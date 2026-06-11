@@ -1,6 +1,6 @@
 import { type FormEvent, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { events } from "../data/events";
+import { events, formatDateRange } from "../data/events";
 
 interface Message {
   role: "user" | "assistant";
@@ -49,15 +49,38 @@ export function ChatWidget() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ messages: nextMessages }),
       });
-      if (!response.ok) {
+      if (!response.ok || !response.body) {
         throw new Error("chat failed");
       }
-      const data = (await response.json()) as { reply: string };
-      setMessages((current) => [
-        ...current,
-        { role: "assistant", content: data.reply },
-      ]);
-      setStatus("idle");
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let acc = "";
+      let started = false;
+
+      for (;;) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        if (!started) {
+          started = true;
+          setStatus("idle");
+          setMessages((current) => [
+            ...current,
+            { role: "assistant", content: acc },
+          ]);
+        } else {
+          setMessages((current) => {
+            const copy = current.slice();
+            copy[copy.length - 1] = { role: "assistant", content: acc };
+            return copy;
+          });
+        }
+      }
+
+      if (!started) {
+        throw new Error("empty stream");
+      }
     } catch {
       setMessages((current) => [
         ...current,
@@ -90,27 +113,46 @@ export function ChatWidget() {
           </div>
 
           <div className="chat-log" ref={logRef}>
-            {messages.map((message, index) => (
-              <div
-                key={index}
-                className={`chat-msg chat-msg--${message.role}`}
-              >
-                <p>{message.content}</p>
-                {message.role === "assistant" && (
-                  <div className="chat-msg__links">
-                    {referencedEvents(message.content).map((event) => (
-                      <Link
-                        key={event.id}
-                        to={`/events/${event.id}`}
-                        onClick={() => setOpen(false)}
-                      >
-                        {event.title} →
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+            {messages.map((message, index) => {
+              const cards =
+                message.role === "assistant"
+                  ? referencedEvents(message.content)
+                  : [];
+              return (
+                <div
+                  key={index}
+                  className={`chat-msg chat-msg--${message.role}`}
+                >
+                  <p>{message.content}</p>
+                  {cards.length > 0 && (
+                    <div className="chat-cards">
+                      {cards.map((event) => (
+                        <Link
+                          key={event.id}
+                          className="chat-card"
+                          to={`/events/${event.id}`}
+                          onClick={() => setOpen(false)}
+                        >
+                          {event.posterImage && (
+                            <img src={event.posterImage} alt="" loading="lazy" />
+                          )}
+                          <span className="chat-card__body">
+                            <span className="chat-card__cat">
+                              {event.category}
+                            </span>
+                            <strong>{event.title}</strong>
+                            <span className="chat-card__meta">
+                              {event.venue} ·{" "}
+                              {formatDateRange(event.startDate, event.endDate)}
+                            </span>
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             {status === "loading" && (
               <div className="chat-msg chat-msg--assistant">
                 <p className="chat-typing">답을 찾는 중…</p>

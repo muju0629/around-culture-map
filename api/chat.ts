@@ -17,10 +17,17 @@ const catalog = events
 
 const SYSTEM_PROMPT = [
   "당신은 'AROUND'의 서울 문화 큐레이터입니다.",
-  "아래 [행사 목록]에 있는 행사만 근거로 추천·안내하세요. 목록에 없는 정보는 지어내지 말고, 모르면 모른다고 답하세요.",
-  "사용자의 상황(지역·날짜·무료 여부·동행 등)을 고려해 1~3개를 추천하고 이유를 한두 문장으로 설명하세요.",
-  "추천할 때는 행사의 정확한 제목을 따옴표 없이 그대로 사용하세요(상세 링크 연결에 필요합니다).",
-  "한국어로 친근하고 간결하게 답하세요. 오늘은 2026-06-11(목), 이번 주말은 2026-06-13~06-14입니다.",
+  "아래 [행사 목록]에 있는 행사만 근거로 추천·안내하세요. 목록에 없는 정보는 절대 지어내지 마세요.",
+  "",
+  "다음 규칙을 반드시 지키세요:",
+  "1. 사용자가 카테고리(전시/음악/축제/문화공간)를 말하면 정확히 그 카테고리만 추천하세요. 예: '전시'를 요청하면 문화공간·축제·음악을 섞지 마세요.",
+  "2. '무료'를 요청하면 가격이 무료인 행사만 추천하세요.",
+  "3. 지역·날짜를 말하면 그 조건에 맞는 행사만 추천하세요.",
+  "4. 조건에 맞는 행사가 없으면 솔직히 '조건에 맞는 행사가 없다'고 말한 뒤, 가장 가까운 대안 1개만 조심스럽게 제안하세요.",
+  "5. 최대 3개까지만, 각 추천은 2~3문장 이내로 간결하게.",
+  "6. 추천하는 행사의 제목은 [행사 목록]에 적힌 그대로(따옴표 없이) 사용하세요. 상세 링크 연결에 필요합니다.",
+  "",
+  "한국어로 친근하게. 오늘은 2026-06-11(목), 이번 주말은 2026-06-13~06-14입니다.",
   "",
   "[행사 목록]",
   catalog,
@@ -30,6 +37,52 @@ function json(payload: unknown, status: number): Response {
   return new Response(JSON.stringify(payload), {
     status,
     headers: { "content-type": "application/json" },
+  });
+}
+
+function streamText(upstream: ReadableStream<Uint8Array>): Response {
+  const stream = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      const reader = upstream.getReader();
+      const decoder = new TextDecoder();
+      const encoder = new TextEncoder();
+      let buffer = "";
+      try {
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+          for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed.startsWith("data:")) continue;
+            const payload = trimmed.slice(5).trim();
+            if (payload === "[DONE]") {
+              controller.close();
+              return;
+            }
+            try {
+              const parsed = JSON.parse(payload);
+              const delta = parsed?.choices?.[0]?.delta?.content;
+              if (typeof delta === "string" && delta.length > 0) {
+                controller.enqueue(encoder.encode(delta));
+              }
+            } catch {
+              // ignore keep-alive / non-JSON lines
+            }
+          }
+        }
+      } catch {
+        // upstream ended unexpectedly; close gracefully
+      }
+      controller.close();
+    },
+  });
+
+  return new Response(stream, {
+    status: 200,
+    headers: { "content-type": "text/plain; charset=utf-8" },
   });
 }
 
@@ -85,7 +138,8 @@ export default async function handler(req: Request): Promise<Response> {
         },
         body: JSON.stringify({
           model,
-          temperature: 0.5,
+          temperature: 0.4,
+          stream: true,
           messages: payloadMessages,
         }),
       });
@@ -93,13 +147,8 @@ export default async function handler(req: Request): Promise<Response> {
       continue;
     }
 
-    if (groqRes.ok) {
-      const data = await groqRes.json();
-      const reply = data?.choices?.[0]?.message?.content;
-      if (typeof reply !== "string") {
-        return json({ error: "Empty Groq response", model }, 502);
-      }
-      return json({ reply }, 200);
+    if (groqRes.ok && groqRes.body) {
+      return streamText(groqRes.body);
     }
 
     lastStatus = groqRes.status;
