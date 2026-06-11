@@ -1,19 +1,14 @@
-export interface MediaTrack {
-  title: string;
-  note?: string;
-}
-
 export interface MediaArtist {
   name: string;
   role: string;
   note?: string;
   photo?: string;
+  credit?: string;
 }
 
 export interface EventMedia {
   appleMusicUrl?: string;
   appleMusicLabel?: string;
-  tracks?: MediaTrack[];
   lineup?: MediaArtist[];
 }
 
@@ -26,70 +21,61 @@ export const eventMedia: Record<string, EventMedia> = {
   "hyundai-super-concert-28": {
     appleMusicUrl: appleSearch("The Weeknd"),
     appleMusicLabel: "The Weeknd",
-    tracks: [
-      { title: "Blinding Lights" },
-      { title: "Starboy" },
-      { title: "Save Your Tears" },
-      { title: "The Hills" },
-    ],
     lineup: [
       {
         name: "The Weeknd",
         role: "HEADLINER",
-        note: "에이벨 테스파예. ‘After Hours’와 ‘Dawn FM’으로 이어진 신스팝·R&B의 정점.",
         photo: "/editorial/the-weeknd/profile.jpg",
+        credit: "Hyundai Card DIVE",
       },
       {
         name: "Creepy Nuts",
         role: "OPENING",
-        note: "‘Bling-Bang-Bang-Born’으로 알려진 일본 힙합 듀오. 이번 공연 오프닝 무대.",
+        photo: "/editorial/the-weeknd/creepy-nuts.jpg",
+        credit: "Wikimedia Commons",
+        note: "‘Bling-Bang-Bang-Born’으로 알려진 일본의 힙합 듀오. 본 공연 한 시간 전 오프닝 무대.",
       },
     ],
   },
   "post-malone-seoul": {
     appleMusicUrl: appleSearch("Post Malone"),
     appleMusicLabel: "Post Malone",
-    tracks: [
-      { title: "Sunflower" },
-      { title: "Rockstar" },
-      { title: "Circles" },
-      { title: "Congratulations" },
-    ],
     lineup: [
       {
         name: "Post Malone",
         role: "HEADLINER",
-        note: "오스틴 포스트. 힙합·팝·록을 넘나드는 멀티 장르 싱어송라이터.",
-        photo: "/editorial/post-malone/f1-trillion.jpg",
+        photo: "/editorial/post-malone/portrait.jpg",
+        credit: "Wikimedia Commons",
       },
       {
         name: "Don Toliver",
         role: "SPECIAL GUEST",
-        note: "‘No Idea’·‘Bandit’의 미국 래퍼. 이번 공연 스페셜 게스트.",
+        photo: "/editorial/post-malone/don-toliver.jpg",
+        credit: "Wikimedia Commons",
+        note: "‘No Idea’·‘Bandit’로 알려진 미국 휴스턴 출신 래퍼·싱어.",
       },
     ],
   },
   "silica-gel-ballad-of-you": {
-    appleMusicUrl: appleSearch("실리카겔 Silica Gel"),
+    appleMusicUrl:
+      "https://music.apple.com/kr/artist/%EC%8B%A4%EB%A6%AC%EC%B9%B4%EA%B2%94/1031084591",
     appleMusicLabel: "실리카겔",
-    tracks: [{ title: "Tik Tak Tok" }, { title: "NO PAIN" }, { title: "Desert Eagle" }],
     lineup: [
+      { name: "김한주", role: "DRUMS" },
       { name: "김춘추", role: "VOCAL · GUITAR" },
       { name: "김건재", role: "GUITAR · VOCAL" },
       { name: "최웅희", role: "BASS" },
-      { name: "김율", role: "DRUMS" },
     ],
   },
   "big-naughty-icn-ntg": {
-    appleMusicUrl: appleSearch("BIG Naughty 서동현"),
+    appleMusicUrl: appleSearch("BIG Naughty 빅나티"),
     appleMusicLabel: "BIG Naughty",
-    tracks: [{ title: "정043 (Vancouver)" }, { title: "호불호" }],
     lineup: [
       {
         name: "BIG Naughty (서동현)",
         role: "HEADLINER",
-        note: "고등래퍼 출신 싱어송라이터 래퍼. 멜로딕한 랩과 미성을 오가는 무대가 강점.",
         photo: "/editorial/big-naughty/portrait.jpg",
+        credit: "H1GHR MUSIC",
       },
     ],
   },

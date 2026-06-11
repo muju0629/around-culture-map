@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { EventCard } from "../components/EventCard";
 import { Header } from "../components/Header";
@@ -31,6 +31,16 @@ export function EventDetailPage() {
   const event = getEventById(id, locale);
   const editorial = getEventEditorial(id, locale);
   const media = getEventMedia(id);
+  // Photos shown in the lineup are dropped from the gallery so the same
+  // portrait never appears twice on the page.
+  const galleryImages = useMemo(() => {
+    const used = new Set(
+      (media?.lineup ?? [])
+        .map((artist) => artist.photo)
+        .filter((photo): photo is string => Boolean(photo)),
+    );
+    return (editorial?.gallery ?? []).filter((image) => !used.has(image.src));
+  }, [editorial, media]);
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { isPlanned, toggleItinerary } = useItinerary();
@@ -47,29 +57,26 @@ export function EventDetailPage() {
       if (keyEvent.key === "Escape") {
         setLightboxIndex(null);
       }
-      if (!editorial?.gallery?.length) {
+      if (!galleryImages.length) {
         return;
       }
       if (keyEvent.key === "ArrowLeft") {
         setLightboxIndex((current) =>
           current === null
             ? null
-            : (current - 1 + editorial.gallery!.length) %
-              editorial.gallery!.length,
+            : (current - 1 + galleryImages.length) % galleryImages.length,
         );
       }
       if (keyEvent.key === "ArrowRight") {
         setLightboxIndex((current) =>
-          current === null
-            ? null
-            : (current + 1) % editorial.gallery!.length,
+          current === null ? null : (current + 1) % galleryImages.length,
         );
       }
     }
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [editorial?.gallery, lightboxIndex]);
+  }, [galleryImages, lightboxIndex]);
 
   if (!event) {
     return <NotFoundPage />;
@@ -89,10 +96,6 @@ export function EventDetailPage() {
       !relatedCandidates.some((relatedEvent) => relatedEvent.id === candidate.id),
   );
   const related = [...relatedCandidates, ...relatedFallbacks].slice(0, 3);
-  const mediaSources =
-    editorial?.sources.filter((source) =>
-      /music\.apple|spotify|youtube|youtu\.be/i.test(source.url),
-    ) ?? [];
   const verifiedDate = new Intl.DateTimeFormat(
     locale === "ko" ? "ko-KR" : "en-GB",
     { year: "numeric", month: "2-digit", day: "2-digit" },
@@ -244,62 +247,46 @@ export function EventDetailPage() {
               </dl>
             </section>
 
-            {media && (media.lineup?.length || media.tracks?.length) && (
-              <section className="media-section">
+            {media?.lineup && media.lineup.length > 0 && (
+              <section className="lineup-section">
                 <div className="detail-section-index">
-                  <span>LINEUP / SOUND</span>
+                  <span>ON STAGE</span>
                 </div>
-                <div className="media-grid">
-                  {media.lineup && media.lineup.length > 0 && (
-                    <div className="media-lineup">
-                      <span className="eyebrow">LINEUP</span>
-                      <ul>
-                        {media.lineup.map((artist) => (
-                          <li key={artist.name}>
-                            <div className="media-artist">
-                              {artist.photo ? (
-                                <img
-                                  src={artist.photo}
-                                  alt={artist.name}
-                                  loading="lazy"
-                                />
-                              ) : (
-                                <span
-                                  className="media-artist__mono"
-                                  aria-hidden="true"
-                                >
-                                  {artist.name.slice(0, 1)}
-                                </span>
-                              )}
-                              <div className="media-artist__text">
-                                <strong>{artist.name}</strong>
-                                <span>{artist.role}</span>
-                              </div>
-                            </div>
-                            {artist.note && <p>{artist.note}</p>}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {media.tracks && media.tracks.length > 0 && (
-                    <div className="media-tracks">
-                      <span className="eyebrow">SIGNATURE TRACKS</span>
-                      <ol>
-                        {media.tracks.map((track) => (
-                          <li key={track.title}>
-                            <strong>{track.title}</strong>
-                            {track.note && <em>{track.note}</em>}
-                          </li>
-                        ))}
-                      </ol>
-                    </div>
-                  )}
+                <div className="lineup-grid">
+                  {media.lineup.map((artist) => (
+                    <article className="artist-card" key={artist.name}>
+                      <div className="artist-card__media">
+                        {artist.photo ? (
+                          <img
+                            src={artist.photo}
+                            alt={artist.name}
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span className="artist-card__avatar" aria-hidden="true">
+                            {artist.name.length <= 4
+                              ? artist.name.slice(-2)
+                              : artist.name.slice(0, 1)}
+                          </span>
+                        )}
+                      </div>
+                      <div className="artist-card__body">
+                        <span className="artist-card__role">{artist.role}</span>
+                        <strong>{artist.name}</strong>
+                        {artist.note && <p>{artist.note}</p>}
+                      </div>
+                      {artist.credit && (
+                        <span className="artist-card__credit">
+                          IMAGE · {artist.credit}
+                        </span>
+                      )}
+                    </article>
+                  ))}
                 </div>
               </section>
             )}
 
-            {editorial.gallery && (
+            {galleryImages.length > 0 && (
               <section
                 className="editorial-gallery"
                 aria-label={copy.detail.relatedImages}
@@ -312,18 +299,18 @@ export function EventDetailPage() {
                 </div>
                 <div
                   className={`editorial-gallery__grid editorial-gallery__grid--${Math.min(
-                    editorial.gallery.length,
+                    galleryImages.length,
                     4,
                   )}`}
                 >
-                  {editorial.gallery.map((image) => (
+                  {galleryImages.map((image) => (
                     <figure key={image.src}>
                       <button
                         type="button"
                         className="editorial-gallery__open"
                         onClick={() =>
                           setLightboxIndex(
-                            editorial.gallery!.findIndex(
+                            galleryImages.findIndex(
                               (candidate) => candidate.src === image.src,
                             ),
                           )
@@ -381,21 +368,6 @@ export function EventDetailPage() {
                     </article>
                   ))}
                 </div>
-                {mediaSources.length > 0 && (
-                  <div className="detail-media-links">
-                    <span className="eyebrow">OFFICIAL LISTENING</span>
-                    {mediaSources.map((source) => (
-                      <a
-                        key={source.url}
-                        href={source.url}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {source.label} <ArrowIcon />
-                      </a>
-                    ))}
-                  </div>
-                )}
               </div>
             </section>
 
@@ -545,12 +517,12 @@ export function EventDetailPage() {
           </a>
         )}
       </div>
-      {lightboxIndex !== null && editorial?.gallery && (
+      {lightboxIndex !== null && galleryImages[lightboxIndex] && (
         <div
           className="image-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={editorial.gallery[lightboxIndex].caption}
+          aria-label={galleryImages[lightboxIndex].caption}
         >
           <button
             type="button"
@@ -565,8 +537,8 @@ export function EventDetailPage() {
             aria-label={copy.detail.previousImage}
             onClick={() =>
               setLightboxIndex(
-                (lightboxIndex - 1 + editorial.gallery!.length) %
-                  editorial.gallery!.length,
+                (lightboxIndex - 1 + galleryImages.length) %
+                  galleryImages.length,
               )
             }
           >
@@ -574,12 +546,12 @@ export function EventDetailPage() {
           </button>
           <figure>
             <img
-              src={editorial.gallery[lightboxIndex].src}
-              alt={editorial.gallery[lightboxIndex].alt}
+              src={galleryImages[lightboxIndex].src}
+              alt={galleryImages[lightboxIndex].alt}
             />
             <figcaption>
-              <strong>{editorial.gallery[lightboxIndex].caption}</strong>
-              <span>{editorial.gallery[lightboxIndex].credit}</span>
+              <strong>{galleryImages[lightboxIndex].caption}</strong>
+              <span>{galleryImages[lightboxIndex].credit}</span>
             </figcaption>
           </figure>
           <button
@@ -587,9 +559,7 @@ export function EventDetailPage() {
             className="image-lightbox__next"
             aria-label={copy.detail.nextImage}
             onClick={() =>
-              setLightboxIndex(
-                (lightboxIndex + 1) % editorial.gallery!.length,
-              )
+              setLightboxIndex((lightboxIndex + 1) % galleryImages.length)
             }
           >
             →

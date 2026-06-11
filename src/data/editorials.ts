@@ -444,6 +444,16 @@ export const eventEditorials: Record<string, EventEditorial> = {
           "공백기 이후 달라진 4인조 실리카겔의 응축된 연주와 사이키델릭한 전개를 들을 수 있습니다.",
       },
     ],
+    gallery: [
+      {
+        src: "/editorial/silica-gel/band.jpg",
+        alt: "2022년 실리카겔 멤버들의 모습",
+        caption: "Silica Gel, 2022",
+        credit: "Image: Wikimedia Commons",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Silica_Gel_members_in_2022.jpg",
+      },
+    ],
     locationNote:
       "올림픽공원 KSPO DOME에서 이틀간 열립니다. 스탠딩과 지정석의 입장 방식이 다를 수 있으므로 예매한 권종의 번호와 입장 공지를 확인하세요.",
     notes: [

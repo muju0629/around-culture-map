@@ -391,6 +391,16 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
           "The track captures the concentrated playing and psychedelic development of the renewed four-piece.",
       },
     ],
+    gallery: [
+      {
+        src: "/editorial/silica-gel/band.jpg",
+        alt: "The members of Silica Gel photographed in 2022",
+        caption: "Silica Gel, 2022",
+        credit: "Image: Wikimedia Commons",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Silica_Gel_members_in_2022.jpg",
+      },
+    ],
     locationNote:
       "The concert runs for two nights at KSPO DOME in Olympic Park. Standing and reserved seating may use different entry procedures, so check the notice for your ticket type.",
     notes: [
