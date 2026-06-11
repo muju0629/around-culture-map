@@ -1,4 +1,4 @@
-import type { CultureEvent, ExploreFilter } from "../types";
+import type { CultureEvent, ExploreFilter, SearchCriteria } from "../types";
 
 export const PROTOTYPE_TODAY = "2026-06-11";
 export const PROTOTYPE_WEEKEND = {
@@ -488,4 +488,44 @@ export function filterEvents(filter: ExploreFilter) {
     return events.filter((event) => event.isFree);
   }
   return events.filter((event) => event.category === filter);
+}
+
+export function searchEvents(criteria: SearchCriteria) {
+  const location = criteria.location?.trim().toLowerCase();
+  const keywords = criteria.keywords
+    .map((keyword) => keyword.trim().toLowerCase())
+    .filter(Boolean);
+
+  return events.filter((event) => {
+    if (criteria.category && event.category !== criteria.category) {
+      return false;
+    }
+    if (criteria.when === "today" && !isActiveOn(event, PROTOTYPE_TODAY)) {
+      return false;
+    }
+    if (
+      criteria.when === "weekend" &&
+      !isActiveDuring(event, PROTOTYPE_WEEKEND.start, PROTOTYPE_WEEKEND.end)
+    ) {
+      return false;
+    }
+    if (criteria.free && !event.isFree) {
+      return false;
+    }
+    if (location) {
+      const place =
+        `${event.region} ${event.district} ${event.venue} ${event.address}`.toLowerCase();
+      if (!place.includes(location)) {
+        return false;
+      }
+    }
+    if (keywords.length > 0) {
+      const text =
+        `${event.title} ${event.englishTitle} ${event.venue} ${event.description} ${event.tags.join(" ")}`.toLowerCase();
+      if (!keywords.some((keyword) => text.includes(keyword))) {
+        return false;
+      }
+    }
+    return true;
+  });
 }
