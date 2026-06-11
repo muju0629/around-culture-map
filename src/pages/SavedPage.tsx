@@ -24,6 +24,12 @@ export function SavedPage() {
       return event ? [event] : [];
     })
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
+  const suggested =
+    savedEvents.length === 0
+      ? events
+          .filter((event) => event.sourceUrl && event.endDate >= today)
+          .slice(0, 3)
+      : [];
   const plannedEvents = itinerary
     .flatMap((id) => {
       const event = events.find((candidate) => candidate.id === id);
@@ -92,6 +98,25 @@ export function SavedPage() {
               <Link className="button" to="/explore">
                 {copy.saved.explore} <ArrowIcon />
               </Link>
+              {suggested.length > 0 && (
+                <div className="saved-empty__suggestions">
+                  <span className="eyebrow">
+                    {locale === "ko"
+                      ? "이런 전시부터 저장해보세요"
+                      : "Try saving these first"}
+                  </span>
+                  <div className="saved-empty__grid">
+                    {suggested.map((event) => (
+                      <EventCard
+                        key={event.id}
+                        event={event}
+                        isFavorite={isFavorite(event.id)}
+                        onToggleFavorite={toggleFavorite}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </section>

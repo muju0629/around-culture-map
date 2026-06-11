@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { divIcon, latLng, latLngBounds } from "leaflet";
 import {
   Circle,
@@ -12,7 +12,7 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { Link } from "react-router-dom";
-import { getMarkerGroups } from "../data/mapMarkers";
+import { getMarkerGroups, getMarkerLabels } from "../data/mapMarkers";
 import { formatDateRange, getCategoryLabel } from "../data/events";
 import { useLanguage } from "../i18n/language";
 import type { CultureEvent, UserLocation } from "../types";
@@ -192,6 +192,175 @@ function MapInteractionEvents({
   return null;
 }
 
+interface RenderCluster {
+  key: string;
+  events: CultureEvent[];
+  index: number;
+  latitude: number;
+  longitude: number;
+}
+
+interface ClusterLayerProps {
+  events: CultureEvent[];
+  selectedId?: string;
+  hoveredId?: string;
+  clusters: RenderCluster[];
+  onClustersChange: (clusters: RenderCluster[]) => void;
+  onSelect: (eventId: string) => void;
+  onHover?: (eventId?: string) => void;
+  onOpenCluster: (key: string) => void;
+}
+
+function ClusterLayer({
+  events,
+  selectedId,
+  hoveredId,
+  clusters,
+  onClustersChange,
+  onSelect,
+  onHover,
+  onOpenCluster,
+}: ClusterLayerProps) {
+  const { locale, copy } = useLanguage();
+  const map = useMap();
+  const baseGroups = useMemo(() => getMarkerGroups(events), [events]);
+  const labels = useMemo(() => getMarkerLabels(events), [events]);
+
+  useEffect(() => {
+    function recompute() {
+      const zoom = map.getZoom();
+      const projected = baseGroups.map((group) => ({
+        group,
+        point: map.project(
+          [group.events[0].latitude, group.events[0].longitude],
+          zoom,
+        ),
+      }));
+      const used = new Array(projected.length).fill(false);
+      const next: RenderCluster[] = [];
+
+      for (let i = 0; i < projected.length; i += 1) {
+        if (used[i]) {
+          continue;
+        }
+        used[i] = true;
+        const members = [projected[i]];
+        for (let j = i + 1; j < projected.length; j += 1) {
+          if (used[j]) {
+            continue;
+          }
+          if (projected[i].point.distanceTo(projected[j].point) < 46) {
+            used[j] = true;
+            members.push(projected[j]);
+          }
+        }
+        const memberGroups = members.map((member) => member.group);
+        const groupEvents = memberGroups.flatMap((group) => group.events);
+        next.push({
+          key: memberGroups.map((group) => group.key).join("|"),
+          events: groupEvents,
+          index: Math.min(...memberGroups.map((group) => group.index)),
+          latitude:
+            memberGroups.reduce(
+              (sum, group) => sum + group.events[0].latitude,
+              0,
+            ) / memberGroups.length,
+          longitude:
+            memberGroups.reduce(
+              (sum, group) => sum + group.events[0].longitude,
+              0,
+            ) / memberGroups.length,
+        });
+      }
+
+      onClustersChange(next);
+    }
+
+    recompute();
+    map.on("zoomend moveend", recompute);
+    return () => {
+      map.off("zoomend moveend", recompute);
+    };
+  }, [map, baseGroups, onClustersChange]);
+
+  return (
+    <>
+      {clusters.map((cluster) => {
+        const isCluster = cluster.events.length > 1;
+        const isSelected = cluster.events.some(
+          (event) => event.id === selectedId,
+        );
+        const isHovered = cluster.events.some(
+          (event) => event.id === hoveredId,
+        );
+        const indexLabel = String(cluster.index).padStart(2, "0");
+        const markerLabel = isCluster
+          ? `${indexLabel}+${cluster.events.length}`
+          : labels.get(cluster.events[0].id) ?? indexLabel;
+        const markerTitle = cluster.events
+          .map((event) => event.title)
+          .join(" · ");
+        const markerA11yLabel = `${markerTitle}${
+          isSelected ? ` ${copy.event.selected}` : ""
+        }`;
+        const markerSize = isSelected ? 46 : isCluster ? 44 : 34;
+        const icon = divIcon({
+          className: `culture-marker${isSelected ? " is-selected" : ""}${
+            isCluster ? " is-cluster" : ""
+          }${isHovered ? " is-hovered" : ""}`,
+          html: `<span aria-hidden="true">${markerLabel}</span><span class="marker-a11y">${escapeHtml(
+            markerA11yLabel,
+          )}</span>`,
+          iconAnchor: [markerSize / 2, markerSize / 2],
+          iconSize: [markerSize, markerSize],
+        });
+
+        return (
+          <Marker
+            key={cluster.key}
+            position={[cluster.latitude, cluster.longitude]}
+            icon={icon}
+            eventHandlers={{
+              click: () => {
+                if (isCluster) {
+                  onOpenCluster(cluster.key);
+                  return;
+                }
+                onSelect(cluster.events[0].id);
+              },
+              mouseover: () => onHover?.(cluster.events[0].id),
+              mouseout: () => onHover?.(),
+            }}
+            keyboard
+            title={markerTitle}
+            zIndexOffset={isSelected ? 1000 : 0}
+          >
+            <Tooltip
+              className="culture-map-preview"
+              direction="top"
+              offset={[0, -18]}
+            >
+              {cluster.events[0].posterImage && (
+                <img src={cluster.events[0].posterImage} alt="" />
+              )}
+              <span>
+                {isCluster
+                  ? `${cluster.events.length} ${
+                      locale === "ko" ? "개 장소" : "places"
+                    }`
+                  : getCategoryLabel(cluster.events[0].category, locale)}
+              </span>
+              <strong>
+                {isCluster ? markerTitle : cluster.events[0].title}
+              </strong>
+            </Tooltip>
+          </Marker>
+        );
+      })}
+    </>
+  );
+}
+
 export function AbstractMap({
   events,
   selectedId,
@@ -204,11 +373,11 @@ export function AbstractMap({
 }: AbstractMapProps) {
   const { locale, copy } = useLanguage();
   const [openClusterKey, setOpenClusterKey] = useState<string>();
+  const [clusters, setClusters] = useState<RenderCluster[]>([]);
   const selectedEvent =
     events.find((event) => event.id === selectedId) ?? events[0];
-  const markerGroups = getMarkerGroups(events);
-  const openCluster = markerGroups.find(
-    (group) => group.key === openClusterKey,
+  const openCluster = clusters.find(
+    (cluster) => cluster.key === openClusterKey,
   );
 
   return (
@@ -263,66 +432,16 @@ export function AbstractMap({
           </>
         )}
 
-        {markerGroups.map((markerGroup) => {
-          const group = markerGroup.events;
-          const isSelected = group.some((event) => event.id === selectedId);
-          const isHovered = group.some((event) => event.id === hoveredId);
-          const markerLabel =
-            group.length > 1
-              ? `${String(markerGroup.index).padStart(2, "0")}+${group.length}`
-              : String(markerGroup.index).padStart(2, "0");
-          const markerTitle = group.map((event) => event.title).join(" · ");
-          const markerA11yLabel = `${markerTitle}${
-            isSelected ? ` ${copy.event.selected}` : ""
-          }`;
-          const markerSize = isSelected ? 46 : group.length > 1 ? 44 : 34;
-          const icon = divIcon({
-            className: `culture-marker${isSelected ? " is-selected" : ""}${
-              group.length > 1 ? " is-cluster" : ""
-            }${isHovered ? " is-hovered" : ""}`,
-            html: `<span aria-hidden="true">${markerLabel}</span><span class="marker-a11y">${escapeHtml(markerA11yLabel)}</span>`,
-            iconAnchor: [markerSize / 2, markerSize / 2],
-            iconSize: [markerSize, markerSize],
-          });
-
-          return (
-            <Marker
-              key={markerGroup.key}
-              position={[group[0].latitude, group[0].longitude]}
-              icon={icon}
-              eventHandlers={{
-                click: () => {
-                  if (group.length > 1) {
-                    setOpenClusterKey(markerGroup.key);
-                    return;
-                  }
-                  onSelect(group[0].id);
-                },
-                mouseover: () => onHover?.(group[0].id),
-                mouseout: () => onHover?.(),
-              }}
-              keyboard
-              title={markerTitle}
-              zIndexOffset={isSelected ? 1000 : 0}
-            >
-              <Tooltip
-                className="culture-map-preview"
-                direction="top"
-                offset={[0, -18]}
-              >
-                {group[0].posterImage && (
-                  <img src={group[0].posterImage} alt="" />
-                )}
-                <span>
-                  {group.length > 1
-                    ? `${group.length} ${locale === "ko" ? "개 장소" : "places"}`
-                    : getCategoryLabel(group[0].category, locale)}
-                </span>
-                <strong>{group.length > 1 ? markerTitle : group[0].title}</strong>
-              </Tooltip>
-            </Marker>
-          );
-        })}
+        <ClusterLayer
+          events={events}
+          selectedId={selectedId}
+          hoveredId={hoveredId}
+          clusters={clusters}
+          onClustersChange={setClusters}
+          onSelect={onSelect}
+          onHover={onHover}
+          onOpenCluster={setOpenClusterKey}
+        />
       </MapContainer>
 
       <div className="map-caption">

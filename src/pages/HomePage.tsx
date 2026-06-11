@@ -49,6 +49,7 @@ export function HomePage() {
     .filter((event) => event.sourceUrl && event.startDate > today)
     .sort((a, b) => a.startDate.localeCompare(b.startDate))
     .slice(0, 7);
+  const heroEvent = featured[0] ?? upcoming[0] ?? events[0];
 
   useEffect(() => {
     const elements = Array.from(
@@ -110,14 +111,16 @@ export function HomePage() {
               </div>
             </div>
           </div>
-          <Link
-            to={`/events/${featured[0].id}`}
-            className="home-hero__poster"
-            aria-label={`${featured[0].title} ${copy.event.details}`}
-          >
-            <Poster event={featured[0]} />
-            <span className="home-hero__number">01</span>
-          </Link>
+          {heroEvent && (
+            <Link
+              to={`/events/${heroEvent.id}`}
+              className="home-hero__poster"
+              aria-label={`${heroEvent.title} ${copy.event.details}`}
+            >
+              <Poster event={heroEvent} />
+              <span className="home-hero__number">01</span>
+            </Link>
+          )}
         </section>
 
         <section className="editorial-section" id="selected" data-reveal>

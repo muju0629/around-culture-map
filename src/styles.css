@@ -1219,7 +1219,7 @@ html[lang="en"] .detail-hero__content h1 {
 .detail-hero {
   display: grid;
   grid-template-columns: minmax(360px, 0.85fr) minmax(0, 1.15fr);
-  min-height: calc(100vh - var(--header-height) - 64px);
+  min-height: clamp(560px, 70vh, 720px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -1825,10 +1825,13 @@ html[lang="en"] .detail-hero__content h1 {
 
 .not-found h1 {
   margin: 24px 0 56px;
-  font-size: clamp(60px, 10vw, 150px);
+  max-width: 12ch;
+  font-size: clamp(42px, 11vw, 150px);
   font-weight: 500;
   letter-spacing: -0.08em;
   line-height: 0.9;
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 @media (max-width: 1100px) {
@@ -1877,6 +1880,7 @@ html[lang="en"] .detail-hero__content h1 {
   }
 
   .site-header {
+    grid-template-columns: auto minmax(0, 1fr);
     padding: 0 16px;
   }
 
@@ -1892,6 +1896,15 @@ html[lang="en"] .detail-hero__content h1 {
 
   .site-nav {
     gap: 12px;
+    justify-content: flex-end;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .area-menu__panel {
@@ -3028,6 +3041,16 @@ html[lang="en"] .detail-hero__content h1 {
   cursor: pointer;
 }
 
+.explore-toolbar__secondary select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6' viewBox='0 0 8 6'%3E%3Cpath d='M1 1l3 3 3-3' fill='none' stroke='%2311110f' stroke-width='1.2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
+  background-size: 8px 6px;
+}
+
 .explore-toolbar__secondary button.is-active {
   color: var(--white);
   background: var(--black);
@@ -3296,17 +3319,45 @@ html[lang="en"] .detail-hero__content h1 {
 }
 
 .saved-empty {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   min-height: 260px;
-  place-items: center;
-  align-content: center;
+  align-items: center;
+  justify-content: center;
   gap: 24px;
+  padding: 56px 28px;
   border: 1px solid var(--line);
 }
 
 .saved-empty p {
   margin: 0;
   color: #5f5f5a;
+}
+
+.saved-empty__suggestions {
+  width: 100%;
+  margin-top: 20px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.saved-empty__suggestions .eyebrow {
+  display: block;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.saved-empty__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+@media (max-width: 760px) {
+  .saved-empty__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }
 
 .itinerary-list {

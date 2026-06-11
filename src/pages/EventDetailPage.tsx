@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { EventCard } from "../components/EventCard";
 import { Header } from "../components/Header";
@@ -78,16 +78,43 @@ export function EventDetailPage() {
   const { isPlanned, toggleItinerary } = useItinerary();
   const [shareMessage, setShareMessage] = useState("");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+  const lightboxOpen = lightboxIndex !== null;
   const today = getTodayInSeoul();
 
   useEffect(() => {
-    if (lightboxIndex === null) {
+    if (!lightboxOpen) {
       return;
     }
+
+    const restoreTarget = document.activeElement as HTMLElement | null;
+    const dialog = lightboxRef.current;
+    dialog
+      ?.querySelector<HTMLElement>(".image-lightbox__close")
+      ?.focus();
 
     function handleKeyDown(keyEvent: KeyboardEvent) {
       if (keyEvent.key === "Escape") {
         setLightboxIndex(null);
+        return;
+      }
+      if (keyEvent.key === "Tab" && dialog) {
+        const focusable = dialog.querySelectorAll<HTMLElement>(
+          "button, a[href]",
+        );
+        if (focusable.length === 0) {
+          return;
+        }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (keyEvent.shiftKey && document.activeElement === first) {
+          keyEvent.preventDefault();
+          last.focus();
+        } else if (!keyEvent.shiftKey && document.activeElement === last) {
+          keyEvent.preventDefault();
+          first.focus();
+        }
+        return;
       }
       if (!visualImages.length) {
         return;
@@ -107,8 +134,11 @@ export function EventDetailPage() {
     }
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex, visualImages]);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      restoreTarget?.focus?.();
+    };
+  }, [lightboxOpen, visualImages]);
 
   if (!event) {
     return <NotFoundPage />;
@@ -536,6 +566,7 @@ export function EventDetailPage() {
           role="dialog"
           aria-modal="true"
           aria-label={visualImages[lightboxIndex].caption}
+          ref={lightboxRef}
         >
           <button
             type="button"
