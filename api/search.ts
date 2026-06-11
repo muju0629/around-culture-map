@@ -1,6 +1,11 @@
 export const config = { runtime: "edge" };
 
-const MODEL = "gemini-2.0-flash";
+const MODELS = [
+  "gemini-2.5-flash",
+  "gemini-2.0-flash",
+  "gemini-2.5-flash-lite",
+  "gemini-2.0-flash-lite",
+];
 
 const responseSchema = {
   type: "object",
@@ -68,41 +73,53 @@ export default async function handler(req: Request): Promise<Response> {
     `검색어: "${query}"`,
   ].join("\n");
 
-  let geminiRes: Response;
-  try {
-    geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            responseMimeType: "application/json",
-            responseSchema,
-            temperature: 0,
-          },
-        }),
-      },
-    );
-  } catch {
-    return json({ error: "Failed to reach Gemini" }, 502);
+  const requestBody = JSON.stringify({
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: {
+      responseMimeType: "application/json",
+      responseSchema,
+      temperature: 0,
+    },
+  });
+
+  let lastStatus = 0;
+  let lastDetail = "Failed to reach Gemini";
+
+  for (const model of MODELS) {
+    let geminiRes: Response;
+    try {
+      geminiRes = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: requestBody,
+        },
+      );
+    } catch {
+      continue;
+    }
+
+    if (geminiRes.ok) {
+      const data = await geminiRes.json();
+      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (typeof text !== "string") {
+        return json({ error: "Empty Gemini response", model }, 502);
+      }
+      try {
+        return json(JSON.parse(text), 200);
+      } catch {
+        return json({ error: "Unparseable Gemini response", model }, 502);
+      }
+    }
+
+    lastStatus = geminiRes.status;
+    lastDetail = await geminiRes.text();
+    // Quota (429) or model-not-found (404): try the next model. Otherwise stop.
+    if (geminiRes.status !== 429 && geminiRes.status !== 404) {
+      break;
+    }
   }
 
-  if (!geminiRes.ok) {
-    const detail = await geminiRes.text();
-    return json({ error: `Gemini error ${geminiRes.status}`, detail }, 502);
-  }
-
-  const data = await geminiRes.json();
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (typeof text !== "string") {
-    return json({ error: "Empty Gemini response" }, 502);
-  }
-
-  try {
-    return json(JSON.parse(text), 200);
-  } catch {
-    return json({ error: "Unparseable Gemini response" }, 502);
-  }
+  return json({ error: `Gemini error ${lastStatus}`, detail: lastDetail }, 502);
 }
