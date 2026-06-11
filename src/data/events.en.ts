@@ -241,16 +241,6 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     description:
       "Filipp Jenikäe's first special exhibition in Korea unfolds five ideas of luck through intense color and energetic scenes. Early-bird tickets are available through June 18.",
   },
-  "waterbomb-seoul-2026": {
-    title: "Waterbomb Seoul 2026",
-    region: "Goyang",
-    district: "Ilsanseo-gu",
-    venue: "KINTEX Outdoor Global Stage",
-    address: "408 Hallyuworld-ro, Ilsanseo-gu, Goyang-si, Gyeonggi-do",
-    price: "KRW 143,000–154,000",
-    description:
-      "The summer festival combines live music and water across three days. The daily lineup includes Jay Park, Changmo, Sunmi, Lee Youngji, RIIZE, Kiss of Life, Taemin, BIBI and Karina. Admission is restricted to guests aged 19 and over.",
-  },
   "city-body-movement": {
     title: "City, Body, Movement",
     region: "Nodeul",
