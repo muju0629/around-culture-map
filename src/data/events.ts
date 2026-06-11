@@ -570,7 +570,18 @@ export function getCurrentWeekend(today = getTodayInSeoul()) {
   return { start, end: addDays(start, 1) };
 }
 
-export function filterEvents(filter: ExploreFilter, locale: Locale = "ko") {
+export function getCurrentWeek(today = getTodayInSeoul()) {
+  const day = new Date(`${today}T00:00:00Z`).getUTCDay();
+  const daysSinceMonday = day === 0 ? 6 : day - 1;
+  const start = addDays(today, -daysSinceMonday);
+  return { start, end: addDays(start, 6) };
+}
+
+export function filterEvents(
+  filter: ExploreFilter,
+  locale: Locale = "ko",
+  region?: string,
+) {
   const today = getTodayInSeoul();
   const weekend = getCurrentWeekend(today);
   let matches: CultureEvent[];
@@ -587,6 +598,10 @@ export function filterEvents(filter: ExploreFilter, locale: Locale = "ko") {
     matches = events.filter((event) => event.isFree);
   } else {
     matches = events.filter((event) => event.category === filter);
+  }
+
+  if (region) {
+    matches = matches.filter((event) => event.region === region);
   }
 
   return locale === "ko"

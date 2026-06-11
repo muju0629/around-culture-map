@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import { getRegions, regions } from "../data/events";
 import { useLanguage } from "../i18n/language";
 import type { Locale } from "../types";
 
@@ -8,6 +9,7 @@ interface HeaderProps {
 
 export function Header({ inverted = false }: HeaderProps) {
   const { locale, setLocale, copy } = useLanguage();
+  const localizedRegions = getRegions(locale);
 
   return (
     <header className={`site-header${inverted ? " site-header--inverted" : ""}`}>
@@ -22,7 +24,42 @@ export function Header({ inverted = false }: HeaderProps) {
         >
           {copy.header.explore}
         </NavLink>
-        <a href="/#weekly">{copy.header.weekly}</a>
+        <a className="site-nav__curated" href="/#selected">
+          {copy.header.curated}
+        </a>
+        <details className="area-menu">
+          <summary>{copy.header.area}</summary>
+          <div
+            className="area-menu__panel"
+            aria-label={copy.header.areaMenuLabel}
+          >
+            <span className="eyebrow">SEOUL / AREA INDEX</span>
+            <div className="area-menu__links">
+              <Link
+                className="area-menu__all"
+                to="/explore"
+                onClick={(event) =>
+                  event.currentTarget.closest("details")?.removeAttribute("open")
+                }
+              >
+                <span>00</span>
+                <strong>{copy.header.allAreas}</strong>
+              </Link>
+              {regions.map((region, index) => (
+                <Link
+                  key={region}
+                  to={`/explore?area=${encodeURIComponent(region)}`}
+                  onClick={(event) =>
+                    event.currentTarget.closest("details")?.removeAttribute("open")
+                  }
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{localizedRegions[index]}</strong>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </details>
         <span className="site-nav__edition">VOL. 01</span>
         <div className="language-switch" aria-label={copy.header.languageLabel}>
           {(["ko", "en"] as Locale[]).map((option) => (

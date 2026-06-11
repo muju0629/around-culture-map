@@ -4,9 +4,8 @@ import { Header } from "../components/Header";
 import { ArrowIcon } from "../components/Icons";
 import { Poster } from "../components/Poster";
 import {
-  getCurrentWeekend,
+  getCurrentWeek,
   getEvents,
-  getRegions,
   getTodayInSeoul,
 } from "../data/events";
 import { useFavorites } from "../hooks/useFavorites";
@@ -16,14 +15,40 @@ export function HomePage() {
   const { locale, copy } = useLanguage();
   const { isFavorite, toggleFavorite } = useFavorites();
   const events = getEvents(locale);
-  const regions = getRegions(locale);
-  const weekend = getCurrentWeekend(getTodayInSeoul());
-  const weekendLabel = `${weekend.start.slice(5).replace("-", ".")}–${weekend.end
+  const today = getTodayInSeoul();
+  const week = getCurrentWeek(today);
+  const weekLabel = `${week.start.slice(5).replace("-", ".")}–${week.end
     .slice(5)
     .replace("-", ".")}`;
-  const featured = events.filter((event) => event.featured);
-  const weekly = events
-    .filter((event) => !event.featured)
+  const recommendedIds = [
+    "inside-other-spaces",
+    "damien-hirst-mmca",
+    "dialogue-in-the-dark-bukchon",
+  ];
+  const activeOfficialExhibitions = events.filter(
+    (event) =>
+      event.category === "전시" &&
+      Boolean(event.sourceUrl) &&
+      event.startDate <= week.end &&
+      event.endDate >= today,
+  );
+  const featured = [
+    ...recommendedIds
+      .map((id) =>
+        activeOfficialExhibitions.find((event) => event.id === id),
+      )
+      .filter((event) => event !== undefined),
+    ...activeOfficialExhibitions.filter(
+      (event) => !recommendedIds.includes(event.id),
+    ),
+  ].slice(0, 3);
+  const featuredIds = featured.map((event) => event.id);
+  const upcoming = events
+    .filter(
+      (event) =>
+        event.startDate > today && !featuredIds.includes(event.id),
+    )
+    .sort((a, b) => a.startDate.localeCompare(b.startDate))
     .slice(0, 4);
 
   return (
@@ -59,16 +84,16 @@ export function HomePage() {
           </Link>
         </section>
 
-        <section className="editorial-section" id="weekly">
+        <section className="editorial-section" id="selected">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">SELECTED / {weekendLabel}</span>
-              <h2>{copy.home.weekend}</h2>
+              <span className="eyebrow">CURATED / {weekLabel}</span>
+              <h2>{copy.home.weeklyExhibitions}</h2>
             </div>
             <p>
-              {copy.home.weekendIntro[0]}
+              {copy.home.weeklyExhibitionsIntro[0]}
               <br />
-              {copy.home.weekendIntro[1]}
+              {copy.home.weeklyExhibitionsIntro[1]}
             </p>
           </div>
           <div className="featured-grid">
@@ -89,50 +114,30 @@ export function HomePage() {
         </section>
 
         <section className="manifesto-strip">
-          <p>NEARBY</p>
-          <p>NOTABLE</p>
-          <p>NOW</p>
+          {copy.home.manifesto.map((word) => (
+            <p key={word}>{word}</p>
+          ))}
           <span>AROUND SEOUL CULTURE INDEX</span>
         </section>
 
         <section className="editorial-section editorial-section--weekly">
           <div className="section-heading section-heading--inline">
             <div>
-              <span className="eyebrow">WEEKLY INDEX</span>
-              <h2>{copy.home.openNow}</h2>
+              <span className="eyebrow">UPCOMING INDEX / 2026</span>
+              <h2>{copy.home.upcoming}</h2>
             </div>
             <Link className="text-link" to="/explore">
               {copy.home.viewAll} <ArrowIcon />
             </Link>
           </div>
           <div className="weekly-grid">
-            {weekly.map((event) => (
+            {upcoming.map((event) => (
               <EventCard
                 key={event.id}
                 event={event}
                 isFavorite={isFavorite(event.id)}
                 onToggleFavorite={toggleFavorite}
               />
-            ))}
-          </div>
-        </section>
-
-        <section className="region-index">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">AREA INDEX / 06</span>
-              <h2>{copy.home.area}</h2>
-            </div>
-            <p>{copy.home.areaIntro}</p>
-          </div>
-          <div className="region-list">
-            {regions.map((region, index) => (
-              <Link key={region} to="/explore" className="region-list__item">
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{region}</strong>
-                <span>SEOUL</span>
-                <ArrowIcon />
-              </Link>
             ))}
           </div>
         </section>
