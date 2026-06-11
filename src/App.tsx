@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { ChatWidget } from "./components/ChatWidget";
 import { EventDetailPage } from "./pages/EventDetailPage";
 import { ExplorePage } from "./pages/ExplorePage";
 import { HomePage } from "./pages/HomePage";
@@ -25,6 +26,7 @@ export default function App() {
         <Route path="/events/:id" element={<EventDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ChatWidget />
     </>
   );
 }
