@@ -90,7 +90,8 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   if (!geminiRes.ok) {
-    return json({ error: `Gemini error ${geminiRes.status}` }, 502);
+    const detail = await geminiRes.text();
+    return json({ error: `Gemini error ${geminiRes.status}`, detail }, 502);
   }
 
   const data = await geminiRes.json();
