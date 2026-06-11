@@ -229,13 +229,13 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
       {
         marker: "2015",
-        title: "Beauty Behind the Madness",
+        title: "Expansion into global pop",
         description:
-          "Can't Feel My Face and The Hills moved an underground sensibility into the center of global pop.",
+          "He brought the dark sensibility of underground R&B to a global audience through sharply defined pop melody.",
       },
       {
         marker: "2019–2020",
-        title: "Blinding Lights / After Hours",
+        title: "The After Hours era",
         description:
           "Synth-pop and a tragic character arc combined into the defining era of his career.",
       },
@@ -350,9 +350,9 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
       {
         marker: "2021–2023",
-        title: "From Desert Eagle to POWER ANDRE 99",
+        title: "Expansion into a second full-length album",
         description:
-          "Desert Eagle, NO PAIN and Tik Tak Tok led into the complete world of the band's second full-length album.",
+          "A run of singles, collaborations and audiovisual projects expanded both the second album's world and the band's audience.",
       },
       {
         marker: "2024",
@@ -362,7 +362,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
       {
         marker: "2026",
-        title: "Ballad of You",
+        title: "First Asia tour",
         description:
           "The band's first Asia tour opens with two Seoul shows at KSPO DOME.",
       },
@@ -392,6 +392,14 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
     ],
     gallery: [
+      {
+        src: "/editorial/silica-gel/artist-2026.png",
+        alt: "Official Silica Gel artist image from 2026",
+        caption: "Silica Gel, 2026",
+        credit: "Image: Apple Music artist profile",
+        sourceUrl:
+          "https://music.apple.com/kr/artist/%EC%8B%A4%EB%A6%AC%EC%B9%B4%EA%B2%94/1031084591",
+      },
       {
         src: "/editorial/silica-gel/band.jpg",
         alt: "The members of Silica Gel photographed in 2022",
@@ -432,6 +440,244 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
     ],
   },
+  "cortis-put-your-phone-down-incheon": {
+    typeLabel: "ARTIST PROFILE",
+    heading: "Five creators involved in making the work both onstage and behind it.",
+    introduction:
+      "CORTIS is a five-member BIGHIT MUSIC group formed by MARTIN, JAMES, JUHOON, SEONGHYEON and KEONHO. Every member contributes to music, choreography or video, placing collective creation above fixed positions. The Incheon shows open their first tour since debut.",
+    facts: [
+      { label: "MEMBERS", value: "Five · Collective creation" },
+      { label: "DEBUT", value: "2025" },
+      { label: "TOUR", value: "First headline tour" },
+      { label: "AGE", value: "Ages 9+" },
+    ],
+    timelineLabel: "CAREER",
+    timeline: [
+      {
+        marker: "2025",
+        title: "Debut with BIGHIT MUSIC",
+        description:
+          "The group introduced a creator-crew model with members contributing directly to music, performance and video.",
+      },
+      {
+        marker: "2025",
+        title: "Expansion through a first EP",
+        description:
+          "Rough guitar, hip-hop production and bright pop hooks revealed the group's broad creative range.",
+      },
+      {
+        marker: "2026",
+        title: "Moving onto global stages",
+        description:
+          "Major international appearances and a second EP expanded the energy of their debut year into a larger performance format.",
+      },
+      {
+        marker: "JUL 2026",
+        title: "First tour begins",
+        description:
+          "Two Incheon shows open a headline tour continuing through North America and Japan.",
+      },
+    ],
+    highlightsLabel: "ESSENTIAL TRACKS",
+    highlights: [
+      {
+        label: "TRACK / 2025",
+        title: "What You Want",
+        meta: "COLOR OUTSIDE THE LINES",
+        description:
+          "Psychedelic-rock guitar and heavy trap rhythm make the group's genre-mixing approach immediately clear.",
+      },
+      {
+        label: "TRACK / 2026",
+        title: "REDRED",
+        meta: "GREENGREEN",
+        description:
+          "A repetitive hook, rapid energy and direct performance instinct condense the color of their second era.",
+      },
+      {
+        label: "TRACK / 2026",
+        title: "TNT",
+        meta: "GREENGREEN",
+        description:
+          "The members' production involvement and visual direction move in step with the track's speed.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/cortis/greengreen.png",
+        alt: "Image for CORTIS second EP GREENGREEN",
+        caption: "GREENGREEN, 2026",
+        credit: "Image: Apple Music",
+        sourceUrl: "https://music.apple.com/kr/artist/cortis/1831651635",
+      },
+    ],
+    locationNote:
+      "INSPIRE Arena is a large venue on Yeongjong Island. Check Airport Railroad connections, resort or concert shuttles and the final route home before traveling.",
+    notes: [
+      {
+        label: "TICKET OPEN",
+        title: "General sale: June 18, 2026 at 20:00",
+        description:
+          "The Korean presale begins June 15 and general sale begins June 18. Recheck the official ticket page for schedule changes.",
+      },
+      {
+        label: "ENTRY",
+        title: "Mobile ticket · Face Pass",
+        description:
+          "No physical ticket is issued, and reservation and attendee information may be checked. Open and save your mobile ticket before reaching the venue.",
+      },
+      {
+        label: "ACCESS",
+        title: "Plan the route back from Yeongjong",
+        description:
+          "Saturday and Sunday start at different times. Include shuttle sales and final public-transport departures in your plan.",
+      },
+    ],
+    sources: [
+      {
+        label: "NOL TICKET",
+        url: "https://tickets.interpark.com/goods/26007886",
+      },
+      {
+        label: "BIGHIT MUSIC TOUR",
+        url: "https://ibighit.com/en/cortis/tour/",
+      },
+      {
+        label: "BIGHIT MUSIC PROFILE",
+        url: "https://ibighit.com/en/cortis/profile/",
+      },
+      {
+        label: "APPLE MUSIC ARTIST PROFILE",
+        url: "https://music.apple.com/kr/artist/cortis/1831651635",
+      },
+    ],
+  },
+  "sienna-spiro-my-house-seoul": {
+    typeLabel: "ARTIST PROFILE",
+    heading: "A voice pushing vintage soul texture into the present.",
+    introduction:
+      "Sienna Spiro is a London singer-songwriter connecting jazz and soul phrasing with contemporary pop writing. Her songs often grow from restrained piano into dramatic strings and full-bodied vocals. The Seoul stop of My House Tour is her first solo performance in Korea.",
+    facts: [
+      { label: "KOREA", value: "First Korean performance" },
+      { label: "FROM", value: "London · 2005" },
+      { label: "FORMAT", value: "My House Tour" },
+      { label: "AGE", value: "All ages" },
+    ],
+    timelineLabel: "CAREER",
+    timeline: [
+      {
+        marker: "2021",
+        title: "Original songs shared online",
+        description:
+          "Covers and original songs introduced her husky tone and precise vocal phrasing to a growing audience.",
+      },
+      {
+        marker: "2024",
+        title: "Official debut and a UK chart entry",
+        description:
+          "After releasing her first single, the follow-up entered the top 50 of the UK Official Singles Chart.",
+      },
+      {
+        marker: "2025",
+        title: "A first EP and global breakthrough",
+        description:
+          "A restrained debut EP was followed by rapid growth across the UK and US charts.",
+      },
+      {
+        marker: "2026",
+        title: "Debut album and world tour",
+        description:
+          "Ahead of her first studio album, she announced her largest tour across North America, Asia, Australia and Europe.",
+      },
+      {
+        marker: "JAN 2027",
+        title: "First solo show in Seoul",
+        description:
+          "Myunghwa Live Hall hosts her first meeting with a Korean concert audience.",
+      },
+    ],
+    highlightsLabel: "ESSENTIAL TRACKS",
+    highlights: [
+      {
+        label: "TRACK / 2025",
+        title: "Die On This Hill",
+        meta: "UK TOP 10",
+        description:
+          "Piano and strings steadily expand beneath a textured voice and an explosive final passage.",
+      },
+      {
+        label: "TRACK / 2026",
+        title: "The Visitor",
+        meta: "VISITOR",
+        description:
+          "Precise phrasing and controlled tension point toward the direction of her first studio album.",
+      },
+      {
+        label: "TRACK / 2024",
+        title: "MAYBE.",
+        meta: "SINK NOW, SWIM LATER",
+        description:
+          "The song offers a close view of her early emotional detail and jazz-vocal influence.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/sienna-spiro/profile.jpg",
+        alt: "Official portrait of Sienna Spiro in a pink jacket",
+        caption: "Sienna Spiro",
+        credit: "Image: Sienna Spiro official",
+        sourceUrl: "https://www.officialsiennaspiro.com/",
+      },
+      {
+        src: "/editorial/sienna-spiro/apple.png",
+        alt: "Official Sienna Spiro artist image from 2026",
+        caption: "Sienna Spiro, 2026",
+        credit: "Image: Apple Music artist profile",
+        sourceUrl:
+          "https://music.apple.com/us/artist/sienna-spiro/1745678083",
+      },
+    ],
+    locationNote:
+      "Myunghwa Live Hall sits between Yeongdeungpo Market and Singil stations. Standing and reserved seats may use different entry routes, so check the notice for your ticket type.",
+    notes: [
+      {
+        label: "FIRST KOREA SHOW",
+        title: "Sienna Spiro's first solo show in Korea",
+        description:
+          "This is her first meeting with a Korean audience as part of a solo tour rather than a festival or shared bill.",
+      },
+      {
+        label: "TICKET OPEN",
+        title: "General sale: June 18, 2026 at 10:00",
+        description:
+          "Artist presale begins June 16, followed by general sale on June 18, with a four-ticket limit per person.",
+      },
+      {
+        label: "SEATING",
+        title: "Standing and reserved seats at one price",
+        description:
+          "Both categories cost KRW 110,000 and the show is open to all ages. Check the official notice for final entry and seating details.",
+      },
+    ],
+    sources: [
+      {
+        label: "NOL TICKET OPEN NOTICE",
+        url: "https://tickets.interpark.com/contents/notice/detail/14159",
+      },
+      {
+        label: "NOL TICKET",
+        url: "https://tickets.interpark.com/goods/26008451",
+      },
+      {
+        label: "SIENNA SPIRO OFFICIAL",
+        url: "https://www.officialsiennaspiro.com/",
+      },
+      {
+        label: "APPLE MUSIC ARTIST PROFILE",
+        url: "https://music.apple.com/us/artist/sienna-spiro/1745678083",
+      },
+    ],
+  },
   "post-malone-seoul": {
     typeLabel: "ARTIST PROFILE",
     heading: "A star layering hip-hop, pop, rock and country into one voice.",
@@ -447,7 +693,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
     timeline: [
       {
         marker: "2015",
-        title: "White Iverson",
+        title: "A breakout debut single",
         description:
           "His debut single quickly introduced a relaxed vocal delivery over hip-hop production.",
       },
@@ -459,9 +705,9 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
       {
         marker: "2018–2019",
-        title: "beerbongs & bentleys / Hollywood's Bleeding",
+        title: "Expansion across two albums",
         description:
-          "rockstar, Sunflower and Circles placed him at the center of global pop.",
+          "A wider range of melody and collaborations, from hip-hop to pop rock, placed him at the center of global pop.",
       },
       {
         marker: "2024",

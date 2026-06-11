@@ -41,6 +41,26 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     description:
       "The Seoul opening of Silica Gel's first Asia tour takes place across two nights at KSPO DOME, with both standing and reserved seating.",
   },
+  "cortis-put-your-phone-down-incheon": {
+    title: "2026 CORTIS TOUR: Put Your Phone Down in Incheon",
+    region: "Yeongjong",
+    district: "Jung-gu, Incheon",
+    venue: "INSPIRE Arena",
+    address: "127 Gonghangmunhwa-ro, Jung-gu, Incheon",
+    price: "Standing · Reserved KRW 143,000",
+    description:
+      "CORTIS opens its first tour with two nights at INSPIRE Arena. The five-member creator crew expands its music, performance and visual direction into a full arena production.",
+  },
+  "sienna-spiro-my-house-seoul": {
+    title: "Sienna Spiro: My House Tour in Seoul",
+    region: "Yeongdeungpo",
+    district: "Yeongdeungpo-gu",
+    venue: "Myunghwa Live Hall",
+    address: "30 Beodeunaru-ro, Yeongdeungpo-gu, Seoul",
+    price: "Standing · Reserved KRW 110,000",
+    description:
+      "British singer-songwriter Sienna Spiro makes her first Korean appearance with the My House Tour, bringing retro soul and jazz texture, piano-led arrangements and a powerful voice to an intimate live hall.",
+  },
   "post-malone-seoul": {
     title: "Post Malone in Seoul",
     region: "Goyang",

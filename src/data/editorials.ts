@@ -282,13 +282,13 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
       {
         marker: "2015",
-        title: "Beauty Behind the Madness",
+        title: "글로벌 팝으로의 확장",
         description:
-          "‘Can’t Feel My Face’와 ‘The Hills’를 통해 언더그라운드의 감각을 글로벌 팝의 중심으로 옮겼습니다.",
+          "언더그라운드 R&B의 어두운 감각을 선명한 팝 멜로디와 결합하며 세계적인 청중에게 도달했습니다.",
       },
       {
         marker: "2019–2020",
-        title: "Blinding Lights / After Hours",
+        title: "After Hours 시대",
         description:
           "신스팝과 비극적 캐릭터 서사를 결합해 커리어를 대표하는 시대를 만들었습니다.",
       },
@@ -403,9 +403,9 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
       {
         marker: "2021–2023",
-        title: "Desert Eagle에서 POWER ANDRE 99까지",
+        title: "두 번째 정규 앨범으로의 확장",
         description:
-          "‘Desert Eagle’, ‘NO PAIN’, ‘Tik Tak Tok’으로 연이어 주목받으며 두 번째 정규 앨범의 세계를 완성했습니다.",
+          "연속된 싱글과 협업, 시청각 작업을 통해 두 번째 정규 앨범의 세계와 밴드의 대중적 기반을 넓혔습니다.",
       },
       {
         marker: "2024",
@@ -415,7 +415,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
       {
         marker: "2026",
-        title: "Ballad of You",
+        title: "첫 아시아 투어",
         description:
           "밴드의 첫 아시아 투어를 KSPO DOME 서울 공연에서 시작합니다.",
       },
@@ -445,6 +445,14 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
     ],
     gallery: [
+      {
+        src: "/editorial/silica-gel/artist-2026.png",
+        alt: "2026년 실리카겔 공식 아티스트 이미지",
+        caption: "Silica Gel, 2026",
+        credit: "Image: Apple Music artist profile",
+        sourceUrl:
+          "https://music.apple.com/kr/artist/%EC%8B%A4%EB%A6%AC%EC%B9%B4%EA%B2%94/1031084591",
+      },
       {
         src: "/editorial/silica-gel/band.jpg",
         alt: "2022년 실리카겔 멤버들의 모습",
@@ -485,6 +493,244 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
     ],
   },
+  "cortis-put-your-phone-down-incheon": {
+    typeLabel: "ARTIST PROFILE",
+    heading: "무대 안팎의 제작 과정에 직접 참여하는 다섯 명의 크리에이터 크루.",
+    introduction:
+      "CORTIS는 MARTIN, JAMES, JUHOON, SEONGHYEON, KEONHO로 구성된 BIGHIT MUSIC의 5인조 그룹입니다. 멤버 전원이 음악, 안무와 영상 제작에 참여하며 정해진 역할보다 공동 창작을 그룹의 중심에 둡니다. 이번 인천 공연은 데뷔 후 처음 여는 투어의 출발점입니다.",
+    facts: [
+      { label: "MEMBERS", value: "5인조 · 공동 창작" },
+      { label: "DEBUT", value: "2025년" },
+      { label: "TOUR", value: "첫 헤드라인 투어" },
+      { label: "AGE", value: "9세 이상" },
+    ],
+    timelineLabel: "CAREER",
+    timeline: [
+      {
+        marker: "2025",
+        title: "BIGHIT MUSIC에서 데뷔",
+        description:
+          "음악과 퍼포먼스, 영상 제작에 멤버가 직접 참여하는 크리에이터 크루의 방향을 선보였습니다.",
+      },
+      {
+        marker: "2025",
+        title: "첫 EP로 확장",
+        description:
+          "거친 기타와 힙합 프로덕션, 밝은 팝 훅을 한 앨범 안에 결합하며 팀의 넓은 제작 스펙트럼을 드러냈습니다.",
+      },
+      {
+        marker: "2026",
+        title: "글로벌 무대로의 이동",
+        description:
+          "해외 대형 무대와 두 번째 EP를 거치며 데뷔 첫해의 에너지를 더 큰 공연 형식으로 넓혔습니다.",
+      },
+      {
+        marker: "2026.07",
+        title: "첫 투어 개막",
+        description:
+          "인천 이틀 공연을 시작으로 북미와 일본까지 이어지는 첫 헤드라인 투어에 나섭니다.",
+      },
+    ],
+    highlightsLabel: "ESSENTIAL TRACKS",
+    highlights: [
+      {
+        label: "TRACK / 2025",
+        title: "What You Want",
+        meta: "COLOR OUTSIDE THE LINES",
+        description:
+          "사이키델릭 록의 기타와 묵직한 트랩 비트를 결합해 CORTIS의 장르 혼합 방식을 선명하게 보여줍니다.",
+      },
+      {
+        label: "TRACK / 2026",
+        title: "REDRED",
+        meta: "GREENGREEN",
+        description:
+          "반복적인 훅과 빠른 에너지, 직접적인 퍼포먼스 감각이 두 번째 활동기의 색을 압축합니다.",
+      },
+      {
+        label: "TRACK / 2026",
+        title: "TNT",
+        meta: "GREENGREEN",
+        description:
+          "멤버들의 제작 참여와 시각적 연출이 음악의 속도감과 맞물리는 곡입니다.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/cortis/greengreen.png",
+        alt: "CORTIS의 두 번째 EP GREENGREEN 이미지",
+        caption: "GREENGREEN, 2026",
+        credit: "Image: Apple Music",
+        sourceUrl: "https://music.apple.com/kr/artist/cortis/1831651635",
+      },
+    ],
+    locationNote:
+      "인스파이어 아레나는 인천 영종도에 있는 대형 공연장입니다. 공항철도와 리조트 셔틀, 공연 전용 셔틀의 운행 시간과 마지막 귀가편을 함께 확인하는 편이 좋습니다.",
+    notes: [
+      {
+        label: "TICKET OPEN",
+        title: "일반예매 2026년 6월 18일 20:00",
+        description:
+          "국내 선예매는 6월 15일, 일반예매는 6월 18일에 시작합니다. 일정 변경 여부는 공식 예매 페이지에서 다시 확인하세요.",
+      },
+      {
+        label: "ENTRY",
+        title: "모바일 티켓 · 얼굴패스 적용",
+        description:
+          "실물 티켓은 제공되지 않으며 예매자와 관람자 정보 확인이 필요합니다. 공연장 이동 전에 모바일 티켓을 미리 열어두는 편이 안전합니다.",
+      },
+      {
+        label: "ACCESS",
+        title: "영종도 귀가 동선 확인",
+        description:
+          "토요일과 일요일의 시작 시간이 다릅니다. 셔틀 판매와 대중교통 막차 시간까지 포함해 방문 일정을 잡으세요.",
+      },
+    ],
+    sources: [
+      {
+        label: "NOL TICKET",
+        url: "https://tickets.interpark.com/goods/26007886",
+      },
+      {
+        label: "BIGHIT MUSIC TOUR",
+        url: "https://ibighit.com/en/cortis/tour/",
+      },
+      {
+        label: "BIGHIT MUSIC PROFILE",
+        url: "https://ibighit.com/en/cortis/profile/",
+      },
+      {
+        label: "APPLE MUSIC ARTIST PROFILE",
+        url: "https://music.apple.com/kr/artist/cortis/1831651635",
+      },
+    ],
+  },
+  "sienna-spiro-my-house-seoul": {
+    typeLabel: "ARTIST PROFILE",
+    heading: "오래된 소울의 질감을 지금의 언어로 밀어붙이는 목소리.",
+    introduction:
+      "시에나 스파이로는 런던 출신 싱어송라이터로, 재즈와 소울의 프레이징을 현대적인 팝 송라이팅과 연결합니다. 절제된 피아노에서 시작해 스트링과 보컬이 크게 확장되는 드라마틱한 구성이 강점이며, ‘My House Tour’ 서울 공연은 그의 첫 한국 단독 무대입니다.",
+    facts: [
+      { label: "KOREA", value: "첫 내한공연" },
+      { label: "FROM", value: "London · 2005" },
+      { label: "FORMAT", value: "My House Tour" },
+      { label: "AGE", value: "전체관람가" },
+    ],
+    timelineLabel: "CAREER",
+    timeline: [
+      {
+        marker: "2021",
+        title: "온라인에서 시작한 자작곡",
+        description:
+          "자작곡과 커버 영상을 공개하며 허스키한 음색과 정교한 보컬 프레이징으로 이름을 알리기 시작했습니다.",
+      },
+      {
+        marker: "2024",
+        title: "정식 데뷔와 영국 차트 진입",
+        description:
+          "첫 싱글을 발표한 뒤 두 번째 싱글로 영국 오피셜 싱글 차트 톱 50에 진입했습니다.",
+      },
+      {
+        marker: "2025",
+        title: "첫 EP와 글로벌 돌파",
+        description:
+          "절제된 편곡과 감정적인 송라이팅을 담은 첫 EP 이후 영국과 미국 차트에서 빠르게 존재감을 넓혔습니다.",
+      },
+      {
+        marker: "2026",
+        title: "첫 정규 앨범과 월드 투어",
+        description:
+          "첫 스튜디오 앨범 발표를 앞두고 북미, 아시아, 호주와 유럽을 잇는 가장 큰 규모의 투어를 발표했습니다.",
+      },
+      {
+        marker: "2027.01",
+        title: "서울 첫 단독 공연",
+        description:
+          "명화라이브홀에서 한국 관객과 처음 만나는 단독 공연을 엽니다.",
+      },
+    ],
+    highlightsLabel: "ESSENTIAL TRACKS",
+    highlights: [
+      {
+        label: "TRACK / 2025",
+        title: "Die On This Hill",
+        meta: "UK TOP 10",
+        description:
+          "피아노와 스트링이 점차 커지는 구성 위로 거친 음색과 폭발적인 후반부가 겹치는 대표곡입니다.",
+      },
+      {
+        label: "TRACK / 2026",
+        title: "The Visitor",
+        meta: "VISITOR",
+        description:
+          "정교한 프레이징과 절제된 긴장감으로 첫 정규 앨범의 방향을 보여주는 싱글입니다.",
+      },
+      {
+        label: "TRACK / 2024",
+        title: "MAYBE.",
+        meta: "SINK NOW, SWIM LATER",
+        description:
+          "초기 활동기의 섬세한 감정 표현과 재즈 보컬의 영향을 가장 가까이 들을 수 있는 곡입니다.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/sienna-spiro/profile.jpg",
+        alt: "분홍색 재킷을 입은 시에나 스파이로 공식 포트레이트",
+        caption: "Sienna Spiro",
+        credit: "Image: Sienna Spiro official",
+        sourceUrl: "https://www.officialsiennaspiro.com/",
+      },
+      {
+        src: "/editorial/sienna-spiro/apple.png",
+        alt: "2026년 시에나 스파이로 공식 아티스트 이미지",
+        caption: "Sienna Spiro, 2026",
+        credit: "Image: Apple Music artist profile",
+        sourceUrl:
+          "https://music.apple.com/us/artist/sienna-spiro/1745678083",
+      },
+    ],
+    locationNote:
+      "명화라이브홀은 영등포시장역과 신길역 사이에 있는 라이브 공연장입니다. 스탠딩과 지정석의 입장 동선이 다를 수 있어 예매한 권종과 현장 번호표 안내를 확인해야 합니다.",
+    notes: [
+      {
+        label: "FIRST KOREA SHOW",
+        title: "시에나 스파이로의 첫 한국 단독 공연",
+        description:
+          "페스티벌이나 합동 무대가 아닌 단독 투어 일정으로 한국 관객을 처음 만나는 공연입니다.",
+      },
+      {
+        label: "TICKET OPEN",
+        title: "일반예매 2026년 6월 18일 10:00",
+        description:
+          "아티스트 선예매는 6월 16일, 일반예매는 6월 18일에 시작하며 1인 4매까지 예매할 수 있습니다.",
+      },
+      {
+        label: "SEATING",
+        title: "스탠딩석 · 지정석 동일가",
+        description:
+          "두 권종 모두 110,000원이며 전체관람가입니다. 세부 입장 순서와 좌석 배치는 공식 예매 공지를 확인하세요.",
+      },
+    ],
+    sources: [
+      {
+        label: "NOL TICKET OPEN NOTICE",
+        url: "https://tickets.interpark.com/contents/notice/detail/14159",
+      },
+      {
+        label: "NOL TICKET",
+        url: "https://tickets.interpark.com/goods/26008451",
+      },
+      {
+        label: "SIENNA SPIRO OFFICIAL",
+        url: "https://www.officialsiennaspiro.com/",
+      },
+      {
+        label: "APPLE MUSIC ARTIST PROFILE",
+        url: "https://music.apple.com/us/artist/sienna-spiro/1745678083",
+      },
+    ],
+  },
   "post-malone-seoul": {
     typeLabel: "ARTIST PROFILE",
     heading: "힙합, 팝, 록, 컨트리를 한 목소리 안에 겹치는 스타.",
@@ -500,7 +746,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
     timeline: [
       {
         marker: "2015",
-        title: "White Iverson",
+        title: "데뷔 싱글의 돌파",
         description:
           "느슨한 보컬과 힙합 프로덕션을 결합한 데뷔 싱글로 빠르게 이름을 알렸습니다.",
       },
@@ -512,9 +758,9 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
       {
         marker: "2018–2019",
-        title: "beerbongs & bentleys / Hollywood’s Bleeding",
+        title: "두 장의 앨범으로 확장",
         description:
-          "‘rockstar’, ‘Sunflower’, ‘Circles’가 이어지며 글로벌 팝의 중심에 자리 잡았습니다.",
+          "힙합에서 팝 록까지 넓어진 멜로디와 협업으로 글로벌 팝의 중심에 자리 잡았습니다.",
       },
       {
         marker: "2024",

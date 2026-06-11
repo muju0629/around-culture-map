@@ -9,7 +9,10 @@ import {
 } from "../components/Icons";
 import { Poster } from "../components/Poster";
 import { MiniMap } from "../components/MiniMap";
-import { getEventEditorial } from "../data/editorials";
+import {
+  getEventEditorial,
+  type EditorialImage,
+} from "../data/editorials";
 import { getEventMedia } from "../data/eventMedia";
 import {
   formatDateRange,
@@ -24,6 +27,12 @@ import { useItinerary } from "../hooks/useItinerary";
 import { useLanguage } from "../i18n/language";
 import { NotFoundPage } from "./NotFoundPage";
 
+interface DetailVisual extends EditorialImage {
+  role?: string;
+  note?: string;
+  kind: "artist" | "editorial";
+}
+
 export function EventDetailPage() {
   const { locale, copy } = useLanguage();
   const { id = "" } = useParams();
@@ -31,16 +40,39 @@ export function EventDetailPage() {
   const event = getEventById(id, locale);
   const editorial = getEventEditorial(id, locale);
   const media = getEventMedia(id);
-  // Photos shown in the lineup are dropped from the gallery so the same
-  // portrait never appears twice on the page.
-  const galleryImages = useMemo(() => {
-    const used = new Set(
-      (media?.lineup ?? [])
-        .map((artist) => artist.photo)
-        .filter((photo): photo is string => Boolean(photo)),
-    );
-    return (editorial?.gallery ?? []).filter((image) => !used.has(image.src));
-  }, [editorial, media]);
+  const roster = (media?.lineup ?? []).filter((artist) => !artist.photo);
+  const visualImages = useMemo<DetailVisual[]>(() => {
+    const images = new Map<string, DetailVisual>();
+
+    for (const artist of media?.lineup ?? []) {
+      if (!artist.photo) {
+        continue;
+      }
+
+      const editorialImage = editorial?.gallery?.find(
+        (image) => image.src === artist.photo,
+      );
+      images.set(artist.photo, {
+        src: artist.photo,
+        alt: editorialImage?.alt ?? artist.name,
+        caption: artist.name,
+        credit: artist.credit ?? editorialImage?.credit ?? "Official image",
+        sourceUrl:
+          artist.sourceUrl ?? editorialImage?.sourceUrl ?? event?.sourceUrl ?? "#",
+        role: artist.role,
+        note: locale === "en" ? artist.noteEn ?? artist.note : artist.note,
+        kind: "artist",
+      });
+    }
+
+    for (const image of editorial?.gallery ?? []) {
+      if (!images.has(image.src)) {
+        images.set(image.src, { ...image, kind: "editorial" });
+      }
+    }
+
+    return [...images.values()];
+  }, [editorial, event?.sourceUrl, locale, media]);
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { isPlanned, toggleItinerary } = useItinerary();
@@ -57,26 +89,26 @@ export function EventDetailPage() {
       if (keyEvent.key === "Escape") {
         setLightboxIndex(null);
       }
-      if (!galleryImages.length) {
+      if (!visualImages.length) {
         return;
       }
       if (keyEvent.key === "ArrowLeft") {
         setLightboxIndex((current) =>
           current === null
             ? null
-            : (current - 1 + galleryImages.length) % galleryImages.length,
+            : (current - 1 + visualImages.length) % visualImages.length,
         );
       }
       if (keyEvent.key === "ArrowRight") {
         setLightboxIndex((current) =>
-          current === null ? null : (current + 1) % galleryImages.length,
+          current === null ? null : (current + 1) % visualImages.length,
         );
       }
     }
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [galleryImages, lightboxIndex]);
+  }, [lightboxIndex, visualImages]);
 
   if (!event) {
     return <NotFoundPage />;
@@ -236,6 +268,19 @@ export function EventDetailPage() {
                     <ArrowIcon />
                   </a>
                 )}
+                {roster.length > 0 && (
+                  <div className="artist-roster">
+                    <span>MEMBERS / ON STAGE</span>
+                    <ul>
+                      {roster.map((artist) => (
+                        <li key={artist.name}>
+                          <strong>{artist.name}</strong>
+                          <span>{artist.role}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
               <dl className="editorial-facts">
                 {editorial.facts.map((fact) => (
@@ -247,69 +292,34 @@ export function EventDetailPage() {
               </dl>
             </section>
 
-            {media?.lineup && media.lineup.length > 0 && (
-              <section className="lineup-section">
-                <div className="detail-section-index">
-                  <span>ON STAGE</span>
-                </div>
-                <div className="lineup-grid">
-                  {media.lineup.map((artist) => (
-                    <article
-                      className={`artist-card${
-                        artist.photo ? "" : " artist-card--text"
-                      }`}
-                      key={artist.name}
-                    >
-                      {artist.photo && (
-                        <div className="artist-card__media">
-                          <img
-                            src={artist.photo}
-                            alt={artist.name}
-                            loading="lazy"
-                          />
-                        </div>
-                      )}
-                      <div className="artist-card__body">
-                        <span className="artist-card__role">{artist.role}</span>
-                        <strong>{artist.name}</strong>
-                        {artist.note && <p>{artist.note}</p>}
-                      </div>
-                      {artist.credit && (
-                        <span className="artist-card__credit">
-                          IMAGE · {artist.credit}
-                        </span>
-                      )}
-                    </article>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {galleryImages.length > 0 && (
+            {visualImages.length > 0 && (
               <section
                 className="editorial-gallery"
                 aria-label={copy.detail.relatedImages}
               >
                 <div className="editorial-gallery__heading">
-                  <span className="eyebrow">IMAGE ESSAY / 02</span>
+                  <span className="eyebrow">VISUAL INDEX / 02</span>
                   <p>
                     {copy.detail.galleryIntro}
                   </p>
                 </div>
                 <div
                   className={`editorial-gallery__grid editorial-gallery__grid--${Math.min(
-                    galleryImages.length,
+                    visualImages.length,
                     4,
                   )}`}
                 >
-                  {galleryImages.map((image) => (
-                    <figure key={image.src}>
+                  {visualImages.map((image) => (
+                    <figure
+                      className={`editorial-gallery__item editorial-gallery__item--${image.kind}`}
+                      key={image.src}
+                    >
                       <button
                         type="button"
                         className="editorial-gallery__open"
                         onClick={() =>
                           setLightboxIndex(
-                            galleryImages.findIndex(
+                            visualImages.findIndex(
                               (candidate) => candidate.src === image.src,
                             ),
                           )
@@ -318,7 +328,11 @@ export function EventDetailPage() {
                         <img src={image.src} alt={image.alt} loading="lazy" />
                       </button>
                       <figcaption>
-                        <strong>{image.caption}</strong>
+                        <div>
+                          {image.role && <span>{image.role}</span>}
+                          <strong>{image.caption}</strong>
+                          {image.note && <p>{image.note}</p>}
+                        </div>
                         <a
                           href={image.sourceUrl}
                           target="_blank"
@@ -516,12 +530,12 @@ export function EventDetailPage() {
           </a>
         )}
       </div>
-      {lightboxIndex !== null && galleryImages[lightboxIndex] && (
+      {lightboxIndex !== null && visualImages[lightboxIndex] && (
         <div
           className="image-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={galleryImages[lightboxIndex].caption}
+          aria-label={visualImages[lightboxIndex].caption}
         >
           <button
             type="button"
@@ -536,8 +550,8 @@ export function EventDetailPage() {
             aria-label={copy.detail.previousImage}
             onClick={() =>
               setLightboxIndex(
-                (lightboxIndex - 1 + galleryImages.length) %
-                  galleryImages.length,
+                (lightboxIndex - 1 + visualImages.length) %
+                  visualImages.length,
               )
             }
           >
@@ -545,12 +559,12 @@ export function EventDetailPage() {
           </button>
           <figure>
             <img
-              src={galleryImages[lightboxIndex].src}
-              alt={galleryImages[lightboxIndex].alt}
+              src={visualImages[lightboxIndex].src}
+              alt={visualImages[lightboxIndex].alt}
             />
             <figcaption>
-              <strong>{galleryImages[lightboxIndex].caption}</strong>
-              <span>{galleryImages[lightboxIndex].credit}</span>
+              <strong>{visualImages[lightboxIndex].caption}</strong>
+              <span>{visualImages[lightboxIndex].credit}</span>
             </figcaption>
           </figure>
           <button
@@ -558,7 +572,7 @@ export function EventDetailPage() {
             className="image-lightbox__next"
             aria-label={copy.detail.nextImage}
             onClick={() =>
-              setLightboxIndex((lightboxIndex + 1) % galleryImages.length)
+              setLightboxIndex((lightboxIndex + 1) % visualImages.length)
             }
           >
             →
