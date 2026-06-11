@@ -254,22 +254,21 @@ export function EventDetailPage() {
                 </div>
                 <div className="lineup-grid">
                   {media.lineup.map((artist) => (
-                    <article className="artist-card" key={artist.name}>
-                      <div className="artist-card__media">
-                        {artist.photo ? (
+                    <article
+                      className={`artist-card${
+                        artist.photo ? "" : " artist-card--text"
+                      }`}
+                      key={artist.name}
+                    >
+                      {artist.photo && (
+                        <div className="artist-card__media">
                           <img
                             src={artist.photo}
                             alt={artist.name}
                             loading="lazy"
                           />
-                        ) : (
-                          <span className="artist-card__avatar" aria-hidden="true">
-                            {artist.name.length <= 4
-                              ? artist.name.slice(-2)
-                              : artist.name.slice(0, 1)}
-                          </span>
-                        )}
-                      </div>
+                        </div>
+                      )}
                       <div className="artist-card__body">
                         <span className="artist-card__role">{artist.role}</span>
                         <strong>{artist.name}</strong>

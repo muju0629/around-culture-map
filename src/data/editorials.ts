@@ -331,12 +331,12 @@ export const eventEditorials: Record<string, EventEditorial> = {
     ],
     gallery: [
       {
-        src: "/editorial/the-weeknd/profile.jpg",
-        alt: "흰 배경 앞에 선 위켄드 공식 프로필",
+        src: "/editorial/the-weeknd/weeknd.jpg",
+        alt: "브라이언 지프가 촬영한 위켄드 포트레이트",
         caption: "The Weeknd",
-        credit: "Image: Hyundai Card DIVE",
+        credit: "Image: Brian Ziff · Wikimedia Commons",
         sourceUrl:
-          "https://dive.hyundaicard.com/web/content/contentView.hdc?contentId=20366",
+          "https://commons.wikimedia.org/wiki/File:The_Weeknd_Portrait_by_Brian_Ziff.jpg",
       },
       {
         src: "/editorial/the-weeknd/stage.jpg",

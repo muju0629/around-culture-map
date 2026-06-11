@@ -25,15 +25,16 @@ export const eventMedia: Record<string, EventMedia> = {
       {
         name: "The Weeknd",
         role: "HEADLINER",
-        photo: "/editorial/the-weeknd/profile.jpg",
-        credit: "Hyundai Card DIVE",
+        note: "캐나다 출신 싱어송라이터·프로듀서(본명 에이벨 테스파예). 어두운 R&B에서 출발해 스타디움 팝의 중심에 섰다.",
+        photo: "/editorial/the-weeknd/weeknd.jpg",
+        credit: "Brian Ziff · Wikimedia Commons",
       },
       {
         name: "Creepy Nuts",
         role: "OPENING",
+        note: "DJ 마츠나가와 R-지정의 일본 힙합 듀오. ‘Bling-Bang-Bang-Born’으로 2024년 세계적 인기를 얻었다.",
         photo: "/editorial/the-weeknd/creepy-nuts.jpg",
         credit: "Wikimedia Commons",
-        note: "‘Bling-Bang-Bang-Born’으로 알려진 일본의 힙합 듀오. 본 공연 한 시간 전 오프닝 무대.",
       },
     ],
   },
@@ -44,15 +45,16 @@ export const eventMedia: Record<string, EventMedia> = {
       {
         name: "Post Malone",
         role: "HEADLINER",
+        note: "미국의 싱어송라이터(본명 오스틴 포스트). 힙합·팝·록을 넘나들며 2024년 컨트리 앨범 ‘F-1 Trillion’까지 영역을 넓혔다.",
         photo: "/editorial/post-malone/portrait.jpg",
         credit: "Wikimedia Commons",
       },
       {
         name: "Don Toliver",
         role: "SPECIAL GUEST",
+        note: "미국 휴스턴 출신 래퍼·싱어. Travis Scott의 레이블 Cactus Jack 소속으로 ‘No Idea’로 이름을 알렸다.",
         photo: "/editorial/post-malone/don-toliver.jpg",
         credit: "Wikimedia Commons",
-        note: "‘No Idea’·‘Bandit’로 알려진 미국 휴스턴 출신 래퍼·싱어.",
       },
     ],
   },
@@ -61,10 +63,26 @@ export const eventMedia: Record<string, EventMedia> = {
       "https://music.apple.com/kr/artist/%EC%8B%A4%EB%A6%AC%EC%B9%B4%EA%B2%94/1031084591",
     appleMusicLabel: "실리카겔",
     lineup: [
-      { name: "김한주", role: "DRUMS" },
-      { name: "김춘추", role: "VOCAL · GUITAR" },
-      { name: "김건재", role: "GUITAR · VOCAL" },
-      { name: "최웅희", role: "BASS" },
+      {
+        name: "김춘추",
+        role: "GUITAR · VOCAL",
+        note: "기타와 보컬을 맡았다.",
+      },
+      {
+        name: "김한주",
+        role: "VOCAL · KEYBOARD",
+        note: "보컬과 키보드를 맡았다.",
+      },
+      {
+        name: "김건재",
+        role: "DRUMS",
+        note: "드럼을 맡았다.",
+      },
+      {
+        name: "최웅희",
+        role: "BASS",
+        note: "베이스를 맡았다.",
+      },
     ],
   },
   "big-naughty-icn-ntg": {
@@ -74,6 +92,7 @@ export const eventMedia: Record<string, EventMedia> = {
       {
         name: "BIG Naughty (서동현)",
         role: "HEADLINER",
+        note: "2019년 ‘쇼미더머니8’에서 3위로 주목받은 싱잉 랩 중심의 래퍼·싱어송라이터. 하이어 뮤직 소속.",
         photo: "/editorial/big-naughty/portrait.jpg",
         credit: "H1GHR MUSIC",
       },
