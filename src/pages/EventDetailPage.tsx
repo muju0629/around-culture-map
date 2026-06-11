@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { EventCard } from "../components/EventCard";
 import { Header } from "../components/Header";
@@ -8,14 +8,18 @@ import {
   ShareIcon,
 } from "../components/Icons";
 import { Poster } from "../components/Poster";
+import { MiniMap } from "../components/MiniMap";
 import { getEventEditorial } from "../data/editorials";
 import {
   formatDateRange,
   getCategoryLabel,
   getEventById,
   getEvents,
+  getVerificationDate,
+  getTodayInSeoul,
 } from "../data/events";
 import { useFavorites } from "../hooks/useFavorites";
+import { useItinerary } from "../hooks/useItinerary";
 import { useLanguage } from "../i18n/language";
 import { NotFoundPage } from "./NotFoundPage";
 
@@ -27,7 +31,43 @@ export function EventDetailPage() {
   const editorial = getEventEditorial(id, locale);
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorites();
+  const { isPlanned, toggleItinerary } = useItinerary();
   const [shareMessage, setShareMessage] = useState("");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const today = getTodayInSeoul();
+
+  useEffect(() => {
+    if (lightboxIndex === null) {
+      return;
+    }
+
+    function handleKeyDown(keyEvent: KeyboardEvent) {
+      if (keyEvent.key === "Escape") {
+        setLightboxIndex(null);
+      }
+      if (!editorial?.gallery?.length) {
+        return;
+      }
+      if (keyEvent.key === "ArrowLeft") {
+        setLightboxIndex((current) =>
+          current === null
+            ? null
+            : (current - 1 + editorial.gallery!.length) %
+              editorial.gallery!.length,
+        );
+      }
+      if (keyEvent.key === "ArrowRight") {
+        setLightboxIndex((current) =>
+          current === null
+            ? null
+            : (current + 1) % editorial.gallery!.length,
+        );
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [editorial?.gallery, lightboxIndex]);
 
   if (!event) {
     return <NotFoundPage />;
@@ -36,15 +76,25 @@ export function EventDetailPage() {
   const relatedCandidates = events.filter(
     (candidate) =>
       candidate.id !== event.id &&
+      candidate.endDate >= today &&
       (candidate.district === event.district ||
         candidate.category === event.category),
   );
   const relatedFallbacks = events.filter(
     (candidate) =>
       candidate.id !== event.id &&
+      candidate.endDate >= today &&
       !relatedCandidates.some((relatedEvent) => relatedEvent.id === candidate.id),
   );
   const related = [...relatedCandidates, ...relatedFallbacks].slice(0, 3);
+  const mediaSources =
+    editorial?.sources.filter((source) =>
+      /music\.apple|spotify|youtube|youtu\.be/i.test(source.url),
+    ) ?? [];
+  const verifiedDate = new Intl.DateTimeFormat(
+    locale === "ko" ? "ko-KR" : "en-GB",
+    { year: "numeric", month: "2-digit", day: "2-digit" },
+  ).format(new Date(`${getVerificationDate(event)}T00:00:00`));
 
   async function handleShare() {
     try {
@@ -76,7 +126,16 @@ export function EventDetailPage() {
           </span>
         </div>
 
-        <section className="detail-hero">
+        <nav className="detail-section-nav" aria-label="Detail sections">
+          <a href="#info">{copy.detail.navInfo}</a>
+          <a href="#profile">
+            {editorial ? copy.detail.navProfile : copy.detail.navAbout}
+          </a>
+          {editorial && <a href="#visit">{copy.detail.navVisit}</a>}
+          {editorial && <a href="#sources">{copy.detail.navSources}</a>}
+        </nav>
+
+        <section className="detail-hero" id="info">
           <div className="detail-hero__poster">
             <Poster event={event} />
           </div>
@@ -119,6 +178,15 @@ export function EventDetailPage() {
                 <BookmarkIcon filled={isFavorite(event.id)} />
                 {isFavorite(event.id) ? "SAVED" : "SAVE"}
               </button>
+              <button
+                type="button"
+                className={`button${isPlanned(event.id) ? " is-active" : ""}`}
+                onClick={() => toggleItinerary(event.id)}
+              >
+                {isPlanned(event.id)
+                  ? copy.detail.removePlan
+                  : copy.detail.addPlan}
+              </button>
               <button type="button" className="button" onClick={handleShare}>
                 <ShareIcon />
                 SHARE
@@ -143,7 +211,7 @@ export function EventDetailPage() {
 
         {editorial ? (
           <>
-            <section className="editorial-profile">
+            <section className="editorial-profile" id="profile">
               <div className="detail-section-index">
                 <span>PROFILE / 01</span>
               </div>
@@ -181,16 +249,28 @@ export function EventDetailPage() {
                 >
                   {editorial.gallery.map((image) => (
                     <figure key={image.src}>
-                      <a
-                        href={image.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
+                      <button
+                        type="button"
+                        className="editorial-gallery__open"
+                        onClick={() =>
+                          setLightboxIndex(
+                            editorial.gallery!.findIndex(
+                              (candidate) => candidate.src === image.src,
+                            ),
+                          )
+                        }
                       >
                         <img src={image.src} alt={image.alt} loading="lazy" />
-                      </a>
+                      </button>
                       <figcaption>
                         <strong>{image.caption}</strong>
-                        <span>{image.credit}</span>
+                        <a
+                          href={image.sourceUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {image.credit} ↗
+                        </a>
                       </figcaption>
                     </figure>
                   ))}
@@ -232,10 +312,25 @@ export function EventDetailPage() {
                     </article>
                   ))}
                 </div>
+                {mediaSources.length > 0 && (
+                  <div className="detail-media-links">
+                    <span className="eyebrow">OFFICIAL LISTENING</span>
+                    {mediaSources.map((source) => (
+                      <a
+                        key={source.url}
+                        href={source.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {source.label} <ArrowIcon />
+                      </a>
+                    ))}
+                  </div>
+                )}
               </div>
             </section>
 
-            <section className="visit-section">
+            <section className="visit-section" id="visit">
               <div className="detail-section-index">
                 <span>VISIT / 05</span>
               </div>
@@ -257,6 +352,7 @@ export function EventDetailPage() {
                   MAP
                   <ArrowIcon />
                 </a>
+                <MiniMap event={event} />
               </div>
               <div className="visit-notes">
                 {editorial.notes.map((note) => (
@@ -269,9 +365,11 @@ export function EventDetailPage() {
               </div>
             </section>
 
-            <section className="detail-sources">
+            <section className="detail-sources" id="sources">
               <div>
-                <span className="eyebrow">SOURCES / UPDATED 2026.06.11</span>
+                <span className="eyebrow">
+                  SOURCES / {copy.detail.verified.toUpperCase()} {verifiedDate}
+                </span>
                 <p>
                   {copy.detail.sourceNotice}
                 </p>
@@ -292,7 +390,7 @@ export function EventDetailPage() {
             </section>
           </>
         ) : (
-          <section className="detail-info">
+          <section className="detail-info" id="profile">
             <div className="detail-info__index">
               <span>ABOUT / 01</span>
             </div>
@@ -309,13 +407,31 @@ export function EventDetailPage() {
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+              <div className="fallback-source">
+                <span>
+                  {copy.detail.verified.toUpperCase()} {verifiedDate}
+                </span>
+                {event.sourceUrl && (
+                  <a
+                    href={event.sourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {event.sourceLabel ?? "OFFICIAL"} <ArrowIcon />
+                  </a>
+                )}
+              </div>
             </div>
-            <div className="detail-info__marker" aria-hidden="true">
-              <span>SEOUL</span>
-              <strong>{event.region}</strong>
-              <span>
-                {event.latitude.toFixed(4)} N / {event.longitude.toFixed(4)} E
-              </span>
+            <div className="detail-info__location">
+              <div className="detail-info__marker" aria-hidden="true">
+                <span>SEOUL</span>
+                <strong>{event.region}</strong>
+                <span>
+                  {event.latitude.toFixed(4)} N /{" "}
+                  {event.longitude.toFixed(4)} E
+                </span>
+              </div>
+              <MiniMap event={event} />
             </div>
           </section>
         )}
@@ -342,6 +458,75 @@ export function EventDetailPage() {
           </div>
         </section>
       </main>
+      <div className="detail-mobile-actions">
+        <button
+          type="button"
+          className={isFavorite(event.id) ? "is-active" : ""}
+          onClick={() => toggleFavorite(event.id)}
+        >
+          <BookmarkIcon filled={isFavorite(event.id)} />
+          {isFavorite(event.id) ? "SAVED" : "SAVE"}
+        </button>
+        <Link to={`/explore?event=${event.id}`}>
+          MAP <ArrowIcon />
+        </Link>
+        {event.sourceUrl && (
+          <a href={event.sourceUrl} target="_blank" rel="noreferrer">
+            OFFICIAL <ArrowIcon />
+          </a>
+        )}
+      </div>
+      {lightboxIndex !== null && editorial?.gallery && (
+        <div
+          className="image-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={editorial.gallery[lightboxIndex].caption}
+        >
+          <button
+            type="button"
+            className="image-lightbox__close"
+            onClick={() => setLightboxIndex(null)}
+          >
+            {copy.detail.closeGallery}
+          </button>
+          <button
+            type="button"
+            className="image-lightbox__previous"
+            aria-label={copy.detail.previousImage}
+            onClick={() =>
+              setLightboxIndex(
+                (lightboxIndex - 1 + editorial.gallery!.length) %
+                  editorial.gallery!.length,
+              )
+            }
+          >
+            ←
+          </button>
+          <figure>
+            <img
+              src={editorial.gallery[lightboxIndex].src}
+              alt={editorial.gallery[lightboxIndex].alt}
+            />
+            <figcaption>
+              <strong>{editorial.gallery[lightboxIndex].caption}</strong>
+              <span>{editorial.gallery[lightboxIndex].credit}</span>
+            </figcaption>
+          </figure>
+          <button
+            type="button"
+            className="image-lightbox__next"
+            aria-label={copy.detail.nextImage}
+            onClick={() =>
+              setLightboxIndex(
+                (lightboxIndex + 1) % editorial.gallery!.length,
+              )
+            }
+          >
+            →
+          </button>
+        </div>
+      )}
       <footer className="site-footer">
         <span>AROUND © 2026</span>
         <span>SEOUL CULTURE INDEX</span>

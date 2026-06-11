@@ -1,9 +1,9 @@
 import { useCallback, useSyncExternalStore } from "react";
 
-const STORAGE_KEY = "around:favorites";
-const CHANGE_EVENT = "around:favorites-change";
+const STORAGE_KEY = "around:itinerary";
+const CHANGE_EVENT = "around:itinerary-change";
 
-function readFavorites() {
+function readItinerary() {
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     return stored ? (JSON.parse(stored) as string[]) : [];
@@ -13,15 +13,15 @@ function readFavorites() {
 }
 
 let cachedValue = "";
-let cachedFavorites: string[] = [];
+let cachedIds: string[] = [];
 
 function getSnapshot() {
   const nextValue = window.localStorage.getItem(STORAGE_KEY) ?? "[]";
   if (nextValue !== cachedValue) {
     cachedValue = nextValue;
-    cachedFavorites = readFavorites();
+    cachedIds = readItinerary();
   }
-  return cachedFavorites;
+  return cachedIds;
 }
 
 function subscribe(callback: () => void) {
@@ -33,17 +33,17 @@ function subscribe(callback: () => void) {
   };
 }
 
-function writeFavorites(favorites: string[]) {
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+function writeItinerary(ids: string[]) {
+  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
   window.dispatchEvent(new Event(CHANGE_EVENT));
 }
 
-export function useFavorites() {
-  const favorites = useSyncExternalStore(subscribe, getSnapshot, () => []);
+export function useItinerary() {
+  const itinerary = useSyncExternalStore(subscribe, getSnapshot, () => []);
 
-  const toggleFavorite = useCallback((eventId: string) => {
+  const toggleItinerary = useCallback((eventId: string) => {
     const current = getSnapshot();
-    writeFavorites(
+    writeItinerary(
       current.includes(eventId)
         ? current.filter((id) => id !== eventId)
         : [...current, eventId],
@@ -51,8 +51,8 @@ export function useFavorites() {
   }, []);
 
   return {
-    favorites,
-    isFavorite: (eventId: string) => favorites.includes(eventId),
-    toggleFavorite,
+    itinerary,
+    isPlanned: (eventId: string) => itinerary.includes(eventId),
+    toggleItinerary,
   };
 }

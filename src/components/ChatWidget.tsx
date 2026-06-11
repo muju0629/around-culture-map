@@ -4,13 +4,15 @@ import {
   useRef,
   useState,
 } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   formatDateRange,
   getCategoryLabel,
   getEvents,
 } from "../data/events";
 import { useLanguage } from "../i18n/language";
+import { useFavorites } from "../hooks/useFavorites";
+import { useItinerary } from "../hooks/useItinerary";
 
 interface Message {
   role: "user" | "assistant";
@@ -40,7 +42,18 @@ function eventsByIds(
 
 export function ChatWidget() {
   const { locale, copy } = useLanguage();
+  const location = useLocation();
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const { isPlanned, toggleItinerary } = useItinerary();
   const localizedEvents = getEvents(locale);
+  const currentEventId = location.pathname.startsWith("/events/")
+    ? location.pathname.split("/")[2]
+    : undefined;
+  const pageContext = location.pathname === "/explore"
+    ? "explore"
+    : currentEventId
+      ? "detail"
+      : "default";
   const greetingContent = copy.chat.greeting;
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -103,6 +116,7 @@ export function ChatWidget() {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           locale,
+          contextEventId: currentEventId,
           messages: nextMessages.map(({ role, content }) => ({
             role,
             content,
@@ -194,7 +208,7 @@ export function ChatWidget() {
       {!open && (
         <button
           type="button"
-          className="chat-fab"
+          className={`chat-fab chat-fab--${pageContext}`}
           onClick={() => setOpen(true)}
           aria-expanded="false"
           aria-label={copy.chat.open}
@@ -205,7 +219,7 @@ export function ChatWidget() {
 
       {open && (
         <div
-          className="chat-panel"
+          className={`chat-panel chat-panel--${pageContext}`}
           role="dialog"
           aria-label={copy.chat.dialog}
         >
@@ -241,7 +255,10 @@ export function ChatWidget() {
                       className="chat-suggestions"
                       aria-label={copy.chat.suggestionLabel}
                     >
-                      {copy.chat.suggestions.map((suggestion) => (
+                      {[
+                        ...copy.chat.suggestions,
+                        ...(currentEventId ? [copy.chat.similar] : []),
+                      ].map((suggestion) => (
                         <button
                           type="button"
                           key={suggestion}
@@ -255,32 +272,73 @@ export function ChatWidget() {
                   {cards.length > 0 && (
                     <div className="chat-cards">
                       {cards.map((event) => (
+                        <article key={event.id} className="chat-card">
+                          <Link
+                            to={`/events/${event.id}`}
+                            onClick={() => setOpen(false)}
+                          >
+                            {event.posterImage && (
+                              <img
+                                src={event.posterImage}
+                                alt=""
+                                loading="lazy"
+                              />
+                            )}
+                            <span className="chat-card__body">
+                              <span className="chat-card__cat">
+                                {getCategoryLabel(event.category, locale)} ·{" "}
+                                {event.sourceLabel}
+                              </span>
+                              <strong>{event.title}</strong>
+                              <span className="chat-card__meta">
+                                {event.venue} ·{" "}
+                                {formatDateRange(
+                                  event.startDate,
+                                  event.endDate,
+                                  locale,
+                                )}
+                              </span>
+                            </span>
+                          </Link>
+                          <div className="chat-card__actions">
+                            <Link
+                              to={`/explore?event=${event.id}`}
+                              onClick={() => setOpen(false)}
+                            >
+                              {copy.chat.viewMap}
+                            </Link>
+                            <button
+                              type="button"
+                              className={isFavorite(event.id) ? "is-active" : ""}
+                              onClick={() => toggleFavorite(event.id)}
+                            >
+                              {isFavorite(event.id)
+                                ? copy.chat.saved
+                                : copy.chat.save}
+                            </button>
+                            <button
+                              type="button"
+                              className={isPlanned(event.id) ? "is-active" : ""}
+                              onClick={() => toggleItinerary(event.id)}
+                            >
+                              {isPlanned(event.id)
+                                ? copy.chat.planned
+                                : copy.chat.plan}
+                            </button>
+                          </div>
+                        </article>
+                      ))}
+                      {cards.length > 1 && (
                         <Link
-                          key={event.id}
-                          className="chat-card"
-                          to={`/events/${event.id}`}
+                          className="chat-view-together"
+                          to={`/explore?ids=${cards
+                            .map((event) => event.id)
+                            .join(",")}`}
                           onClick={() => setOpen(false)}
                         >
-                          {event.posterImage && (
-                            <img src={event.posterImage} alt="" loading="lazy" />
-                          )}
-                          <span className="chat-card__body">
-                            <span className="chat-card__cat">
-                              {getCategoryLabel(event.category, locale)} ·{" "}
-                              {event.sourceLabel}
-                            </span>
-                            <strong>{event.title}</strong>
-                            <span className="chat-card__meta">
-                              {event.venue} ·{" "}
-                              {formatDateRange(
-                                event.startDate,
-                                event.endDate,
-                                locale,
-                              )}
-                            </span>
-                          </span>
+                          {copy.chat.viewTogether}
                         </Link>
-                      ))}
+                      )}
                     </div>
                   )}
                 </div>

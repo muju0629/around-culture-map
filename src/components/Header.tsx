@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { getRegions, regions } from "../data/events";
+import { useFavorites } from "../hooks/useFavorites";
 import { useLanguage } from "../i18n/language";
 import type { Locale } from "../types";
 
@@ -9,6 +10,7 @@ interface HeaderProps {
 
 export function Header({ inverted = false }: HeaderProps) {
   const { locale, setLocale, copy } = useLanguage();
+  const { favorites } = useFavorites();
   const localizedRegions = getRegions(locale);
 
   return (
@@ -60,6 +62,15 @@ export function Header({ inverted = false }: HeaderProps) {
             </div>
           </div>
         </details>
+        <NavLink
+          to="/saved"
+          className={({ isActive }) =>
+            `site-nav__saved${isActive ? " is-active" : ""}`
+          }
+        >
+          {copy.header.saved}
+          <span>{String(favorites.length).padStart(2, "0")}</span>
+        </NavLink>
         <span className="site-nav__edition">VOL. 01</span>
         <div className="language-switch" aria-label={copy.header.languageLabel}>
           {(["ko", "en"] as Locale[]).map((option) => (

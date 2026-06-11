@@ -171,6 +171,66 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     description:
       "A 24-seat space made for attentive listening, with weekly sessions devoted to hearing one selected album from beginning to end.",
   },
+  "to-alexa": {
+    title: "To Alexa",
+    region: "Pyeongchang",
+    district: "Jongno-gu",
+    venue: "SeMA Art Archives",
+    address: "101 Pyeongchangmunhwa-ro, Jongno-gu, Seoul",
+    price: "Free",
+    description:
+      "Eight artists consider how contemporary art converses with technology as the interfaces used to find and communicate information continue to change.",
+  },
+  "foundation-of-technology": {
+    title: "The Foundation of Technology: Scenes at the Boundary",
+    region: "Jeong-dong",
+    district: "Jung-gu",
+    venue: "SeMA Seosomun Main Branch",
+    address: "61 Deoksugung-gil, Jung-gu, Seoul",
+    price: "Free",
+    description:
+      "Drawing from the Gana Art Collection, the exhibition examines how industrialization, urbanization and changing media shaped Korean society and art from the 1970s through the 1990s.",
+  },
+  "the-art-of-writing": {
+    title: "The Art of Writing",
+    region: "Junggye",
+    district: "Nowon-gu",
+    venue: "SeMA Buk-Seoul Museum of Art",
+    address: "1238 Dongil-ro, Nowon-gu, Seoul",
+    price: "Free",
+    description:
+      "Ten artists and collectives treat writing as an essential artistic language, moving across text, sound, drawing, installation and video.",
+  },
+  "seoul-photo-festival-comeback-home": {
+    title: "2026 Seoul Photo Festival: Comeback Home",
+    region: "Chang-dong",
+    district: "Dobong-gu",
+    venue: "Photo SeMA",
+    address: "68 Madeul-ro 13-gil, Dobong-gu, Seoul",
+    price: "Free",
+    description:
+      "Returning after five years, the Seoul Photo Festival brings together 23 artists who revisit home as a place shaped by relationships, memory and movement through photography, installation and video.",
+  },
+  "filipp-jenikae-lucky": {
+    title: "Filipp Jenikäe: Lucky, Lucky? Lucky!",
+    region: "Hongdae",
+    district: "Mapo-gu",
+    venue: "T Art Museum Hongdae",
+    address: "14-16 Yanghwa-ro 16-gil, Mapo-gu, Seoul",
+    price: "Early bird KRW 10,000 · General KRW 20,000",
+    description:
+      "Filipp Jenikäe's first special exhibition in Korea unfolds five ideas of luck through intense color and energetic scenes. Early-bird tickets are available through June 18.",
+  },
+  "waterbomb-seoul-2026": {
+    title: "Waterbomb Seoul 2026",
+    region: "Goyang",
+    district: "Ilsanseo-gu",
+    venue: "KINTEX Outdoor Global Stage",
+    address: "408 Hallyuworld-ro, Ilsanseo-gu, Goyang-si, Gyeonggi-do",
+    price: "KRW 143,000–154,000",
+    description:
+      "The summer festival combines live music and water across three days. The daily lineup includes Jay Park, Changmo, Sunmi, Lee Youngji, RIIZE, Kiss of Life, Taemin, BIBI and Karina. Admission is restricted to guests aged 19 and over.",
+  },
   "city-body-movement": {
     title: "City, Body, Movement",
     region: "Nodeul",

@@ -51,6 +51,7 @@ export interface CultureEvent {
   locationLabel?: string;
   sourceLabel?: string;
   sourceUrl?: string;
+  verifiedAt?: string;
   featured?: boolean;
 }
 
@@ -60,3 +61,10 @@ export type ExploreFilter =
   | "이번 주말"
   | "무료"
   | EventCategory;
+
+export type ExploreSort = "recommended" | "distance" | "date";
+
+export interface UserLocation {
+  latitude: number;
+  longitude: number;
+}

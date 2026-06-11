@@ -5,6 +5,7 @@ import { EventDetailPage } from "./pages/EventDetailPage";
 import { ExplorePage } from "./pages/ExplorePage";
 import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { SavedPage } from "./pages/SavedPage";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/events/:id" element={<EventDetailPage />} />
+        <Route path="/saved" element={<SavedPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ChatWidget />

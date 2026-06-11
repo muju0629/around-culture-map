@@ -3,8 +3,11 @@ import type {
   EventCategory,
   ExploreFilter,
   Locale,
+  UserLocation,
 } from "../types";
 import { eventEnglishCopy } from "./events.en";
+
+export const CATALOG_UPDATED_AT = "2026-06-11";
 
 export const events: CultureEvent[] = [
   {
@@ -404,6 +407,157 @@ export const events: CultureEvent[] = [
     longitude: 126.9876,
   },
   {
+    id: "to-alexa",
+    title: "알렉사에게",
+    englishTitle: "TO ALEXA",
+    category: "전시",
+    region: "평창",
+    district: "종로구",
+    venue: "서울시립 미술아카이브",
+    address: "서울 종로구 평창문화로 101",
+    startDate: "2026-03-26",
+    endDate: "2026-07-26",
+    hours: "TUE–FRI 10:00–20:00 / WEEKEND 10:00–19:00",
+    price: "무료",
+    isFree: true,
+    description:
+      "정보를 찾고 전달하는 인터페이스가 달라진 오늘, 동시대 미술이 기술과 대화하는 방식을 살펴보는 전시입니다. 여덟 작가의 작업을 통해 질문하고 응답하는 행위의 의미를 다시 생각합니다.",
+    tags: ["INTERFACE", "ARCHIVE", "FREE"],
+    poster: "signal",
+    latitude: 37.6054993,
+    longitude: 126.9663636,
+    sourceLabel: "SeMA",
+    sourceUrl:
+      "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1513028",
+    verifiedAt: "2026-06-11",
+  },
+  {
+    id: "foundation-of-technology",
+    title: "기술의 저변: 경계에 선 장면들",
+    englishTitle: "THE FOUNDATION OF TECHNOLOGY: SCENES AT THE BOUNDARY",
+    category: "전시",
+    region: "정동",
+    district: "중구",
+    venue: "서울시립미술관 서소문본관",
+    address: "서울 중구 덕수궁길 61",
+    startDate: "2026-04-16",
+    endDate: "2026-11-22",
+    hours: "TUE–THU 10:00–20:00 / FRI –21:00 / WEEKEND –19:00",
+    price: "무료",
+    isFree: true,
+    description:
+      "가나아트컬렉션을 중심으로 1970년대부터 1990년대까지 산업화, 도시화, 매체 변화가 한국 사회의 풍경과 미술에 남긴 장면을 살펴봅니다.",
+    tags: ["GANA ART COLLECTION", "KOREAN ART", "FREE"],
+    poster: "grid",
+    latitude: 37.5641598,
+    longitude: 126.9738078,
+    sourceLabel: "SeMA",
+    sourceUrl:
+      "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1509709",
+    verifiedAt: "2026-06-11",
+  },
+  {
+    id: "the-art-of-writing",
+    title: "글짓, 쓰는 예술",
+    englishTitle: "THE ART OF WRITING",
+    category: "전시",
+    region: "중계",
+    district: "노원구",
+    venue: "서울시립 북서울미술관",
+    address: "서울 노원구 동일로 1238",
+    startDate: "2026-04-23",
+    endDate: "2026-07-12",
+    hours: "TUE–THU 10:00–20:00 / FRI –21:00 / WEEKEND –19:00",
+    price: "무료",
+    isFree: true,
+    description:
+      "쓰기를 예술의 핵심 언어로 바라보는 전시입니다. 열 팀의 작가가 텍스트, 소리, 드로잉, 설치, 영상을 오가며 글을 짓고 읽는 새로운 방식을 제안합니다.",
+    tags: ["WRITING", "TEXT ART", "FREE"],
+    poster: "type",
+    latitude: 37.6408003,
+    longitude: 127.0667787,
+    sourceLabel: "SeMA",
+    sourceUrl:
+      "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1521429",
+    verifiedAt: "2026-06-11",
+  },
+  {
+    id: "seoul-photo-festival-comeback-home",
+    title: "2026 서울사진축제: 컴백홈",
+    englishTitle: "2026 SEOUL PHOTO FESTIVAL: COMEBACK HOME",
+    category: "축제",
+    region: "창동",
+    district: "도봉구",
+    venue: "서울시립 사진미술관",
+    address: "서울 도봉구 마들로13길 68",
+    startDate: "2026-04-09",
+    endDate: "2026-06-14",
+    hours: "TUE–FRI 10:00–20:00 / WEEKEND 10:00–19:00",
+    price: "무료",
+    isFree: true,
+    description:
+      "5년 만에 돌아온 서울사진축제입니다. 스물세 명의 작가가 사진, 설치, 영상으로 집을 관계와 기억, 이동이 교차하는 장소로 다시 바라봅니다.",
+    tags: ["PHOTOGRAPHY", "23 ARTISTS", "FREE"],
+    poster: "frame",
+    latitude: 37.6624476,
+    longitude: 127.0448598,
+    sourceLabel: "SeMA",
+    sourceUrl:
+      "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1515171",
+    verifiedAt: "2026-06-11",
+  },
+  {
+    id: "filipp-jenikae-lucky",
+    title: "필립 예니카 기획전: 럭키 럭키 럭키",
+    englishTitle: "FILIPP JENIKÄE: LUCKY, LUCKY? LUCKY!",
+    category: "전시",
+    region: "홍대",
+    district: "마포구",
+    venue: "띠아트뮤지엄 홍대",
+    address: "서울 마포구 양화로16길 14-16",
+    startDate: "2026-06-19",
+    endDate: "2026-09-19",
+    hours: "DAILY 10:30–19:00 / LAST ENTRY 18:00",
+    price: "얼리버드 10,000원 · 일반 20,000원",
+    isFree: false,
+    description:
+      "강렬한 색과 에너지로 행운의 다섯 가지 비밀을 풀어낸 필립 예니카의 국내 첫 기획전입니다. 6월 18일까지 얼리버드 티켓을 판매합니다.",
+    tags: ["FILIPP JENIKÄE", "FIRST IN KOREA", "EARLY BIRD"],
+    poster: "orbit",
+    latitude: 37.5527986,
+    longitude: 126.9200241,
+    sourceLabel: "MELON TICKET",
+    sourceUrl:
+      "https://ticket.melon.com/performance/index.htm?prodId=213358",
+    verifiedAt: "2026-06-11",
+  },
+  {
+    id: "waterbomb-seoul-2026",
+    title: "워터밤 서울 2026",
+    englishTitle: "WATERBOMB SEOUL 2026",
+    category: "축제",
+    region: "고양",
+    district: "일산서구",
+    venue: "킨텍스 야외 글로벌 스테이지",
+    address: "경기 고양시 일산서구 한류월드로 408",
+    startDate: "2026-07-24",
+    endDate: "2026-07-26",
+    hours: "FRI–SUN 13:00 / 540 MIN",
+    price: "143,000–154,000원",
+    isFree: false,
+    description:
+      "음악과 물을 결합한 여름 페스티벌입니다. 박재범, 창모, 선미, 이영지, 라이즈, 키스오브라이프, 태민, 비비, 카리나 등이 날짜별 라인업에 참여하며 만 19세 이상 관람가입니다.",
+    tags: ["WATERBOMB", "LIVE", "19+"],
+    poster: "wave",
+    latitude: 37.6647322,
+    longitude: 126.7494034,
+    locationLabel: "GOYANG / GYEONGGI",
+    sourceLabel: "MELON TICKET",
+    sourceUrl:
+      "https://ticket.melon.com/performance/index.htm?prodId=212030",
+    verifiedAt: "2026-06-11",
+  },
+  {
     id: "city-body-movement",
     title: "도시, 몸, 움직임",
     englishTitle: "CITY BODY MOVEMENT",
@@ -549,10 +703,77 @@ export function getTodayInSeoul(reference = new Date()) {
   return `${values.year}-${values.month}-${values.day}`;
 }
 
-function addDays(date: string, amount: number) {
+export function addDays(date: string, amount: number) {
   const value = new Date(`${date}T00:00:00Z`);
   value.setUTCDate(value.getUTCDate() + amount);
   return value.toISOString().slice(0, 10);
+}
+
+export function differenceInDays(fromDate: string, toDate: string) {
+  const from = new Date(`${fromDate}T00:00:00Z`).getTime();
+  const to = new Date(`${toDate}T00:00:00Z`).getTime();
+  return Math.round((to - from) / 86_400_000);
+}
+
+export function getEventStatus(
+  event: CultureEvent,
+  locale: Locale = "ko",
+  today = getTodayInSeoul(),
+) {
+  if (event.endDate < today) {
+    return locale === "ko" ? "종료" : "Ended";
+  }
+
+  if (isActiveOn(event, today)) {
+    const daysLeft = differenceInDays(today, event.endDate);
+    if (daysLeft === 0) {
+      return locale === "ko" ? "오늘 종료" : "Ends today";
+    }
+    if (daysLeft <= 7) {
+      return locale === "ko"
+        ? `${daysLeft}일 후 종료`
+        : `Ends in ${daysLeft}d`;
+    }
+    return locale === "ko" ? "진행 중" : "Open now";
+  }
+
+  const daysUntil = differenceInDays(today, event.startDate);
+  return `D-${daysUntil}`;
+}
+
+export function getTicketStatus(event: CultureEvent, locale: Locale = "ko") {
+  if (
+    event.tags.some((tag) => tag.toUpperCase() === "SOLD OUT") ||
+    event.price.includes("매진")
+  ) {
+    return locale === "ko" ? "매진" : "Sold out";
+  }
+  if (event.sourceUrl) {
+    return locale === "ko" ? "공식 정보 확인" : "Official source";
+  }
+  return locale === "ko" ? "정보 확인 필요" : "Needs verification";
+}
+
+export function getVerificationDate(event: CultureEvent) {
+  return event.verifiedAt ?? CATALOG_UPDATED_AT;
+}
+
+export function getDistanceKm(
+  origin: UserLocation,
+  destination: Pick<CultureEvent, "latitude" | "longitude">,
+) {
+  const toRadians = (value: number) => (value * Math.PI) / 180;
+  const earthRadiusKm = 6371;
+  const latitudeDelta = toRadians(destination.latitude - origin.latitude);
+  const longitudeDelta = toRadians(destination.longitude - origin.longitude);
+  const originLatitude = toRadians(origin.latitude);
+  const destinationLatitude = toRadians(destination.latitude);
+  const a =
+    Math.sin(latitudeDelta / 2) ** 2 +
+    Math.cos(originLatitude) *
+      Math.cos(destinationLatitude) *
+      Math.sin(longitudeDelta / 2) ** 2;
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 export function getCurrentWeekend(today = getTodayInSeoul()) {
@@ -584,20 +805,21 @@ export function filterEvents(
 ) {
   const today = getTodayInSeoul();
   const weekend = getCurrentWeekend(today);
+  const currentEvents = events.filter((event) => event.endDate >= today);
   let matches: CultureEvent[];
 
   if (filter === "전체") {
-    matches = events;
+    matches = currentEvents;
   } else if (filter === "오늘") {
-    matches = events.filter((event) => isActiveOn(event, today));
+    matches = currentEvents.filter((event) => isActiveOn(event, today));
   } else if (filter === "이번 주말") {
-    matches = events.filter((event) =>
+    matches = currentEvents.filter((event) =>
       isActiveDuring(event, weekend.start, weekend.end),
     );
   } else if (filter === "무료") {
-    matches = events.filter((event) => event.isFree);
+    matches = currentEvents.filter((event) => event.isFree);
   } else {
-    matches = events.filter((event) => event.category === filter);
+    matches = currentEvents.filter((event) => event.category === filter);
   }
 
   if (region) {

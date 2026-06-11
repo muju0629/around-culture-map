@@ -207,13 +207,26 @@ function detectCriteria(query: string): QueryCriteria {
   };
 }
 
-function selectCandidates(query: string) {
+function selectCandidates(query: string, contextEventId?: string) {
   const criteria = detectCriteria(query);
   const today = getTodayInSeoul();
   const weekend = getCurrentWeekend(today);
+  const contextEvent = contextEventId
+    ? events.find((event) => event.id === contextEventId)
+    : undefined;
+  const wantsSimilar =
+    Boolean(contextEvent) &&
+    /(비슷|유사|닮은|similar|like this|related)/i.test(query);
 
   return verifiedEvents
     .filter((event) => event.endDate >= today)
+    .filter((event) => event.id !== contextEventId)
+    .filter(
+      (event) =>
+        !wantsSimilar ||
+        event.category === contextEvent?.category ||
+        event.district === contextEvent?.district,
+    )
     .filter(
       (event) => !criteria.category || event.category === criteria.category,
     )
@@ -442,6 +455,7 @@ export default async function handler(req: Request): Promise<Response> {
 
   let history: ChatMessage[] = [];
   let locale: Locale = "ko";
+  let contextEventId: string | undefined;
   try {
     const body = await req.json();
     if (!Array.isArray(body?.messages) || body.messages.length > 30) {
@@ -449,6 +463,9 @@ export default async function handler(req: Request): Promise<Response> {
     }
     if (body?.locale === "en") {
       locale = "en";
+    }
+    if (typeof body?.contextEventId === "string") {
+      contextEventId = body.contextEventId.slice(0, 120);
     }
 
     history = body.messages
@@ -485,7 +502,7 @@ export default async function handler(req: Request): Promise<Response> {
     contextual && userMessages.length > 1
       ? `${userMessages.at(-2)?.content ?? ""} ${latestUserMessage}`
       : latestUserMessage;
-  const candidates = selectCandidates(criteriaQuery);
+  const candidates = selectCandidates(criteriaQuery, contextEventId);
 
   if (candidates.length === 0) {
     return staticStream(noResultsMessage(criteriaQuery, locale), []);

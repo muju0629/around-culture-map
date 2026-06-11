@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import {
   formatDateRange,
   getCategoryLabel,
+  getEventStatus,
+  getTicketStatus,
 } from "../data/events";
 import { useLanguage } from "../i18n/language";
 import type { CultureEvent } from "../types";
@@ -14,7 +16,10 @@ interface EventCardProps {
   isFavorite?: boolean;
   onSelect?: (eventId: string) => void;
   onToggleFavorite?: (eventId: string) => void;
+  onHover?: (eventId?: string) => void;
   layout?: "grid" | "list" | "feature";
+  markerLabel?: string;
+  distanceKm?: number;
 }
 
 export function EventCard({
@@ -23,7 +28,10 @@ export function EventCard({
   isFavorite = false,
   onSelect,
   onToggleFavorite,
+  onHover,
   layout = "grid",
+  markerLabel,
+  distanceKm,
 }: EventCardProps) {
   const { locale, copy } = useLanguage();
   const category = getCategoryLabel(event.category, locale);
@@ -33,6 +41,8 @@ export function EventCard({
       <article
         id={`event-list-${event.id}`}
         className={`event-card event-card--list${isSelected ? " is-selected" : ""}`}
+        onMouseEnter={() => onHover?.(event.id)}
+        onMouseLeave={() => onHover?.()}
       >
         <button
           type="button"
@@ -43,15 +53,27 @@ export function EventCard({
         >
           <Poster event={event} showLabel={false} />
           <span className="event-card__body">
-            <span className="eyebrow">
-              {category} / {event.region}
-              {event.sourceLabel ? ` · ${event.sourceLabel}` : ""}
+            <span className="event-card__list-topline">
+              {markerLabel && (
+                <span className="event-card__marker">{markerLabel}</span>
+              )}
+              <span className="eyebrow">
+                {category} / {event.region}
+                {event.sourceLabel ? ` · ${event.sourceLabel}` : ""}
+              </span>
             </span>
             <strong>{event.title}</strong>
             <span className="event-card__date">
               {formatDateRange(event.startDate, event.endDate, locale)} ·{" "}
               {event.venue}
             </span>
+            {distanceKm !== undefined && (
+              <span className="event-card__distance">
+                {distanceKm < 1
+                  ? `${Math.round(distanceKm * 1000)} M`
+                  : `${distanceKm.toFixed(1)} KM`}
+              </span>
+            )}
           </span>
         </button>
         <div className="event-card__actions">
@@ -77,9 +99,22 @@ export function EventCard({
   }
 
   return (
-    <article className={`event-card event-card--${layout}`}>
+    <article
+      className={`event-card event-card--${layout}`}
+      onMouseEnter={() => onHover?.(event.id)}
+      onMouseLeave={() => onHover?.()}
+    >
       <Link to={`/events/${event.id}`} className="event-card__visual">
         <Poster event={event} />
+        <span className="event-card__status">
+          {getEventStatus(event, locale)}
+        </span>
+        <span className="event-card__preview">
+          <strong>{event.venue}</strong>
+          <span>{formatDateRange(event.startDate, event.endDate, locale)}</span>
+          <span>{event.price}</span>
+          <span>{getTicketStatus(event, locale)}</span>
+        </span>
       </Link>
       <div className="event-card__meta">
         <span className="eyebrow">

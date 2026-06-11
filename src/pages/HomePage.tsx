@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { EventCard } from "../components/EventCard";
 import { Header } from "../components/Header";
 import { ArrowIcon } from "../components/Icons";
@@ -15,6 +17,7 @@ export function HomePage() {
   const { locale, copy } = useLanguage();
   const { isFavorite, toggleFavorite } = useFavorites();
   const events = getEvents(locale);
+  const navigate = useNavigate();
   const today = getTodayInSeoul();
   const week = getCurrentWeek(today);
   const weekLabel = `${week.start.slice(5).replace("-", ".")}–${week.end
@@ -23,7 +26,7 @@ export function HomePage() {
   const recommendedIds = [
     "inside-other-spaces",
     "damien-hirst-mmca",
-    "dialogue-in-the-dark-bukchon",
+    "to-alexa",
   ];
   const activeOfficialExhibitions = events.filter(
     (event) =>
@@ -42,22 +45,44 @@ export function HomePage() {
       (event) => !recommendedIds.includes(event.id),
     ),
   ].slice(0, 3);
-  const upcomingIds = [
-    "javier-sola-one-year",
-    "silica-gel-ballad-of-you",
-    "post-malone-seoul",
-    "hyundai-super-concert-28",
-  ];
-  const upcoming = upcomingIds.flatMap((id) => {
-    const event = events.find((candidate) => candidate.id === id);
-    return event && event.endDate >= today ? [event] : [];
-  });
+  const upcoming = events
+    .filter((event) => event.sourceUrl && event.startDate > today)
+    .sort((a, b) => a.startDate.localeCompare(b.startDate))
+    .slice(0, 7);
+
+  useEffect(() => {
+    const elements = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]"),
+    );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            (entry.target as HTMLElement).classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 },
+    );
+    elements.forEach((element) => observer.observe(element));
+    return () => observer.disconnect();
+  }, []);
+
+  function discoverRandomEvent() {
+    const currentEvents = events.filter((event) => event.endDate >= today);
+    const event =
+      currentEvents[Math.floor(Math.random() * currentEvents.length)];
+    if (event) {
+      navigate(`/events/${event.id}`);
+    }
+  }
 
   return (
     <div className="page page--home">
       <Header />
       <main>
-        <section className="home-hero">
+        <section className="home-hero" data-reveal>
           <div className="home-hero__copy">
             <p className="eyebrow">CURATED CULTURE MAP / SEOUL</p>
             <h1>
@@ -71,9 +96,18 @@ export function HomePage() {
                 <br />
                 {copy.home.intro[1]}
               </p>
-              <Link className="text-link" to="/explore">
-                {copy.home.exploreMap} <ArrowIcon />
-              </Link>
+              <div className="home-hero__links">
+                <Link className="text-link" to="/explore">
+                  {copy.home.exploreMap} <ArrowIcon />
+                </Link>
+                <button
+                  type="button"
+                  className="text-link"
+                  onClick={discoverRandomEvent}
+                >
+                  {copy.home.random} <ArrowIcon />
+                </button>
+              </div>
             </div>
           </div>
           <Link
@@ -86,7 +120,7 @@ export function HomePage() {
           </Link>
         </section>
 
-        <section className="editorial-section" id="selected">
+        <section className="editorial-section" id="selected" data-reveal>
           <div className="section-heading">
             <div>
               <span className="eyebrow">CURATED / {weekLabel}</span>
@@ -111,14 +145,17 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="manifesto-strip">
+        <section className="manifesto-strip" data-reveal>
           {copy.home.manifesto.map((word) => (
             <p key={word}>{word}</p>
           ))}
           <span>AROUND SEOUL CULTURE INDEX</span>
         </section>
 
-        <section className="editorial-section editorial-section--weekly">
+        <section
+          className="editorial-section editorial-section--weekly"
+          data-reveal
+        >
           <div className="section-heading section-heading--inline">
             <div>
               <span className="eyebrow">UPCOMING INDEX / 2026</span>
@@ -140,7 +177,7 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="home-cta">
+        <section className="home-cta" data-reveal>
           <p className="eyebrow">AROUND / CULTURE MAP</p>
           <h2>
             {copy.home.cta[0]}
