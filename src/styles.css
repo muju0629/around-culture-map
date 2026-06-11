@@ -2645,6 +2645,120 @@ html[lang="en"] .detail-hero__content h1 {
   cursor: default;
 }
 
+.media-section {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 28px 40px;
+  padding: 56px 28px;
+  border-top: 1px solid var(--line);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px;
+}
+
+.media-lineup > .eyebrow,
+.media-tracks > .eyebrow {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.media-lineup ul {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.media-lineup__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.media-lineup__head strong {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.media-lineup__head span {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--cool-gray);
+  white-space: nowrap;
+}
+
+.media-lineup li p {
+  margin: 6px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.media-tracks ol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: track;
+}
+
+.media-tracks li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  counter-increment: track;
+}
+
+.media-tracks li::before {
+  content: counter(track, decimal-leading-zero);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--cool-gray);
+}
+
+.media-tracks li strong {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.media-tracks li em {
+  margin-left: auto;
+  font-size: 11px;
+  font-style: normal;
+  color: var(--cool-gray);
+}
+
+.media-apple {
+  margin-top: 22px;
+}
+
+@media (max-width: 900px) {
+  .media-section {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 40px 16px;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
 @media (max-width: 760px) {
   .chat-fab {
     right: 16px;

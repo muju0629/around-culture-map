@@ -10,6 +10,7 @@ import {
 import { Poster } from "../components/Poster";
 import { MiniMap } from "../components/MiniMap";
 import { getEventEditorial } from "../data/editorials";
+import { getEventMedia } from "../data/eventMedia";
 import {
   formatDateRange,
   getCategoryLabel,
@@ -29,6 +30,7 @@ export function EventDetailPage() {
   const events = getEvents(locale);
   const event = getEventById(id, locale);
   const editorial = getEventEditorial(id, locale);
+  const media = getEventMedia(id);
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { isPlanned, toggleItinerary } = useItinerary();
@@ -329,6 +331,57 @@ export function EventDetailPage() {
                 )}
               </div>
             </section>
+
+            {media && (media.lineup?.length || media.tracks?.length || media.appleMusicUrl) && (
+              <section className="media-section">
+                <div className="detail-section-index">
+                  <span>LISTEN / SOUND</span>
+                </div>
+                <div className="media-grid">
+                  {media.lineup && media.lineup.length > 0 && (
+                    <div className="media-lineup">
+                      <span className="eyebrow">LINEUP</span>
+                      <ul>
+                        {media.lineup.map((artist) => (
+                          <li key={artist.name}>
+                            <div className="media-lineup__head">
+                              <strong>{artist.name}</strong>
+                              <span>{artist.role}</span>
+                            </div>
+                            {artist.note && <p>{artist.note}</p>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {media.tracks && media.tracks.length > 0 && (
+                    <div className="media-tracks">
+                      <span className="eyebrow">SIGNATURE TRACKS</span>
+                      <ol>
+                        {media.tracks.map((track) => (
+                          <li key={track.title}>
+                            <strong>{track.title}</strong>
+                            {track.note && <em>{track.note}</em>}
+                          </li>
+                        ))}
+                      </ol>
+                      {media.appleMusicUrl && (
+                        <a
+                          className="button media-apple"
+                          href={media.appleMusicUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          APPLE MUSIC
+                          {media.appleMusicLabel ? ` · ${media.appleMusicLabel}` : ""}
+                          <ArrowIcon />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
 
             <section className="visit-section" id="visit">
               <div className="detail-section-index">
