@@ -1,52 +1,273 @@
-import { events } from "../src/data/events";
+import {
+  events,
+  getCurrentWeekend,
+  getTodayInSeoul,
+  isActiveDuring,
+  isActiveOn,
+} from "../src/data/events";
+import type { CultureEvent, EventCategory } from "../src/types";
 
 export const config = { runtime: "edge" };
 
 const MODELS = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
+const MAX_MESSAGES = 12;
+const MAX_MESSAGE_LENGTH = 800;
+const MAX_TOTAL_LENGTH = 5_000;
+const RATE_LIMIT = 12;
+const RATE_WINDOW_MS = 60_000;
+const rateBuckets = new Map<string, { count: number; resetAt: number }>();
 
-const catalog = events
-  .map((event) => {
-    const when =
-      event.startDate === event.endDate
-        ? event.startDate
-        : `${event.startDate}~${event.endDate}`;
-    const price = event.isFree ? "무료" : event.price;
-    return `- "${event.title}" | ${event.category} | ${event.region}·${event.district} ${event.venue} | ${when} | ${price} | ${event.description}`;
-  })
-  .join("\n");
+const verifiedEvents = events.filter(
+  (event) => Boolean(event.sourceLabel && event.sourceUrl),
+);
 
-const SYSTEM_PROMPT = [
-  "당신은 'AROUND'의 서울 문화 큐레이터입니다.",
-  "아래 [행사 목록]에 있는 행사만 근거로 추천·안내하세요. 목록에 없는 정보는 절대 지어내지 마세요.",
-  "",
-  "다음 규칙을 반드시 지키세요:",
-  "1. 사용자가 카테고리(전시/음악/축제/문화공간)를 말하면 정확히 그 카테고리만 추천하세요. 예: '전시'를 요청하면 문화공간·축제·음악을 섞지 마세요.",
-  "2. '무료'를 요청하면 가격이 무료인 행사만 추천하세요.",
-  "3. 지역·날짜를 말하면 그 조건에 맞는 행사만 추천하세요.",
-  "4. 조건에 맞는 행사가 없으면 솔직히 '조건에 맞는 행사가 없다'고 말한 뒤, 가장 가까운 대안 1개만 조심스럽게 제안하세요.",
-  "5. 최대 3개까지만, 각 추천은 2~3문장 이내로 간결하게.",
-  "6. 추천하는 행사의 제목은 [행사 목록]에 적힌 그대로(따옴표 없이) 사용하세요. 상세 링크 연결에 필요합니다.",
-  "",
-  "한국어로 친근하게. 오늘은 2026-06-11(목), 이번 주말은 2026-06-13~06-14입니다.",
-  "",
-  "[행사 목록]",
-  catalog,
-].join("\n");
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
 
-function json(payload: unknown, status: number): Response {
+interface QueryCriteria {
+  category?: EventCategory;
+  free: boolean;
+  today: boolean;
+  weekend: boolean;
+  koreaVisit: boolean;
+  locationAliases: string[];
+  eventIds: string[];
+}
+
+function json(
+  payload: unknown,
+  status: number,
+  headers?: Record<string, string>,
+): Response {
   return new Response(JSON.stringify(payload), {
     status,
-    headers: { "content-type": "application/json" },
+    headers: { "content-type": "application/json", ...headers },
   });
 }
 
-function streamText(upstream: ReadableStream<Uint8Array>): Response {
+function streamLine(payload: unknown) {
+  return new TextEncoder().encode(`${JSON.stringify(payload)}\n`);
+}
+
+function staticStream(answer: string, eventIds: string[]): Response {
+  const stream = new ReadableStream<Uint8Array>({
+    start(controller) {
+      controller.enqueue(streamLine({ type: "meta", eventIds }));
+      controller.enqueue(streamLine({ type: "delta", content: answer }));
+      controller.close();
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "content-type": "application/x-ndjson; charset=utf-8",
+      "cache-control": "no-store",
+    },
+  });
+}
+
+function getClientId(req: Request) {
+  return (
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "anonymous"
+  );
+}
+
+function isRateLimited(req: Request) {
+  const now = Date.now();
+  const clientId = getClientId(req);
+  const current = rateBuckets.get(clientId);
+
+  if (!current || current.resetAt <= now) {
+    rateBuckets.set(clientId, { count: 1, resetAt: now + RATE_WINDOW_MS });
+    return false;
+  }
+
+  current.count += 1;
+  if (rateBuckets.size > 500) {
+    for (const [key, bucket] of rateBuckets) {
+      if (bucket.resetAt <= now) {
+        rateBuckets.delete(key);
+      }
+    }
+  }
+  return current.count > RATE_LIMIT;
+}
+
+function placeAliases(event: CultureEvent) {
+  const aliases = [
+    event.region,
+    `${event.region}동`,
+    event.district,
+    event.district.replace(/[시군구]$/, ""),
+    event.venue,
+  ];
+  return aliases
+    .map((alias) => alias.trim().toLowerCase())
+    .filter((alias) => alias.length >= 2);
+}
+
+function detectCategory(query: string): EventCategory | undefined {
+  if (/(문화\s?공간|복합문화|라운지|북카페)/.test(query)) {
+    return "문화공간";
+  }
+  if (/(축제|페스티벌|오픈\s?스튜디오)/.test(query)) {
+    return "축제";
+  }
+  if (/(전시|미술관|갤러리|작품)/.test(query)) {
+    return "전시";
+  }
+  if (/(음악|콘서트|공연|라이브|밴드|가수)/.test(query)) {
+    return "음악";
+  }
+  return undefined;
+}
+
+function detectCriteria(query: string): QueryCriteria {
+  const normalized = query.toLowerCase();
+  const allAliases = Array.from(
+    new Set(verifiedEvents.flatMap((event) => placeAliases(event))),
+  ).sort((a, b) => b.length - a.length);
+  const locationAliases = allAliases.filter((alias) =>
+    normalized.includes(alias),
+  );
+
+  const eventIds = verifiedEvents
+    .filter((event) => {
+      const tokens = [
+        event.title,
+        event.englishTitle,
+        ...event.tags,
+      ]
+        .flatMap((value) => value.toLowerCase().split(/[\s:/><·—–()[\],]+/))
+        .filter((token) => token.length >= 3);
+      return tokens.some((token) => normalized.includes(token));
+    })
+    .map((event) => event.id);
+
+  return {
+    category: detectCategory(normalized),
+    free: /(무료|공짜|돈\s*안\s*드는)/.test(normalized),
+    today: /(오늘|금일)/.test(normalized),
+    weekend: /(이번\s*주말|주말|토요일|일요일)/.test(normalized),
+    koreaVisit: /(내한|해외\s*아티스트)/.test(normalized),
+    locationAliases,
+    eventIds,
+  };
+}
+
+function selectCandidates(query: string) {
+  const criteria = detectCriteria(query);
+  const today = getTodayInSeoul();
+  const weekend = getCurrentWeekend(today);
+
+  return verifiedEvents
+    .filter((event) => event.endDate >= today)
+    .filter(
+      (event) => !criteria.category || event.category === criteria.category,
+    )
+    .filter((event) => !criteria.free || event.isFree)
+    .filter((event) => {
+      if (!criteria.koreaVisit) return true;
+      const context = `${event.title} ${event.description} ${event.tags.join(" ")}`;
+      return /(내한|한국 관객|한국.*돌아)/.test(context);
+    })
+    .filter((event) => !criteria.today || isActiveOn(event, today))
+    .filter(
+      (event) =>
+        !criteria.weekend ||
+        isActiveDuring(event, weekend.start, weekend.end),
+    )
+    .filter(
+      (event) =>
+        criteria.locationAliases.length === 0 ||
+        placeAliases(event).some((alias) =>
+          criteria.locationAliases.includes(alias),
+        ),
+    )
+    .filter(
+      (event) =>
+        criteria.eventIds.length === 0 || criteria.eventIds.includes(event.id),
+    )
+    .sort((a, b) => {
+      const aActive = isActiveOn(a, today);
+      const bActive = isActiveOn(b, today);
+      if (aActive !== bActive) {
+        return aActive ? -1 : 1;
+      }
+      return aActive
+        ? a.endDate.localeCompare(b.endDate)
+        : a.startDate.localeCompare(b.startDate);
+    })
+    .slice(0, 3);
+}
+
+function noResultsMessage(query: string) {
+  const criteria = detectCriteria(query);
+  const conditions = [
+    criteria.weekend ? "이번 주말" : criteria.today ? "오늘" : "",
+    criteria.free ? "무료" : "",
+    criteria.locationAliases[0] ?? "",
+    criteria.category ?? "",
+  ].filter(Boolean);
+  const label = conditions.length > 0 ? conditions.join(" · ") : "요청한 조건";
+
+  return `현재 공식 출처로 확인된 행사 중 ${label}에 맞는 결과가 없어요. 지역, 날짜, 가격 조건 중 하나를 넓혀 다시 물어봐 주세요.`;
+}
+
+function buildSystemPrompt(candidates: CultureEvent[]) {
+  const today = getTodayInSeoul();
+  const weekend = getCurrentWeekend(today);
+  const catalog = candidates
+    .map((event) => {
+      const when =
+        event.startDate === event.endDate
+          ? event.startDate
+          : `${event.startDate}~${event.endDate}`;
+      return [
+        `ID: ${event.id}`,
+        `제목: ${event.title}`,
+        `분류: ${event.category}`,
+        `장소: ${event.region}·${event.district} ${event.venue}`,
+        `기간: ${when}`,
+        `가격: ${event.isFree ? "무료" : event.price}`,
+        `설명: ${event.description}`,
+      ].join(" | ");
+    })
+    .join("\n");
+
+  return [
+    "당신은 AROUND의 서울 문화 큐레이터입니다.",
+    "서버가 사용자의 조건을 검증해 아래 공식 행사 후보만 전달했습니다.",
+    "목록 밖의 행사나 사실은 절대 추가하지 마세요.",
+    `오늘은 ${today}, 이번 주말은 ${weekend.start}~${weekend.end}입니다.`,
+    "",
+    "답변 규칙:",
+    "1. 후보를 최대 3개까지 간결하게 추천하세요.",
+    "2. 각 후보의 공식 제목을 정확히 한 번씩 포함하세요.",
+    "3. 후보의 카테고리, 가격, 날짜를 바꾸거나 추측하지 마세요.",
+    "4. 전체 답변은 6문장 이내의 자연스러운 한국어로 작성하세요.",
+    "",
+    "[검증된 공식 행사 후보]",
+    catalog,
+  ].join("\n");
+}
+
+function streamGroq(
+  upstream: ReadableStream<Uint8Array>,
+  eventIds: string[],
+): Response {
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       const reader = upstream.getReader();
       const decoder = new TextDecoder();
-      const encoder = new TextEncoder();
       let buffer = "";
+      let wroteContent = false;
+      controller.enqueue(streamLine({ type: "meta", eventIds }));
+
       try {
         for (;;) {
           const { done, value } = await reader.read();
@@ -54,6 +275,7 @@ function streamText(upstream: ReadableStream<Uint8Array>): Response {
           buffer += decoder.decode(value, { stream: true });
           const lines = buffer.split("\n");
           buffer = lines.pop() ?? "";
+
           for (const line of lines) {
             const trimmed = line.trim();
             if (!trimmed.startsWith("data:")) continue;
@@ -66,23 +288,37 @@ function streamText(upstream: ReadableStream<Uint8Array>): Response {
               const parsed = JSON.parse(payload);
               const delta = parsed?.choices?.[0]?.delta?.content;
               if (typeof delta === "string" && delta.length > 0) {
-                controller.enqueue(encoder.encode(delta));
+                wroteContent = true;
+                controller.enqueue(
+                  streamLine({ type: "delta", content: delta }),
+                );
               }
             } catch {
-              // ignore keep-alive / non-JSON lines
+              // Ignore Groq keep-alive and malformed upstream lines.
             }
           }
         }
       } catch {
-        // upstream ended unexpectedly; close gracefully
+        // A partially streamed answer is still useful.
+      }
+
+      if (!wroteContent) {
+        controller.enqueue(
+          streamLine({
+            type: "delta",
+            content: "추천 답변을 완성하지 못했어요. 잠시 후 다시 시도해주세요.",
+          }),
+        );
       }
       controller.close();
     },
   });
 
   return new Response(stream, {
-    status: 200,
-    headers: { "content-type": "text/plain; charset=utf-8" },
+    headers: {
+      "content-type": "application/x-ndjson; charset=utf-8",
+      "cache-control": "no-store",
+    },
   });
 }
 
@@ -90,73 +326,107 @@ export default async function handler(req: Request): Promise<Response> {
   if (req.method !== "POST") {
     return json({ error: "POST only" }, 405);
   }
-
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) {
-    return json({ error: "GROQ_API_KEY is not configured" }, 500);
+  if (isRateLimited(req)) {
+    return json(
+      { error: "Too many requests" },
+      429,
+      { "retry-after": "60" },
+    );
   }
 
-  let history: { role: string; content: string }[] = [];
+  const contentLength = Number(req.headers.get("content-length") ?? 0);
+  if (contentLength > 12_000) {
+    return json({ error: "Request too large" }, 413);
+  }
+
+  let history: ChatMessage[] = [];
   try {
     const body = await req.json();
-    if (Array.isArray(body?.messages)) {
-      history = body.messages
-        .filter(
-          (message: { role?: unknown; content?: unknown }) =>
-            (message?.role === "user" || message?.role === "assistant") &&
-            typeof message?.content === "string",
-        )
-        .slice(-12)
-        .map((message: { role: string; content: string }) => ({
-          role: message.role,
-          content: message.content,
-        }));
+    if (!Array.isArray(body?.messages) || body.messages.length > 30) {
+      return json({ error: "Invalid messages" }, 400);
     }
+
+    history = body.messages
+      .filter(
+        (message: { role?: unknown; content?: unknown }) =>
+          (message?.role === "user" || message?.role === "assistant") &&
+          typeof message?.content === "string",
+      )
+      .slice(-MAX_MESSAGES);
   } catch {
     return json({ error: "Invalid JSON body" }, 400);
   }
-  if (history.length === 0) {
-    return json({ error: "No messages" }, 400);
+
+  if (
+    history.length === 0 ||
+    history.some((message) => message.content.length > MAX_MESSAGE_LENGTH) ||
+    history.reduce((sum, message) => sum + message.content.length, 0) >
+      MAX_TOTAL_LENGTH
+  ) {
+    return json({ error: "Invalid message length" }, 400);
+  }
+
+  const userMessages = history.filter((message) => message.role === "user");
+  const latestUserMessage = userMessages.at(-1)?.content.trim();
+  if (!latestUserMessage) {
+    return json({ error: "No user message" }, 400);
+  }
+
+  const contextual = /^(그중|그럼|거기|그 지역|그날)/.test(latestUserMessage);
+  const criteriaQuery =
+    contextual && userMessages.length > 1
+      ? `${userMessages.at(-2)?.content ?? ""} ${latestUserMessage}`
+      : latestUserMessage;
+  const candidates = selectCandidates(criteriaQuery);
+
+  if (candidates.length === 0) {
+    return staticStream(noResultsMessage(criteriaQuery), []);
+  }
+
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
+    return json({ error: "Chat is not configured" }, 503);
   }
 
   const payloadMessages = [
-    { role: "system", content: SYSTEM_PROMPT },
+    { role: "system", content: buildSystemPrompt(candidates) },
     ...history,
   ];
 
-  let lastStatus = 0;
-  let lastDetail = "Failed to reach Groq";
-
   for (const model of MODELS) {
-    let groqRes: Response;
+    let groqResponse: Response;
     try {
-      groqRes = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${apiKey}`,
+      groqResponse = await fetch(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            model,
+            temperature: 0.2,
+            stream: true,
+            messages: payloadMessages,
+          }),
         },
-        body: JSON.stringify({
-          model,
-          temperature: 0.4,
-          stream: true,
-          messages: payloadMessages,
-        }),
-      });
+      );
     } catch {
       continue;
     }
 
-    if (groqRes.ok && groqRes.body) {
-      return streamText(groqRes.body);
+    if (groqResponse.ok && groqResponse.body) {
+      return streamGroq(
+        groqResponse.body,
+        candidates.map((event) => event.id),
+      );
     }
 
-    lastStatus = groqRes.status;
-    lastDetail = await groqRes.text();
-    if (groqRes.status !== 404 && groqRes.status !== 400) {
+    if (groqResponse.status !== 404 && groqResponse.status !== 400) {
       break;
     }
   }
 
-  return json({ error: `Groq error ${lastStatus}`, detail: lastDetail }, 502);
+  return json({ error: "Chat service unavailable" }, 502);
 }

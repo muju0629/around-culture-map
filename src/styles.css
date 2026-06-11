@@ -670,8 +670,8 @@ a:focus-visible {
 .explore-toolbar {
   display: grid;
   grid-template-columns: 220px 1fr auto;
-  align-items: end;
-  min-height: 116px;
+  align-items: center;
+  min-height: 88px;
   padding: 18px 28px;
   gap: 28px;
   border-bottom: 1px solid var(--line);
@@ -718,76 +718,6 @@ a:focus-visible {
   background: var(--black);
 }
 
-.explore-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 0;
-}
-
-.explore-search {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-
-.explore-search input {
-  flex: 1 1 auto;
-  min-width: 0;
-  min-height: 34px;
-  padding: 0 15px;
-  border: 1px solid #82827e;
-  border-radius: 100px;
-  background: transparent;
-  font-family: inherit;
-  font-size: 11px;
-  letter-spacing: -0.01em;
-  color: var(--black);
-}
-
-.explore-search input::placeholder {
-  color: #9a9a95;
-}
-
-.explore-search input:focus {
-  outline: none;
-  border-color: var(--black);
-}
-
-.explore-search button {
-  flex: 0 0 auto;
-  min-height: 34px;
-  padding: 0 15px;
-  border: 1px solid var(--black);
-  border-radius: 100px;
-  background: var(--black);
-  color: var(--white);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition:
-    opacity 160ms ease,
-    background 160ms ease,
-    color 160ms ease;
-}
-
-.explore-search button:disabled {
-  opacity: 0.45;
-  cursor: default;
-}
-
-.explore-search__clear {
-  border-color: #82827e;
-  background: transparent;
-  color: var(--black);
-}
-
-.explore-search__status {
-  font-size: 9px;
-  letter-spacing: 0.06em;
-  color: #9a9a95;
-}
-
 .explore-toolbar__count {
   display: flex;
   align-items: flex-end;
@@ -812,7 +742,7 @@ a:focus-visible {
 .explore-layout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(400px, 2fr);
-  height: calc(100vh - var(--header-height) - 116px);
+  height: calc(100vh - var(--header-height) - 88px);
 }
 
 .explore-map-panel {
@@ -2379,16 +2309,37 @@ a:focus-visible {
 
 .chat-panel__header {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   padding: 16px 18px 13px;
   border-bottom: 1px solid var(--line);
+}
+
+.chat-panel__header > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .chat-panel__header strong {
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.04em;
+}
+
+.chat-panel__close {
+  min-width: 42px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--black);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
 }
 
 .chat-log {
@@ -2437,6 +2388,31 @@ a:focus-visible {
 
 .chat-typing {
   color: var(--cool-gray);
+}
+
+.chat-suggestions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 9px;
+  gap: 6px;
+}
+
+.chat-suggestions button {
+  min-height: 32px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: var(--white);
+  color: var(--black);
+  font-size: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.chat-suggestions button:hover,
+.chat-panel__close:hover {
+  border-color: var(--black);
 }
 
 .chat-cards {
@@ -2542,4 +2518,50 @@ a:focus-visible {
 .chat-input button:disabled {
   opacity: 0.45;
   cursor: default;
+}
+
+@media (max-width: 760px) {
+  .chat-fab {
+    right: 16px;
+    bottom: 18px;
+    width: 58px;
+    height: 58px;
+  }
+
+  .chat-panel {
+    inset: var(--header-height) 0 0;
+    width: 100%;
+    height: auto;
+    border-width: 1px 0 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .chat-panel__header {
+    min-height: 68px;
+    padding: 13px 16px;
+  }
+
+  .chat-panel__close {
+    min-width: 48px;
+    min-height: 40px;
+  }
+
+  .chat-log {
+    padding: 18px 16px 24px;
+  }
+
+  .chat-msg {
+    max-width: 92%;
+  }
+
+  .chat-input {
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: var(--white);
+  }
+
+  .chat-input input,
+  .chat-input button {
+    min-height: 44px;
+  }
 }

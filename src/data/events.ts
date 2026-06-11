@@ -1,10 +1,4 @@
-import type { CultureEvent, ExploreFilter, SearchCriteria } from "../types";
-
-export const PROTOTYPE_TODAY = "2026-06-11";
-export const PROTOTYPE_WEEKEND = {
-  start: "2026-06-13",
-  end: "2026-06-14",
-};
+import type { CultureEvent, ExploreFilter } from "../types";
 
 export const events: CultureEvent[] = [
   {
@@ -472,63 +466,57 @@ export function isActiveDuring(
   return event.startDate <= endDate && event.endDate >= startDate;
 }
 
+export function getTodayInSeoul(reference = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(reference);
+  const values = Object.fromEntries(
+    parts.map((part) => [part.type, part.value]),
+  );
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+function addDays(date: string, amount: number) {
+  const value = new Date(`${date}T00:00:00Z`);
+  value.setUTCDate(value.getUTCDate() + amount);
+  return value.toISOString().slice(0, 10);
+}
+
+export function getCurrentWeekend(today = getTodayInSeoul()) {
+  const day = new Date(`${today}T00:00:00Z`).getUTCDay();
+
+  if (day === 0) {
+    return { start: addDays(today, -1), end: today };
+  }
+  if (day === 6) {
+    return { start: today, end: addDays(today, 1) };
+  }
+
+  const daysUntilSaturday = 6 - day;
+  const start = addDays(today, daysUntilSaturday);
+  return { start, end: addDays(start, 1) };
+}
+
 export function filterEvents(filter: ExploreFilter) {
+  const today = getTodayInSeoul();
+  const weekend = getCurrentWeekend(today);
+
   if (filter === "전체") {
     return events;
   }
   if (filter === "오늘") {
-    return events.filter((event) => isActiveOn(event, PROTOTYPE_TODAY));
+    return events.filter((event) => isActiveOn(event, today));
   }
   if (filter === "이번 주말") {
     return events.filter((event) =>
-      isActiveDuring(event, PROTOTYPE_WEEKEND.start, PROTOTYPE_WEEKEND.end),
+      isActiveDuring(event, weekend.start, weekend.end),
     );
   }
   if (filter === "무료") {
     return events.filter((event) => event.isFree);
   }
   return events.filter((event) => event.category === filter);
-}
-
-export function searchEvents(criteria: SearchCriteria) {
-  const location = criteria.location?.trim().toLowerCase();
-  const keywords = criteria.keywords
-    .map((keyword) => keyword.trim().toLowerCase())
-    .filter(Boolean);
-
-  return events.filter((event) => {
-    if (criteria.category && event.category !== criteria.category) {
-      return false;
-    }
-    if (criteria.when === "today" && !isActiveOn(event, PROTOTYPE_TODAY)) {
-      return false;
-    }
-    if (
-      criteria.when === "weekend" &&
-      !isActiveDuring(event, PROTOTYPE_WEEKEND.start, PROTOTYPE_WEEKEND.end)
-    ) {
-      return false;
-    }
-    if (criteria.free && !event.isFree) {
-      return false;
-    }
-    if (location) {
-      const place =
-        `${event.region} ${event.district} ${event.venue} ${event.address}`.toLowerCase();
-      const region = event.region.toLowerCase();
-      // place.includes covers "성수"·"종로구"; location.includes(region) covers
-      // suffix mismatches like the query "한남동" against the region "한남".
-      if (!place.includes(location) && !location.includes(region)) {
-        return false;
-      }
-    }
-    if (keywords.length > 0) {
-      const text =
-        `${event.title} ${event.englishTitle} ${event.venue} ${event.description} ${event.tags.join(" ")}`.toLowerCase();
-      if (!keywords.some((keyword) => text.includes(keyword))) {
-        return false;
-      }
-    }
-    return true;
-  });
 }

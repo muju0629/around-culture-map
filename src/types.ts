@@ -49,11 +49,3 @@ export type ExploreFilter =
   | "이번 주말"
   | "무료"
   | EventCategory;
-
-export interface SearchCriteria {
-  category: EventCategory | null;
-  when: "today" | "weekend" | null;
-  free: boolean | null;
-  location: string | null;
-  keywords: string[];
-}

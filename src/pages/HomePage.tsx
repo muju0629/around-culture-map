@@ -3,11 +3,20 @@ import { EventCard } from "../components/EventCard";
 import { Header } from "../components/Header";
 import { ArrowIcon } from "../components/Icons";
 import { Poster } from "../components/Poster";
-import { events, regions } from "../data/events";
+import {
+  events,
+  getCurrentWeekend,
+  getTodayInSeoul,
+  regions,
+} from "../data/events";
 import { useFavorites } from "../hooks/useFavorites";
 
 export function HomePage() {
   const { isFavorite, toggleFavorite } = useFavorites();
+  const weekend = getCurrentWeekend(getTodayInSeoul());
+  const weekendLabel = `${weekend.start.slice(5).replace("-", ".")}–${weekend.end
+    .slice(5)
+    .replace("-", ".")}`;
   const featured = events.filter((event) => event.featured);
   const weekly = events
     .filter((event) => !event.featured)
@@ -49,7 +58,7 @@ export function HomePage() {
         <section className="editorial-section" id="weekly">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">SELECTED / 06.11–06.14</span>
+              <span className="eyebrow">SELECTED / {weekendLabel}</span>
               <h2>이번 주말</h2>
             </div>
             <p>
