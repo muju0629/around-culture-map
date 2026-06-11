@@ -1,4 +1,5 @@
-import { filterOptions } from "../data/events";
+import { filterOptions, getFilterLabel } from "../data/events";
+import { useLanguage } from "../i18n/language";
 import type { ExploreFilter } from "../types";
 
 interface FilterBarProps {
@@ -7,8 +8,13 @@ interface FilterBarProps {
 }
 
 export function FilterBar({ activeFilter, onChange }: FilterBarProps) {
+  const { locale } = useLanguage();
+
   return (
-    <div className="filter-bar" aria-label="행사 필터">
+    <div
+      className="filter-bar"
+      aria-label={locale === "ko" ? "행사 필터" : "Event filters"}
+    >
       {filterOptions.map((filter) => (
         <button
           type="button"
@@ -17,7 +23,7 @@ export function FilterBar({ activeFilter, onChange }: FilterBarProps) {
           onClick={() => onChange(filter)}
           aria-pressed={filter === activeFilter}
         >
-          {filter}
+          {getFilterLabel(filter, locale)}
         </button>
       ))}
     </div>

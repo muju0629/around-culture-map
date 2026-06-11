@@ -1,4 +1,15 @@
 export type EventCategory = "음악" | "전시" | "축제" | "문화공간";
+export type Locale = "ko" | "en";
+
+export interface EventLocalizedCopy {
+  title: string;
+  region: string;
+  district: string;
+  venue: string;
+  address: string;
+  price: string;
+  description: string;
+}
 
 export type PosterVariant =
   | "orbit"

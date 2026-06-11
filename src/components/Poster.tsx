@@ -1,4 +1,5 @@
 import type { CultureEvent } from "../types";
+import { useLanguage } from "../i18n/language";
 
 interface PosterProps {
   event: CultureEvent;
@@ -11,13 +12,15 @@ export function Poster({
   className = "",
   showLabel = true,
 }: PosterProps) {
+  const { copy } = useLanguage();
+
   if (event.posterImage) {
     return (
       <div className={`poster poster--official ${className}`.trim()}>
         <img
           className="poster__image"
           src={event.posterImage}
-          alt={`${event.title} 공식 포스터`}
+          alt={`${event.title} ${copy.event.officialPoster}`}
         />
         {showLabel && (
           <>
@@ -37,7 +40,7 @@ export function Poster({
   return (
     <div
       className={`poster poster--${event.poster} ${className}`.trim()}
-      aria-label={`${event.title} 포스터`}
+      aria-label={`${event.title} ${copy.event.poster}`}
       role="img"
     >
       <svg viewBox="0 0 600 760" preserveAspectRatio="none" aria-hidden="true">

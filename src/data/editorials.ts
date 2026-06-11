@@ -1,3 +1,6 @@
+import type { Locale } from "../types";
+import { eventEditorialsEn } from "./editorials.en";
+
 export interface EditorialFact {
   label: string;
   value: string;
@@ -905,6 +908,6 @@ export const eventEditorials: Record<string, EventEditorial> = {
   },
 };
 
-export function getEventEditorial(id: string) {
-  return eventEditorials[id];
+export function getEventEditorial(id: string, locale: Locale = "ko") {
+  return locale === "en" ? eventEditorialsEn[id] : eventEditorials[id];
 }

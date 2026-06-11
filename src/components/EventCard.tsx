@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
-import { formatDateRange } from "../data/events";
+import {
+  formatDateRange,
+  getCategoryLabel,
+} from "../data/events";
+import { useLanguage } from "../i18n/language";
 import type { CultureEvent } from "../types";
 import { ArrowIcon, BookmarkIcon } from "./Icons";
 import { Poster } from "./Poster";
@@ -21,6 +25,9 @@ export function EventCard({
   onToggleFavorite,
   layout = "grid",
 }: EventCardProps) {
+  const { locale, copy } = useLanguage();
+  const category = getCategoryLabel(event.category, locale);
+
   if (layout === "list") {
     return (
       <article
@@ -32,17 +39,18 @@ export function EventCard({
           className="event-card__select"
           onClick={() => onSelect?.(event.id)}
           aria-pressed={isSelected}
-          aria-label={`지도에서 ${event.title} 선택`}
+          aria-label={`${copy.event.selectOnMap}: ${event.title}`}
         >
           <Poster event={event} showLabel={false} />
           <span className="event-card__body">
             <span className="eyebrow">
-              {event.category} / {event.region}
+              {category} / {event.region}
               {event.sourceLabel ? ` · ${event.sourceLabel}` : ""}
             </span>
             <strong>{event.title}</strong>
             <span className="event-card__date">
-              {formatDateRange(event.startDate, event.endDate)} · {event.venue}
+              {formatDateRange(event.startDate, event.endDate, locale)} ·{" "}
+              {event.venue}
             </span>
           </span>
         </button>
@@ -51,11 +59,16 @@ export function EventCard({
             type="button"
             className="icon-button"
             onClick={() => onToggleFavorite?.(event.id)}
-            aria-label={isFavorite ? `${event.title} 찜 해제` : `${event.title} 찜`}
+            aria-label={`${event.title} ${
+              isFavorite ? copy.event.unsave : copy.event.save
+            }`}
           >
             <BookmarkIcon filled={isFavorite} />
           </button>
-          <Link to={`/events/${event.id}`} aria-label={`${event.title} 상세 보기`}>
+          <Link
+            to={`/events/${event.id}`}
+            aria-label={`${event.title} ${copy.event.details}`}
+          >
             <ArrowIcon />
           </Link>
         </div>
@@ -70,14 +83,16 @@ export function EventCard({
       </Link>
       <div className="event-card__meta">
         <span className="eyebrow">
-          {event.category} / {event.region}
+          {category} / {event.region}
           {event.sourceLabel ? ` · ${event.sourceLabel}` : ""}
         </span>
         <button
           type="button"
           className="icon-button"
           onClick={() => onToggleFavorite?.(event.id)}
-          aria-label={isFavorite ? `${event.title} 찜 해제` : `${event.title} 찜`}
+          aria-label={`${event.title} ${
+            isFavorite ? copy.event.unsave : copy.event.save
+          }`}
         >
           <BookmarkIcon filled={isFavorite} />
         </button>
@@ -87,7 +102,7 @@ export function EventCard({
         <ArrowIcon />
       </Link>
       <p>
-        {formatDateRange(event.startDate, event.endDate)} · {event.venue}
+        {formatDateRange(event.startDate, event.endDate, locale)} · {event.venue}
       </p>
     </article>
   );

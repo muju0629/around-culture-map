@@ -9,7 +9,8 @@ import {
   useMap,
 } from "react-leaflet";
 import { Link } from "react-router-dom";
-import { formatDateRange } from "../data/events";
+import { formatDateRange, getCategoryLabel } from "../data/events";
+import { useLanguage } from "../i18n/language";
 import type { CultureEvent } from "../types";
 import { ArrowIcon } from "./Icons";
 
@@ -86,6 +87,7 @@ export function AbstractMap({
   selectedId,
   onSelect,
 }: AbstractMapProps) {
+  const { locale, copy } = useLanguage();
   const selectedEvent =
     events.find((event) => event.id === selectedId) ?? events[0];
   const markerGroups = useMemo(
@@ -101,7 +103,7 @@ export function AbstractMap({
   );
 
   return (
-    <div className="abstract-map" aria-label="서울 문화 지도">
+    <div className="abstract-map" aria-label={copy.map.label}>
       <MapContainer
         center={[37.5665, 126.978]}
         zoom={11}
@@ -110,7 +112,7 @@ export function AbstractMap({
         className="culture-map"
         preferCanvas
         zoomControl={false}
-        placeholder={<div className="map-loading">지도를 불러오는 중</div>}
+        placeholder={<div className="map-loading">{copy.map.loading}</div>}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -132,7 +134,7 @@ export function AbstractMap({
               : String(index + 1).padStart(2, "0");
           const markerTitle = group.map((event) => event.title).join(" · ");
           const markerA11yLabel = `${markerTitle}${
-            isSelected ? " 선택됨" : ""
+            isSelected ? ` ${copy.event.selected}` : ""
           }`;
           const markerSize = isSelected ? 46 : group.length > 1 ? 40 : 34;
           const icon = divIcon({
@@ -174,15 +176,20 @@ export function AbstractMap({
       {selectedEvent && (
         <div className="map-selection" aria-live="polite">
           <span>
-            SELECTED / {selectedEvent.category.toUpperCase()}
+            {copy.map.selected} /{" "}
+            {getCategoryLabel(selectedEvent.category, locale).toUpperCase()}
           </span>
           <strong>{selectedEvent.title}</strong>
           <small>
             {selectedEvent.venue} ·{" "}
-            {formatDateRange(selectedEvent.startDate, selectedEvent.endDate)}
+            {formatDateRange(
+              selectedEvent.startDate,
+              selectedEvent.endDate,
+              locale,
+            )}
           </small>
           <Link to={`/events/${selectedEvent.id}`}>
-            상세 보기 <ArrowIcon />
+            {copy.map.details} <ArrowIcon />
           </Link>
         </div>
       )}

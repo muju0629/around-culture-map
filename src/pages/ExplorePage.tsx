@@ -5,9 +5,11 @@ import { FilterBar } from "../components/FilterBar";
 import { Header } from "../components/Header";
 import { filterEvents } from "../data/events";
 import { useFavorites } from "../hooks/useFavorites";
+import { useLanguage } from "../i18n/language";
 import type { ExploreFilter } from "../types";
 
 export function ExplorePage() {
+  const { locale, copy } = useLanguage();
   const todayLabel = new Intl.DateTimeFormat("en-GB", {
     timeZone: "Asia/Seoul",
     weekday: "short",
@@ -19,8 +21,8 @@ export function ExplorePage() {
     .toUpperCase();
   const [activeFilter, setActiveFilter] = useState<ExploreFilter>("전체");
   const visibleEvents = useMemo(
-    () => filterEvents(activeFilter),
-    [activeFilter],
+    () => filterEvents(activeFilter, locale),
+    [activeFilter, locale],
   );
   const [selectedId, setSelectedId] = useState(visibleEvents[0]?.id);
   const [panelExpanded, setPanelExpanded] = useState(false);
@@ -57,7 +59,7 @@ export function ExplorePage() {
   }, [selectedId]);
 
   function handleFilterChange(filter: ExploreFilter) {
-    const nextEvents = filterEvents(filter);
+    const nextEvents = filterEvents(filter, locale);
     setActiveFilter(filter);
     setSelectedId(nextEvents[0]?.id);
   }
@@ -69,7 +71,7 @@ export function ExplorePage() {
         <div className="explore-toolbar">
           <div className="explore-toolbar__title">
             <span className="eyebrow">SEOUL / {todayLabel}</span>
-            <h1>문화 지도</h1>
+            <h1>{copy.explore.title}</h1>
           </div>
           <FilterBar
             activeFilter={activeFilter}
@@ -77,7 +79,7 @@ export function ExplorePage() {
           />
           <p className="explore-toolbar__count">
             <strong>{String(visibleEvents.length).padStart(2, "0")}</strong>
-            <span>PLACES FOUND</span>
+            <span>{copy.explore.placesFound}</span>
           </p>
         </div>
 
@@ -94,7 +96,7 @@ export function ExplorePage() {
             className={`explore-list-panel${
               panelExpanded ? " is-expanded" : " is-collapsed"
             }`}
-            aria-label="행사 목록"
+            aria-label={copy.explore.listLabel}
           >
             <button
               type="button"
@@ -103,7 +105,8 @@ export function ExplorePage() {
               aria-expanded={panelExpanded}
             >
               <span />
-              {visibleEvents.length}개의 장소
+              {visibleEvents.length}
+              {copy.explore.places}
             </button>
             <div className="explore-list-panel__header">
               <span>INDEX</span>

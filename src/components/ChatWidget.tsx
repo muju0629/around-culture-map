@@ -5,7 +5,12 @@ import {
   useState,
 } from "react";
 import { Link } from "react-router-dom";
-import { events, formatDateRange } from "../data/events";
+import {
+  formatDateRange,
+  getCategoryLabel,
+  getEvents,
+} from "../data/events";
+import { useLanguage } from "../i18n/language";
 
 interface Message {
   role: "user" | "assistant";
@@ -19,19 +24,10 @@ interface StreamMessage {
   content?: string;
 }
 
-const GREETING: Message = {
-  role: "assistant",
-  content:
-    "안녕하세요, AROUND 문화 큐레이터예요. 원하는 날짜, 지역, 가격과 문화 유형을 말해주세요.",
-};
-
-const SUGGESTIONS = [
-  "이번 주말 전시 추천해줘",
-  "곧 열리는 내한 공연 알려줘",
-  "종로에서 볼 전시가 있어?",
-];
-
-function eventsByIds(ids: string[] = []) {
+function eventsByIds(
+  events: ReturnType<typeof getEvents>,
+  ids: string[] = [],
+) {
   const order = new Map(ids.map((id, index) => [id, index]));
   return events
     .filter((event) => order.has(event.id))
@@ -43,8 +39,13 @@ function eventsByIds(ids: string[] = []) {
 }
 
 export function ChatWidget() {
+  const { locale, copy } = useLanguage();
+  const localizedEvents = getEvents(locale);
+  const greetingContent = copy.chat.greeting;
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([GREETING]);
+  const [messages, setMessages] = useState<Message[]>([
+    { role: "assistant", content: greetingContent },
+  ]);
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "streaming" | "error"
@@ -53,6 +54,13 @@ export function ChatWidget() {
   const inputRef = useRef<HTMLInputElement>(null);
   const pendingRef = useRef(false);
   const isPending = status === "loading" || status === "streaming";
+
+  useEffect(() => {
+    setMessages([{ role: "assistant", content: greetingContent }]);
+    setInput("");
+    setStatus("idle");
+    pendingRef.current = false;
+  }, [greetingContent, locale]);
 
   useEffect(() => {
     logRef.current?.scrollTo({ top: logRef.current.scrollHeight });
@@ -94,6 +102,7 @@ export function ChatWidget() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
+          locale,
           messages: nextMessages.map(({ role, content }) => ({
             role,
             content,
@@ -166,8 +175,7 @@ export function ChatWidget() {
         ...current,
         {
           role: "assistant",
-          content:
-            "죄송해요, 지금 답을 가져오지 못했어요. 잠시 후 다시 시도해주세요.",
+          content: copy.chat.error,
         },
       ]);
       setStatus("error");
@@ -189,7 +197,7 @@ export function ChatWidget() {
           className="chat-fab"
           onClick={() => setOpen(true)}
           aria-expanded="false"
-          aria-label="큐레이터 챗봇 열기"
+          aria-label={copy.chat.open}
         >
           ASK
         </button>
@@ -199,20 +207,20 @@ export function ChatWidget() {
         <div
           className="chat-panel"
           role="dialog"
-          aria-label="문화 큐레이터"
+          aria-label={copy.chat.dialog}
         >
           <div className="chat-panel__header">
             <div>
               <span className="eyebrow">AROUND / CURATOR</span>
-              <strong>무엇을 찾으세요?</strong>
+              <strong>{copy.chat.heading}</strong>
             </div>
             <button
               type="button"
               className="chat-panel__close"
               onClick={() => setOpen(false)}
-              aria-label="큐레이터 챗봇 닫기"
+              aria-label={copy.chat.closeLabel}
             >
-              닫기
+              {copy.chat.close}
             </button>
           </div>
 
@@ -220,7 +228,7 @@ export function ChatWidget() {
             {messages.map((message, index) => {
               const cards =
                 message.role === "assistant"
-                  ? eventsByIds(message.eventIds)
+                  ? eventsByIds(localizedEvents, message.eventIds)
                   : [];
               return (
                 <div
@@ -229,8 +237,11 @@ export function ChatWidget() {
                 >
                   <p>{message.content}</p>
                   {index === 0 && messages.length === 1 && (
-                    <div className="chat-suggestions" aria-label="추천 질문">
-                      {SUGGESTIONS.map((suggestion) => (
+                    <div
+                      className="chat-suggestions"
+                      aria-label={copy.chat.suggestionLabel}
+                    >
+                      {copy.chat.suggestions.map((suggestion) => (
                         <button
                           type="button"
                           key={suggestion}
@@ -255,12 +266,17 @@ export function ChatWidget() {
                           )}
                           <span className="chat-card__body">
                             <span className="chat-card__cat">
-                              {event.category} · {event.sourceLabel}
+                              {getCategoryLabel(event.category, locale)} ·{" "}
+                              {event.sourceLabel}
                             </span>
                             <strong>{event.title}</strong>
                             <span className="chat-card__meta">
                               {event.venue} ·{" "}
-                              {formatDateRange(event.startDate, event.endDate)}
+                              {formatDateRange(
+                                event.startDate,
+                                event.endDate,
+                                locale,
+                              )}
                             </span>
                           </span>
                         </Link>
@@ -272,7 +288,7 @@ export function ChatWidget() {
             })}
             {status === "loading" && (
               <div className="chat-msg chat-msg--assistant">
-                <p className="chat-typing">공식 행사에서 찾는 중…</p>
+                <p className="chat-typing">{copy.chat.loading}</p>
               </div>
             )}
           </div>
@@ -283,11 +299,11 @@ export function ChatWidget() {
               value={input}
               maxLength={800}
               onChange={(event) => setInput(event.target.value)}
-              placeholder="예: 이번 주말 종로 전시"
-              aria-label="메시지 입력"
+              placeholder={copy.chat.placeholder}
+              aria-label={copy.chat.inputLabel}
             />
             <button type="submit" disabled={isPending || !input.trim()}>
-              보내기
+              {copy.chat.send}
             </button>
           </form>
         </div>

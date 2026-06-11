@@ -9,14 +9,22 @@ import {
 } from "../components/Icons";
 import { Poster } from "../components/Poster";
 import { getEventEditorial } from "../data/editorials";
-import { events, formatDateRange, getEventById } from "../data/events";
+import {
+  formatDateRange,
+  getCategoryLabel,
+  getEventById,
+  getEvents,
+} from "../data/events";
 import { useFavorites } from "../hooks/useFavorites";
+import { useLanguage } from "../i18n/language";
 import { NotFoundPage } from "./NotFoundPage";
 
 export function EventDetailPage() {
+  const { locale, copy } = useLanguage();
   const { id = "" } = useParams();
-  const event = getEventById(id);
-  const editorial = getEventEditorial(id);
+  const events = getEvents(locale);
+  const event = getEventById(id, locale);
+  const editorial = getEventEditorial(id, locale);
   const navigate = useNavigate();
   const { isFavorite, toggleFavorite } = useFavorites();
   const [shareMessage, setShareMessage] = useState("");
@@ -41,9 +49,9 @@ export function EventDetailPage() {
   async function handleShare() {
     try {
       await navigator.clipboard.writeText(window.location.href);
-      setShareMessage("링크를 복사했습니다.");
+      setShareMessage(copy.detail.copied);
     } catch {
-      setShareMessage("주소창의 링크를 복사해주세요.");
+      setShareMessage(copy.detail.copyFailed);
     }
     window.setTimeout(() => setShareMessage(""), 2200);
   }
@@ -55,10 +63,11 @@ export function EventDetailPage() {
         <div className="detail-topbar">
           <button type="button" className="text-link" onClick={() => navigate(-1)}>
             <ArrowIcon />
-            돌아가기
+            {copy.detail.back}
           </button>
           <span>
-            {event.category.toUpperCase()} / {event.region.toUpperCase()}
+            {getCategoryLabel(event.category, locale).toUpperCase()} /{" "}
+            {event.region.toUpperCase()}
           </span>
           <span>
             {event.sourceLabel
@@ -72,14 +81,20 @@ export function EventDetailPage() {
             <Poster event={event} />
           </div>
           <div className="detail-hero__content">
-            <p className="eyebrow">{event.englishTitle}</p>
+            <p className="eyebrow">
+              {locale === "en"
+                ? `${getCategoryLabel(event.category, locale)} / ${event.region}`
+                : event.englishTitle}
+            </p>
             <h1>{event.title}</h1>
             <p className="detail-hero__intro">{event.description}</p>
 
             <dl className="detail-facts">
               <div>
                 <dt>DATE</dt>
-                <dd>{formatDateRange(event.startDate, event.endDate)}</dd>
+                <dd>
+                  {formatDateRange(event.startDate, event.endDate, locale)}
+                </dd>
               </div>
               <div>
                 <dt>TIME</dt>
@@ -148,12 +163,14 @@ export function EventDetailPage() {
             </section>
 
             {editorial.gallery && (
-              <section className="editorial-gallery" aria-label="관련 이미지">
+              <section
+                className="editorial-gallery"
+                aria-label={copy.detail.relatedImages}
+              >
                 <div className="editorial-gallery__heading">
                   <span className="eyebrow">IMAGE ESSAY / 02</span>
                   <p>
-                    포스터 바깥의 인물과 작품을 함께 보면 이번 행사의 맥락이
-                    더 선명해집니다.
+                    {copy.detail.galleryIntro}
                   </p>
                 </div>
                 <div
@@ -256,9 +273,7 @@ export function EventDetailPage() {
               <div>
                 <span className="eyebrow">SOURCES / UPDATED 2026.06.11</span>
                 <p>
-                  일정, 가격, 관람 조건은 변경될 수 있습니다. 이미지와 정보는
-                  연결된 공식 페이지를 기준으로 확인했으며, 실제 서비스 공개
-                  전에는 각 이미지의 사용 권한을 별도로 확보해야 합니다.
+                  {copy.detail.sourceNotice}
                 </p>
               </div>
               <div className="detail-sources__links">
@@ -282,14 +297,14 @@ export function EventDetailPage() {
               <span>ABOUT / 01</span>
             </div>
             <div className="detail-info__copy">
-              <h2>장소와 시간 사이에 놓인 하나의 장면.</h2>
+              <h2>{copy.detail.fallbackHeading}</h2>
               <p>{event.description}</p>
               <div className="detail-address">
                 <span>ADDRESS</span>
                 <strong>{event.address}</strong>
                 <span>{event.hours}</span>
               </div>
-              <div className="tag-list" aria-label="행사 태그">
+              <div className="tag-list" aria-label={copy.detail.eventTags}>
                 {event.tags.map((tag) => (
                   <span key={tag}>{tag}</span>
                 ))}
@@ -309,10 +324,10 @@ export function EventDetailPage() {
           <div className="section-heading section-heading--inline">
             <div>
               <span className="eyebrow">NEARBY / RELATED</span>
-              <h2>함께 둘러볼 곳</h2>
+              <h2>{copy.detail.related}</h2>
             </div>
             <Link className="text-link" to="/explore">
-              지도에서 보기 <ArrowIcon />
+              {copy.detail.viewMap} <ArrowIcon />
             </Link>
           </div>
           <div className="related-grid">

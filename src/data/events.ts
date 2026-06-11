@@ -1,4 +1,10 @@
-import type { CultureEvent, ExploreFilter } from "../types";
+import type {
+  CultureEvent,
+  EventCategory,
+  ExploreFilter,
+  Locale,
+} from "../types";
+import { eventEnglishCopy } from "./events.en";
 
 export const events: CultureEvent[] = [
   {
@@ -433,14 +439,78 @@ export const filterOptions: ExploreFilter[] = [
 
 export const regions = ["성수", "을지로", "한남", "문래", "서촌", "망원"];
 
-export function getEventById(id: string) {
-  return events.find((event) => event.id === id);
+const regionEnglish: Record<string, string> = {
+  성수: "Seongsu",
+  을지로: "Euljiro",
+  한남: "Hannam",
+  문래: "Mullae",
+  서촌: "Seochon",
+  망원: "Mangwon",
+};
+
+const categoryEnglish: Record<EventCategory, string> = {
+  음악: "Music",
+  전시: "Exhibition",
+  축제: "Festival",
+  문화공간: "Culture space",
+};
+
+const filterEnglish: Record<ExploreFilter, string> = {
+  전체: "All",
+  오늘: "Today",
+  "이번 주말": "This weekend",
+  무료: "Free",
+  음악: "Music",
+  전시: "Exhibition",
+  축제: "Festival",
+  문화공간: "Culture space",
+};
+
+export function localizeEvent(
+  event: CultureEvent,
+  locale: Locale,
+): CultureEvent {
+  if (locale === "ko") {
+    return event;
+  }
+
+  const translation = eventEnglishCopy[event.id];
+  return translation ? { ...event, ...translation } : event;
 }
 
-export function formatDateRange(startDate: string, endDate: string) {
+export function getEvents(locale: Locale = "ko") {
+  return locale === "ko"
+    ? events
+    : events.map((event) => localizeEvent(event, locale));
+}
+
+export function getEventById(id: string, locale: Locale = "ko") {
+  const event = events.find((candidate) => candidate.id === id);
+  return event ? localizeEvent(event, locale) : undefined;
+}
+
+export function getCategoryLabel(category: EventCategory, locale: Locale) {
+  return locale === "en" ? categoryEnglish[category] : category;
+}
+
+export function getFilterLabel(filter: ExploreFilter, locale: Locale) {
+  return locale === "en" ? filterEnglish[filter] : filter;
+}
+
+export function getRegions(locale: Locale) {
+  return locale === "en"
+    ? regions.map((region) => regionEnglish[region] ?? region)
+    : regions;
+}
+
+export function formatDateRange(
+  startDate: string,
+  endDate: string,
+  locale: Locale = "ko",
+) {
   const start = new Date(`${startDate}T00:00:00`);
   const end = new Date(`${endDate}T00:00:00`);
-  const format = new Intl.DateTimeFormat("ko-KR", {
+  const format = new Intl.DateTimeFormat(locale === "ko" ? "ko-KR" : "en-GB", {
     month: "2-digit",
     day: "2-digit",
   });
@@ -500,23 +570,26 @@ export function getCurrentWeekend(today = getTodayInSeoul()) {
   return { start, end: addDays(start, 1) };
 }
 
-export function filterEvents(filter: ExploreFilter) {
+export function filterEvents(filter: ExploreFilter, locale: Locale = "ko") {
   const today = getTodayInSeoul();
   const weekend = getCurrentWeekend(today);
+  let matches: CultureEvent[];
 
   if (filter === "전체") {
-    return events;
-  }
-  if (filter === "오늘") {
-    return events.filter((event) => isActiveOn(event, today));
-  }
-  if (filter === "이번 주말") {
-    return events.filter((event) =>
+    matches = events;
+  } else if (filter === "오늘") {
+    matches = events.filter((event) => isActiveOn(event, today));
+  } else if (filter === "이번 주말") {
+    matches = events.filter((event) =>
       isActiveDuring(event, weekend.start, weekend.end),
     );
+  } else if (filter === "무료") {
+    matches = events.filter((event) => event.isFree);
+  } else {
+    matches = events.filter((event) => event.category === filter);
   }
-  if (filter === "무료") {
-    return events.filter((event) => event.isFree);
-  }
-  return events.filter((event) => event.category === filter);
+
+  return locale === "ko"
+    ? matches
+    : matches.map((event) => localizeEvent(event, locale));
 }
