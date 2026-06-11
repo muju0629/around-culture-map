@@ -99,14 +99,10 @@ export function HomePage() {
             </p>
           </div>
           <div className="featured-grid">
-            {featured.map((event, index) => (
-              <div
-                className={`featured-grid__item featured-grid__item--${index + 1}`}
-                key={event.id}
-              >
+            {featured.map((event) => (
+              <div className="featured-grid__item" key={event.id}>
                 <EventCard
                   event={event}
-                  layout={index === 0 ? "feature" : "grid"}
                   isFavorite={isFavorite(event.id)}
                   onToggleFavorite={toggleFavorite}
                 />
