@@ -25,7 +25,7 @@ export const uiCopy = {
       manifesto: ["SEE", "HEAR", "GATHER"],
       upcoming: "앞으로 열릴 주요 일정",
       viewAll: "전체 보기",
-      cta: ["가까운 장면부터", "발견해보세요."],
+      cta: ["다음에 갈 곳을", "지도에서 찾아보세요."],
     },
     explore: {
       title: "문화 지도",
@@ -106,7 +106,7 @@ export const uiCopy = {
       manifesto: ["SEE", "HEAR", "GATHER"],
       upcoming: "Upcoming highlights",
       viewAll: "View all",
-      cta: ["Start with what is near.", "Discover what is next."],
+      cta: ["Find where to go next.", "Explore it on the map."],
     },
     explore: {
       title: "Culture map",

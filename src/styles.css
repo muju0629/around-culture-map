@@ -678,7 +678,9 @@ html[lang="en"] .detail-hero__content h1 {
 
 .manifesto-strip {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, min-content);
+  justify-content: space-between;
+  column-gap: clamp(28px, 5vw, 88px);
   padding: 64px 28px 20px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -688,18 +690,19 @@ html[lang="en"] .detail-hero__content h1 {
 
 .manifesto-strip p {
   margin: 0;
-  font-size: clamp(50px, 9vw, 150px);
+  font-size: clamp(48px, 8.2vw, 132px);
   font-weight: 500;
   letter-spacing: -0.09em;
   line-height: 0.8;
+  white-space: nowrap;
 }
 
 .manifesto-strip p:nth-child(2) {
-  text-align: center;
+  justify-self: center;
 }
 
 .manifesto-strip p:nth-child(3) {
-  text-align: right;
+  justify-self: end;
 }
 
 .manifesto-strip > span {
@@ -1963,21 +1966,26 @@ html[lang="en"] .detail-hero__content h1 {
 
   .manifesto-strip {
     grid-template-columns: 1fr;
+    row-gap: 12px;
     padding: 50px 16px 20px;
   }
 
   .manifesto-strip p {
-    font-size: 24vw;
+    font-size: 15.5vw;
     line-height: 0.82;
-    text-align: left !important;
+    letter-spacing: -0.07em;
+  }
+
+  .manifesto-strip p:nth-child(1) {
+    justify-self: start;
   }
 
   .manifesto-strip p:nth-child(2) {
-    margin-left: 10vw;
+    justify-self: center;
   }
 
   .manifesto-strip p:nth-child(3) {
-    margin-left: 28vw;
+    justify-self: end;
   }
 
   .manifesto-strip > span {

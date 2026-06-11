@@ -42,14 +42,16 @@ export function HomePage() {
       (event) => !recommendedIds.includes(event.id),
     ),
   ].slice(0, 3);
-  const featuredIds = featured.map((event) => event.id);
-  const upcoming = events
-    .filter(
-      (event) =>
-        event.startDate > today && !featuredIds.includes(event.id),
-    )
-    .sort((a, b) => a.startDate.localeCompare(b.startDate))
-    .slice(0, 4);
+  const upcomingIds = [
+    "javier-sola-one-year",
+    "silica-gel-ballad-of-you",
+    "post-malone-seoul",
+    "hyundai-super-concert-28",
+  ];
+  const upcoming = upcomingIds.flatMap((id) => {
+    const event = events.find((candidate) => candidate.id === id);
+    return event && event.endDate >= today ? [event] : [];
+  });
 
   return (
     <div className="page page--home">
