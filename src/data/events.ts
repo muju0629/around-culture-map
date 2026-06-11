@@ -515,7 +515,10 @@ export function searchEvents(criteria: SearchCriteria) {
     if (location) {
       const place =
         `${event.region} ${event.district} ${event.venue} ${event.address}`.toLowerCase();
-      if (!place.includes(location)) {
+      const region = event.region.toLowerCase();
+      // place.includes covers "성수"·"종로구"; location.includes(region) covers
+      // suffix mismatches like the query "한남동" against the region "한남".
+      if (!place.includes(location) && !location.includes(region)) {
         return false;
       }
     }
