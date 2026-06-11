@@ -2674,29 +2674,58 @@ html[lang="en"] .detail-hero__content h1 {
   list-style: none;
 }
 
-.media-lineup__head {
+.media-lineup li {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.media-artist {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-.media-lineup__head strong {
-  font-size: 16px;
+.media-artist img,
+.media-artist__mono {
+  flex: 0 0 auto;
+  width: 52px;
+  height: 52px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+.media-artist__mono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--cool-gray);
+}
+
+.media-artist__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.media-artist__text strong {
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: -0.03em;
 }
 
-.media-lineup__head span {
+.media-artist__text span {
   font-size: 8px;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--cool-gray);
-  white-space: nowrap;
 }
 
 .media-lineup li p {
-  margin: 6px 0 0;
+  margin: 8px 0 0 64px;
   font-size: 13px;
   line-height: 1.6;
   color: var(--ink);

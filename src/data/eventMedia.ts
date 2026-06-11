@@ -7,6 +7,7 @@ export interface MediaArtist {
   name: string;
   role: string;
   note?: string;
+  photo?: string;
 }
 
 export interface EventMedia {
@@ -36,6 +37,7 @@ export const eventMedia: Record<string, EventMedia> = {
         name: "The Weeknd",
         role: "HEADLINER",
         note: "에이벨 테스파예. ‘After Hours’와 ‘Dawn FM’으로 이어진 신스팝·R&B의 정점.",
+        photo: "/editorial/the-weeknd/profile.jpg",
       },
       {
         name: "Creepy Nuts",
@@ -58,6 +60,7 @@ export const eventMedia: Record<string, EventMedia> = {
         name: "Post Malone",
         role: "HEADLINER",
         note: "오스틴 포스트. 힙합·팝·록을 넘나드는 멀티 장르 싱어송라이터.",
+        photo: "/editorial/post-malone/f1-trillion.jpg",
       },
       {
         name: "Don Toliver",
@@ -86,6 +89,7 @@ export const eventMedia: Record<string, EventMedia> = {
         name: "BIG Naughty (서동현)",
         role: "HEADLINER",
         note: "고등래퍼 출신 싱어송라이터 래퍼. 멜로딕한 랩과 미성을 오가는 무대가 강점.",
+        photo: "/editorial/big-naughty/portrait.jpg",
       },
     ],
   },

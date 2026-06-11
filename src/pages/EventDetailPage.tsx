@@ -221,6 +221,18 @@ export function EventDetailPage() {
                 <span className="eyebrow">{editorial.typeLabel}</span>
                 <h2>{editorial.heading}</h2>
                 <p>{editorial.introduction}</p>
+                {media?.appleMusicUrl && (
+                  <a
+                    className="button media-apple"
+                    href={media.appleMusicUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    APPLE MUSIC
+                    {media.appleMusicLabel ? ` · ${media.appleMusicLabel}` : ""}
+                    <ArrowIcon />
+                  </a>
+                )}
               </div>
               <dl className="editorial-facts">
                 {editorial.facts.map((fact) => (
@@ -231,6 +243,61 @@ export function EventDetailPage() {
                 ))}
               </dl>
             </section>
+
+            {media && (media.lineup?.length || media.tracks?.length) && (
+              <section className="media-section">
+                <div className="detail-section-index">
+                  <span>LINEUP / SOUND</span>
+                </div>
+                <div className="media-grid">
+                  {media.lineup && media.lineup.length > 0 && (
+                    <div className="media-lineup">
+                      <span className="eyebrow">LINEUP</span>
+                      <ul>
+                        {media.lineup.map((artist) => (
+                          <li key={artist.name}>
+                            <div className="media-artist">
+                              {artist.photo ? (
+                                <img
+                                  src={artist.photo}
+                                  alt={artist.name}
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <span
+                                  className="media-artist__mono"
+                                  aria-hidden="true"
+                                >
+                                  {artist.name.slice(0, 1)}
+                                </span>
+                              )}
+                              <div className="media-artist__text">
+                                <strong>{artist.name}</strong>
+                                <span>{artist.role}</span>
+                              </div>
+                            </div>
+                            {artist.note && <p>{artist.note}</p>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {media.tracks && media.tracks.length > 0 && (
+                    <div className="media-tracks">
+                      <span className="eyebrow">SIGNATURE TRACKS</span>
+                      <ol>
+                        {media.tracks.map((track) => (
+                          <li key={track.title}>
+                            <strong>{track.title}</strong>
+                            {track.note && <em>{track.note}</em>}
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
 
             {editorial.gallery && (
               <section
@@ -331,57 +398,6 @@ export function EventDetailPage() {
                 )}
               </div>
             </section>
-
-            {media && (media.lineup?.length || media.tracks?.length || media.appleMusicUrl) && (
-              <section className="media-section">
-                <div className="detail-section-index">
-                  <span>LISTEN / SOUND</span>
-                </div>
-                <div className="media-grid">
-                  {media.lineup && media.lineup.length > 0 && (
-                    <div className="media-lineup">
-                      <span className="eyebrow">LINEUP</span>
-                      <ul>
-                        {media.lineup.map((artist) => (
-                          <li key={artist.name}>
-                            <div className="media-lineup__head">
-                              <strong>{artist.name}</strong>
-                              <span>{artist.role}</span>
-                            </div>
-                            {artist.note && <p>{artist.note}</p>}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {media.tracks && media.tracks.length > 0 && (
-                    <div className="media-tracks">
-                      <span className="eyebrow">SIGNATURE TRACKS</span>
-                      <ol>
-                        {media.tracks.map((track) => (
-                          <li key={track.title}>
-                            <strong>{track.title}</strong>
-                            {track.note && <em>{track.note}</em>}
-                          </li>
-                        ))}
-                      </ol>
-                      {media.appleMusicUrl && (
-                        <a
-                          className="button media-apple"
-                          href={media.appleMusicUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          APPLE MUSIC
-                          {media.appleMusicLabel ? ` · ${media.appleMusicLabel}` : ""}
-                          <ArrowIcon />
-                        </a>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </section>
-            )}
 
             <section className="visit-section" id="visit">
               <div className="detail-section-index">
