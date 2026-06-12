@@ -107,14 +107,6 @@ summary:focus-visible {
   line-height: 1;
 }
 
-.wordmark__index {
-  margin: 1px 0 0 8px;
-  font-size: 7px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  line-height: 1.15;
-}
-
 .site-nav {
   display: flex;
   align-items: center;
@@ -146,11 +138,6 @@ summary:focus-visible {
 .site-nav > a.is-active::after {
   transform: scaleX(1);
   transform-origin: left;
-}
-
-.site-nav__edition {
-  padding: 7px 9px;
-  border: 1px solid currentColor;
 }
 
 .area-menu {
@@ -376,7 +363,7 @@ html[lang="en"] .detail-hero__content h1 {
   font-size: clamp(64px, 8.2vw, 138px);
   font-weight: 500;
   letter-spacing: -0.085em;
-  line-height: 0.87;
+  line-height: 0.93;
   word-break: keep-all;
 }
 
@@ -699,13 +686,6 @@ html[lang="en"] .detail-hero__content h1 {
   justify-self: end;
 }
 
-.manifesto-strip > span {
-  grid-column: 1 / -1;
-  margin-top: 60px;
-  font-size: 8px;
-  letter-spacing: 0.18em;
-}
-
 .weekly-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -724,7 +704,7 @@ html[lang="en"] .detail-hero__content h1 {
   font-size: clamp(70px, 10vw, 160px);
   font-weight: 500;
   letter-spacing: -0.085em;
-  line-height: 0.84;
+  line-height: 0.9;
 }
 
 .site-footer {
@@ -1890,9 +1870,7 @@ html[lang="en"] .detail-hero__content h1 {
     font-size: 19px;
   }
 
-  .wordmark__index,
-  .site-nav__curated,
-  .site-nav__edition {
+  .site-nav__curated {
     display: none;
   }
 
@@ -1948,13 +1926,13 @@ html[lang="en"] .detail-hero__content h1 {
   .home-hero h1 {
     margin: 70px 0 auto;
     font-size: clamp(54px, 16vw, 80px);
-    line-height: 0.9;
+    line-height: 0.95;
   }
 
   html[lang="en"] .home-hero h1 {
     max-width: 10ch;
     font-size: clamp(50px, 14vw, 70px);
-    line-height: 0.88;
+    line-height: 0.94;
   }
 
   .home-hero__footer {
@@ -2034,10 +2012,6 @@ html[lang="en"] .detail-hero__content h1 {
     justify-self: end;
   }
 
-  .manifesto-strip > span {
-    margin-top: 48px;
-  }
-
   .weekly-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 46px 10px;
@@ -2055,10 +2029,6 @@ html[lang="en"] .detail-hero__content h1 {
 
   .site-footer {
     padding: 18px 16px;
-  }
-
-  .site-footer span:nth-child(2) {
-    display: none;
   }
 
   /* Explore mobile */

@@ -620,8 +620,6 @@ export function EventDetailPage() {
       )}
       <footer className="site-footer">
         <span>AROUND © 2026</span>
-        <span>SEOUL CULTURE INDEX</span>
-        <span>DESIGN PROTOTYPE / VOL.01</span>
       </footer>
     </div>
   );

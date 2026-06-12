@@ -10,6 +10,7 @@ import {
   getEvents,
   getTodayInSeoul,
 } from "../data/events";
+import { getEventEditorial } from "../data/editorials";
 import { useFavorites } from "../hooks/useFavorites";
 import { useLanguage } from "../i18n/language";
 
@@ -23,33 +24,37 @@ export function HomePage() {
   const weekLabel = `${week.start.slice(5).replace("-", ".")}–${week.end
     .slice(5)
     .replace("-", ".")}`;
-  const recommendedIds = [
+  const featuredIds = [
     "inside-other-spaces",
     "damien-hirst-mmca",
-    "to-alexa",
+    "audeum",
   ];
-  const activeOfficialExhibitions = events.filter(
+  const completeEvents = events.filter(
     (event) =>
-      event.category === "전시" &&
+      Boolean(event.posterImage) &&
       Boolean(event.sourceUrl) &&
+      Boolean(getEventEditorial(event.id, locale)),
+  );
+  const activeCompleteEvents = completeEvents.filter(
+    (event) =>
       event.startDate <= week.end &&
       event.endDate >= today,
   );
   const featured = [
-    ...recommendedIds
+    ...featuredIds
       .map((id) =>
-        activeOfficialExhibitions.find((event) => event.id === id),
+        activeCompleteEvents.find((event) => event.id === id),
       )
       .filter((event) => event !== undefined),
-    ...activeOfficialExhibitions.filter(
-      (event) => !recommendedIds.includes(event.id),
+    ...activeCompleteEvents.filter(
+      (event) => !featuredIds.includes(event.id),
     ),
   ].slice(0, 3);
-  const upcoming = events
-    .filter((event) => event.sourceUrl && event.startDate > today)
+  const upcoming = completeEvents
+    .filter((event) => event.startDate > today)
     .sort((a, b) => a.startDate.localeCompare(b.startDate))
     .slice(0, 7);
-  const heroEvent = featured[0] ?? upcoming[0] ?? events[0];
+  const heroEvent = featured[0] ?? upcoming[0] ?? completeEvents[0];
 
   useEffect(() => {
     const elements = Array.from(
@@ -71,7 +76,9 @@ export function HomePage() {
   }, []);
 
   function discoverRandomEvent() {
-    const currentEvents = events.filter((event) => event.endDate >= today);
+    const currentEvents = completeEvents.filter(
+      (event) => event.endDate >= today,
+    );
     const event =
       currentEvents[Math.floor(Math.random() * currentEvents.length)];
     if (event) {
@@ -152,7 +159,6 @@ export function HomePage() {
           {copy.home.manifesto.map((word) => (
             <p key={word}>{word}</p>
           ))}
-          <span>AROUND SEOUL CULTURE INDEX</span>
         </section>
 
         <section
@@ -194,8 +200,6 @@ export function HomePage() {
       </main>
       <footer className="site-footer">
         <span>AROUND © 2026</span>
-        <span>SEOUL CULTURE INDEX</span>
-        <span>DESIGN PROTOTYPE / VOL.01</span>
       </footer>
     </div>
   );

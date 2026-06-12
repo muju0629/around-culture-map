@@ -17,7 +17,6 @@ export function Header({ inverted = false }: HeaderProps) {
     <header className={`site-header${inverted ? " site-header--inverted" : ""}`}>
       <Link className="wordmark" to="/" aria-label={copy.header.homeLabel}>
         AROUND
-        <span className="wordmark__index">SEOUL / 0626</span>
       </Link>
       <nav className="site-nav" aria-label={copy.header.navLabel}>
         <NavLink
@@ -71,7 +70,6 @@ export function Header({ inverted = false }: HeaderProps) {
           {copy.header.saved}
           <span>{String(favorites.length).padStart(2, "0")}</span>
         </NavLink>
-        <span className="site-nav__edition">VOL. 01</span>
         <div className="language-switch" aria-label={copy.header.languageLabel}>
           {(["ko", "en"] as Locale[]).map((option) => (
             <button
