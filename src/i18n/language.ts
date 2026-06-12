@@ -18,7 +18,7 @@ export const uiCopy = {
       languageLabel: "언어 선택",
     },
     home: {
-      title: ["오늘 주변에서", "발견할 문화"],
+      title: ["당신의 문화생활을", "더 특별하게 해줄 AROUND"],
       intro: ["음악, 전시, 축제와 새로운 공간.", "지금 서울에서 열리는 장면을 모았습니다."],
       exploreMap: "지도에서 둘러보기",
       weeklyExhibitions: "금주 추천 전시 3개",
@@ -53,7 +53,6 @@ export const uiCopy = {
       copied: "링크를 복사했습니다.",
       copyFailed: "주소창의 링크를 복사해주세요.",
       relatedImages: "관련 이미지",
-      galleryIntro: "아티스트, 무대와 작품 이미지를 한 흐름으로 모았습니다.",
       sourceNotice: "일정, 가격, 관람 조건은 변경될 수 있습니다. 이미지와 정보는 연결된 공식 페이지를 기준으로 확인했으며, 실제 서비스 공개 전에는 각 이미지의 사용 권한을 별도로 확보해야 합니다.",
       fallbackHeading: "장소와 시간 사이에 놓인 하나의 장면.",
       eventTags: "행사 태그",
@@ -146,7 +145,7 @@ export const uiCopy = {
       languageLabel: "Select language",
     },
     home: {
-      title: ["Culture to discover", "around you today"],
+      title: ["Make your cultural life", "more special with AROUND"],
       intro: ["Music, exhibitions, festivals and new spaces.", "A selection of scenes unfolding across Seoul now."],
       exploreMap: "Explore the map",
       weeklyExhibitions: "Three exhibitions this week",
@@ -181,7 +180,6 @@ export const uiCopy = {
       copied: "Link copied.",
       copyFailed: "Please copy the link from your address bar.",
       relatedImages: "Related images",
-      galleryIntro: "Artist, stage and work images collected into one visual sequence.",
       sourceNotice: "Schedules, prices and admission conditions may change. Images and information were checked against the linked official pages. Image rights must be secured separately before a public service launch.",
       fallbackHeading: "A scene placed between a location and a moment.",
       eventTags: "Event tags",

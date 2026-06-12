@@ -20,6 +20,20 @@ const appleSearch = (term: string) =>
   `https://music.apple.com/kr/search?term=${encodeURIComponent(term)}`;
 
 export const eventMedia: Record<string, EventMedia> = {
+  "damien-hirst-mmca": {
+    lineup: [
+      {
+        name: "Damien Hirst",
+        role: "ARTIST",
+        note: "죽음, 믿음, 과학과 예술 시장을 설치·조각·회화로 탐구해 온 영국 현대미술가.",
+        noteEn:
+          "A British contemporary artist exploring death, belief, science and the art market through installation, sculpture and painting.",
+        photo: "/editorial/damien-hirst/artist.jpg",
+        credit: "Oli Scarff/Getty Images · Gagosian",
+        sourceUrl: "https://gagosian.com/artists/damien-hirst/",
+      },
+    ],
+  },
   "hyundai-super-concert-28": {
     appleMusicUrl: appleSearch("The Weeknd"),
     appleMusicLabel: "The Weeknd",

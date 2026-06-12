@@ -1509,20 +1509,7 @@ html[lang="en"] .detail-hero__content h1 {
 }
 
 .editorial-gallery__heading {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 40px;
   margin-bottom: 64px;
-}
-
-.editorial-gallery__heading p {
-  max-width: 440px;
-  justify-self: end;
-  margin: 0;
-  color: #aaa9a3;
-  font-size: 12px;
-  line-height: 1.7;
-  word-break: keep-all;
 }
 
 .editorial-gallery__grid {
@@ -1724,6 +1711,21 @@ html[lang="en"] .detail-hero__content h1 {
   font-size: 9px;
   font-style: normal;
   letter-spacing: 0.05em;
+}
+
+.highlight-list__link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 24px;
+  gap: 10px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.highlight-list__link svg {
+  width: 13px;
+  height: 13px;
 }
 
 .visit-section {
@@ -2317,13 +2319,7 @@ html[lang="en"] .detail-hero__content h1 {
   }
 
   .editorial-gallery__heading {
-    grid-template-columns: 1fr;
     margin-bottom: 36px;
-    gap: 22px;
-  }
-
-  .editorial-gallery__heading p {
-    justify-self: start;
   }
 
   .editorial-gallery__grid--1,

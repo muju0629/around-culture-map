@@ -257,6 +257,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2019",
         title: "Blinding Lights",
+        url: "https://music.apple.com/kr/album/blinding-lights/1505683705?i=1505683988",
         meta: "After Hours",
         description:
           "Eighties synth-pop texture and an immediate melody meet in his signature global hit.",
@@ -264,13 +265,15 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2016",
         title: "Starboy",
+        url: "https://music.apple.com/kr/album/starboy-feat-daft-punk/1677005169?i=1677005489",
         meta: "Starboy",
         description:
           "A collaboration with Daft Punk that sharply reconstructs his image and desire as a pop star.",
       },
       {
         label: "TRACK / 2015",
-        title: "Can't Feel My Face",
+        title: "Can’t Feel My Face",
+        url: "https://music.apple.com/kr/album/cant-feel-my-face/1440826239?i=1440826389",
         meta: "Beauty Behind the Madness",
         description:
           "A turning-point single pairing a Michael Jackson-like hook with darker metaphor.",
@@ -372,6 +375,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2022",
         title: "NO PAIN",
+        url: "https://music.apple.com/kr/album/no-pain/1865062012?i=1865062183",
         meta: "Best Modern Rock Song",
         description:
           "A rushing band sound and declarative chorus made this a major turning point for Silica Gel.",
@@ -379,6 +383,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2023",
         title: "Tik Tak Tok",
+        url: "https://music.apple.com/kr/album/tik-tak-tok-feat-so-yoon/1836310183?i=1836310305",
         meta: "feat. So!YoON!",
         description:
           "Sharp guitar riffs cross So!YoON!'s voice, revealing the band's rhythmic precision and range.",
@@ -386,6 +391,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2021",
         title: "Desert Eagle",
+        url: "https://music.apple.com/kr/album/desert-eagle/1703562324?i=1703562329",
         meta: "Best Modern Rock Song",
         description:
           "The track captures the concentrated playing and psychedelic development of the renewed four-piece.",
@@ -393,20 +399,18 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
     ],
     gallery: [
       {
-        src: "/editorial/silica-gel/artist-2026.png",
-        alt: "Official Silica Gel artist image from 2026",
+        src: "/editorial/silica-gel/group-2026.jpg",
+        alt: "The four members of Silica Gel against a blue sky",
         caption: "Silica Gel, 2026",
-        credit: "Image: Apple Music artist profile",
-        sourceUrl:
-          "https://music.apple.com/kr/artist/%EC%8B%A4%EB%A6%AC%EC%B9%B4%EA%B2%94/1031084591",
+        credit: "Image: CAM",
+        sourceUrl: "https://v.daum.net/v/20260602164500893",
       },
       {
-        src: "/editorial/silica-gel/band.jpg",
-        alt: "The members of Silica Gel photographed in 2022",
-        caption: "Silica Gel, 2022",
-        credit: "Image: Wikimedia Commons",
-        sourceUrl:
-          "https://commons.wikimedia.org/wiki/File:Silica_Gel_members_in_2022.jpg",
+        src: "/editorial/silica-gel/live-2025.jpg",
+        alt: "Silica Gel performing before a large blue stage visual",
+        caption: "Syn.THE.Size X, 2025",
+        credit: "Image: Silica Gel Official",
+        sourceUrl: "https://www.youtube.com/watch?v=KaYT_O0CwLE",
       },
     ],
     locationNote:
@@ -483,6 +487,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2025",
         title: "What You Want",
+        url: "https://music.apple.com/kr/album/what-you-want/1832031331?i=1832031341",
         meta: "COLOR OUTSIDE THE LINES",
         description:
           "Psychedelic-rock guitar and heavy trap rhythm make the group's genre-mixing approach immediately clear.",
@@ -490,6 +495,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2026",
         title: "REDRED",
+        url: "https://music.apple.com/kr/album/redred/1887671065?i=1887671067",
         meta: "GREENGREEN",
         description:
           "A repetitive hook, rapid energy and direct performance instinct condense the color of their second era.",
@@ -497,6 +503,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2026",
         title: "TNT",
+        url: "https://music.apple.com/kr/album/tnt/1887671065?i=1887671066",
         meta: "GREENGREEN",
         description:
           "The members' production involvement and visual direction move in step with the track's speed.",
@@ -601,6 +608,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2025",
         title: "Die On This Hill",
+        url: "https://music.apple.com/kr/album/die-on-this-hill/1841769601?i=1841769602",
         meta: "UK TOP 10",
         description:
           "Piano and strings steadily expand beneath a textured voice and an explosive final passage.",
@@ -608,6 +616,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2026",
         title: "The Visitor",
+        url: "https://music.apple.com/kr/album/the-visitor/6769552402?i=6769552688",
         meta: "VISITOR",
         description:
           "Precise phrasing and controlled tension point toward the direction of her first studio album.",
@@ -615,6 +624,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2024",
         title: "MAYBE.",
+        url: "https://music.apple.com/kr/album/maybe/1793196922?i=1793197040",
         meta: "SINK NOW, SWIM LATER",
         description:
           "The song offers a close view of her early emotional detail and jazz-vocal influence.",
@@ -727,6 +737,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2015",
         title: "White Iverson",
+        url: "https://music.apple.com/kr/album/white-iverson/1440888125?i=1440888729",
         meta: "Stoney",
         description:
           "The debut that first made his hazy melody and the boundary between singing and rap widely recognizable.",
@@ -734,6 +745,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2018",
         title: "Sunflower",
+        url: "https://music.apple.com/kr/album/sunflower-spider-man-into-the-spider-verse/1445949265?i=1445949267",
         meta: "with Swae Lee",
         description:
           "A clear, weightless melody made this collaboration a cross-generational pop favorite.",
@@ -741,6 +753,7 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2019",
         title: "Circles",
+        url: "https://music.apple.com/kr/album/circles/1477880265?i=1477880561",
         meta: "Hollywood's Bleeding",
         description:
           "A soft guitar-led pop-rock sound shows the breadth of Post Malone's musical range.",
@@ -1041,7 +1054,8 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
     highlights: [
       {
         label: "TRACK",
-        title: "Beyond Love",
+        title: "10:30 in Front of Crispy",
+        url: "https://music.apple.com/kr/album/10%EC%8B%9C-%EB%B0%98-%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC-%EC%95%9E-feat-%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9-%EB%93%80%EC%98%A4/6771244767?i=6771244768",
         meta: "feat. Dynamic Duo",
         description:
           "A narrative anchored in a specific place and time gains another dimension through the veteran duo.",
@@ -1049,12 +1063,14 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "TRACK",
         title: "Vancouver",
+        url: "https://music.apple.com/kr/album/vancouver/1622167330?i=1622167332",
         description:
           "A signature track connecting the name of a destination with memories of a relationship through an expressive melody.",
       },
       {
         label: "TRACK",
         title: "Lovey Dovey",
+        url: "https://music.apple.com/kr/album/lovey-dovey-feat-meenoi/1622167330?i=1622167331",
         meta: "Solo Ver.",
         description:
           "A light, approachable chorus brings his vocal tone and pop instinct clearly to the surface.",
@@ -1106,6 +1122,132 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       {
         label: "H1GHR MUSIC ARTIST PROFILE",
         url: "https://en.h1ghrmusic.com/bignaughty",
+      },
+    ],
+  },
+  audeum: {
+    typeLabel: "SPACE / EXHIBITION PROFILE",
+    heading: "Beyond viewing equipment, a place to experience good sound.",
+    introduction:
+      "Audeum is an audio museum preserving and researching rare sound-reproduction equipment dating from the nineteenth century onward. Its permanent exhibition Jung Eum: In Search of Sound begins with the hi-fi ideal of faithful reproduction, then asks visitors to form their own answer to the question of what good sound can be.",
+    facts: [
+      { label: "FORMAT", value: "Audio museum · Listening tour" },
+      { label: "EXHIBITION", value: "Jung Eum: In Search of Sound · Permanent" },
+      { label: "ARCHITECT", value: "Kengo Kuma" },
+      { label: "ENTRY", value: "Free · Advance reservation" },
+    ],
+    timelineLabel: "COLLECTION CONTEXT",
+    timeline: [
+      {
+        marker: "19C–",
+        title: "A history of sound reproduction",
+        description:
+          "The collection preserves equipment spanning Edison phonographs, early cinema systems and the development of domestic high fidelity.",
+      },
+      {
+        marker: "1920S",
+        title: "Large horns for cinemas and public space",
+        description:
+          "Western Electric's large horn systems delivered powerful, articulate sound during the early period of electrical amplification.",
+      },
+      {
+        marker: "1957",
+        title: "JBL Paragon",
+        description:
+          "A curved acoustic reflector and wooden cabinet expanded the boundary between domestic stereo technology and furniture design.",
+      },
+      {
+        marker: "NOW",
+        title: "Jung Eum: In Search of Sound",
+        description:
+          "The permanent exhibition connects the history and construction of the collection to listening, leaving room for each visitor's own definition of good sound.",
+      },
+    ],
+    highlightsLabel: "COLLECTION NOTES",
+    highlights: [
+      {
+        label: "SYSTEM / WESTERN ELECTRIC",
+        title: "Horn Speaker 11A",
+        meta: "Straight horn · 555 driver",
+        description:
+          "One of Western Electric's largest straight horns, designed for the high output and clarity required by early professional sound systems.",
+      },
+      {
+        label: "SYSTEM / LANSING",
+        title: "Iconic",
+        meta: "Early compact Hi-Fi",
+        description:
+          "A speaker that moved high-resolution reproduction beyond large cinemas and helped open the path toward domestic high fidelity.",
+      },
+      {
+        label: "SYSTEM / JBL",
+        title: "Paragon",
+        meta: "Integrated stereo · 1957",
+        description:
+          "Its curved reflector creates a balanced stereo image across the room, while the cabinet is conceived with the presence of finely made furniture.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/audeum/architecture.jpg",
+        alt: "Audeum's entrance framed by glass and a vertical metal-pipe facade",
+        caption: "Audeum Audio Museum",
+        credit: "Image: Audeum",
+        sourceUrl: "https://audeum.org/about",
+      },
+      {
+        src: "/editorial/audeum/western-electric-11a.jpg",
+        alt: "Western Electric 11A system formed by eight large horns",
+        caption: "Western Electric Horn Speaker 11A",
+        credit: "Image: Audeum",
+        sourceUrl: "https://audeum.org/exhibitions/1",
+      },
+      {
+        src: "/editorial/audeum/jbl-paragon.jpg",
+        alt: "JBL Paragon speaker built as a long curved wooden cabinet",
+        caption: "JBL Paragon Speaker, 1957",
+        credit: "Image: Audeum",
+        sourceUrl: "https://audeum.org/exhibitions/1",
+      },
+    ],
+    locationNote:
+      "Audeum sits in a residential area overlooking Cheonggye Mountain. It is about two minutes on foot from the Tapseong Village, Seocho Foresta Entrance bus stop and about twenty minutes from Cheonggyesan Station.",
+    notes: [
+      {
+        label: "NEXT RESERVATION",
+        title: "Opens June 16, 2026 at 14:00",
+        description:
+          "Reservations are scheduled to open for June 18, 19, 20, 25, 26 and 27. Cancelled slots are updated on the official booking page.",
+      },
+      {
+        label: "OPENING HOURS",
+        title: "Thursday–Saturday, 10:00–17:30",
+        description:
+          "Last admission is at 17:00 and every visit requires an advance reservation.",
+      },
+      {
+        label: "ENTRY",
+        title: "One ticket per person · QR entry",
+        description:
+          "Entry requires the QR ticket issued after booking. Avoid any paid reservation channel outside Audeum's official website.",
+      },
+    ],
+    sources: [
+      {
+        label: "AUDEUM",
+        url: "https://audeum.org/",
+      },
+      {
+        label: "CURRENT EXHIBITION",
+        url: "https://audeum.org/exhibitions/1",
+      },
+      {
+        label: "VISIT / ARCHITECTURE",
+        url: "https://audeum.org/about",
+      },
+      {
+        label: "RESERVATION",
+        url: "https://audeum.org/booking",
       },
     ],
   },

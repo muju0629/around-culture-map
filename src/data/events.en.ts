@@ -251,4 +251,14 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     description:
       "Outdoor performances and workshops on movement in the city unfold across three stages and participatory programs along the Han River.",
   },
+  audeum: {
+    title: "Audeum",
+    region: "Yangjae",
+    district: "Seocho-gu",
+    venue: "Audeum",
+    address: "6 Heolleung-ro 8-gil, Seocho-gu, Seoul",
+    price: "Free · Advance reservation required",
+    description:
+      "An audio museum preserving and researching rare sound-reproduction equipment dating from the nineteenth century onward. Its Kengo Kuma–designed building hosts the permanent exhibition Jung Eum: In Search of Sound and reservation-only listening tours.",
+  },
 };

@@ -17,6 +17,7 @@ export interface EditorialHighlight {
   title: string;
   meta?: string;
   description: string;
+  url?: string;
 }
 
 export interface EditorialImage {
@@ -310,6 +311,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2019",
         title: "Blinding Lights",
+        url: "https://music.apple.com/kr/album/blinding-lights/1505683705?i=1505683988",
         meta: "After Hours",
         description:
           "80년대 신스팝의 질감과 즉각적인 멜로디를 결합한 위켄드의 대표곡입니다.",
@@ -317,6 +319,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2016",
         title: "Starboy",
+        url: "https://music.apple.com/kr/album/starboy-feat-daft-punk/1677005169?i=1677005489",
         meta: "Starboy",
         description:
           "Daft Punk와의 협업으로 팝스타라는 자신의 이미지와 욕망을 날카롭게 재구성했습니다.",
@@ -324,6 +327,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2015",
         title: "Can’t Feel My Face",
+        url: "https://music.apple.com/kr/album/cant-feel-my-face/1440826239?i=1440826389",
         meta: "Beauty Behind the Madness",
         description:
           "마이클 잭슨을 연상시키는 팝 훅과 어두운 은유가 동시에 작동하는 전환점 같은 싱글입니다.",
@@ -425,6 +429,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2022",
         title: "NO PAIN",
+        url: "https://music.apple.com/kr/album/no-pain/1865062012?i=1865062183",
         meta: "최우수 모던록 노래",
         description:
           "질주하는 밴드 사운드와 선언적인 후렴이 결합된 곡으로 실리카겔의 대중적 전환점이 됐습니다.",
@@ -432,6 +437,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2023",
         title: "Tik Tak Tok",
+        url: "https://music.apple.com/kr/album/tik-tak-tok-feat-so-yoon/1836310183?i=1836310305",
         meta: "feat. So!YoON!",
         description:
           "날카로운 기타 리프와 황소윤의 목소리가 교차하며 밴드의 리듬 감각과 확장성을 보여줍니다.",
@@ -439,6 +445,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2021",
         title: "Desert Eagle",
+        url: "https://music.apple.com/kr/album/desert-eagle/1703562324?i=1703562329",
         meta: "최우수 모던록 노래",
         description:
           "공백기 이후 달라진 4인조 실리카겔의 응축된 연주와 사이키델릭한 전개를 들을 수 있습니다.",
@@ -446,20 +453,18 @@ export const eventEditorials: Record<string, EventEditorial> = {
     ],
     gallery: [
       {
-        src: "/editorial/silica-gel/artist-2026.png",
-        alt: "2026년 실리카겔 공식 아티스트 이미지",
+        src: "/editorial/silica-gel/group-2026.jpg",
+        alt: "푸른 하늘을 배경으로 선 실리카겔 네 멤버",
         caption: "Silica Gel, 2026",
-        credit: "Image: Apple Music artist profile",
-        sourceUrl:
-          "https://music.apple.com/kr/artist/%EC%8B%A4%EB%A6%AC%EC%B9%B4%EA%B2%94/1031084591",
+        credit: "Image: CAM",
+        sourceUrl: "https://v.daum.net/v/20260602164500893",
       },
       {
-        src: "/editorial/silica-gel/band.jpg",
-        alt: "2022년 실리카겔 멤버들의 모습",
-        caption: "Silica Gel, 2022",
-        credit: "Image: Wikimedia Commons",
-        sourceUrl:
-          "https://commons.wikimedia.org/wiki/File:Silica_Gel_members_in_2022.jpg",
+        src: "/editorial/silica-gel/live-2025.jpg",
+        alt: "푸른 조명과 대형 비주얼 앞에서 연주하는 실리카겔",
+        caption: "Syn.THE.Size X, 2025",
+        credit: "Image: Silica Gel Official",
+        sourceUrl: "https://www.youtube.com/watch?v=KaYT_O0CwLE",
       },
     ],
     locationNote:
@@ -536,6 +541,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2025",
         title: "What You Want",
+        url: "https://music.apple.com/kr/album/what-you-want/1832031331?i=1832031341",
         meta: "COLOR OUTSIDE THE LINES",
         description:
           "사이키델릭 록의 기타와 묵직한 트랩 비트를 결합해 CORTIS의 장르 혼합 방식을 선명하게 보여줍니다.",
@@ -543,6 +549,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2026",
         title: "REDRED",
+        url: "https://music.apple.com/kr/album/redred/1887671065?i=1887671067",
         meta: "GREENGREEN",
         description:
           "반복적인 훅과 빠른 에너지, 직접적인 퍼포먼스 감각이 두 번째 활동기의 색을 압축합니다.",
@@ -550,6 +557,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2026",
         title: "TNT",
+        url: "https://music.apple.com/kr/album/tnt/1887671065?i=1887671066",
         meta: "GREENGREEN",
         description:
           "멤버들의 제작 참여와 시각적 연출이 음악의 속도감과 맞물리는 곡입니다.",
@@ -654,6 +662,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2025",
         title: "Die On This Hill",
+        url: "https://music.apple.com/kr/album/die-on-this-hill/1841769601?i=1841769602",
         meta: "UK TOP 10",
         description:
           "피아노와 스트링이 점차 커지는 구성 위로 거친 음색과 폭발적인 후반부가 겹치는 대표곡입니다.",
@@ -661,6 +670,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2026",
         title: "The Visitor",
+        url: "https://music.apple.com/kr/album/the-visitor/6769552402?i=6769552688",
         meta: "VISITOR",
         description:
           "정교한 프레이징과 절제된 긴장감으로 첫 정규 앨범의 방향을 보여주는 싱글입니다.",
@@ -668,6 +678,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2024",
         title: "MAYBE.",
+        url: "https://music.apple.com/kr/album/maybe/1793196922?i=1793197040",
         meta: "SINK NOW, SWIM LATER",
         description:
           "초기 활동기의 섬세한 감정 표현과 재즈 보컬의 영향을 가장 가까이 들을 수 있는 곡입니다.",
@@ -780,6 +791,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2015",
         title: "White Iverson",
+        url: "https://music.apple.com/kr/album/white-iverson/1440888125?i=1440888729",
         meta: "Stoney",
         description:
           "포스트 말론 특유의 나른한 멜로디와 랩의 경계를 처음 대중에게 각인한 데뷔곡입니다.",
@@ -787,6 +799,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2018",
         title: "Sunflower",
+        url: "https://music.apple.com/kr/album/sunflower-spider-man-into-the-spider-verse/1445949265?i=1445949267",
         meta: "with Swae Lee",
         description:
           "가볍고 선명한 멜로디로 세대와 장르를 넘어 사랑받은 대표적인 팝 협업곡입니다.",
@@ -794,6 +807,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK / 2019",
         title: "Circles",
+        url: "https://music.apple.com/kr/album/circles/1477880265?i=1477880561",
         meta: "Hollywood’s Bleeding",
         description:
           "기타 중심의 부드러운 팝 록 사운드가 포스트 말론의 넓은 음악적 스펙트럼을 보여줍니다.",
@@ -1095,6 +1109,7 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK",
         title: "10시 반 크리스피 앞",
+        url: "https://music.apple.com/kr/album/10%EC%8B%9C-%EB%B0%98-%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC-%EC%95%9E-feat-%EB%8B%A4%EC%9D%B4%EB%82%98%EB%AF%B9-%EB%93%80%EC%98%A4/6771244767?i=6771244768",
         meta: "feat. 다이나믹 듀오",
         description:
           "구체적인 장소와 시간에서 출발하는 서사에 선배 듀오의 호흡을 더한 곡입니다.",
@@ -1102,12 +1117,14 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "TRACK",
         title: "Vancouver",
+        url: "https://music.apple.com/kr/album/vancouver/1622167330?i=1622167332",
         description:
           "여행지의 이름과 관계의 기억을 감각적인 멜로디로 연결한 대표곡입니다.",
       },
       {
         label: "TRACK",
         title: "Lovey Dovey",
+        url: "https://music.apple.com/kr/album/lovey-dovey-feat-meenoi/1622167330?i=1622167331",
         meta: "Solo Ver.",
         description:
           "가볍고 친근한 후렴 안에 BIG Naughty의 보컬과 팝 감각이 선명하게 드러납니다.",
@@ -1159,6 +1176,132 @@ export const eventEditorials: Record<string, EventEditorial> = {
       {
         label: "H1GHR MUSIC ARTIST PROFILE",
         url: "https://en.h1ghrmusic.com/bignaughty",
+      },
+    ],
+  },
+  audeum: {
+    typeLabel: "SPACE / EXHIBITION PROFILE",
+    heading: "기기를 보는 박물관에서, 좋은 소리를 직접 듣는 공간으로.",
+    introduction:
+      "오디움은 19세기 이후의 희귀 음향 재생 장비를 보존하고 연구하는 오디오 박물관입니다. 상설전 《정음: 소리를 찾아서》는 원음에 가까운 재생을 뜻하는 하이파이에서 출발해 ‘좋은 소리란 무엇인가’를 묻고, 각자의 청취 경험으로 답을 찾도록 이끕니다.",
+    facts: [
+      { label: "FORMAT", value: "Audio museum · Listening tour" },
+      { label: "EXHIBITION", value: "정음: 소리를 찾아서 · 상설" },
+      { label: "ARCHITECT", value: "Kengo Kuma" },
+      { label: "ENTRY", value: "무료 · 사전 예약제" },
+    ],
+    timelineLabel: "COLLECTION CONTEXT",
+    timeline: [
+      {
+        marker: "19C–",
+        title: "음향 재생 기술의 역사",
+        description:
+          "에디슨 축음기부터 초기 영화관과 가정용 하이파이 시스템까지 소리를 재현해 온 장비를 수집하고 보존합니다.",
+      },
+      {
+        marker: "1920S",
+        title: "극장과 공공 공간의 대형 혼 스피커",
+        description:
+          "Western Electric의 대형 혼 시스템은 전기 증폭 초기의 극장과 야외 공간에 강하고 선명한 소리를 전달했습니다.",
+      },
+      {
+        marker: "1957",
+        title: "JBL Paragon",
+        description:
+          "곡면 반사판과 목재 캐비닛을 결합한 일체형 스테레오 시스템이 가정용 오디오와 가구 디자인의 경계를 넓혔습니다.",
+      },
+      {
+        marker: "NOW",
+        title: "정음: 소리를 찾아서",
+        description:
+          "소장품의 역사와 구조를 듣는 경험으로 연결해, 한 가지 정답이 아닌 각자의 ‘좋은 소리’를 탐색합니다.",
+      },
+    ],
+    highlightsLabel: "COLLECTION NOTES",
+    highlights: [
+      {
+        label: "SYSTEM / WESTERN ELECTRIC",
+        title: "Horn Speaker 11A",
+        meta: "Straight horn · 555 driver",
+        description:
+          "Western Electric의 대형 직선형 혼 가운데 하나로, 높은 출력과 명료한 전달력을 갖춘 초기 전문 음향 시스템입니다.",
+      },
+      {
+        label: "SYSTEM / LANSING",
+        title: "Iconic",
+        meta: "Early compact Hi-Fi",
+        description:
+          "극장에 머물던 고해상도 재생 기술을 더 작은 공간으로 옮기며 가정용 하이파이 발전의 출발점이 된 스피커입니다.",
+      },
+      {
+        label: "SYSTEM / JBL",
+        title: "Paragon",
+        meta: "Integrated stereo · 1957",
+        description:
+          "곡면 음향 반사판으로 넓은 위치에서 균형 잡힌 스테레오 이미지를 만들며, 하나의 정교한 가구처럼 설계된 시스템입니다.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/audeum/architecture.jpg",
+        alt: "수직 금속 파이프 외피와 유리 입구가 보이는 오디움 건축",
+        caption: "Audeum Audio Museum",
+        credit: "Image: Audeum",
+        sourceUrl: "https://audeum.org/about",
+      },
+      {
+        src: "/editorial/audeum/western-electric-11a.jpg",
+        alt: "여덟 개의 대형 혼으로 구성된 Western Electric 11A 시스템",
+        caption: "Western Electric Horn Speaker 11A",
+        credit: "Image: Audeum",
+        sourceUrl: "https://audeum.org/exhibitions/1",
+      },
+      {
+        src: "/editorial/audeum/jbl-paragon.jpg",
+        alt: "곡선형 목재 캐비닛으로 제작된 JBL Paragon 스피커",
+        caption: "JBL Paragon Speaker, 1957",
+        credit: "Image: Audeum",
+        sourceUrl: "https://audeum.org/exhibitions/1",
+      },
+    ],
+    locationNote:
+      "오디움은 청계산을 바라보는 서초구 주거 지역에 있습니다. 탑성마을·서초포레스타입구 정류장에서 도보 약 2분, 청계산입구역에서는 도보 약 20분 거리입니다.",
+    notes: [
+      {
+        label: "NEXT RESERVATION",
+        title: "2026년 6월 16일 14:00 오픈",
+        description:
+          "6월 18·19·20일과 25·26·27일 상설전 예약이 열릴 예정입니다. 취소표는 공식 예약 페이지에 수시로 반영됩니다.",
+      },
+      {
+        label: "OPENING HOURS",
+        title: "목–토 10:00–17:30",
+        description:
+          "마지막 입장은 17:00이며 전 일정 사전 예약제로 운영됩니다.",
+      },
+      {
+        label: "ENTRY",
+        title: "1인 1매 · QR 티켓 입장",
+        description:
+          "예약 완료 뒤 발급된 QR 티켓이 있어야 입장할 수 있습니다. 공식 사이트 이외의 유료 예약 경로는 이용하지 마세요.",
+      },
+    ],
+    sources: [
+      {
+        label: "AUDEUM",
+        url: "https://audeum.org/",
+      },
+      {
+        label: "CURRENT EXHIBITION",
+        url: "https://audeum.org/exhibitions/1",
+      },
+      {
+        label: "VISIT / ARCHITECTURE",
+        url: "https://audeum.org/about",
+      },
+      {
+        label: "RESERVATION",
+        url: "https://audeum.org/booking",
       },
     ],
   },

@@ -329,9 +329,6 @@ export function EventDetailPage() {
               >
                 <div className="editorial-gallery__heading">
                   <span className="eyebrow">VISUAL INDEX / 02</span>
-                  <p>
-                    {copy.detail.galleryIntro}
-                  </p>
                 </div>
                 <div
                   className={`editorial-gallery__grid editorial-gallery__grid--${Math.min(
@@ -408,6 +405,17 @@ export function EventDetailPage() {
                       <h3>{highlight.title}</h3>
                       {highlight.meta && <em>{highlight.meta}</em>}
                       <p>{highlight.description}</p>
+                      {highlight.url && (
+                        <a
+                          className="highlight-list__link"
+                          href={highlight.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          APPLE MUSIC
+                          <ArrowIcon />
+                        </a>
+                      )}
                     </article>
                   ))}
                 </div>

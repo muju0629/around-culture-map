@@ -7,7 +7,7 @@ import type {
 } from "../types";
 import { eventEnglishCopy } from "./events.en";
 
-export const CATALOG_UPDATED_AT = "2026-06-11";
+export const CATALOG_UPDATED_AT = "2026-06-12";
 
 export const events: CultureEvent[] = [
   {
@@ -604,6 +604,33 @@ export const events: CultureEvent[] = [
     poster: "type",
     latitude: 37.5175,
     longitude: 126.9583,
+  },
+  {
+    id: "audeum",
+    title: "오디움",
+    englishTitle: "AUDEUM — MUSEUM OF SOUND",
+    category: "문화공간",
+    region: "양재",
+    district: "서초구",
+    venue: "오디움",
+    address: "서울 서초구 헌릉로8길 6",
+    startDate: "2026-01-01",
+    endDate: "2026-12-31",
+    hours: "THU–SAT 10:00–17:30 · LAST ENTRY 17:00",
+    price: "무료 · 사전 예약",
+    isFree: true,
+    description:
+      "19세기 이후의 희귀 음향 재생 장비를 보존하고 연구하는 오디오 박물관입니다. 쿠마 켄고가 설계한 건축 안에서 상설전 《정음: 소리를 찾아서》와 예약제 리스닝 투어를 운영합니다.",
+    tags: ["SOUND", "AUDIO", "KENGO KUMA"],
+    poster: "signal",
+    posterImage: "/posters/audeum.png",
+    posterCredit: "AUDEUM OFFICIAL",
+    latitude: 37.4569698,
+    longitude: 127.0591039,
+    locationLabel: "SEOCHO / SEOUL",
+    sourceLabel: "AUDEUM",
+    sourceUrl: "https://audeum.org/",
+    verifiedAt: "2026-06-12",
   },
 ];
 
