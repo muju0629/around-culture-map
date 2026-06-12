@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">AROUND</title>
+  <rect width="64" height="64" fill="#0d0d0c"/>
+  <path d="M7 52 21.8 12h8.4L45 52h-9l-3.1-9H19.1L16 52H7Zm14.8-17h8.4L26 22.8 21.8 35Z" fill="#f1f0ec"/>
+  <g fill="none" stroke="#f1f0ec" stroke-linecap="square" stroke-width="2.4">
+    <path d="M50 10v17"/>
+    <path d="M41.5 18.5h17"/>
+    <path d="m44 12.5 12 12"/>
+    <path d="m56 12.5-12 12"/>
+  </g>
+</svg>

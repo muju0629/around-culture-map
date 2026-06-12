@@ -1,0 +1,24 @@
+{
+  "name": "AROUND — Seoul Culture Map",
+  "short_name": "AROUND",
+  "description": "서울의 음악, 전시, 축제와 문화공간을 발견하는 문화 지도",
+  "lang": "ko",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f1f0ec",
+  "theme_color": "#0d0d0c",
+  "icons": [
+    {
+      "src": "/brand/around-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand/around-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
