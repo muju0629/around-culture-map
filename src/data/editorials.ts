@@ -1092,6 +1092,786 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
     ],
   },
+  "yoo-youngkuk-retrospective": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "산의 형태가 아니라, 산을 바라보던 마음을 그린 화가.",
+    introduction:
+      "유영국은 평생 산을 그렸지만 산의 풍경을 재현한 적은 없습니다. 선과 면, 강렬한 원색으로 응축된 그의 추상은 자연을 마주한 감정 그 자체였습니다. 탄생 110주년을 맞아 서울시립미술관이 새로 시작하는 '한국 근대 거장전' 시리즈의 첫 자리에서, 미공개작을 포함한 170여 점으로 60여 년의 화업 전체를 통과합니다.",
+    facts: [
+      { label: "ANNIVERSARY", value: "탄생 110주년" },
+      { label: "WORKS", value: "회화 · 부조 · 드로잉 · 아카이브 170여 점" },
+      { label: "SERIES", value: "한국 근대 거장전 no.1" },
+      { label: "ADMISSION", value: "무료 · 사전 예약" },
+    ],
+    timelineLabel: "LIFE & WORK",
+    timeline: [
+      {
+        marker: "1935",
+        title: "도쿄에서 시작된 추상 실험",
+        description:
+          "일본 유학 시기 전위 그룹 활동과 함께 사진, 부조 등 매체를 넘나드는 초기 추상 실험이 시작됩니다.",
+      },
+      {
+        marker: "1960s–",
+        title: "산이라는 평생의 주제",
+        description:
+          "귀국 후 산을 모티프로 색과 형태를 응축하는 독자적 추상 언어를 완성해 갑니다.",
+      },
+      {
+        marker: "2026",
+        title: "역대 최대 규모의 회고전",
+        description:
+          "생애 후반의 심상 추상까지, 서소문본관 전관에서 화업 전체를 조망합니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / COLOR",
+        title: "원색의 밀도",
+        description:
+          "빨강, 파랑, 노랑의 강렬한 원색이 캔버스 위에서 어떻게 긴장과 균형을 만드는지 가까이에서 살펴보세요.",
+      },
+      {
+        label: "02 / MOUNTAIN",
+        title: "재현이 아닌 응축",
+        description:
+          "산의 윤곽을 찾기보다, 능선과 골짜기가 선과 면으로 응축되는 과정을 시기별로 비교해 보세요.",
+      },
+      {
+        label: "03 / ARCHIVE",
+        title: "미공개작과 기록",
+        description:
+          "처음 공개되는 작품과 아카이브 자료가 화가의 작업실과 시대를 증언합니다.",
+      },
+    ],
+    locationNote:
+      "덕수궁 돌담길 옆 서울시립미술관 서소문본관 1층 전시장에서 열립니다. 시청역과 덕수궁, 정동길 산책과 자연스럽게 이어집니다.",
+    notes: [
+      {
+        label: "RESERVATION",
+        title: "무료 · 사전 예약 권장",
+        description:
+          "서울시립미술관 공식 홈페이지에서 관람일을 예약할 수 있습니다. 현장 입장은 혼잡 시 제한될 수 있습니다.",
+      },
+      {
+        label: "CLOSED",
+        title: "월요일 휴관",
+        description:
+          "평일은 오후 8시까지, 주말은 오후 7시까지 운영합니다. 금요일 야간 관람과 함께 계획해 보세요.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA EXHIBITION",
+        url: "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1529410",
+      },
+      {
+        label: "SEOUL NEWS",
+        url: "https://news.seoul.go.kr/culture/archives/532952",
+      },
+    ],
+  },
+  "jo-sook-jin-namseoul": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "버려진 나무에서 시작해, 공간 전체를 조각으로.",
+    introduction:
+      "조숙진은 1988년 뉴욕으로 건너간 이후 버려진 나무와 오브제를 모아 부조와 설치, 건축적 프로젝트로 확장해 온 조각가입니다. 서울시립 남서울미술관의 연례 조각가 개인전으로 마련된 이번 전시는 초기 부조 시리즈부터 퍼포먼스와 드로잉까지, 국내에서 온전히 보기 어려웠던 작업 세계를 종합적으로 소개합니다.",
+    facts: [
+      { label: "ARTIST", value: "조숙진 (Sook Jin Jo)" },
+      { label: "BASE", value: "뉴욕 · 1988년 이후" },
+      { label: "FORMAT", value: "부조 · 설치 · 퍼포먼스 · 드로잉" },
+      { label: "ADMISSION", value: "무료" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1988",
+        title: "뉴욕으로",
+        description:
+          "서울에서 뉴욕으로 활동 무대를 옮겨 버려진 목재를 이용한 부조 작업을 심화합니다.",
+      },
+      {
+        marker: "1990s–",
+        title: "설치와 건축 프로젝트",
+        description:
+          "벽면 부조를 넘어 공간 전체를 감싸는 설치와 공공 건축 프로젝트로 작업을 확장합니다.",
+      },
+      {
+        marker: "2026",
+        title: "남서울미술관 개인전",
+        description:
+          "옛 벨기에영사관 건축 안에서 초기작부터 근작까지를 한자리에 모읍니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / MATERIAL",
+        title: "나무의 시간",
+        description:
+          "칠이 벗겨지고 결이 드러난 폐목재의 표면에서 재료가 살아온 시간을 읽어보세요.",
+      },
+      {
+        label: "02 / SPACE",
+        title: "건축과의 대화",
+        description:
+          "1900년대 초 지어진 옛 벨기에영사관의 목조 계단, 회랑과 작품이 만드는 관계를 함께 살펴보세요.",
+      },
+      {
+        label: "03 / GESTURE",
+        title: "수행으로서의 조각",
+        description:
+          "재료를 줍고, 다듬고, 쌓는 반복적 행위가 남긴 흔적에서 작가의 수행적 태도를 발견할 수 있습니다.",
+      },
+    ],
+    locationNote:
+      "사당역 6번 출구 앞, 옛 벨기에영사관을 이전 복원한 서울시립 남서울미술관에서 열립니다. 등록문화재 건축 자체가 전시의 일부처럼 작동합니다.",
+    notes: [
+      {
+        label: "OPENING",
+        title: "7월 29일 개막",
+        description:
+          "전시는 7월 29일 시작해 11월 15일까지 이어집니다. 개막 직후 주말은 혼잡할 수 있습니다.",
+      },
+      {
+        label: "CLOSED",
+        title: "월요일 휴관",
+        description:
+          "평일은 오후 8시, 주말은 오후 6시까지 운영합니다. 관람은 무료입니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA",
+        url: "https://sema.seoul.go.kr/",
+      },
+      {
+        label: "SEMA 2026 PROGRAM",
+        url: "https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706",
+      },
+    ],
+  },
+  "oh-yoon-collection": {
+    typeLabel: "ARCHIVE PROFILE",
+    heading: "칼끝으로 새긴 민중의 얼굴, 40년 만의 재회.",
+    introduction:
+      "오윤(1946–1986)은 목판의 거친 칼맛으로 민중의 삶과 한, 신명을 새긴 1980년대 민중미술의 상징적 판화가입니다. 작고 40주기를 맞아 서울시립 미술아카이브가 2024년 수집한 오윤 아카이브를 처음으로 본격 공개하며, 완성작 너머의 밑그림과 기록을 통해 창작의 과정 자체를 들여다봅니다.",
+    facts: [
+      { label: "ARTIST", value: "오윤 (1946–1986)" },
+      { label: "OCCASION", value: "작고 40주기" },
+      { label: "COLLECTION", value: "2024년 수집 오윤 아카이브" },
+      { label: "ADMISSION", value: "무료" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1980s",
+        title: "민중미술의 한복판",
+        description:
+          "현실과 발언 동인으로 활동하며 판화를 통해 시대의 얼굴을 기록했습니다.",
+      },
+      {
+        marker: "1986",
+        title: "마흔의 이른 작고",
+        description:
+          "첫 개인전을 연 해에 세상을 떠나며 짧지만 강렬한 작업 세계를 남겼습니다.",
+      },
+      {
+        marker: "2026",
+        title: "아카이브로 다시 읽기",
+        description:
+          "밑그림, 스케치, 기록 자료를 통해 완성작 이전의 고민과 과정을 추적합니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / KNIFE",
+        title: "칼맛의 언어",
+        description:
+          "매끈함 대신 거칠게 남긴 칼자국이 인물의 감정과 힘을 어떻게 증폭하는지 살펴보세요.",
+      },
+      {
+        label: "02 / PROCESS",
+        title: "완성작 이전",
+        description:
+          "아카이브 전시답게 스케치와 습작, 메모에서 하나의 판화가 태어나는 경로를 따라가 보세요.",
+      },
+      {
+        label: "03 / PEOPLE",
+        title: "민중이라는 주어",
+        description:
+          "도깨비와 탈춤, 장터의 사람들. 오윤이 평생 그린 주인공들이 지금 우리와 어떻게 겹치는지 생각해 볼 수 있습니다.",
+      },
+    ],
+    locationNote:
+      "북한산 자락 평창동의 서울시립 미술아카이브에서 열립니다. 미술 자료 전문 기관 특유의 차분한 열람 환경에서 전시를 볼 수 있습니다.",
+    notes: [
+      {
+        label: "OPENING",
+        title: "8월 27일 개막",
+        description:
+          "전시는 2027년 2월 21일까지 이어지는 장기 기획전입니다. 가을 평창동 산책과 함께 계획해 보세요.",
+      },
+      {
+        label: "CLOSED",
+        title: "월요일 휴관",
+        description: "관람은 무료이며 화요일부터 일요일까지 운영합니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA ART ARCHIVES",
+        url: "https://sema.seoul.go.kr/semaaa/front/main.do",
+      },
+      {
+        label: "SEMA 2026 PROGRAM",
+        url: "https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706",
+      },
+    ],
+  },
+  "koo-jeong-a-leeum": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "보이지 않지만 분명히 존재하는 것들의 미술.",
+    introduction:
+      "구정아의 작업은 종종 놓치기 쉽습니다. 희미한 빛, 옅은 향, 미세한 진동처럼 감각의 문턱 근처에서 작동하기 때문입니다. 제60회 베니스 비엔날레 한국관에서 향으로 한국을 담아냈던 작가가 이번에는 리움 M2 전관을 무대로, 자력과 에너지의 흐름처럼 보이지 않는 존재들을 공간 전체의 경험으로 바꿔 놓습니다.",
+    facts: [
+      { label: "ARTIST", value: "구정아 (Koo Jeong A)" },
+      { label: "VENICE", value: "제60회 베니스 비엔날레 한국관" },
+      { label: "VENUE", value: "리움미술관 M2 전관" },
+      { label: "OPENING", value: "2026년 9월 5일" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1990s–",
+        title: "감각의 문턱에서",
+        description:
+          "파리와 런던을 오가며 빛, 향, 온도처럼 비물질적 요소를 다루는 독자적 설치 언어를 구축했습니다.",
+      },
+      {
+        marker: "2024",
+        title: "베니스의 향기",
+        description:
+          "베니스 비엔날레 한국관에서 한국의 기억을 향으로 번역한 《오도라마 시티》로 주목받았습니다.",
+      },
+      {
+        marker: "2026",
+        title: "리움 M2 전관",
+        description:
+          "국내에서 보기 드문 대규모 개인전으로 작가의 세계를 집약합니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / SLOW",
+        title: "천천히, 오래",
+        description:
+          "작품이 잘 보이지 않는다면 그것이 의도입니다. 걸음을 늦추고 공기와 빛의 변화에 감각을 열어보세요.",
+      },
+      {
+        label: "02 / SENSE",
+        title: "시각 너머",
+        description:
+          "냄새, 온도, 진동처럼 시각 밖의 감각이 언제 어디서 개입하는지 알아차려 보세요.",
+      },
+      {
+        label: "03 / ENERGY",
+        title: "에너지의 흐름",
+        description:
+          "자력처럼 보이지 않는 힘이 공간의 분위기를 어떻게 바꾸는지, 전시장 사이의 이동에서도 느껴보세요.",
+      },
+    ],
+    locationNote:
+      "한남동 리움미술관 M2에서 열립니다. 같은 시기 그라운드갤러리의 《다른 공간 안으로》와 함께 보면 '공간을 경험하는 미술'이라는 하나의 흐름으로 이어집니다.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "예매 공지 예정",
+        description:
+          "관람권과 예매 일정은 리움 공식 홈페이지를 통해 공지될 예정입니다. 공식 채널에서 확인하세요.",
+      },
+      {
+        label: "CLOSED",
+        title: "월요일 휴관",
+        description: "관람 시간은 화요일부터 일요일 오전 10시부터 오후 6시까지입니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "LEEUM UPCOMING",
+        url: "https://www.leeumhoam.org/leeum/exhibition/94",
+      },
+      {
+        label: "LEEUM",
+        url: "https://www.leeumhoam.org/leeum",
+      },
+    ],
+  },
+  "sema-seoseoul": {
+    typeLabel: "SPACE PROFILE",
+    heading: "공원 위에 놓인 스트리트형 미술관, 서남권의 새 거점.",
+    introduction:
+      "서울시립 서서울미술관은 두 가지 '처음'을 안고 문을 열었습니다. 서남권 최초의 공립 미술관이자, 서울시 첫 뉴미디어 특화 미술관이라는 점입니다. 김찬중(더시스템랩)이 설계한 건물은 금나래공원의 보행로를 그대로 끌어들여, 공원을 걷다 자연스럽게 미술관 안으로 흘러드는 개방적 경험을 제안합니다.",
+    facts: [
+      { label: "OPENED", value: "2026년 3월 12일" },
+      { label: "FOCUS", value: "뉴미디어 · 청소년" },
+      { label: "ARCHITECT", value: "김찬중 · 더시스템랩" },
+      { label: "ADMISSION", value: "무료" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2026.03",
+        title: "개관",
+        description:
+          "개관특별전 《우리의 시간은 여기서부터》로 서남권 지역의 시간과 기억을 조명하며 문을 열었습니다.",
+      },
+      {
+        marker: "NOW",
+        title: "개관 시즌",
+        description:
+          "퍼포먼스 《호흡》, 뉴미디어 소장품전 등 개관 프로그램이 이어지고 있습니다.",
+      },
+      {
+        marker: "AHEAD",
+        title: "서남권의 문화 거점으로",
+        description:
+          "학교와 가족 단위 관람객을 위한 뉴미디어 교육 프로그램이 함께 운영됩니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / STREET",
+        title: "길이 되는 미술관",
+        description:
+          "공원 보행로와 이어지는 스트리트형 동선을 따라 걸으며 안과 밖의 경계가 흐려지는 순간을 즐겨보세요.",
+      },
+      {
+        label: "02 / NEW MEDIA",
+        title: "뉴미디어 소장품",
+        description:
+          "영상, 인터랙티브 설치 등 스크린 세대를 위한 소장품전이 상설로 운영됩니다.",
+      },
+      {
+        label: "03 / PARK",
+        title: "금나래공원과 함께",
+        description:
+          "관람 전후로 공원 산책을 곁들이면 반나절 나들이 코스로 충분합니다.",
+      },
+    ],
+    locationNote:
+      "금천구 독산동 금나래중앙공원 위에 자리합니다. 1호선 독산역에서 도보로 닿을 수 있어 서남권에서 가장 가까운 시립 미술관입니다.",
+    notes: [
+      {
+        label: "ADMISSION",
+        title: "무료 관람",
+        description:
+          "상설 프로그램은 무료입니다. 일부 교육 프로그램은 사전 신청이 필요할 수 있습니다.",
+      },
+      {
+        label: "CLOSED",
+        title: "월요일 휴관",
+        description: "평일은 오후 8시, 주말은 오후 6시까지 운영합니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA SEO-SEOUL",
+        url: "https://sema.seoul.go.kr/kr/visit/seoseoul",
+      },
+      {
+        label: "OPENING EXHIBITION",
+        url: "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1498975",
+      },
+    ],
+  },
+  "yeowoorak-festival-2026": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "여기, 우리 음악이 있다 — 열여섯 번째 여름.",
+    introduction:
+      "여우락은 '여기 우리 음악이 있다'의 준말입니다. 국립극장이 매년 여름 전통음악의 가장 대담한 확장을 실험해 온 이 축제가 올해는 예술감독 이한철, 음악감독 유태평양 체제로 열립니다. '누구나 즐길 수 있는 우리 음악'을 내걸고 강산에, 선우정아, 하림, 안예은, 이희문까지 장르의 경계를 넘는 만남 12편을 준비했습니다.",
+    facts: [
+      { label: "PERIOD", value: "7월 3일 – 7월 25일" },
+      { label: "PROGRAM", value: "총 12개 공연" },
+      { label: "DIRECTORS", value: "이한철 · 유태평양" },
+      { label: "VENUE", value: "하늘극장 · 달오름극장" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2010",
+        title: "첫 여우락",
+        description:
+          "전통음악과 동시대 음악의 만남을 내건 국립극장의 여름 축제가 시작됐습니다.",
+      },
+      {
+        marker: "2026",
+        title: "이한철 × 유태평양",
+        description:
+          "대중음악과 국악을 대표하는 두 음악가가 감독으로 만나 '누구나 즐기는 우리 음악'을 설계합니다.",
+      },
+      {
+        marker: "JUL",
+        title: "12개의 무대",
+        description:
+          "3주간 하늘극장과 달오름극장에서 서로 다른 조합의 협업 무대가 이어집니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / CROSSOVER",
+        title: "경계 없는 협업",
+        description:
+          "국악 명인과 대중음악가가 한 무대에서 만나는 여우락 특유의 일회성 조합을 눈여겨보세요.",
+      },
+      {
+        label: "02 / PICK",
+        title: "라인업 고르기",
+        description:
+          "강산에, 선우정아, 안예은 등 익숙한 이름에서 시작해 낯선 전통 무대로 넓혀가는 동선을 추천합니다.",
+      },
+      {
+        label: "03 / NIGHT",
+        title: "남산의 여름밤",
+        description:
+          "공연 전후 남산 자락 국립극장 앞마당에서 여름밤 공기를 즐겨보세요.",
+      },
+    ],
+    locationNote:
+      "장충동 국립극장 하늘극장과 달오름극장에서 열립니다. 동대입구역에서 남산 방향으로 도보 또는 순환버스로 이동할 수 있습니다.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "공연별 예매",
+        description:
+          "공연마다 일정과 가격이 다릅니다. 국립극장 공식 홈페이지에서 회차별로 확인하세요.",
+      },
+      {
+        label: "PACKAGE",
+        title: "패키지 티켓",
+        description:
+          "여러 공연을 묶은 패키지 티켓이 운영됩니다. 두 편 이상 볼 계획이라면 먼저 확인해 보세요.",
+      },
+    ],
+    sources: [
+      {
+        label: "NTOK YEOWOORAK",
+        url: "https://www.ntok.go.kr/ntok/pm/prfmng/selectSeasonInfo.do?seasonType=2&mi=21018",
+      },
+    ],
+  },
+  "the-neighbourhood-seoul": {
+    typeLabel: "CONCERT PROFILE",
+    heading: "스웨터 웨더의 밴드, 13년 만의 첫 서울.",
+    introduction:
+      "'Sweater Weather'가 스포티파이에서 44억 회 넘게 재생되는 동안, 네이버후드는 한 번도 한국 무대에 서지 않았습니다. 캘리포니아 특유의 나른함과 어두운 R&B 무드를 섞은 이 밴드의 첫 단독 내한이 예스24 라이브홀에서 성사됩니다. 데뷔 초부터 기다려온 팬이라면 놓치기 어려운 단 한 번의 밤입니다.",
+    facts: [
+      { label: "DATE", value: "7월 20일 (월) 20:00" },
+      { label: "VENUE", value: "예스24 라이브홀" },
+      { label: "PRICE", value: "139,000원 · 스탠딩" },
+      { label: "FIRST", value: "첫 단독 내한" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2013",
+        title: "I Love You. 데뷔",
+        description:
+          "데뷔 앨범 수록곡 'Sweater Weather'가 빌보드 얼터너티브 차트 1위에 오르며 단숨에 주목받았습니다.",
+      },
+      {
+        marker: "2020",
+        title: "다시 온 전성기",
+        description:
+          "SNS를 타고 'Sweater Weather'가 역주행하며 새로운 세대의 사운드트랙이 됐습니다.",
+      },
+      {
+        marker: "2026",
+        title: "첫 서울 무대",
+        description:
+          "재결성 이후 아시아 투어의 한 축으로 서울을 처음 찾습니다.",
+      },
+    ],
+    highlightsLabel: "BEFORE YOU GO",
+    highlights: [
+      {
+        label: "01 / SETLIST",
+        title: "예습 리스트",
+        description:
+          "'Sweater Weather', 'Daddy Issues', 'Softcore'까지 대표곡의 라이브 버전을 미리 들어보세요.",
+      },
+      {
+        label: "02 / STANDING",
+        title: "스탠딩 공연",
+        description:
+          "라이브홀 특성상 전 구역 스탠딩입니다. 입장 순서는 예매 번호 기준이니 일찍 도착하는 편이 좋습니다.",
+      },
+      {
+        label: "03 / MOOD",
+        title: "어두운 무드의 미학",
+        description:
+          "흑백의 비주얼과 몽환적 사운드가 만드는 밴드 특유의 공기를 현장에서 느껴보세요.",
+      },
+    ],
+    locationNote:
+      "광나루역 인근 예스24 라이브홀(구 악스코리아)에서 열립니다. 2호선 강변역과 5호선 광나루역 사이, 도보 10분 거리입니다.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "공식 예매처 이용",
+        description:
+          "예스24 티켓이 공식 예매처입니다. 양도 티켓 거래는 입장이 거부될 수 있습니다.",
+      },
+      {
+        label: "AGE",
+        title: "관람 연령 확인",
+        description: "관람 등급과 입장 정책은 공연 공지를 따릅니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "YES24 LIVE HALL",
+        url: "https://yes24livehall.com/",
+      },
+    ],
+  },
+  "classic-revolution-2026": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "클래식의 뿌리를 찾아가는 8일간의 여정.",
+    introduction:
+      "올해 클래식 레볼루션의 주제는 '뿌리(Origin)'입니다. 코다이와 바르톡, 드보르작처럼 민속음악에서 출발해 클래식의 정전이 된 음악들을 8일에 걸쳐 집중적으로 조명합니다. 안드레이 보레이코가 지휘하는 국립심포니와 첼리스트 키안 솔타니의 개막 무대부터 카바코스와 게르스타인의 듀오 리사이틀까지, 여름의 끝을 채우는 밀도 높은 라인업입니다.",
+    facts: [
+      { label: "PERIOD", value: "8월 28일 – 9월 4일" },
+      { label: "THEME", value: "뿌리 (Origin)" },
+      { label: "OPENING", value: "보레이코 × 국립심포니 × 키안 솔타니" },
+      { label: "VENUE", value: "롯데콘서트홀" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2020",
+        title: "축제의 시작",
+        description:
+          "롯데콘서트홀이 여름 시즌을 채우는 자체 기획 축제로 클래식 레볼루션을 시작했습니다.",
+      },
+      {
+        marker: "2026",
+        title: "개관 10주년",
+        description:
+          "홀의 개관 10주년과 맞물려 어느 해보다 무게 있는 라인업이 꾸려졌습니다.",
+      },
+      {
+        marker: "AUG–SEP",
+        title: "8일간의 집중",
+        description:
+          "오케스트라, 체임버, 듀오 리사이틀이 교차하며 하나의 주제를 다층적으로 파고듭니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / OPENING",
+        title: "개막 공연",
+        description:
+          "코다이 '갈란타 무곡', 드보르작 첼로 협주곡, 바르톡 '오케스트라를 위한 협주곡'까지 주제를 압축한 프로그램입니다.",
+      },
+      {
+        label: "02 / DUO",
+        title: "카바코스 × 게르스타인",
+        description:
+          "당대 최고의 바이올리니스트와 피아니스트가 만나는 듀오 리사이틀은 축제의 또 다른 정점입니다.",
+      },
+      {
+        label: "03 / HALL",
+        title: "홀의 음향",
+        description:
+          "빈야드 스타일 롯데콘서트홀의 음향을 고려해 무대 뒤편 합창석에서 듣는 선택지도 시도해 보세요.",
+      },
+    ],
+    locationNote:
+      "잠실 롯데월드몰 8층의 롯데콘서트홀에서 열립니다. 2호선 잠실역과 바로 연결되어 접근이 편리합니다.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "공연별 예매",
+        description:
+          "공연마다 가격과 좌석 등급이 다릅니다. 롯데콘서트홀 공식 홈페이지에서 회차별로 확인하세요.",
+      },
+      {
+        label: "TIME",
+        title: "공연 시간 확인",
+        description:
+          "평일 저녁과 주말 공연 시간이 다를 수 있으니 예매 시 시작 시간을 확인하세요.",
+      },
+    ],
+    sources: [
+      {
+        label: "LOTTE CONCERT HALL",
+        url: "https://www.lotteconcerthall.com/",
+      },
+    ],
+  },
+  "seoul-fringe-2026": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "심사도 선정도 없이, 예술가가 직접 여는 무대.",
+    introduction:
+      "서울프린지페스티벌의 원칙은 단순합니다. 작품과 예술가를 심사하지 않고, 선정하지 않는 것. 그래서 이 축제에는 다른 어디에서도 볼 수 없는 날것의 실험이 모입니다. 연극, 무용, 음악, 퍼포먼스, 시각예술까지 — 8월의 홍대 일대가 독립예술가들의 자유로운 무대가 됩니다.",
+    facts: [
+      { label: "PERIOD", value: "8월 6일 – 8월 23일" },
+      { label: "PRINCIPLE", value: "자유참가 · 무심사" },
+      { label: "GENRES", value: "연극 · 무용 · 음악 · 퍼포먼스 · 시각" },
+      { label: "AREA", value: "홍대 일대 소극장 · 거리" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1998",
+        title: "독립예술제로 출발",
+        description:
+          "대학로 중심의 제도권 무대 바깥에서 독립예술가들의 자생적 축제로 시작했습니다.",
+      },
+      {
+        marker: "SINCE",
+        title: "홍대라는 토양",
+        description:
+          "홍대 앞 소극장과 클럽, 거리의 인프라와 함께 성장하며 한국 독립예술의 관문이 됐습니다.",
+      },
+      {
+        marker: "2026",
+        title: "여름 3주간",
+        description:
+          "8월 6일부터 23일까지, 올여름도 수백 명의 예술가가 자발적으로 무대를 엽니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / RANDOM",
+        title: "우연에 맡기기",
+        description:
+          "프린지의 묘미는 계획 없는 발견입니다. 시간표만 들고 홍대를 걷다 끌리는 공연에 들어가 보세요.",
+      },
+      {
+        label: "02 / STREET",
+        title: "거리 공연",
+        description:
+          "티켓 없이 만나는 거리 퍼포먼스는 축제의 가장 열린 입구입니다.",
+      },
+      {
+        label: "03 / TALK",
+        title: "예술가와의 거리",
+        description:
+          "소극장 공연 후 예술가와 직접 대화할 수 있는 가까운 거리감이 프린지의 특권입니다.",
+      },
+    ],
+    locationNote:
+      "서교동을 중심으로 한 홍대 일대 소극장과 거리 곳곳에서 열립니다. 공연별 장소는 공식 홈페이지의 시간표에서 확인하세요.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "작품별 예매",
+        description:
+          "유료 공연과 무료 공연이 섞여 있습니다. 7월 티켓 오픈 이후 공식 홈페이지에서 예매할 수 있습니다.",
+      },
+      {
+        label: "SCHEDULE",
+        title: "시간표 확인",
+        description:
+          "3주간 수백 개의 공연이 열리므로, 방문 전 날짜별 시간표를 확인하는 것이 좋습니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEOUL FRINGE FESTIVAL",
+        url: "https://seoulfringefestival.net/",
+      },
+    ],
+  },
+  "jamsugyo-ddooddoo-festival": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "일요일마다 차가 비켜서고, 다리가 광장이 된다.",
+    introduction:
+      "잠수교는 한강에서 수면과 가장 가까운 다리입니다. 매주 일요일, 이 다리에서 차가 사라지면 900미터의 강 위 산책로가 열립니다. 상반기 시즌에만 117만 명이 다녀간 뚜벅뚜벅 축제가 9월부터 하반기 시즌을 시작합니다. 미식과 마켓, 거리 공연, 그리고 한강 위에서 맞는 노을까지 — 서울에서 가장 낮은 눈높이로 강을 만나는 방법입니다.",
+    facts: [
+      { label: "PERIOD", value: "9월 6일 – 10월 25일 · 매주 일요일" },
+      { label: "HOURS", value: "13:00 – 21:00" },
+      { label: "VISITORS", value: "상반기 누적 117만 명" },
+      { label: "ADMISSION", value: "무료" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2023",
+        title: "차 없는 다리 실험",
+        description:
+          "주말 잠수교를 보행자 전용으로 여는 실험이 서울의 대표 한강 프로그램으로 자리잡았습니다.",
+      },
+      {
+        marker: "2026.04",
+        title: "상반기 시즌",
+        description:
+          "4월부터 6월까지 8주간 117만 명이 찾으며 전년 대비 13% 성장했습니다.",
+      },
+      {
+        marker: "2026.09",
+        title: "하반기 시즌",
+        description:
+          "9월 6일부터 10월 25일까지, 가을의 한강과 노을이 배경이 됩니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / SUNSET",
+        title: "노을 시간 맞추기",
+        description:
+          "해질 무렵 다리 위는 축제의 절정입니다. 일몰 30분 전에 도착해 서쪽 하늘을 확보하세요.",
+      },
+      {
+        label: "02 / FOOD",
+        title: "미식과 마켓",
+        description:
+          "시즌마다 바뀌는 푸드트럭과 마켓 라인업이 다리 위에 늘어섭니다.",
+      },
+      {
+        label: "03 / WALK",
+        title: "반포에서 이촌까지",
+        description:
+          "잠수교를 건너 이촌한강공원까지 이어 걸으면 강북과 강남을 잇는 완주 코스가 됩니다.",
+      },
+    ],
+    locationNote:
+      "잠수교와 반포한강공원 일대에서 열립니다. 고속터미널역 8-1번 출구에서 반포한강공원 방향으로 도보 15분입니다.",
+    notes: [
+      {
+        label: "SUNDAY ONLY",
+        title: "일요일에만",
+        description:
+          "축제는 매주 일요일 낮 1시부터 밤 9시까지만 열립니다. 우천 시 일부 프로그램이 축소될 수 있습니다.",
+      },
+      {
+        label: "FREE",
+        title: "무료 입장",
+        description:
+          "입장은 무료이며 일부 체험 프로그램은 현장 선착순으로 운영됩니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "DDOODDOO FESTA",
+        url: "http://www.festa-ddooddoo.com/",
+      },
+      {
+        label: "FUN SEOUL",
+        url: "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=402",
+      },
+    ],
+  },
 };
 
 export function getEventEditorial(id: string, locale: Locale = "ko") {

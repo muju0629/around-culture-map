@@ -1038,4 +1038,784 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
     ],
   },
+  "yoo-youngkuk-retrospective": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "A painter of mountains who never painted a landscape.",
+    introduction:
+      "Yoo Youngkuk painted mountains all his life, yet never once depicted a scene. His abstraction — lines, planes and saturated primary color — was the feeling of standing before nature itself. Marking the 110th anniversary of his birth, the first edition of SeMA's new Korean Modern Masters series traverses his entire six-decade career with some 170 works, including pieces shown for the first time.",
+    facts: [
+      { label: "ANNIVERSARY", value: "110th anniversary of his birth" },
+      { label: "WORKS", value: "170+ paintings, reliefs, drawings, archives" },
+      { label: "SERIES", value: "Korean Modern Masters no.1" },
+      { label: "ADMISSION", value: "Free · Advance reservation" },
+    ],
+    timelineLabel: "LIFE & WORK",
+    timeline: [
+      {
+        marker: "1935",
+        title: "Abstract experiments in Tokyo",
+        description:
+          "During his studies in Japan he joined avant-garde groups, experimenting across photography and relief.",
+      },
+      {
+        marker: "1960s–",
+        title: "The mountain, a lifelong subject",
+        description:
+          "Back in Korea, he distilled the mountain into a singular abstract language of color and form.",
+      },
+      {
+        marker: "2026",
+        title: "The largest retrospective yet",
+        description:
+          "The Seosomun main branch surveys everything through to the inner abstractions of his late years.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / COLOR",
+        title: "The density of primary color",
+        description:
+          "Watch how reds, blues and yellows hold tension and balance on the canvas at close range.",
+      },
+      {
+        label: "02 / MOUNTAIN",
+        title: "Condensation, not depiction",
+        description:
+          "Rather than hunting for a mountain's outline, compare how ridgelines condense into line and plane across periods.",
+      },
+      {
+        label: "03 / ARCHIVE",
+        title: "Unseen works and records",
+        description:
+          "First-shown works and archival materials testify to the painter's studio and his times.",
+      },
+    ],
+    locationNote:
+      "Held on the first floor of SeMA's Seosomun main branch, beside the Deoksugung stone wall — an easy pairing with a walk along Jeongdong-gil.",
+    notes: [
+      {
+        label: "RESERVATION",
+        title: "Free · Reservation recommended",
+        description:
+          "Book a date on the SeMA website. Walk-in entry may be limited at busy times.",
+      },
+      {
+        label: "CLOSED",
+        title: "Closed Mondays",
+        description:
+          "Open until 8pm on weekdays and 7pm on weekends. Consider a Friday evening visit.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA EXHIBITION",
+        url: "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1529410",
+      },
+      {
+        label: "SEOUL NEWS",
+        url: "https://news.seoul.go.kr/culture/archives/532952",
+      },
+    ],
+  },
+  "jo-sook-jin-namseoul": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "From discarded wood to sculpture that fills a building.",
+    introduction:
+      "Since moving to New York in 1988, Sook Jin Jo has gathered abandoned wood and objects, expanding them into reliefs, installations and architectural projects. Mounted as SeMA Nam-Seoul's annual sculptor's exhibition, this survey brings together a practice rarely seen in full in Korea — from early relief series to performances and drawings.",
+    facts: [
+      { label: "ARTIST", value: "Sook Jin Jo" },
+      { label: "BASE", value: "New York · since 1988" },
+      { label: "FORMAT", value: "Relief · Installation · Performance · Drawing" },
+      { label: "ADMISSION", value: "Free" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1988",
+        title: "To New York",
+        description:
+          "Relocating from Seoul, she deepened her relief work using discarded lumber found in the city.",
+      },
+      {
+        marker: "1990s–",
+        title: "Installation and architecture",
+        description:
+          "Her work grew beyond the wall into room-scale installations and public architectural projects.",
+      },
+      {
+        marker: "2026",
+        title: "Solo show at Nam-Seoul",
+        description:
+          "Early works through recent pieces gather inside the former Belgian Consulate building.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / MATERIAL",
+        title: "The time inside wood",
+        description:
+          "Read the years lived by each plank in its peeling paint and exposed grain.",
+      },
+      {
+        label: "02 / SPACE",
+        title: "In dialogue with architecture",
+        description:
+          "Notice the relationships formed between the works and the early-1900s consulate's wooden stairs and corridors.",
+      },
+      {
+        label: "03 / GESTURE",
+        title: "Sculpture as practice",
+        description:
+          "Traces of gathering, dressing and stacking reveal the meditative, performative side of her process.",
+      },
+    ],
+    locationNote:
+      "At SeMA Nam-Seoul, the relocated and restored former Belgian Consulate directly outside Sadang Station Exit 6. The registered heritage building works almost as part of the exhibition.",
+    notes: [
+      {
+        label: "OPENING",
+        title: "Opens July 29",
+        description:
+          "The exhibition runs from July 29 to November 15. Weekends right after opening may be crowded.",
+      },
+      {
+        label: "CLOSED",
+        title: "Closed Mondays",
+        description:
+          "Open until 8pm on weekdays and 6pm on weekends. Admission is free.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA",
+        url: "https://sema.seoul.go.kr/",
+      },
+      {
+        label: "SEMA 2026 PROGRAM",
+        url: "https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706",
+      },
+    ],
+  },
+  "oh-yoon-collection": {
+    typeLabel: "ARCHIVE PROFILE",
+    heading: "Faces of the people, carved with a knife — reunited after forty years.",
+    introduction:
+      "Oh Yoon (1946–1986) was the emblematic printmaker of 1980s Minjung art, carving the lives, sorrows and vitality of ordinary people into rough-hewn woodblocks. Marking forty years since his death, SeMA Art Archives makes its first full presentation of the Oh Yoon archive acquired in 2024, looking past the finished prints into the drafts and records of his creative process.",
+    facts: [
+      { label: "ARTIST", value: "Oh Yoon (1946–1986)" },
+      { label: "OCCASION", value: "40th anniversary of his death" },
+      { label: "COLLECTION", value: "Oh Yoon archive, acquired 2024" },
+      { label: "ADMISSION", value: "Free" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1980s",
+        title: "At the heart of Minjung art",
+        description:
+          "Active in the Reality and Utterance group, he recorded the faces of his era through prints.",
+      },
+      {
+        marker: "1986",
+        title: "An early death at forty",
+        description:
+          "He died the same year as his first solo exhibition, leaving a brief but ferocious body of work.",
+      },
+      {
+        marker: "2026",
+        title: "Rereading through the archive",
+        description:
+          "Sketches, studies and documents trace the path by which each print came into being.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / KNIFE",
+        title: "The language of the blade",
+        description:
+          "See how rough, unpolished knife marks amplify the force and feeling of each figure.",
+      },
+      {
+        label: "02 / PROCESS",
+        title: "Before the finished print",
+        description:
+          "True to an archive show, follow a work's journey through sketches, studies and notes.",
+      },
+      {
+        label: "03 / PEOPLE",
+        title: "The people as subject",
+        description:
+          "Goblins, mask dancers, market crowds — consider how Oh Yoon's lifelong protagonists overlap with us today.",
+      },
+    ],
+    locationNote:
+      "At SeMA Art Archives in Pyeongchang-dong, at the foot of Bukhansan. The archive's calm reading-room atmosphere suits the show's pace.",
+    notes: [
+      {
+        label: "OPENING",
+        title: "Opens August 27",
+        description:
+          "A long-run exhibition continuing to February 21, 2027 — pair it with an autumn walk through Pyeongchang-dong.",
+      },
+      {
+        label: "CLOSED",
+        title: "Closed Mondays",
+        description: "Free admission, Tuesday through Sunday.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA ART ARCHIVES",
+        url: "https://sema.seoul.go.kr/semaaa/front/main.do",
+      },
+      {
+        label: "SEMA 2026 PROGRAM",
+        url: "https://sema.seoul.go.kr/kr/bbs/611333/getBbsDetail?bbsNo=1478706",
+      },
+    ],
+  },
+  "koo-jeong-a-leeum": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "An art of things unseen but undeniably present.",
+    introduction:
+      "Koo Jeong A's work is easy to miss — it operates at the threshold of the senses, in faint light, thin scent, subtle vibration. Having distilled Korea into fragrance at the 60th Venice Biennale's Korean Pavilion, the artist now takes over the entire M2 building at Leeum, turning invisible presences like magnetism and flows of energy into a whole-building experience.",
+    facts: [
+      { label: "ARTIST", value: "Koo Jeong A" },
+      { label: "VENICE", value: "Korean Pavilion, 60th Venice Biennale" },
+      { label: "VENUE", value: "Leeum M2, all floors" },
+      { label: "OPENING", value: "September 5, 2026" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1990s–",
+        title: "At the threshold of sense",
+        description:
+          "Working between Paris and London, she built an installation language of light, scent and temperature.",
+      },
+      {
+        marker: "2024",
+        title: "The scent of Venice",
+        description:
+          "Her Odorama Cities translated Korean memories into fragrance at the Biennale's Korean Pavilion.",
+      },
+      {
+        marker: "2026",
+        title: "All of M2",
+        description:
+          "A rare large-scale solo presentation condenses the artist's world in Seoul.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / SLOW",
+        title: "Slowly, and longer",
+        description:
+          "If a work seems hard to see, that is the point. Slow your pace and open your senses to shifts in air and light.",
+      },
+      {
+        label: "02 / SENSE",
+        title: "Beyond the visual",
+        description:
+          "Notice when smell, temperature or vibration quietly intervene from outside the field of vision.",
+      },
+      {
+        label: "03 / ENERGY",
+        title: "Flows of energy",
+        description:
+          "Feel how unseen forces alter a room's atmosphere — even in the passages between galleries.",
+      },
+    ],
+    locationNote:
+      "At Leeum M2 in Hannam-dong. Seen together with Inside Other Spaces in the Ground Gallery, it forms a single thread: art you experience as space.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "Ticketing to be announced",
+        description:
+          "Admission and booking details will be posted on Leeum's official website.",
+      },
+      {
+        label: "CLOSED",
+        title: "Closed Mondays",
+        description: "Open Tuesday to Sunday, 10am to 6pm.",
+      },
+    ],
+    sources: [
+      {
+        label: "LEEUM UPCOMING",
+        url: "https://www.leeumhoam.org/leeum/exhibition/94",
+      },
+      {
+        label: "LEEUM",
+        url: "https://www.leeumhoam.org/leeum",
+      },
+    ],
+  },
+  "sema-seoseoul": {
+    typeLabel: "SPACE PROFILE",
+    heading: "A street-like museum laid over a park — a new anchor for southwest Seoul.",
+    introduction:
+      "SeMA Seo-Seoul opened with two firsts: the first public art museum in southwestern Seoul, and the city's first devoted to new media. Kim Chan-joong of THE_SYSTEM LAB designed the building to absorb the walkways of Geumnarae Park, so that a stroll through the park flows naturally into the galleries.",
+    facts: [
+      { label: "OPENED", value: "March 12, 2026" },
+      { label: "FOCUS", value: "New media · Youth" },
+      { label: "ARCHITECT", value: "Kim Chan-joong · THE_SYSTEM LAB" },
+      { label: "ADMISSION", value: "Free" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2026.03",
+        title: "Opening",
+        description:
+          "The inaugural exhibition Our Time Starts Here explores the layered time and memory of southwest Seoul.",
+      },
+      {
+        marker: "NOW",
+        title: "Opening season",
+        description:
+          "The performance program Breath and new-media collection shows continue through the year.",
+      },
+      {
+        marker: "AHEAD",
+        title: "A cultural anchor",
+        description:
+          "New-media education programs for schools and families run alongside the exhibitions.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / STREET",
+        title: "A museum that is a path",
+        description:
+          "Follow the street-like circulation as the boundary between park and gallery dissolves.",
+      },
+      {
+        label: "02 / NEW MEDIA",
+        title: "The new-media collection",
+        description:
+          "Video and interactive installations form a standing program built for the screen generation.",
+      },
+      {
+        label: "03 / PARK",
+        title: "With Geumnarae Park",
+        description:
+          "Add a walk in the park before or after and it becomes a full half-day outing.",
+      },
+    ],
+    locationNote:
+      "Set on Geumnarae Central Park in Doksan-dong, Geumcheon-gu — a short walk from Doksan Station on Line 1, and the closest municipal museum to southwest Seoul.",
+    notes: [
+      {
+        label: "ADMISSION",
+        title: "Free entry",
+        description:
+          "Standing programs are free. Some education programs require advance sign-up.",
+      },
+      {
+        label: "CLOSED",
+        title: "Closed Mondays",
+        description: "Open until 8pm on weekdays and 6pm on weekends.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEMA SEO-SEOUL",
+        url: "https://sema.seoul.go.kr/kr/visit/seoseoul",
+      },
+      {
+        label: "OPENING EXHIBITION",
+        url: "https://sema.seoul.go.kr/kr/whatson/exhibition/detail?exNo=1498975",
+      },
+    ],
+  },
+  "yeowoorak-festival-2026": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "'Here is our music' — the sixteenth summer.",
+    introduction:
+      "Yeowoorak is short for a Korean phrase meaning 'here is our music.' Every summer the National Theater of Korea uses it to stage the boldest expansions of Korean traditional music. This year artistic director Lee Han-chul and music director Yoo Tae-pyung-yang present twelve performances under the banner 'our music for everyone,' pairing Kang San-eh, Sunwoo Jung-a, Harim, Ahn Ye-eun and Lee Hee-moon across genre lines.",
+    facts: [
+      { label: "PERIOD", value: "July 3 – July 25" },
+      { label: "PROGRAM", value: "12 performances" },
+      { label: "DIRECTORS", value: "Lee Han-chul · Yoo Tae-pyung-yang" },
+      { label: "VENUE", value: "Haneul · Daloreum Theaters" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2010",
+        title: "The first Yeowoorak",
+        description:
+          "The National Theater launched its summer festival for encounters between tradition and the contemporary.",
+      },
+      {
+        marker: "2026",
+        title: "Lee Han-chul × Yoo Tae-pyung-yang",
+        description:
+          "Two musicians from pop and gugak meet as directors to design 'our music for everyone.'",
+      },
+      {
+        marker: "JUL",
+        title: "Twelve stages",
+        description:
+          "Across three weeks, one-off collaborations rotate through the Haneul and Daloreum theaters.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / CROSSOVER",
+        title: "Collaboration without borders",
+        description:
+          "Watch for Yeowoorak's signature one-night-only pairings of gugak masters and pop musicians.",
+      },
+      {
+        label: "02 / PICK",
+        title: "Choosing your lineup",
+        description:
+          "Start from familiar names — Kang San-eh, Sunwoo Jung-a, Ahn Ye-eun — then wander into unfamiliar traditional stages.",
+      },
+      {
+        label: "03 / NIGHT",
+        title: "Summer nights on Namsan",
+        description:
+          "Before or after a show, linger in the theater forecourt on the slopes of Namsan.",
+      },
+    ],
+    locationNote:
+      "At the National Theater of Korea's Haneul and Daloreum theaters in Jangchung-dong — reachable on foot or by shuttle from Dongguk University Station.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "Booked per performance",
+        description:
+          "Dates and prices differ by show. Check each performance on the National Theater's website.",
+      },
+      {
+        label: "PACKAGE",
+        title: "Package tickets",
+        description:
+          "Multi-show packages are available — worth checking if you plan to see two or more.",
+      },
+    ],
+    sources: [
+      {
+        label: "NTOK YEOWOORAK",
+        url: "https://www.ntok.go.kr/ntok/pm/prfmng/selectSeasonInfo.do?seasonType=2&mi=21018",
+      },
+    ],
+  },
+  "the-neighbourhood-seoul": {
+    typeLabel: "CONCERT PROFILE",
+    heading: "The Sweater Weather band, in Seoul at last.",
+    introduction:
+      "While 'Sweater Weather' racked up over four billion Spotify streams, The Neighbourhood never once played Korea. The California band's first headline show here lands at YES24 Live Hall, bringing their blend of hazy West Coast languor and dark R&B mood. For fans who have waited since the debut, it is a one-night-only affair.",
+    facts: [
+      { label: "DATE", value: "July 20 (Mon) 20:00" },
+      { label: "VENUE", value: "YES24 Live Hall" },
+      { label: "PRICE", value: "KRW 139,000 · Standing" },
+      { label: "FIRST", value: "First headline show in Korea" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2013",
+        title: "I Love You. debut",
+        description:
+          "'Sweater Weather' from the debut album topped Billboard's alternative chart and made the band's name.",
+      },
+      {
+        marker: "2020",
+        title: "A second peak",
+        description:
+          "The song surged again through social media, becoming a new generation's soundtrack.",
+      },
+      {
+        marker: "2026",
+        title: "First Seoul stage",
+        description:
+          "Seoul joins the band's Asia tour for the first time since their return.",
+      },
+    ],
+    highlightsLabel: "BEFORE YOU GO",
+    highlights: [
+      {
+        label: "01 / SETLIST",
+        title: "Pre-show listening",
+        description:
+          "Revisit live versions of 'Sweater Weather,' 'Daddy Issues' and 'Softcore.'",
+      },
+      {
+        label: "02 / STANDING",
+        title: "Standing show",
+        description:
+          "The hall is all standing; entry order follows booking number, so arrive early.",
+      },
+      {
+        label: "03 / MOOD",
+        title: "The aesthetics of gloom",
+        description:
+          "Experience the band's monochrome visuals and hazy sound as one atmosphere, live.",
+      },
+    ],
+    locationNote:
+      "At YES24 Live Hall (the former AX Korea) near Gwangnaru Station — about ten minutes on foot between Gangbyeon (Line 2) and Gwangnaru (Line 5).",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "Official ticketing only",
+        description:
+          "YES24 Ticket is the official outlet. Resold tickets may be refused entry.",
+      },
+      {
+        label: "AGE",
+        title: "Check admission policy",
+        description: "Age rating and entry rules follow the show's official notices.",
+      },
+    ],
+    sources: [
+      {
+        label: "YES24 LIVE HALL",
+        url: "https://yes24livehall.com/",
+      },
+    ],
+  },
+  "classic-revolution-2026": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "Eight days tracing classical music back to its roots.",
+    introduction:
+      "This year's Classic Revolution takes 'Origin' as its theme — eight days devoted to music that rose from folk sources into the classical canon, from Kodály and Bartók to Dvořák. Andrey Boreyko opens with the Korean National Symphony and cellist Kian Soltani; the Leonidas Kavakos and Kirill Gerstein duo recital follows — a dense lineup to close out the summer.",
+    facts: [
+      { label: "PERIOD", value: "August 28 – September 4" },
+      { label: "THEME", value: "Origin" },
+      { label: "OPENING", value: "Boreyko × KNSO × Kian Soltani" },
+      { label: "VENUE", value: "Lotte Concert Hall" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2020",
+        title: "The festival begins",
+        description:
+          "Lotte Concert Hall launched Classic Revolution as its own summer-season festival.",
+      },
+      {
+        marker: "2026",
+        title: "A tenth anniversary",
+        description:
+          "Coinciding with the hall's tenth year, the lineup carries unusual weight.",
+      },
+      {
+        marker: "AUG–SEP",
+        title: "Eight concentrated days",
+        description:
+          "Orchestral nights, chamber evenings and duo recitals cut into one theme from many angles.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / OPENING",
+        title: "Opening night",
+        description:
+          "Kodály's Dances of Galánta, Dvořák's Cello Concerto and Bartók's Concerto for Orchestra compress the theme into one program.",
+      },
+      {
+        label: "02 / DUO",
+        title: "Kavakos × Gerstein",
+        description:
+          "The duo recital by two of today's finest instrumentalists is the festival's other summit.",
+      },
+      {
+        label: "03 / HALL",
+        title: "The hall itself",
+        description:
+          "In this vineyard-style hall, seats behind the stage in the choir section offer a striking alternative listen.",
+      },
+    ],
+    locationNote:
+      "On the eighth floor of Lotte World Mall in Jamsil, directly connected to Jamsil Station on Line 2.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "Booked per concert",
+        description:
+          "Prices and seating differ by concert; check each program on the hall's official site.",
+      },
+      {
+        label: "TIME",
+        title: "Check start times",
+        description:
+          "Weekday evening and weekend start times can differ — confirm when booking.",
+      },
+    ],
+    sources: [
+      {
+        label: "LOTTE CONCERT HALL",
+        url: "https://www.lotteconcerthall.com/",
+      },
+    ],
+  },
+  "seoul-fringe-2026": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "No jury, no selection — artists open the stage themselves.",
+    introduction:
+      "The Seoul Fringe Festival runs on one simple principle: no judging, no selecting. That is precisely why it gathers raw experiments found nowhere else. For three weeks in August, the small theaters and streets of Hongdae become open stages for independent artists across theater, dance, music, performance and visual art.",
+    facts: [
+      { label: "PERIOD", value: "August 6 – August 23" },
+      { label: "PRINCIPLE", value: "Open participation · No jury" },
+      { label: "GENRES", value: "Theater · Dance · Music · Performance · Visual" },
+      { label: "AREA", value: "Theaters and streets of Hongdae" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "1998",
+        title: "Born as an indie arts festival",
+        description:
+          "It began as a self-organized festival outside the institutional stages of Daehangno.",
+      },
+      {
+        marker: "SINCE",
+        title: "Rooted in Hongdae",
+        description:
+          "Growing with the area's small theaters, clubs and streets, it became the gateway of Korean independent art.",
+      },
+      {
+        marker: "2026",
+        title: "Three weeks in August",
+        description:
+          "From August 6 to 23, hundreds of artists once again open their own stages.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / RANDOM",
+        title: "Trust the accident",
+        description:
+          "The fringe is best unplanned — carry the timetable, wander Hongdae, walk into whatever pulls you.",
+      },
+      {
+        label: "02 / STREET",
+        title: "Street performances",
+        description:
+          "Ticketless street shows are the festival's most open doorway.",
+      },
+      {
+        label: "03 / TALK",
+        title: "Close to the artists",
+        description:
+          "Talking with artists right after a small-theater show is the fringe's quiet privilege.",
+      },
+    ],
+    locationNote:
+      "Centered on Seogyo-dong, across the small theaters and streets of Hongdae. Check each show's venue on the official timetable.",
+    notes: [
+      {
+        label: "TICKETS",
+        title: "Booked per work",
+        description:
+          "Paid and free shows mix freely; booking opens in July on the official site.",
+      },
+      {
+        label: "SCHEDULE",
+        title: "Check the timetable",
+        description:
+          "With hundreds of shows over three weeks, check the daily schedule before you go.",
+      },
+    ],
+    sources: [
+      {
+        label: "SEOUL FRINGE FESTIVAL",
+        url: "https://seoulfringefestival.net/",
+      },
+    ],
+  },
+  "jamsugyo-ddooddoo-festival": {
+    typeLabel: "FESTIVAL PROFILE",
+    heading: "Every Sunday, the cars step aside and a bridge becomes a plaza.",
+    introduction:
+      "Jamsugyo sits closer to the water than any other Han River bridge. Every Sunday, when the cars disappear, nine hundred meters of walkway open up over the river. After drawing 1.17 million visitors in its spring season, the Ddooddoo Festival returns for autumn — food, markets, street performances, and sunsets met from the middle of the river, at Seoul's lowest eye level to the water.",
+    facts: [
+      { label: "PERIOD", value: "September 6 – October 25 · Sundays" },
+      { label: "HOURS", value: "1pm – 9pm" },
+      { label: "VISITORS", value: "1.17M in the spring season" },
+      { label: "ADMISSION", value: "Free" },
+    ],
+    timelineLabel: "CONTEXT",
+    timeline: [
+      {
+        marker: "2023",
+        title: "The car-free experiment",
+        description:
+          "Opening Jamsugyo to pedestrians on weekends grew into one of Seoul's signature river programs.",
+      },
+      {
+        marker: "2026.04",
+        title: "Spring season",
+        description:
+          "Eight weeks from April drew 1.17 million visitors, up 13 percent from the year before.",
+      },
+      {
+        marker: "2026.09",
+        title: "Autumn season",
+        description:
+          "From September 6 to October 25, the backdrop turns to autumn river and sunset.",
+      },
+    ],
+    highlightsLabel: "HOW TO ENJOY",
+    highlights: [
+      {
+        label: "01 / SUNSET",
+        title: "Time it to the sunset",
+        description:
+          "The bridge peaks at dusk — arrive thirty minutes before sundown and claim a west-facing spot.",
+      },
+      {
+        label: "02 / FOOD",
+        title: "Food trucks and markets",
+        description:
+          "A rotating lineup of food trucks and market stalls lines the bridge each season.",
+      },
+      {
+        label: "03 / WALK",
+        title: "Banpo to Ichon",
+        description:
+          "Cross the bridge and continue to Ichon Hangang Park for a full river-to-river walk.",
+      },
+    ],
+    locationNote:
+      "On Jamsugyo Bridge and Banpo Hangang Park — about fifteen minutes on foot from Express Bus Terminal Station Exit 8-1.",
+    notes: [
+      {
+        label: "SUNDAY ONLY",
+        title: "Sundays only",
+        description:
+          "The festival runs Sundays from 1pm to 9pm; some programs may scale down in rain.",
+      },
+      {
+        label: "FREE",
+        title: "Free entry",
+        description:
+          "Entry is free; some hands-on programs run first-come, first-served on site.",
+      },
+    ],
+    sources: [
+      {
+        label: "DDOODDOO FESTA",
+        url: "http://www.festa-ddooddoo.com/",
+      },
+      {
+        label: "FUN SEOUL",
+        url: "https://festival.seoul.go.kr/festival/main/festivalView.do?festacode=402",
+      },
+    ],
+  },
 };

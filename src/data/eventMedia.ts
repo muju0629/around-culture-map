@@ -184,6 +184,70 @@ export const eventMedia: Record<string, EventMedia> = {
       },
     ],
   },
+  "the-neighbourhood-seoul": {
+    appleMusicUrl: appleSearch("The Neighbourhood"),
+    appleMusicLabel: "The Neighbourhood",
+    lineup: [
+      {
+        name: "The Neighbourhood",
+        role: "HEADLINER",
+        note: "제시 러더퍼드가 이끄는 캘리포니아 5인조 밴드. 'Sweater Weather'로 빌보드 얼터너티브 차트 1위에 올랐다.",
+        noteEn:
+          "A five-piece California band fronted by Jesse Rutherford, whose 'Sweater Weather' topped Billboard's alternative chart.",
+        sourceUrl: "https://yes24livehall.com/",
+      },
+    ],
+  },
+  "yeowoorak-festival-2026": {
+    lineup: [
+      {
+        name: "이한철",
+        role: "ARTISTIC DIRECTOR",
+        note: "밴드 불독맨션 출신의 싱어송라이터·프로듀서. 올해 여우락의 예술감독을 맡았다.",
+        noteEn:
+          "A singer-songwriter and producer, formerly of Bulldog Mansion, serving as this year's artistic director.",
+        sourceUrl:
+          "https://www.ntok.go.kr/ntok/pm/prfmng/selectSeasonInfo.do?seasonType=2&mi=21018",
+      },
+      {
+        name: "유태평양",
+        role: "MUSIC DIRECTOR",
+        note: "국립창극단 소리꾼. 전통 판소리와 동시대 무대를 잇는 대표적 젊은 국악인으로 음악감독을 맡았다.",
+        noteEn:
+          "A pansori singer of the National Changgeuk Company, bridging tradition and contemporary stages as music director.",
+        sourceUrl:
+          "https://www.ntok.go.kr/ntok/pm/prfmng/selectSeasonInfo.do?seasonType=2&mi=21018",
+      },
+    ],
+  },
+  "classic-revolution-2026": {
+    lineup: [
+      {
+        name: "Andrey Boreyko",
+        role: "CONDUCTOR / OPENING",
+        note: "국립심포니오케스트라와 개막 공연을 지휘한다. 코다이, 드보르작, 바르톡 프로그램.",
+        noteEn:
+          "Conducts the Korean National Symphony for opening night — Kodály, Dvořák and Bartók.",
+        sourceUrl: "https://www.lotteconcerthall.com/",
+      },
+      {
+        name: "Kian Soltani",
+        role: "CELLO / OPENING",
+        note: "개막 공연에서 드보르작 첼로 협주곡을 협연하는 오스트리아-이란계 첼리스트.",
+        noteEn:
+          "The Austrian-Iranian cellist joining opening night for Dvořák's Cello Concerto.",
+        sourceUrl: "https://www.lotteconcerthall.com/",
+      },
+      {
+        name: "Leonidas Kavakos & Kirill Gerstein",
+        role: "DUO RECITAL",
+        note: "바이올린과 피아노의 듀오 리사이틀로 축제 후반부를 이끈다.",
+        noteEn:
+          "The violin-piano duo leads the festival's second half with a recital program.",
+        sourceUrl: "https://www.lotteconcerthall.com/",
+      },
+    ],
+  },
 };
 
 export function getEventMedia(id: string): EventMedia | undefined {

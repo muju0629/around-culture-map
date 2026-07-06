@@ -151,4 +151,104 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     description:
       "An audio museum preserving and researching rare sound-reproduction equipment dating from the nineteenth century onward. Its Kengo Kuma–designed building hosts the permanent exhibition Jung Eum: In Search of Sound and reservation-only listening tours.",
   },
+  "yoo-youngkuk-retrospective": {
+    title: "Yoo Youngkuk: The Mountain Is in Me",
+    region: "Jeongdong",
+    district: "Jung-gu",
+    venue: "SeMA Seosomun Main Branch",
+    address: "61 Deoksugung-gil, Jung-gu, Seoul",
+    price: "Free · Advance reservation",
+    description:
+      "The largest retrospective ever devoted to Yoo Youngkuk, a pioneer of Korean abstract art, marking the 110th anniversary of his birth. Some 170 paintings, reliefs, photographs, drawings and archival materials — including never-before-shown works — trace six decades of his practice, from his first abstract experiments in 1935 Tokyo to the inner landscapes of his late years.",
+  },
+  "jo-sook-jin-namseoul": {
+    title: "Sook Jin Jo",
+    region: "Sadang",
+    district: "Gwanak-gu",
+    venue: "SeMA Nam-Seoul Museum of Art",
+    address: "2076 Nambusunhwan-ro, Gwanak-gu, Seoul",
+    price: "Free",
+    description:
+      "The annual sculptor's solo exhibition presents Sook Jin Jo, who moved to New York in 1988 and has worked internationally since. From her early relief series to installations, performances, architectural projects and drawings from her New York years, the show surveys a practice that breathes new life into discarded wood.",
+  },
+  "oh-yoon-collection": {
+    title: "Oh Yoon Collection",
+    region: "Pyeongchang",
+    district: "Jongno-gu",
+    venue: "SeMA Art Archives",
+    address: "101 Pyeongchang-munhwa-ro, Jongno-gu, Seoul",
+    price: "Free",
+    description:
+      "A collection-based exhibition marking the 40th anniversary of the death of Oh Yoon, the printmaker who defined 1980s Minjung art. Drawing on the Oh Yoon archive acquired in 2024, it revisits the work and creative process of an artist who embraced the lives of ordinary people and questioned what art should do.",
+  },
+  "koo-jeong-a-leeum": {
+    title: "Koo Jeong A",
+    region: "Hannam",
+    district: "Yongsan-gu",
+    venue: "Leeum Museum of Art M2",
+    address: "60-16 Itaewon-ro 55-gil, Yongsan-gu, Seoul",
+    price: "Ticketing to be announced",
+    description:
+      "A large-scale solo exhibition by Koo Jeong A, who represented the Korean Pavilion at the 60th Venice Biennale. Exploring flows of energy that exist without being seen — like magnetism or scent — the artist fills the entire M2 building with subtle, elusive works that quietly disturb the order of the senses.",
+  },
+  "sema-seoseoul": {
+    title: "SeMA Seo-Seoul Museum of Art",
+    region: "Doksan",
+    district: "Geumcheon-gu",
+    venue: "SeMA Seo-Seoul Museum of Art",
+    address: "65 Siheung-daero 79-gil, Geumcheon-gu, Seoul",
+    price: "Free",
+    description:
+      "The first public art museum in southwestern Seoul and the city's first museum specialising in new media. Designed by Kim Chan-joong (THE_SYSTEM LAB), the street-like building merges with the walkways of Geumnarae Park and hosts the inaugural exhibition Our Time Starts Here alongside new-media collection shows.",
+  },
+  "yeowoorak-festival-2026": {
+    title: "Yeowoorak Festival 2026",
+    region: "Jangchung",
+    district: "Jung-gu",
+    venue: "National Theater of Korea",
+    address: "59 Jangchungdan-ro, Jung-gu, Seoul",
+    price: "Varies by performance",
+    description:
+      "The National Theater of Korea's flagship summer music festival, whose name declares 'Here is our music.' Led by artistic director Lee Han-chul and music director Yoo Tae-pyung-yang, this year's twelve performances bring Kang San-eh, Sunwoo Jung-a, Harim, Ahn Ye-eun, Lee Hee-moon and more to blur the line between traditional and popular music.",
+  },
+  "the-neighbourhood-seoul": {
+    title: "The Neighbourhood Live in Seoul",
+    region: "Gwangjin",
+    district: "Gwangjin-gu",
+    venue: "YES24 Live Hall",
+    address: "20 Gucheonmyeon-ro, Gwangjin-gu, Seoul",
+    price: "KRW 139,000",
+    description:
+      "The first-ever headline show in Korea by The Neighbourhood, the California band behind the global hit 'Sweater Weather.' Fronted by Jesse Rutherford, the five-piece brings its hazy, moody alternative pop sound to Seoul for the first time.",
+  },
+  "classic-revolution-2026": {
+    title: "Classic Revolution 2026 — Origin",
+    region: "Jamsil",
+    district: "Songpa-gu",
+    venue: "Lotte Concert Hall",
+    address: "300 Olympic-ro, Songpa-gu, Seoul",
+    price: "Varies by performance",
+    description:
+      "Lotte Concert Hall's summer classical festival takes 'Origin' as this year's theme, spotlighting masterpieces rooted in folk music. Andrey Boreyko conducts the Korean National Symphony with cellist Kian Soltani for the opening night, followed by the Leonidas Kavakos and Kirill Gerstein duo and more.",
+  },
+  "seoul-fringe-2026": {
+    title: "Seoul Fringe Festival 2026",
+    region: "Hongdae",
+    district: "Mapo-gu",
+    venue: "Theaters and streets around Hongdae",
+    address: "Seogyo-dong area, Mapo-gu, Seoul",
+    price: "Varies by work · Some free",
+    description:
+      "An independent arts festival founded on open participation — no jury, no selection. Artists across theater, dance, music, performance and visual art turn the small theaters and streets of the Hongdae area into stages for experimental work.",
+  },
+  "jamsugyo-ddooddoo-festival": {
+    title: "Car-Free Jamsugyo Ddooddoo Festival",
+    region: "Banpo",
+    district: "Seocho-gu",
+    venue: "Jamsugyo Bridge · Banpo Hangang Park",
+    address: "Jamsugyo Bridge, Banpo-dong, Seocho-gu, Seoul",
+    price: "Free",
+    description:
+      "Every Sunday this fall season, Jamsugyo Bridge empties of cars and returns to pedestrians. Having drawn 1.17 million visitors in its spring season alone, the festival offers food, markets and street performances — and a rare walk into the sunset over the Han River.",
+  },
 };

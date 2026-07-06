@@ -25,12 +25,12 @@ export function HomePage() {
     .slice(5)
     .replace("-", ".")}`;
   const featuredIds = [
+    "yoo-youngkuk-retrospective",
     "inside-other-spaces",
     "audeum",
   ];
   const completeEvents = events.filter(
     (event) =>
-      Boolean(event.posterImage) &&
       Boolean(event.sourceUrl) &&
       Boolean(getEventEditorial(event.id, locale)),
   );
