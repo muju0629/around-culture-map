@@ -41,6 +41,7 @@ export function EventCard({
       <article
         id={`event-list-${event.id}`}
         className={`event-card event-card--list${isSelected ? " is-selected" : ""}`}
+        data-category={event.category}
         onMouseEnter={() => onHover?.(event.id)}
         onMouseLeave={() => onHover?.()}
       >
@@ -101,6 +102,7 @@ export function EventCard({
   return (
     <article
       className={`event-card event-card--${layout}`}
+      data-category={event.category}
       onMouseEnter={() => onHover?.(event.id)}
       onMouseLeave={() => onHover?.()}
     >
