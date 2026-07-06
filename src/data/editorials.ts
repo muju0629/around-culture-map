@@ -1872,6 +1872,219 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
     ],
   },
+  "damien-hirst-mmca": {
+    typeLabel: "ARTIST / EXHIBITION PROFILE",
+    heading: "죽음, 믿음, 가치. 허스트가 반복해서 꺼내 온 질문들.",
+    introduction:
+      "데이미언 허스트의 초기작부터 근작까지 설치, 조각, 회화를 한 자리에서 살피는 아시아 최초 대규모 개인전입니다. 포름알데히드 수조, 약장, 스팟과 스핀 페인팅, 다이아몬드 해골을 따라가면 생명과 죽음뿐 아니라 과학과 종교, 예술과 시장의 관계가 함께 드러납니다.",
+    facts: [
+      { label: "SCALE", value: "아시아 최초 대규모 개인전" },
+      { label: "MEDIA", value: "설치 · 조각 · 회화" },
+      { label: "KEY THEMES", value: "죽음 · 영생 · 믿음 · 시장" },
+      { label: "ADMISSION", value: "8,000원" },
+    ],
+    timelineLabel: "SELECTED CHRONOLOGY",
+    timeline: [
+      {
+        marker: "1986",
+        title: "스팟 페인팅",
+        description:
+          "규칙적인 색점과 제작 시스템을 통해 작가의 손, 반복, 예술 생산의 구조를 질문합니다.",
+      },
+      {
+        marker: "1990",
+        title: "천 년",
+        description:
+          "탄생과 죽음이 실제 생물학적 순환으로 반복되는 유리 진열장 설치입니다.",
+      },
+      {
+        marker: "1991",
+        title: "살아있는 자의 마음 속 죽음의 물리적 불가능성",
+        description:
+          "포름알데히드 수조 속 상어를 통해 죽음을 보면서도 완전히 상상할 수 없는 상태를 마주하게 합니다.",
+      },
+      {
+        marker: "2007",
+        title: "신의 사랑을 위하여",
+        description:
+          "백금과 다이아몬드, 실제 인간의 치아로 만든 해골이 영원성과 사치, 예술의 가격을 동시에 드러냅니다.",
+      },
+      {
+        marker: "2026",
+        title: "MMCA 서울",
+        description:
+          "대표작과 ‘벚꽃’ 연작 이후 미공개 최신작까지 작가의 작업 전반을 연결합니다.",
+      },
+    ],
+    highlightsLabel: "SELECTED WORKS",
+    highlights: [
+      {
+        label: "WORK / 1991",
+        title: "살아있는 자의 마음 속 죽음의 물리적 불가능성",
+        meta: "유리 · 철 · 상어 · 포름알데히드 수용액",
+        description:
+          "허스트의 ‘자연사’ 연작을 대표하는 작품으로, 실제 죽음의 물질성과 관람자의 심리적 거리를 충돌시킵니다.",
+      },
+      {
+        label: "WORK / 2007",
+        title: "신의 사랑을 위하여",
+        meta: "백금 · 다이아몬드 · 인간의 치아",
+        description:
+          "죽음을 상징하는 해골을 극단적인 귀금속으로 덮어 영원성에 대한 욕망과 시장의 논리를 압축합니다.",
+      },
+      {
+        label: "WORK / 2000",
+        title: "사랑의 취약성",
+        meta: "비치볼 · 칼 · 송풍기",
+        description:
+          "칼날 위에 공중 부양한 비치볼이 균형과 불안, 삶의 취약성을 단순하고 긴장감 있게 보여줍니다.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/damien-hirst/shark.jpg",
+        alt: "포름알데히드 수조에 설치된 상어 작품",
+        caption: "살아있는 자의 마음 속 죽음의 물리적 불가능성, 1991",
+        credit: "© Damien Hirst and Science Ltd. / Image: MMCA",
+        sourceUrl:
+          "https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&exhId=202601060002023",
+      },
+      {
+        src: "/editorial/damien-hirst/diamond-skull.jpg",
+        alt: "다이아몬드로 덮인 해골 작품",
+        caption: "신의 사랑을 위하여, 2007",
+        credit: "© Damien Hirst and Science Ltd. / Image: MMCA",
+        sourceUrl:
+          "https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&exhId=202601060002023",
+      },
+      {
+        src: "/editorial/damien-hirst/vitrine.jpg",
+        alt: "유리 진열장 안에 오브제가 놓인 설치 작품",
+        caption: "삶과 죽음, 과학과 믿음을 다루는 진열장 설치",
+        credit: "© Damien Hirst and Science Ltd. / Image: MMCA",
+        sourceUrl:
+          "https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&exhId=202601060002023",
+      },
+      {
+        src: "/editorial/damien-hirst/beach-ball.jpg",
+        alt: "칼날 위에 비치볼이 떠 있는 설치 작품",
+        caption: "사랑의 취약성, 2000",
+        credit: "© Damien Hirst and Science Ltd. / Image: MMCA",
+        sourceUrl:
+          "https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&exhId=202601060002023",
+      },
+    ],
+    locationNote:
+      "서울관 지하 1층과 3·4·5전시실, 2층 MMCA 스튜디오, 서울박스까지 여러 층에 걸쳐 이어지는 전시입니다. 한 공간만 보고 끝나지 않도록 전시장 동선을 확인하세요.",
+    notes: [
+      {
+        label: "CONTENT NOTE",
+        title: "실제 동물 표본과 생물학적 소재",
+        description:
+          "포름알데히드에 보존된 동물과 죽음을 직접적으로 다룬 작품이 포함됩니다. 소재에 민감하다면 관람 전 작품 정보를 확인하세요.",
+      },
+      {
+        label: "AUDIO GUIDE",
+        title: "20개 항목의 공식 오디오 가이드",
+        description:
+          "MMCA 공식 페이지에서 전시 인사말과 주요 작품별 오디오 가이드를 확인할 수 있습니다.",
+      },
+      {
+        label: "LAST DATE",
+        title: "2026년 6월 28일 종료",
+        description:
+          "종료일이 가까운 전시입니다. 수요일과 토요일은 오후 9시까지 연장 운영합니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "MMCA EXHIBITION",
+        url: "https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=2&exhId=202601060002023",
+      },
+    ],
+  },
+  "dialogue-in-the-dark-bukchon": {
+    typeLabel: "EXPERIENCE PROFILE",
+    heading: "보지 않는 100분 동안, 다른 감각과 타인을 신뢰하는 법.",
+    introduction:
+      "‘어둠속의대화’는 빛이 완전히 차단된 공간을 전문 안내자와 함께 이동하는 체험입니다. 전시물을 바라보는 대신 소리, 촉감, 냄새, 거리감과 대화를 통해 일상적인 공간을 새롭게 인식하게 합니다.",
+    facts: [
+      { label: "DURATION", value: "100분" },
+      { label: "GROUP", value: "회차당 최대 8명" },
+      { label: "INTERVAL", value: "15분 간격" },
+      { label: "CONDITION", value: "완전한 어둠" },
+    ],
+    timelineLabel: "EXPERIENCE FLOW",
+    timeline: [
+      {
+        marker: "BEFORE",
+        title: "15분 전 도착",
+        description:
+          "안내와 소지품 정리를 위해 시작 시간보다 일찍 도착해야 합니다. 지각 시 중간 입장이 어렵습니다.",
+      },
+      {
+        marker: "100 MIN",
+        title: "로드마스터와 이동",
+        description:
+          "최대 8명이 한 팀이 되어 전문 안내자의 목소리를 따라 여러 일상적 환경을 통과합니다.",
+      },
+      {
+        marker: "AFTER",
+        title: "감각과 대화 돌아보기",
+        description:
+          "시각이 사라졌을 때 공간과 타인을 어떻게 인식했는지 밝은 공간에서 다시 정리합니다.",
+      },
+    ],
+    highlightsLabel: "WHAT CHANGES",
+    highlights: [
+      {
+        label: "01 / SOUND",
+        title: "소리의 거리",
+        description:
+          "목소리와 발소리, 주변의 반향만으로 방향과 공간의 크기를 추측하게 됩니다.",
+      },
+      {
+        label: "02 / TOUCH",
+        title: "촉감의 정보",
+        description:
+          "손과 발로 만나는 재질, 온도, 경사가 시각을 대신해 공간의 지도가 됩니다.",
+      },
+      {
+        label: "03 / TRUST",
+        title: "안내자와 동행자",
+        description:
+          "빠르게 이동하는 것보다 목소리를 듣고 서로의 위치를 확인하는 과정이 체험의 중심입니다.",
+      },
+    ],
+    locationNote:
+      "북촌로 71의 전용 체험 공간에서 진행됩니다. 정시 입장이 중요한 프로그램이라 주변 관광 일정보다 회차 도착 시간을 우선해 잡는 편이 좋습니다.",
+    notes: [
+      {
+        label: "ARRIVAL",
+        title: "시작 15분 전 도착",
+        description:
+          "체험이 시작되면 중간 입장이 불가능합니다. 교통과 북촌 일대의 보행 시간을 고려하세요.",
+      },
+      {
+        label: "RESTRICTION",
+        title: "촬영·녹음 및 발광 기기 사용 불가",
+        description:
+          "완전한 어둠을 유지해야 하므로 휴대전화와 빛이 나는 기기는 안내에 따라 보관합니다.",
+      },
+      {
+        label: "HEALTH NOTE",
+        title: "밀폐된 어둠에 대한 사전 확인",
+        description:
+          "폐소공포나 어둠에 대한 불안, 이동 보조가 필요한 경우 공식 예매처의 참여 조건을 먼저 확인하세요.",
+      },
+    ],
+    sources: [
+      {
+        label: "NOL TICKET",
+        url: "https://nol.yanolja.com/ticket/products/26002802",
+      },
+    ],
+  },
 };
 
 export function getEventEditorial(id: string, locale: Locale = "ko") {

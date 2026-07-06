@@ -62,6 +62,12 @@ export function Header({ inverted = false }: HeaderProps) {
           </div>
         </details>
         <NavLink
+          to="/archive"
+          className={({ isActive }) => (isActive ? "is-active" : "")}
+        >
+          {copy.header.archive}
+        </NavLink>
+        <NavLink
           to="/saved"
           className={({ isActive }) =>
             `site-nav__saved${isActive ? " is-active" : ""}`
