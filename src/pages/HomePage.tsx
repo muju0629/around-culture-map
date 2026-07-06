@@ -26,7 +26,6 @@ export function HomePage() {
     .replace("-", ".")}`;
   const featuredIds = [
     "inside-other-spaces",
-    "damien-hirst-mmca",
     "audeum",
   ];
   const completeEvents = events.filter(
