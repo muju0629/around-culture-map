@@ -15,13 +15,9 @@
   --mid-gray: #aaa9a4;
   --cool-gray: #858783;
   --line: rgba(17, 17, 15, 0.22);
-  --font-serif: "Instrument Serif", "Noto Serif KR", "Apple SD Gothic Neo",
-    serif;
   --ease-out-soft: cubic-bezier(0.32, 0.72, 0, 1);
-  --accent-music: #8a4437;
-  --accent-exhibition: #55614b;
-  --accent-festival: #96702f;
-  --accent-space: #49596b;
+  --signal: #e61919;
+  --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, monospace;
   --header-height: 76px;
 }
 
@@ -38,16 +34,6 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background: var(--paper);
-}
-
-body::after {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  content: "";
-  opacity: 0.045;
-  pointer-events: none;
 }
 
 body,
@@ -95,9 +81,10 @@ summary:focus-visible {
   display: block;
   margin: 0;
   color: var(--ink);
+  font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   line-height: 1.4;
   text-transform: uppercase;
 }
@@ -129,9 +116,10 @@ summary:focus-visible {
   display: flex;
   align-items: center;
   gap: 28px;
+  font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .site-nav > a {
@@ -283,8 +271,8 @@ html[lang="en"] .editorial-profile__copy h2 {
 html[lang="en"] .home-hero h1 {
   max-width: 9ch;
   font-size: clamp(66px, 9vw, 132px);
-  letter-spacing: -0.03em;
-  line-height: 0.96;
+  letter-spacing: -0.05em;
+  line-height: 0.92;
 }
 
 html[lang="en"] .detail-hero__content h1 {
@@ -300,9 +288,10 @@ html[lang="en"] .detail-hero__content h1 {
   border: 0;
   border-bottom: 1px solid currentColor;
   background: transparent;
+  font-family: var(--font-mono);
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   cursor: pointer;
 }
 
@@ -324,9 +313,10 @@ html[lang="en"] .detail-hero__content h1 {
   border: 1px solid var(--black);
   border-radius: 0;
   background: transparent;
+  font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   cursor: pointer;
   transition:
     color 180ms ease,
@@ -384,11 +374,10 @@ html[lang="en"] .detail-hero__content h1 {
 .home-hero h1 {
   max-width: 850px;
   margin: auto 0;
-  font-family: var(--font-serif);
   font-size: clamp(64px, 8.2vw, 138px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1.02;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
   text-wrap: balance;
   word-break: keep-all;
 }
@@ -459,11 +448,10 @@ html[lang="en"] .detail-hero__content h1 {
 
 .section-heading h2 {
   margin: 7px 0 0;
-  font-family: var(--font-serif);
   font-size: clamp(38px, 4.2vw, 68px);
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
   text-wrap: balance;
 }
 
@@ -527,22 +515,6 @@ html[lang="en"] .detail-hero__content h1 {
   vertical-align: 1px;
 }
 
-.event-card[data-category="음악"] .eyebrow::before {
-  background: var(--accent-music);
-}
-
-.event-card[data-category="전시"] .eyebrow::before {
-  background: var(--accent-exhibition);
-}
-
-.event-card[data-category="축제"] .eyebrow::before {
-  background: var(--accent-festival);
-}
-
-.event-card[data-category="문화공간"] .eyebrow::before {
-  background: var(--accent-space);
-}
-
 .event-card__title {
   display: flex;
   align-items: flex-start;
@@ -553,11 +525,10 @@ html[lang="en"] .detail-hero__content h1 {
 
 .event-card__title h3 {
   margin: 0;
-  font-family: var(--font-serif);
   font-size: clamp(18px, 2vw, 27px);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.16;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
 }
 
 .event-card__title svg {
@@ -573,8 +544,9 @@ html[lang="en"] .detail-hero__content h1 {
 .event-card > p {
   margin: 8px 0 0;
   color: #5b5b56;
+  font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
 }
 
 .event-card--feature .event-card__title h3 {
@@ -701,9 +673,10 @@ html[lang="en"] .detail-hero__content h1 {
   align-items: flex-end;
   justify-content: space-between;
   gap: 20px;
+  font-family: var(--font-mono);
   font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 .poster--orbit .poster__label,
@@ -726,12 +699,10 @@ html[lang="en"] .detail-hero__content h1 {
 
 .manifesto-strip p {
   margin: 0;
-  font-family: var(--font-serif);
   font-size: clamp(48px, 8.2vw, 132px);
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.82;
   white-space: nowrap;
 }
 
@@ -758,11 +729,10 @@ html[lang="en"] .detail-hero__content h1 {
 
 .home-cta h2 {
   margin: 70px 0 72px;
-  font-family: var(--font-serif);
   font-size: clamp(70px, 10vw, 160px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
   text-wrap: balance;
 }
 
@@ -808,10 +778,9 @@ html[lang="en"] .detail-hero__content h1 {
 
 .explore-toolbar__title h1 {
   margin: 5px 0 0;
-  font-family: var(--font-serif);
   font-size: 32px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.045em;
 }
 
 .explore-toolbar__heading-line {
@@ -877,9 +846,11 @@ html[lang="en"] .detail-hero__content h1 {
 }
 
 .explore-toolbar__count strong {
+  color: var(--signal);
+  font-family: var(--font-mono);
   font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.06em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
@@ -1290,11 +1261,10 @@ html[lang="en"] .detail-hero__content h1 {
 .detail-hero__content h1 {
   max-width: 850px;
   margin: 18px 0 34px;
-  font-family: var(--font-serif);
   font-size: clamp(60px, 8vw, 128px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
   text-wrap: balance;
   word-break: keep-all;
 }
@@ -1369,11 +1339,10 @@ html[lang="en"] .detail-hero__content h1 {
 .detail-info__copy h2 {
   max-width: 700px;
   margin: 0 0 48px;
-  font-family: var(--font-serif);
   font-size: clamp(42px, 5.6vw, 82px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
   text-wrap: balance;
   word-break: keep-all;
 }
@@ -1482,10 +1451,9 @@ html[lang="en"] .detail-hero__content h1 {
 
 .detail-info__marker strong {
   align-self: center;
-  font-family: var(--font-serif);
   font-size: clamp(38px, 5vw, 68px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.045em;
 }
 
 .detail-section-index {
@@ -1506,11 +1474,10 @@ html[lang="en"] .detail-hero__content h1 {
 .editorial-profile__copy h2 {
   max-width: 760px;
   margin: 24px 0 42px;
-  font-family: var(--font-serif);
   font-size: clamp(44px, 5.8vw, 86px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
   text-wrap: balance;
   word-break: keep-all;
 }
@@ -1786,11 +1753,10 @@ html[lang="en"] .detail-hero__content h1 {
 .visit-location h2 {
   max-width: 680px;
   margin: 22px 0 32px;
-  font-family: var(--font-serif);
   font-size: clamp(44px, 5.3vw, 78px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.04;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 0.98;
   text-wrap: balance;
   word-break: keep-all;
 }
@@ -1877,11 +1843,10 @@ html[lang="en"] .detail-hero__content h1 {
 .not-found h1 {
   margin: 24px 0 56px;
   max-width: 12ch;
-  font-family: var(--font-serif);
   font-size: clamp(42px, 11vw, 150px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -2066,8 +2031,8 @@ html[lang="en"] .detail-hero__content h1 {
 
   .manifesto-strip p {
     font-size: 15.5vw;
-    line-height: 0.9;
-    letter-spacing: -0.03em;
+    line-height: 0.82;
+    letter-spacing: -0.055em;
   }
 
   .manifesto-strip p:nth-child(1) {
@@ -2977,9 +2942,10 @@ html[lang="en"] .detail-hero__content h1 {
   border: 1px solid rgba(241, 240, 236, 0.7);
   color: var(--white);
   background: rgba(17, 17, 15, 0.8);
+  font-family: var(--font-mono);
   font-size: 7px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
 }
 
 .event-card__preview {
@@ -3292,11 +3258,19 @@ html[lang="en"] .detail-hero__content h1 {
 .saved-hero h1 {
   max-width: 1000px;
   margin: 0;
-  font-family: var(--font-serif);
   font-size: clamp(68px, 7.6vw, 116px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 0.9;
+}
+
+.archive-empty {
+  margin: 0;
+  color: var(--cool-gray);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .saved-hero h1 span {
@@ -3435,10 +3409,9 @@ html[lang="en"] .detail-hero__content h1 {
 
 .itinerary-list h3 {
   margin: 6px 0 0;
-  font-family: var(--font-serif);
   font-size: clamp(23px, 2.5vw, 38px);
-  font-weight: 500;
-  letter-spacing: -0.015em;
+  font-weight: 600;
+  letter-spacing: -0.035em;
 }
 
 .itinerary-list__flags {
