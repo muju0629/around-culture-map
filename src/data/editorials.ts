@@ -2085,6 +2085,346 @@ export const eventEditorials: Record<string, EventEditorial> = {
       },
     ],
   },
+  "do-ho-suh-mmca": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "집을 지고 다니는 방법에 대하여.",
+    introduction:
+      "서도호는 살았던 집을 반투명한 천으로 다시 지어 왔습니다. 벽과 문고리, 배관까지 옮겨 담은 그 집은 접어서 가방에 넣을 수 있습니다. 서울에서 뉴욕으로, 다시 런던으로 옮겨 다닌 삶에서 집은 고정된 건축물이 아니라 몸에 남는 기억의 치수였습니다. 국립현대미술관 서울이 작가의 역대 최대 규모 개인전으로 그 치수를 펼칩니다.",
+    facts: [
+      { label: "SCALE", value: "작가 최대 규모 개인전" },
+      { label: "RANGE", value: "대학원 졸업작 – 미공개 신작" },
+      { label: "FIRST SHOWN", value: "평생의 드로잉 국내 최초 공개" },
+      { label: "KEY WORK", value: "브릿지 프로젝트" },
+    ],
+    timelineLabel: "TRAJECTORY",
+    timeline: [
+      {
+        marker: "1999",
+        title: "서울 집 / L.A. 집",
+        description:
+          "서울의 한옥을 로스앤젤레스에 옮겨 놓은 초기작으로, 이주와 기억이라는 주제가 처음 형태를 얻습니다.",
+      },
+      {
+        marker: "2013",
+        title: "집 속의 집 속의 집",
+        description:
+          "시간과 지리를 달리하는 거주지들을 겹쳐, 하나의 집 안에 여러 집이 들어앉는 구조를 만듭니다.",
+      },
+      {
+        marker: "2026",
+        title: "서울관을 통과하는 집",
+        description:
+          "관람자가 직접 걸어 들어가는 방과 복도의 연쇄, 그리고 미래를 향한 브릿지 프로젝트가 전시장을 채웁니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / FABRIC",
+        title: "천으로 재는 치수",
+        description:
+          "손잡이와 콘센트, 스위치까지 실측해 옮긴 디테일을 보세요. 집을 기억하는 단위가 무엇인지 드러납니다.",
+      },
+      {
+        label: "02 / DRAWING",
+        title: "처음 공개되는 드로잉",
+        description:
+          "완성된 설치보다 먼저 존재한 사유의 흔적입니다. 작품이 되기 전의 생각을 따라가 보세요.",
+      },
+      {
+        label: "03 / PASSAGE",
+        title: "통과하는 작품",
+        description:
+          "‘네스트’ 계열의 방과 복도는 바라보는 것이 아니라 지나가는 작품입니다. 걷는 속도를 바꿔 보세요.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/do-ho-suh/bridging-home.jpg",
+        alt: "리버풀의 벽돌 건물 사이에 끼워 넣은 한옥, 서도호의 브리징 홈",
+        caption: "Do Ho Suh, Bridging Home, 2010 · Liverpool",
+        credit: "Image: Julian Stallabrass · Wikimedia Commons (CC BY 2.0)",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Do_Ho_Suh-_5759-sm_(5133451420).jpg",
+      },
+      {
+        src: "/editorial/do-ho-suh/bridging-home-detail.jpg",
+        alt: "벽돌벽에 파묻힌 한옥의 기와지붕과 창호를 올려다본 모습",
+        caption: "기와와 벽돌이 맞붙는 자리",
+        credit: "Image: Julian Stallabrass · Wikimedia Commons (CC BY 2.0)",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Do_Ho_Suh-_5756-sm_(5133449116).jpg",
+      },
+    ],
+    locationNote:
+      "경복궁 동쪽 삼청로의 국립현대미술관 서울에서 열립니다. 수요일과 토요일은 오후 9시까지 열려, 해가 진 뒤 소격동 골목과 이어 걷기 좋습니다.",
+    notes: [
+      {
+        label: "ADMISSION",
+        title: "관람료 추후 공지",
+        description:
+          "개막 시점에 국립현대미술관 공식 채널에서 관람권 정보가 안내됩니다. 수·토 야간개장(18–21시)은 무료입니다.",
+      },
+      {
+        label: "CLOSED",
+        title: "임시 휴관일 확인",
+        description:
+          "9월과 12월 첫째 주 화요일은 임시 휴관합니다. 장기 전시인 만큼 방문 전 일정 확인을 권합니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "MMCA",
+        url: "https://www.mmca.go.kr/exhibitions/futureProgressList.do",
+      },
+      {
+        label: "MARIE CLAIRE KOREA",
+        url: "https://www.marieclairekorea.com/culture/2026/07/dohosuh/",
+      },
+    ],
+  },
+  "company-world-affair-piknic": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "무엇을 만들 것인가보다, 누구와 만들 것인가.",
+    introduction:
+      "컴퍼니는 세계 여러 지역의 장인을 찾아다니며 물건을 만들어 온 디자인 스튜디오입니다. 도면을 보내고 결과물을 받는 방식 대신, 그 지역의 손과 재료가 이미 알고 있는 것에서 출발합니다. ‘온 세상 만들기의 비밀을 찾아서’라는 부제는 그 여정의 기록이자 질문입니다.",
+    facts: [
+      { label: "SUBTITLE", value: "온 세상 만들기의 비밀을 찾아서" },
+      { label: "PRACTICE", value: "장인 협업 · 지역 재료" },
+      { label: "VENUE", value: "남산 자락의 옛 제약회사 건물" },
+      { label: "RUN", value: "04.03 – 09.06" },
+    ],
+    timelineLabel: "METHOD",
+    timeline: [
+      {
+        marker: "TRAVEL",
+        title: "먼저 찾아간다",
+        description:
+          "스튜디오에서 완성한 도면을 보내는 대신, 만드는 사람이 있는 곳으로 직접 이동하는 데서 작업이 시작됩니다.",
+      },
+      {
+        marker: "MATERIAL",
+        title: "그곳의 재료로 배운다",
+        description:
+          "지역에 축적된 기술과 재료의 성질이 형태를 결정합니다. 디자인은 통제가 아니라 번역에 가까워집니다.",
+      },
+      {
+        marker: "OBJECT",
+        title: "만들어진 것이 남긴 질문",
+        description:
+          "완성된 사물은 결과이면서 동시에 만들기의 조건을 다시 묻는 자료가 됩니다.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / HAND",
+        title: "손의 흔적",
+        description:
+          "기계로 낼 수 없는 편차를 찾아보세요. 균일하지 않은 표면이 협업의 증거입니다.",
+      },
+      {
+        label: "02 / ORIGIN",
+        title: "어디서 왔는가",
+        description:
+          "사물마다 붙은 지역과 재료의 출처를 따라 읽으면 전시가 한 장의 지도로 정리됩니다.",
+      },
+      {
+        label: "03 / BUILDING",
+        title: "건물도 전시의 일부",
+        description:
+          "1970년대 제약회사 사옥을 고쳐 쓴 공간입니다. 계단과 창의 위치가 동선을 만드는 방식을 함께 보세요.",
+      },
+    ],
+    locationNote:
+      "서울역과 회현 사이, 남산 자락으로 오르는 언덕에 있습니다. 관람 후 옥상에서 도심 쪽 전망을 보고 내려오는 동선을 권합니다.",
+    notes: [
+      {
+        label: "BOOKING",
+        title: "사전 예매 권장",
+        description:
+          "네이버, 29CM, 카카오, 현장 발권으로 입장할 수 있습니다. 주말은 예매분이 먼저 소진되는 편입니다.",
+      },
+      {
+        label: "CLOSED",
+        title: "월요일 휴관 · 입장 마감 17시",
+        description:
+          "화요일부터 일요일까지 오전 10시에 열고 오후 6시에 닫습니다. 마지막 입장은 오후 5시입니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "PIKNIC",
+        url: "https://piknic.kr/home/sub01/exhibition.php?cate=EXHIBITION",
+      },
+    ],
+  },
+  "frieze-seoul-2026": {
+    typeLabel: "ART FAIR PROFILE",
+    heading: "9월 첫 주, 도시 전체가 전시장이 되는 나흘.",
+    introduction:
+      "프리즈 서울이 다섯 번째 회차를 맞습니다. 30개국 125개 이상의 갤러리가 코엑스 C·D홀에 모이고, 같은 기간 A·B홀에서는 키아프 서울이 열립니다. 하지만 이 주간의 진짜 규모는 코엑스 바깥에 있습니다. 을지로와 한남, 청담과 삼청의 갤러리들이 밤늦게까지 문을 열며 도시의 지도가 잠시 다시 그려집니다.",
+    facts: [
+      { label: "EDITION", value: "다섯 번째" },
+      { label: "GALLERIES", value: "30개국 125곳 이상" },
+      { label: "ASIA-PACIFIC", value: "참가 갤러리의 70% 이상" },
+      { label: "CO-LOCATED", value: "키아프 서울 · 코엑스 A·B홀" },
+    ],
+    timelineLabel: "THE WEEK",
+    timeline: [
+      {
+        marker: "08.31–09.03",
+        title: "프리즈 위크 · 동네의 밤",
+        description:
+          "을지로, 한남, 청담, 삼청에서 갤러리 나이트가 이어지며 미술관 기획전도 이 주간에 맞춰 문을 엽니다.",
+      },
+      {
+        marker: "09.02",
+        title: "초대장 소지자 전용",
+        description:
+          "첫날은 초대장을 가진 관람객에게만 열립니다. 오전 11시부터 오후 7시까지 운영합니다.",
+      },
+      {
+        marker: "09.03–09.05",
+        title: "일반 관람",
+        description:
+          "3일 오후 3시부터 일반 입장이 시작되고, 이후 이틀간 오전 11시부터 오후 7시까지 이어집니다.",
+      },
+    ],
+    highlightsLabel: "SECTIONS",
+    highlights: [
+      {
+        label: "01 / MATERIAL PRACTICE",
+        title: "재료와 손의 자리",
+        description:
+          "물성과 한국 전통 공예를 축으로 삼은 섹션입니다. 아트페어에서 가장 느리게 봐야 하는 구역입니다.",
+      },
+      {
+        label: "02 / SPOTLIGHT",
+        title: "다시 보는 20세기",
+        description:
+          "서구 미술사에서 충분히 다뤄지지 않은 20세기 작가들을 개인전 형식으로 소개합니다.",
+      },
+      {
+        label: "03 / FOCUS",
+        title: "2014년 이후의 갤러리",
+        description:
+          "설립 10년 안팎의 신생 갤러리들이 아시아를 넘어 확장하는 흐름을 보여 줍니다.",
+      },
+    ],
+    locationNote:
+      "코엑스 3층 C홀과 D홀에서 열립니다. 삼성역과 봉은사역 양쪽에서 진입할 수 있고, 관람 후 청담 갤러리 거리로 이동하기 좋습니다.",
+    notes: [
+      {
+        label: "TICKET",
+        title: "시간대별로 가격이 다릅니다",
+        description:
+          "오후 3시 이전 입장(퍼스트 액세스) 90,000원, 이후 입장(애프터눈 액세스) 70,000원, 만 7–19세 학생 55,000원입니다.",
+      },
+      {
+        label: "PLAN",
+        title: "하루에 둘 다는 어렵습니다",
+        description:
+          "프리즈와 키아프는 티켓이 별도이며 홀도 다릅니다. 한 회차에 하나씩 나눠 보는 편이 낫습니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "FRIEZE SEOUL",
+        url: "https://www.frieze.com/fairs/frieze-seoul/about",
+      },
+      {
+        label: "COEX",
+        url: "https://www.coexcenter.com/events/frieze-seoul-2026/",
+      },
+    ],
+  },
+  "jack-white-seoul-2026": {
+    typeLabel: "CONCERT PROFILE",
+    heading: "기타 한 대와 앰프 하나로 충분하다는 증명.",
+    introduction:
+      "잭 화이트는 화이트 스트라입스에서 베이스 없이 기타와 드럼만으로 밴드를 굴렸습니다. 부족한 편성을 채우는 대신 그 결핍을 소리의 성격으로 만들었고, 그래미를 열두 번 받는 동안에도 그 방식은 크게 달라지지 않았습니다. 4년 만의 단독 내한이 예스24 라이브홀에서 열립니다.",
+    facts: [
+      { label: "GRAMMY", value: "12회 수상" },
+      { label: "LAST SOLO SHOW", value: "약 4년 만" },
+      { label: "VENUE", value: "예스24 라이브홀" },
+      { label: "TICKET", value: "스탠딩 · 지정석 132,000원" },
+    ],
+    timelineLabel: "TRAJECTORY",
+    timeline: [
+      {
+        marker: "2000s",
+        title: "화이트 스트라입스",
+        description:
+          "기타와 드럼, 빨강·하양·검정의 규칙만으로 2000년대 개러지 록의 기준을 다시 세웁니다.",
+      },
+      {
+        marker: "2012–",
+        title: "솔로와 서드맨",
+        description:
+          "솔로 활동과 함께 자신의 레이블 서드맨 레코드를 통해 아날로그 제작 방식을 고집스럽게 이어 갑니다.",
+      },
+      {
+        marker: "2026",
+        title: "4년 만의 단독 공연",
+        description:
+          "2024년 페스티벌 헤드라이너 이후 2년, 단독 공연으로는 약 4년 만에 서울 무대에 섭니다.",
+      },
+    ],
+    highlightsLabel: "WHAT TO EXPECT",
+    highlights: [
+      {
+        label: "01 / SETLIST",
+        title: "고정되지 않는 구성",
+        description:
+          "매 공연 셋리스트를 바꾸는 것으로 알려져 있습니다. 같은 곡도 그날의 편곡으로 다르게 들립니다.",
+      },
+      {
+        label: "02 / SOUND",
+        title: "아날로그를 고집하는 이유",
+        description:
+          "잡음과 왜곡을 지우지 않는 사운드입니다. 라이브홀 규모에서 그 질감이 가장 잘 드러납니다.",
+      },
+      {
+        label: "03 / VENUE",
+        title: "스탠딩의 밀도",
+        description:
+          "돔이나 아레나가 아닌 라이브홀입니다. 무대와 객석의 거리가 짧아 소리의 압력이 그대로 옵니다.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/jack-white/jack-white.jpg",
+        alt: "파리 라 시갈 무대에서 기타를 연주하는 잭 화이트",
+        caption: "Jack White, No Name Tour · La Cigale, Paris, 2025",
+        credit: "Image: Gmczk · Wikimedia Commons (CC0)",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Jack_White_la_Cigale_Paris_2025.jpg",
+      },
+    ],
+    locationNote:
+      "광나루역과 아차산역 사이 구천면로에 있습니다. 공연 종료 후 5호선 막차 시간을 미리 확인해 두세요.",
+    notes: [
+      {
+        label: "TIME",
+        title: "월요일 저녁 6시 시작",
+        description:
+          "평일 이른 시간에 시작합니다. 퇴근 후 이동 시간을 넉넉히 잡는 편이 안전합니다.",
+      },
+      {
+        label: "TICKET",
+        title: "스탠딩 · 지정석 동일가",
+        description:
+          "132,000원 단일가로 운영됩니다. 예매는 예스24와 NOL 티켓에서 진행됐습니다.",
+      },
+    ],
+    sources: [
+      {
+        label: "LIVE NATION KOREA",
+        url: "https://www.livenation.kr/event/jack-white-live-2026-in-seoul-seoul-tickets-edp1672337",
+      },
+    ],
+  },
 };
 
 export function getEventEditorial(id: string, locale: Locale = "ko") {

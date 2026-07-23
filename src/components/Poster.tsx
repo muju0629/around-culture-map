@@ -5,22 +5,28 @@ interface PosterProps {
   event: CultureEvent;
   className?: string;
   showLabel?: boolean;
+  priority?: boolean;
 }
 
 export function Poster({
   event,
   className = "",
   showLabel = true,
+  priority = false,
 }: PosterProps) {
   const { copy } = useLanguage();
 
   if (event.posterImage) {
+    const imageLabel = copy.event[event.posterImageType ?? "officialPoster"];
+
     return (
       <div className={`poster poster--official ${className}`.trim()}>
         <img
           className="poster__image"
           src={event.posterImage}
-          alt={`${event.title} ${copy.event.officialPoster}`}
+          alt={`${event.title} ${imageLabel}`}
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
         />
         {showLabel && (
           <>

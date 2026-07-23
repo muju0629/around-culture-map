@@ -25,9 +25,10 @@ export function HomePage() {
     .slice(5)
     .replace("-", ".")}`;
   const featuredIds = [
-    "yoo-youngkuk-retrospective",
     "inside-other-spaces",
+    "company-world-affair-piknic",
     "audeum",
+    "yoo-youngkuk-retrospective",
   ];
   const completeEvents = events.filter(
     (event) =>
@@ -39,7 +40,7 @@ export function HomePage() {
       event.startDate <= week.end &&
       event.endDate >= today,
   );
-  const featured = [
+  const featuredPool = [
     ...featuredIds
       .map((id) =>
         activeCompleteEvents.find((event) => event.id === id),
@@ -48,12 +49,16 @@ export function HomePage() {
     ...activeCompleteEvents.filter(
       (event) => !featuredIds.includes(event.id),
     ),
-  ].slice(0, 3);
+  ].slice(0, 4);
   const upcoming = completeEvents
     .filter((event) => event.startDate > today)
     .sort((a, b) => a.startDate.localeCompare(b.startDate))
-    .slice(0, 7);
-  const heroEvent = featured[0] ?? upcoming[0] ?? completeEvents[0];
+    .slice(0, 4);
+  const heroEvent = featuredPool[0] ?? upcoming[0] ?? completeEvents[0];
+  const featured = featuredPool
+    .filter((event) => event.id !== heroEvent?.id)
+    .slice(0, 3);
+  const shortcutFilters = ["전시", "음악", "문화공간"] as const;
 
   useEffect(() => {
     const elements = Array.from(
@@ -93,9 +98,8 @@ export function HomePage() {
           <div className="home-hero__copy">
             <p className="eyebrow">CURATED CULTURE MAP / SEOUL</p>
             <h1>
-              {copy.home.title[0]}
-              <br />
-              {copy.home.title[1]}
+              <span className="home-hero__lead">{copy.home.title[0]}</span>
+              <span className="home-hero__brand">{copy.home.title[1]}</span>
             </h1>
             <div className="home-hero__footer">
               <p>
@@ -123,7 +127,7 @@ export function HomePage() {
               className="home-hero__poster"
               aria-label={`${heroEvent.title} ${copy.event.details}`}
             >
-              <Poster event={heroEvent} />
+              <Poster event={heroEvent} priority />
               <span className="home-hero__number">01</span>
             </Link>
           )}
@@ -154,9 +158,13 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="manifesto-strip" data-reveal>
-          {copy.home.manifesto.map((word) => (
-            <p key={word}>{word}</p>
+        <section className="home-shortcuts" aria-label="빠른 행사 필터" data-reveal>
+          {shortcutFilters.map((filter, index) => (
+            <Link key={filter} to={`/explore?filter=${filter}`}>
+              <span>0{index + 1}</span>
+              <strong>{copy.home.quickFilters[index]}</strong>
+              <ArrowIcon />
+            </Link>
           ))}
         </section>
 

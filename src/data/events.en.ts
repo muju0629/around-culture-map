@@ -10,6 +10,8 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     price: "KRW 18,000",
     description:
       "An international exhibition revisiting pioneering environments by 11 women artists long omitted from postwar art history. Their works bring the body, light, color and space together as a multisensory experience.",
+    curatorNote:
+      "An exhibition that turns Leeum's Black Box into a space to walk through.",
   },
   "hyundai-super-concert-28": {
     title: "Hyundai Card Super Concert 28: The Weeknd",
@@ -137,9 +139,9 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     district: "Mapo-gu",
     venue: "T Art Museum Hongdae",
     address: "14-16 Yanghwa-ro 16-gil, Mapo-gu, Seoul",
-    price: "Early bird KRW 10,000 · General KRW 20,000",
+    price: "General KRW 20,000",
     description:
-      "Filipp Jenikäe's first special exhibition in Korea unfolds five ideas of luck through intense color and energetic scenes. Early-bird tickets are available through June 18.",
+      "Filipp Jenikäe's first special exhibition in Korea unfolds five ideas of luck through intense color, quick brushwork and energetic scenes.",
   },
   audeum: {
     title: "Audeum",
@@ -150,6 +152,8 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     price: "Free · Advance reservation required",
     description:
       "An audio museum preserving and researching rare sound-reproduction equipment dating from the nineteenth century onward. Its Kengo Kuma–designed building hosts the permanent exhibition Jung Eum: In Search of Sound and reservation-only listening tours.",
+    curatorNote:
+      "For people who want to listen longer, not just know the equipment.",
   },
   "yoo-youngkuk-retrospective": {
     title: "Yoo Youngkuk: The Mountain Is in Me",
@@ -160,6 +164,8 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     price: "Free · Advance reservation",
     description:
       "The largest retrospective ever devoted to Yoo Youngkuk, a pioneer of Korean abstract art, marking the 110th anniversary of his birth. Some 170 paintings, reliefs, photographs, drawings and archival materials — including never-before-shown works — trace six decades of his practice, from his first abstract experiments in 1935 Tokyo to the inner landscapes of his late years.",
+    curatorNote:
+      "A retrospective that makes the familiar painter of mountains feel much wider.",
   },
   "jo-sook-jin-namseoul": {
     title: "Sook Jin Jo",
@@ -170,6 +176,8 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     price: "Free",
     description:
       "The annual sculptor's solo exhibition presents Sook Jin Jo, who moved to New York in 1988 and has worked internationally since. From her early relief series to installations, performances, architectural projects and drawings from her New York years, the show surveys a practice that breathes new life into discarded wood.",
+    curatorNote:
+      "Discarded wood meets the old architecture of SeMA Nam-Seoul.",
   },
   "oh-yoon-collection": {
     title: "Oh Yoon Collection",
@@ -180,6 +188,8 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     price: "Free",
     description:
       "A collection-based exhibition marking the 40th anniversary of the death of Oh Yoon, the printmaker who defined 1980s Minjung art. Drawing on the Oh Yoon archive acquired in 2024, it revisits the work and creative process of an artist who embraced the lives of ordinary people and questioned what art should do.",
+    curatorNote:
+      "An archive exhibition that reads the thoughts and hand behind the work.",
   },
   "koo-jeong-a-leeum": {
     title: "Koo Jeong A",
@@ -240,6 +250,8 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     price: "Varies by work · Some free",
     description:
       "An independent arts festival founded on open participation — no jury, no selection. Artists across theater, dance, music, performance and visual art turn the small theaters and streets of the Hongdae area into stages for experimental work.",
+    curatorNote:
+      "For seeing new movements before they settle into finished forms.",
   },
   "jamsugyo-ddooddoo-festival": {
     title: "Car-Free Jamsugyo Ddooddoo Festival",
@@ -360,5 +372,79 @@ export const eventEnglishCopy: Record<string, EventLocalizedCopy> = {
     price: "KRW 12,000",
     description:
       "Outdoor performances and workshops on movement in the city unfold across three stages and participatory programs along the Han River.",
+  },
+  "do-ho-suh-mmca": {
+    title: "Do Ho Suh",
+    region: "Samcheong",
+    district: "Jongno-gu",
+    venue: "MMCA Seoul",
+    address: "30 Samcheong-ro, Jongno-gu, Seoul",
+    price: "Admission to be announced",
+    description:
+      "The largest solo exhibition to date by Do Ho Suh, the installation artist known for houses sewn from translucent fabric. Graduate work, unseen recent pieces and a lifetime of drawings are shown together in Korea for the first time, alongside large installations including the Bridge Project.",
+  },
+  "company-world-affair-piknic": {
+    title: "COMPANY: World Affair",
+    region: "Hoehyeon",
+    district: "Jung-gu",
+    venue: "piknic",
+    address: "30 Toegye-ro 6ga-gil, Jung-gu, Seoul",
+    price: "Advance booking",
+    description:
+      "Subtitled “in search of the secrets of world-making,” this exhibition traces how design studio COMPANY has made objects with artisans around the world, staged inside a former pharmaceutical building on the slope of Namsan.",
+    curatorNote:
+      "For anyone curious about how objects are made, not only how they look.",
+  },
+  "frieze-seoul-2026": {
+    title: "Frieze Seoul 2026",
+    region: "Samseong-dong",
+    district: "Gangnam-gu",
+    venue: "COEX Hall C·D",
+    address: "513 Yeongdong-daero, Gangnam-gu, Seoul",
+    price: "KRW 70,000–90,000 · Students KRW 55,000",
+    description:
+      "The fifth edition brings more than 125 galleries from 30 countries, over 70% of them based across Asia-Pacific. Curated sections include Material Practice, on materiality and Korean craft, and Spotlight, revisiting 20th-century artists underrepresented in Western art history. Kiaf Seoul runs at the same time in Halls A and B.",
+  },
+  "ddp-vacance-music-festival": {
+    title: "DDP Vacance: Music Festival",
+    region: "Dongdaemun",
+    district: "Jung-gu",
+    venue: "DDP Eoulim Square",
+    address: "281 Euljiro, Jung-gu, Seoul",
+    price: "Free · Food and drink sold separately",
+    description:
+      "A three-day summer festival in the middle of the city. Live stages moving between jazz, classical and folk sit alongside a lounge of beanbags and a market zone on DDP's Eoulim Square.",
+  },
+  "hangang-bridge-film-festival": {
+    title: "Hangang Under-the-Bridge Film Festival",
+    region: "Yeouido",
+    district: "Yeongdeungpo-gu",
+    venue: "Yeouido · Ttukseom · Gwangnaru Hangang Park",
+    address: "330 Yeouidong-ro, Yeongdeungpo-gu, Seoul",
+    price: "Free",
+    description:
+      "Open-air screenings held under the bridges of the Han River on Saturday evenings through August, pairing feature films with finalists from the Hangang Moment short-form video open call.",
+  },
+  "official-hige-dandism-seoul": {
+    title: "Official HIGE DANdism Asia Tour 2026 in Seoul",
+    region: "Olympic Park",
+    district: "Songpa-gu",
+    venue: "KSPO DOME",
+    address: "424 Olympic-ro, Songpa-gu, Seoul",
+    price: "KRW 132,000–165,000",
+    description:
+      "Official HIGE DANdism return to Korea after two years for the Seoul stop of their Asia tour, playing two nights at KSPO DOME with standing and reserved seating.",
+  },
+  "jack-white-seoul-2026": {
+    title: "Jack White Live 2026 in Seoul",
+    region: "Gwangjang-dong",
+    district: "Gwangjin-gu",
+    venue: "YES24 Live Hall",
+    address: "20 Guchunmyeon-ro, Gwangjin-gu, Seoul",
+    price: "KRW 132,000",
+    description:
+      "Twelve-time Grammy winner Jack White returns for his first headline show in Korea in four years, running from White Stripes-era songs through his solo work at YES24 Live Hall.",
+    curatorNote:
+      "Guitar sound that lands more clearly in a live hall than a stadium.",
   },
 };

@@ -262,6 +262,37 @@ export const eventMedia: Record<string, EventMedia> = {
       },
     ],
   },
+  "jack-white-seoul-2026": {
+    appleMusicUrl: appleSearch("Jack White"),
+    appleMusicLabel: "Jack White",
+    lineup: [
+      {
+        name: "Jack White",
+        role: "HEADLINER",
+        note: "화이트 스트라입스로 2000년대 개러지 록을 다시 세운 기타리스트이자 서드맨 레코드의 설립자. 그래미를 12번 받았다.",
+        noteEn:
+          "The guitarist who reset 2000s garage rock with the White Stripes and founded Third Man Records, with twelve Grammy wins.",
+        photo: "/editorial/jack-white/jack-white.jpg",
+        credit: "Gmczk · Wikimedia Commons (CC0)",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Jack_White_la_Cigale_Paris_2025.jpg",
+      },
+    ],
+  },
+  "official-hige-dandism-seoul": {
+    appleMusicUrl: appleSearch("Official HIGE DANdism"),
+    appleMusicLabel: "Official HIGE DANdism",
+    lineup: [
+      {
+        name: "Official髭男dism",
+        role: "HEADLINER",
+        note: "후지하라 사토시가 이끄는 일본 4인조 밴드. 피아노를 축으로 한 팝 편곡과 넓은 음역의 보컬로 알려져 있다.",
+        noteEn:
+          "A Japanese four-piece led by Satoshi Fujihara, known for piano-driven pop arrangements and a wide vocal range.",
+        sourceUrl: "https://higedan.com/",
+      },
+    ],
+  },
 };
 
 export function getEventMedia(id: string): EventMedia | undefined {

@@ -17,6 +17,7 @@ import { Header } from "../components/Header";
 import { CrosshairIcon } from "../components/Icons";
 import {
   filterEvents,
+  filterOptions,
   getDistanceKm,
   getRegions,
   regions,
@@ -46,6 +47,12 @@ export function ExplorePage() {
   const { locale, copy } = useLanguage();
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedRegion = searchParams.get("area");
+  const requestedFilterValue = searchParams.get("filter");
+  const requestedFilter = filterOptions.includes(
+    requestedFilterValue as ExploreFilter,
+  )
+    ? (requestedFilterValue as ExploreFilter)
+    : undefined;
   const requestedEventId = searchParams.get("event") ?? undefined;
   const requestedIds = searchParams.get("ids")?.split(",").filter(Boolean);
   const showSavedOnly = searchParams.get("saved") === "1";
@@ -68,7 +75,9 @@ export function ExplorePage() {
     .format(new Date())
     .replace(",", "")
     .toUpperCase();
-  const [activeFilter, setActiveFilter] = useState<ExploreFilter>("전체");
+  const [activeFilter, setActiveFilter] = useState<ExploreFilter>(
+    requestedFilter ?? "전체",
+  );
   const [sort, setSort] = useState<ExploreSort>("recommended");
   const [selectedId, setSelectedId] = useState(requestedEventId);
   const [hoveredId, setHoveredId] = useState<string>();
@@ -137,6 +146,10 @@ export function ExplorePage() {
   );
 
   useEffect(() => {
+    setActiveFilter(requestedFilter ?? "전체");
+  }, [requestedFilter]);
+
+  useEffect(() => {
     if (
       selectedId &&
       visibleEvents.some((event) => event.id === selectedId)
@@ -193,6 +206,7 @@ export function ExplorePage() {
 
   function handleFilterChange(filter: ExploreFilter) {
     setActiveFilter(filter);
+    updateSearchParam("filter", filter === "전체" ? undefined : filter);
     setAppliedBounds(undefined);
     setPendingBounds(undefined);
   }
@@ -339,10 +353,6 @@ export function ExplorePage() {
               </select>
             </div>
           </div>
-          <p className="explore-toolbar__count">
-            <strong>{String(visibleEvents.length).padStart(2, "0")}</strong>
-            <span>{copy.explore.placesFound}</span>
-          </p>
         </div>
 
         <div className="explore-layout">

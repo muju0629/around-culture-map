@@ -111,6 +111,9 @@ export function EventCard({
         <span className="event-card__status">
           {getEventStatus(event, locale)}
         </span>
+        {event.curatorNote && (
+          <span className="event-card__pick">AROUND PICK</span>
+        )}
         <span className="event-card__preview">
           <strong>{event.venue}</strong>
           <span>{formatDateRange(event.startDate, event.endDate, locale)}</span>
@@ -138,7 +141,10 @@ export function EventCard({
         <h3>{event.title}</h3>
         <ArrowIcon />
       </Link>
-      <p>
+      {event.curatorNote && (
+        <p className="event-card__note">{event.curatorNote}</p>
+      )}
+      <p className="event-card__date-line">
         {formatDateRange(event.startDate, event.endDate, locale)} · {event.venue}
       </p>
     </article>

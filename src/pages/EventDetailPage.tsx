@@ -204,7 +204,7 @@ export function EventDetailPage() {
 
         <section className="detail-hero" id="info">
           <div className="detail-hero__poster">
-            <Poster event={event} />
+            <Poster event={event} priority />
           </div>
           <div className="detail-hero__content">
             <p className="eyebrow">
@@ -374,53 +374,60 @@ export function EventDetailPage() {
               </section>
             )}
 
-            <section className="editorial-story">
-              <div className="editorial-story__timeline">
-                <div className="section-label">
-                  <span>TIMELINE / 03</span>
-                  <strong>{editorial.timelineLabel}</strong>
+            <details className="editorial-more">
+              <summary>
+                <span className="eyebrow">EDITORIAL / 03–04</span>
+                <strong>{copy.detail.moreAbout}</strong>
+                <span aria-hidden="true">+</span>
+              </summary>
+              <section className="editorial-story">
+                <div className="editorial-story__timeline">
+                  <div className="section-label">
+                    <span>TIMELINE / 03</span>
+                    <strong>{editorial.timelineLabel}</strong>
+                  </div>
+                  <ol>
+                    {editorial.timeline.map((item) => (
+                      <li key={`${item.marker}-${item.title}`}>
+                        <span>{item.marker}</span>
+                        <div>
+                          <h3>{item.title}</h3>
+                          <p>{item.description}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
                 </div>
-                <ol>
-                  {editorial.timeline.map((item) => (
-                    <li key={`${item.marker}-${item.title}`}>
-                      <span>{item.marker}</span>
-                      <div>
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
 
-              <div className="editorial-story__highlights">
-                <div className="section-label">
-                  <span>SELECTED / 04</span>
-                  <strong>{editorial.highlightsLabel}</strong>
+                <div className="editorial-story__highlights">
+                  <div className="section-label">
+                    <span>SELECTED / 04</span>
+                    <strong>{editorial.highlightsLabel}</strong>
+                  </div>
+                  <div className="highlight-list">
+                    {editorial.highlights.map((highlight) => (
+                      <article key={`${highlight.label}-${highlight.title}`}>
+                        <span>{highlight.label}</span>
+                        <h3>{highlight.title}</h3>
+                        {highlight.meta && <em>{highlight.meta}</em>}
+                        <p>{highlight.description}</p>
+                        {highlight.url && (
+                          <a
+                            className="highlight-list__link"
+                            href={highlight.url}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            APPLE MUSIC
+                            <ArrowIcon />
+                          </a>
+                        )}
+                      </article>
+                    ))}
+                  </div>
                 </div>
-                <div className="highlight-list">
-                  {editorial.highlights.map((highlight) => (
-                    <article key={`${highlight.label}-${highlight.title}`}>
-                      <span>{highlight.label}</span>
-                      <h3>{highlight.title}</h3>
-                      {highlight.meta && <em>{highlight.meta}</em>}
-                      <p>{highlight.description}</p>
-                      {highlight.url && (
-                        <a
-                          className="highlight-list__link"
-                          href={highlight.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          APPLE MUSIC
-                          <ArrowIcon />
-                        </a>
-                      )}
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </section>
+              </section>
+            </details>
 
             <section className="visit-section" id="visit">
               <div className="detail-section-index">

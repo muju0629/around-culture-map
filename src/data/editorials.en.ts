@@ -2031,4 +2031,344 @@ export const eventEditorialsEn: Record<string, EventEditorial> = {
       },
     ],
   },
+  "do-ho-suh-mmca": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "On the practice of carrying a house with you.",
+    introduction:
+      "Do Ho Suh rebuilds the homes he has lived in out of translucent fabric — walls, door handles and plumbing included — until the house folds into a suitcase. Across a life that moved from Seoul to New York to London, home stopped being fixed architecture and became a set of measurements held in the body. MMCA Seoul unfolds those measurements in the artist's largest solo exhibition to date.",
+    facts: [
+      { label: "SCALE", value: "Artist's largest solo exhibition" },
+      { label: "RANGE", value: "Graduate work to unseen recent pieces" },
+      { label: "FIRST SHOWN", value: "A lifetime of drawings, first time in Korea" },
+      { label: "KEY WORK", value: "Bridge Project" },
+    ],
+    timelineLabel: "TRAJECTORY",
+    timeline: [
+      {
+        marker: "1999",
+        title: "Seoul House / L.A. House",
+        description:
+          "An early work relocating a Seoul hanok to Los Angeles, where migration and memory first take physical form.",
+      },
+      {
+        marker: "2013",
+        title: "House Within House",
+        description:
+          "Residences from different times and geographies are layered until several homes sit inside a single structure.",
+      },
+      {
+        marker: "2026",
+        title: "A house you walk through",
+        description:
+          "Chains of rooms and corridors visitors enter on foot, together with the forward-looking Bridge Project, fill the Seoul galleries.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / FABRIC",
+        title: "Measured in cloth",
+        description:
+          "Look for handles, outlets and switches transferred at actual size. They reveal the unit in which a home is remembered.",
+      },
+      {
+        label: "02 / DRAWING",
+        title: "Drawings shown for the first time",
+        description:
+          "Traces of thinking that existed before the installations. Follow the idea before it became a work.",
+      },
+      {
+        label: "03 / PASSAGE",
+        title: "Work you pass through",
+        description:
+          "The Nest rooms and corridors are walked, not viewed. Try changing your pace inside them.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/do-ho-suh/bridging-home.jpg",
+        alt: "A hanok wedged between brick buildings in Liverpool, Do Ho Suh's Bridging Home",
+        caption: "Do Ho Suh, Bridging Home, 2010 · Liverpool",
+        credit: "Image: Julian Stallabrass · Wikimedia Commons (CC BY 2.0)",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Do_Ho_Suh-_5759-sm_(5133451420).jpg",
+      },
+      {
+        src: "/editorial/do-ho-suh/bridging-home-detail.jpg",
+        alt: "Looking up at the tiled roof and lattice doors of a hanok buried in a brick wall",
+        caption: "Where roof tile meets brick",
+        credit: "Image: Julian Stallabrass · Wikimedia Commons (CC BY 2.0)",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Do_Ho_Suh-_5756-sm_(5133449116).jpg",
+      },
+    ],
+    locationNote:
+      "Held at MMCA Seoul on Samcheong-ro, east of Gyeongbokgung. Wednesday and Saturday hours run to 9pm, which pairs well with a walk through the Sogyeok-dong alleys after dark.",
+    notes: [
+      {
+        label: "ADMISSION",
+        title: "Admission to be announced",
+        description:
+          "Ticket details will be published on MMCA's official channels at opening. Wednesday and Saturday evenings (6–9pm) are free.",
+      },
+      {
+        label: "CLOSED",
+        title: "Check temporary closures",
+        description:
+          "The museum closes on the first Tuesday of September and December. Confirm dates before visiting this long-running show.",
+      },
+    ],
+    sources: [
+      {
+        label: "MMCA",
+        url: "https://www.mmca.go.kr/exhibitions/futureProgressList.do",
+      },
+      {
+        label: "MARIE CLAIRE KOREA",
+        url: "https://www.marieclairekorea.com/culture/2026/07/dohosuh/",
+      },
+    ],
+  },
+  "company-world-affair-piknic": {
+    typeLabel: "EXHIBITION PROFILE",
+    heading: "Less what to make than who to make it with.",
+    introduction:
+      "COMPANY is a design studio that has made objects by traveling to artisans around the world. Instead of sending drawings and receiving results, the work begins with what local hands and materials already know. The subtitle — in search of the secrets of world-making — is both a record of that journey and its open question.",
+    facts: [
+      { label: "SUBTITLE", value: "In search of the secrets of world-making" },
+      { label: "PRACTICE", value: "Artisan collaboration · Local material" },
+      { label: "VENUE", value: "A former pharmaceutical building on Namsan" },
+      { label: "RUN", value: "04.03 – 09.06" },
+    ],
+    timelineLabel: "METHOD",
+    timeline: [
+      {
+        marker: "TRAVEL",
+        title: "Go there first",
+        description:
+          "Rather than sending finished drawings from the studio, the work starts by moving to where the makers are.",
+      },
+      {
+        marker: "MATERIAL",
+        title: "Learn from what is there",
+        description:
+          "Accumulated local technique and the behavior of the material decide the form. Design becomes translation rather than control.",
+      },
+      {
+        marker: "OBJECT",
+        title: "What the made thing asks",
+        description:
+          "The finished object is both an outcome and a document that reopens the question of how things get made.",
+      },
+    ],
+    highlightsLabel: "HOW TO LOOK",
+    highlights: [
+      {
+        label: "01 / HAND",
+        title: "Traces of the hand",
+        description:
+          "Look for the variance a machine could not produce. Uneven surfaces are the evidence of collaboration.",
+      },
+      {
+        label: "02 / ORIGIN",
+        title: "Where it came from",
+        description:
+          "Read the region and material listed with each object and the exhibition resolves into a single map.",
+      },
+      {
+        label: "03 / BUILDING",
+        title: "The building is part of the show",
+        description:
+          "A 1970s pharmaceutical headquarters, reused. Notice how the position of stairs and windows shapes your route.",
+      },
+    ],
+    locationNote:
+      "On the hill rising toward Namsan, between Seoul Station and Hoehyeon. Take in the view over the city from the roof before heading back down.",
+    notes: [
+      {
+        label: "BOOKING",
+        title: "Advance booking recommended",
+        description:
+          "Entry via Naver, 29CM, Kakao or on-site ticketing. Weekend slots tend to sell through first.",
+      },
+      {
+        label: "CLOSED",
+        title: "Closed Mondays · Last entry 5pm",
+        description:
+          "Open Tuesday to Sunday, 10am to 6pm, with last admission at 5pm.",
+      },
+    ],
+    sources: [
+      {
+        label: "PIKNIC",
+        url: "https://piknic.kr/home/sub01/exhibition.php?cate=EXHIBITION",
+      },
+    ],
+  },
+  "frieze-seoul-2026": {
+    typeLabel: "ART FAIR PROFILE",
+    heading: "Four days when the whole city becomes the venue.",
+    introduction:
+      "Frieze Seoul returns for a fifth edition. More than 125 galleries from 30 countries gather in COEX Halls C and D, while Kiaf Seoul runs alongside in Halls A and B. The real scale of the week, though, is outside COEX: galleries in Euljiro, Hannam, Cheongdam and Samcheong stay open late, and the map of the city is briefly redrawn.",
+    facts: [
+      { label: "EDITION", value: "Fifth" },
+      { label: "GALLERIES", value: "125+ from 30 countries" },
+      { label: "ASIA-PACIFIC", value: "Over 70% of participants" },
+      { label: "CO-LOCATED", value: "Kiaf Seoul · COEX Halls A·B" },
+    ],
+    timelineLabel: "THE WEEK",
+    timeline: [
+      {
+        marker: "08.31–09.03",
+        title: "Frieze Week nights",
+        description:
+          "Gallery nights run through Euljiro, Hannam, Cheongdam and Samcheong, with museum exhibitions timed to open the same week.",
+      },
+      {
+        marker: "09.02",
+        title: "Invitation holders only",
+        description:
+          "The opening day is restricted to invitation holders, 11am to 7pm.",
+      },
+      {
+        marker: "09.03–09.05",
+        title: "General admission",
+        description:
+          "General entry begins at 3pm on the 3rd, then continues 11am to 7pm for the remaining two days.",
+      },
+    ],
+    highlightsLabel: "SECTIONS",
+    highlights: [
+      {
+        label: "01 / MATERIAL PRACTICE",
+        title: "Where material and hand meet",
+        description:
+          "A section built around materiality and Korean craft — the part of the fair worth walking slowest through.",
+      },
+      {
+        label: "02 / SPOTLIGHT",
+        title: "The twentieth century, revisited",
+        description:
+          "Solo presentations of twentieth-century artists underexamined in Western art history.",
+      },
+      {
+        label: "03 / FOCUS",
+        title: "Galleries founded after 2014",
+        description:
+          "Younger galleries, roughly a decade old, showing how they are expanding beyond Asia.",
+      },
+    ],
+    locationNote:
+      "Halls C and D on the third floor of COEX, reachable from both Samseong and Bongeunsa stations. The Cheongdam gallery district is an easy move afterward.",
+    notes: [
+      {
+        label: "TICKET",
+        title: "Price depends on entry time",
+        description:
+          "First Access (before 3pm) KRW 90,000, Afternoon Access (after 3pm) KRW 70,000, students aged 7–19 KRW 55,000.",
+      },
+      {
+        label: "PLAN",
+        title: "Both in one day is a stretch",
+        description:
+          "Frieze and Kiaf have separate tickets and separate halls. One per visit works better.",
+      },
+    ],
+    sources: [
+      {
+        label: "FRIEZE SEOUL",
+        url: "https://www.frieze.com/fairs/frieze-seoul/about",
+      },
+      {
+        label: "COEX",
+        url: "https://www.coexcenter.com/events/frieze-seoul-2026/",
+      },
+    ],
+  },
+  "jack-white-seoul-2026": {
+    typeLabel: "CONCERT PROFILE",
+    heading: "Proof that one guitar and one amp is enough.",
+    introduction:
+      "In the White Stripes, Jack White ran a band on guitar and drums with no bass. Rather than filling the gap, he turned the absence into the character of the sound — and across twelve Grammy wins the method has not changed much. His first headline show in Korea in four years lands at YES24 Live Hall.",
+    facts: [
+      { label: "GRAMMY", value: "12 wins" },
+      { label: "LAST SOLO SHOW", value: "Roughly four years ago" },
+      { label: "VENUE", value: "YES24 Live Hall" },
+      { label: "TICKET", value: "Standing · Reserved KRW 132,000" },
+    ],
+    timelineLabel: "TRAJECTORY",
+    timeline: [
+      {
+        marker: "2000s",
+        title: "The White Stripes",
+        description:
+          "Guitar, drums and a red-white-black rule set that reset the standard for 2000s garage rock.",
+      },
+      {
+        marker: "2012–",
+        title: "Solo work and Third Man",
+        description:
+          "Alongside his solo albums, his label Third Man Records has kept an insistently analog approach to making records.",
+      },
+      {
+        marker: "2026",
+        title: "First headline show in four years",
+        description:
+          "Two years after headlining a festival here in 2024, and about four since his last solo concert in Seoul.",
+      },
+    ],
+    highlightsLabel: "WHAT TO EXPECT",
+    highlights: [
+      {
+        label: "01 / SETLIST",
+        title: "Nothing fixed",
+        description:
+          "He is known for changing the setlist every night. The same song arrives in that evening's arrangement.",
+      },
+      {
+        label: "02 / SOUND",
+        title: "Why the analog insistence",
+        description:
+          "Noise and distortion are left in rather than cleaned away, and a live hall is where that texture reads best.",
+      },
+      {
+        label: "03 / VENUE",
+        title: "The density of standing",
+        description:
+          "Not a dome or an arena. The short distance between stage and floor delivers the pressure of the sound intact.",
+      },
+    ],
+    gallery: [
+      {
+        src: "/editorial/jack-white/jack-white.jpg",
+        alt: "Jack White playing guitar on stage at La Cigale in Paris",
+        caption: "Jack White, No Name Tour · La Cigale, Paris, 2025",
+        credit: "Image: Gmczk · Wikimedia Commons (CC0)",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Jack_White_la_Cigale_Paris_2025.jpg",
+      },
+    ],
+    locationNote:
+      "On Guchunmyeon-ro, between Gwangnaru and Achasan stations. Check the last Line 5 train before the show ends.",
+    notes: [
+      {
+        label: "TIME",
+        title: "Monday, 6pm start",
+        description:
+          "An early weekday start — allow generous travel time after work.",
+      },
+      {
+        label: "TICKET",
+        title: "One price for standing and seated",
+        description:
+          "A flat KRW 132,000, sold through YES24 and NOL Ticket.",
+      },
+    ],
+    sources: [
+      {
+        label: "LIVE NATION KOREA",
+        url: "https://www.livenation.kr/event/jack-white-live-2026-in-seoul-seoul-tickets-edp1672337",
+      },
+    ],
+  },
 };

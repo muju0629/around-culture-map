@@ -1,6 +1,15 @@
 export type EventCategory = "음악" | "전시" | "축제" | "문화공간";
 export type Locale = "ko" | "en";
 
+export type EventImageType =
+  | "officialPoster"
+  | "artistPhoto"
+  | "installationPhoto"
+  | "venuePhoto"
+  | "relatedWorkPhoto"
+  | "referencePhoto"
+  | "editorialImage";
+
 export interface EventLocalizedCopy {
   title: string;
   region: string;
@@ -9,6 +18,7 @@ export interface EventLocalizedCopy {
   address: string;
   price: string;
   description: string;
+  curatorNote?: string;
 }
 
 export type PosterVariant =
@@ -42,10 +52,12 @@ export interface CultureEvent {
   price: string;
   isFree: boolean;
   description: string;
+  curatorNote?: string;
   tags: string[];
   poster: PosterVariant;
   posterImage?: string;
   posterCredit?: string;
+  posterImageType?: EventImageType;
   latitude: number;
   longitude: number;
   locationLabel?: string;
