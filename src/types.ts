@@ -37,7 +37,7 @@ export type PosterVariant =
   | "eclipse"
   | "synthesis";
 
-export interface CultureEvent {
+export interface Spot {
   id: string;
   title: string;
   englishTitle: string;

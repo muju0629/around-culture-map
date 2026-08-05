@@ -1,7 +1,7 @@
 import { divIcon } from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { tileAttribution, tileUrl } from "../mapTiles";
-import type { CultureEvent } from "../types";
+import type { Spot } from "../types";
 
 const markerIcon = divIcon({
   className: "mini-map-marker",
@@ -10,7 +10,7 @@ const markerIcon = divIcon({
   iconSize: [16, 16],
 });
 
-export function MiniMap({ event }: { event: CultureEvent }) {
+export function MiniMap({ event }: { event: Spot }) {
   return (
     <div className="mini-map" aria-label={`${event.venue} map`}>
       <MapContainer

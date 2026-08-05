@@ -1,18 +1,18 @@
-import type { CultureEvent } from "../types";
+import type { Spot } from "../types";
 
 export interface MarkerGroup {
   key: string;
-  events: CultureEvent[];
+  events: Spot[];
   index: number;
 }
 
-export function getMarkerGroups(events: CultureEvent[]): MarkerGroup[] {
+export function getMarkerGroups(events: Spot[]): MarkerGroup[] {
   return Array.from(
     events.reduce((groups, event) => {
       const key = `${event.latitude.toFixed(4)}-${event.longitude.toFixed(4)}`;
       groups.set(key, [...(groups.get(key) ?? []), event]);
       return groups;
-    }, new Map<string, CultureEvent[]>()),
+    }, new Map<string, Spot[]>()),
   ).map(([key, groupEvents], index) => ({
     key,
     events: groupEvents,
@@ -20,7 +20,7 @@ export function getMarkerGroups(events: CultureEvent[]): MarkerGroup[] {
   }));
 }
 
-export function getMarkerLabels(events: CultureEvent[]) {
+export function getMarkerLabels(events: Spot[]) {
   const labels = new Map<string, string>();
   getMarkerGroups(events).forEach((group) => {
     group.events.forEach((event, eventIndex) => {

@@ -26,7 +26,7 @@ import { getMarkerLabels } from "../data/mapMarkers";
 import { useFavorites } from "../hooks/useFavorites";
 import { useLanguage } from "../i18n/language";
 import type {
-  CultureEvent,
+  Spot,
   ExploreFilter,
   ExploreSort,
   UserLocation,
@@ -34,7 +34,7 @@ import type {
 
 type PanelSnap = "collapsed" | "half" | "expanded";
 
-function isInsideBounds(event: CultureEvent, bounds: MapBounds) {
+function isInsideBounds(event: Spot, bounds: MapBounds) {
   return (
     event.latitude <= bounds.north &&
     event.latitude >= bounds.south &&

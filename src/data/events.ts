@@ -1,5 +1,5 @@
 import type {
-  CultureEvent,
+  Spot,
   EventCategory,
   ExploreFilter,
   Locale,
@@ -9,7 +9,7 @@ import { eventEnglishCopy } from "./events.en";
 
 export const CATALOG_UPDATED_AT = "2026-07-23";
 
-export const events: CultureEvent[] = [
+export const events: Spot[] = [
   {
     id: "inside-other-spaces",
     title: "다른 공간 안으로",
@@ -1150,9 +1150,9 @@ const filterEnglish: Record<ExploreFilter, string> = {
 };
 
 export function localizeEvent(
-  event: CultureEvent,
+  event: Spot,
   locale: Locale,
-): CultureEvent {
+): Spot {
   if (locale === "ko") {
     return event;
   }
@@ -1207,12 +1207,12 @@ export function formatDateRange(
     .replace(/\.$/, "")}`;
 }
 
-export function isActiveOn(event: CultureEvent, date: string) {
+export function isActiveOn(event: Spot, date: string) {
   return event.startDate <= date && event.endDate >= date;
 }
 
 export function isActiveDuring(
-  event: CultureEvent,
+  event: Spot,
   startDate: string,
   endDate: string,
 ) {
@@ -1245,7 +1245,7 @@ export function differenceInDays(fromDate: string, toDate: string) {
 }
 
 export function getEventStatus(
-  event: CultureEvent,
+  event: Spot,
   locale: Locale = "ko",
   today = getTodayInSeoul(),
 ) {
@@ -1270,7 +1270,7 @@ export function getEventStatus(
   return `D-${daysUntil}`;
 }
 
-export function getTicketStatus(event: CultureEvent, locale: Locale = "ko") {
+export function getTicketStatus(event: Spot, locale: Locale = "ko") {
   if (
     event.tags.some((tag) => tag.toUpperCase() === "SOLD OUT") ||
     event.price.includes("매진")
@@ -1283,13 +1283,13 @@ export function getTicketStatus(event: CultureEvent, locale: Locale = "ko") {
   return locale === "ko" ? "정보 확인 필요" : "Needs verification";
 }
 
-export function getVerificationDate(event: CultureEvent) {
+export function getVerificationDate(event: Spot) {
   return event.verifiedAt ?? CATALOG_UPDATED_AT;
 }
 
 export function getDistanceKm(
   origin: UserLocation,
-  destination: Pick<CultureEvent, "latitude" | "longitude">,
+  destination: Pick<Spot, "latitude" | "longitude">,
 ) {
   const toRadians = (value: number) => (value * Math.PI) / 180;
   const earthRadiusKm = 6371;
@@ -1335,7 +1335,7 @@ export function filterEvents(
   const today = getTodayInSeoul();
   const weekend = getCurrentWeekend(today);
   const currentEvents = events.filter((event) => event.endDate >= today);
-  let matches: CultureEvent[];
+  let matches: Spot[];
 
   if (filter === "전체") {
     matches = currentEvents;

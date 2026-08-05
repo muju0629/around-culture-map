@@ -1,8 +1,8 @@
-import type { CultureEvent } from "../types";
+import type { Spot } from "../types";
 import { useLanguage } from "../i18n/language";
 
 interface PosterProps {
-  event: CultureEvent;
+  event: Spot;
   className?: string;
   showLabel?: boolean;
   priority?: boolean;

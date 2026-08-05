@@ -16,7 +16,7 @@ import { getMarkerGroups, getMarkerLabels } from "../data/mapMarkers";
 import { formatDateRange, getCategoryLabel } from "../data/events";
 import { useLanguage } from "../i18n/language";
 import { tileAttribution, tileUrl } from "../mapTiles";
-import type { CultureEvent, UserLocation } from "../types";
+import type { Spot, UserLocation } from "../types";
 import { ArrowIcon } from "./Icons";
 
 function escapeHtml(value: string) {
@@ -34,7 +34,7 @@ function escapeHtml(value: string) {
 }
 
 interface AbstractMapProps {
-  events: CultureEvent[];
+  events: Spot[];
   selectedId?: string;
   hoveredId?: string;
   onSelect: (eventId: string) => void;
@@ -52,8 +52,8 @@ export interface MapBounds {
 }
 
 interface MapViewportProps {
-  events: CultureEvent[];
-  selectedEvent?: CultureEvent;
+  events: Spot[];
+  selectedEvent?: Spot;
 }
 
 function MapViewport({ events, selectedEvent }: MapViewportProps) {
@@ -195,14 +195,14 @@ function MapInteractionEvents({
 
 interface RenderCluster {
   key: string;
-  events: CultureEvent[];
+  events: Spot[];
   index: number;
   latitude: number;
   longitude: number;
 }
 
 interface ClusterLayerProps {
-  events: CultureEvent[];
+  events: Spot[];
   selectedId?: string;
   hoveredId?: string;
   clusters: RenderCluster[];

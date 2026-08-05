@@ -6,12 +6,12 @@ import {
   getTicketStatus,
 } from "../data/events";
 import { useLanguage } from "../i18n/language";
-import type { CultureEvent } from "../types";
+import type { Spot } from "../types";
 import { ArrowIcon, BookmarkIcon } from "./Icons";
 import { Poster } from "./Poster";
 
 interface EventCardProps {
-  event: CultureEvent;
+  event: Spot;
   isSelected?: boolean;
   isFavorite?: boolean;
   onSelect?: (eventId: string) => void;
