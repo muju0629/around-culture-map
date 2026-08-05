@@ -18,6 +18,16 @@
   --ease-out-soft: cubic-bezier(0.32, 0.72, 0, 1);
   --signal: #e61919;
   --font-mono: ui-monospace, "SF Mono", "IBM Plex Mono", Menlo, monospace;
+  --font-display: "Sora", "Pretendard Variable", Pretendard,
+    "Apple SD Gothic Neo", sans-serif;
+  --font-body: "Inter", "Pretendard Variable", Pretendard,
+    "Apple SD Gothic Neo", sans-serif;
+  --muted: #5a5a5a;
+  --faint: #9c9b96;
+  --rule: rgba(17, 17, 15, 0.1);
+  --rule-soft: rgba(17, 17, 15, 0.055);
+  --ease-gesso: cubic-bezier(0.22, 1, 0.36, 1);
+  --fast: 180ms;
   --header-height: 76px;
 }
 
@@ -4149,4 +4159,30 @@ html[lang="en"] .detail-hero__content h1 {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* 메타 레이블 — 라틴은 대문자 0.18em, 한글은 0.14em */
+.meta-latin {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.meta-ko {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+/* 숫자는 디스플레이 서체로 */
+.numeral {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
 }
