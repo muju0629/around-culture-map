@@ -30,6 +30,7 @@ import type { MoodId } from "../data/moods";
 import { useFavorites } from "../hooks/useFavorites";
 import { useItinerary } from "../hooks/useItinerary";
 import { useLanguage } from "../i18n/language";
+import { parseCourse } from "../lib/course";
 import { fetchOptimalOrder, fetchWalkingRoute, type Route } from "../lib/directions";
 import type {
   Spot,
@@ -107,6 +108,21 @@ export function ExplorePage() {
   // 클로저에 잡힌 itinerary는 이미 낡았을 수 있다
   const itineraryRef = useRef(itinerary);
   itineraryRef.current = itinerary;
+
+  useEffect(() => {
+    const shared = searchParams.get("s");
+    if (!shared) return;
+    const known = new Set(events.map((spot) => spot.id));
+    const restored = parseCourse(shared, known);
+    if (restored.length > 0) {
+      setItinerary(restored);
+    }
+    const next = new URLSearchParams(searchParams);
+    next.delete("s");
+    setSearchParams(next, { replace: true });
+    // 마운트 시 한 번만. searchParams를 의존성에 넣으면 무한 루프가 된다
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const courseSpots = itinerary
     .map((id) => events.find((spot) => spot.id === id))

@@ -25,6 +25,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/course" element={<ExplorePage />} />
         <Route path="/events/:id" element={<EventDetailPage />} />
         <Route path="/archive" element={<ArchivePage />} />
         <Route path="/saved" element={<SavedPage />} />
