@@ -147,14 +147,18 @@ export const MOODS: Mood[] = [
 
 - [ ] **Step 2: `src/types.ts`의 `Spot`을 넓힌다**
 
-`startDate: string;` / `endDate: string;` 두 줄을 아래로 바꾸고, `category` 아래에 두 필드를 더한다.
+`category` 아래에 두 필드를 더한다.
 
 ```ts
   kind: "place" | "event";
   moods: MoodId[];
-  startDate?: string;
-  endDate?: string;
 ```
+
+**`startDate`와 `endDate`는 필수로 둔다.** 선택으로 바꾸면 9개 파일 37곳이 깨진다 — `AbstractMap` · `ChatWidget` · `EventCard` · `ArchivePage` · `EventDetailPage` · `ExplorePage` · `HomePage` · `SavedPage`, 그리고 `events.ts`의 날짜 헬퍼가 전부 `.startDate`를 non-null로 읽는다.
+
+지금 43개는 `문화공간` 4곳까지 전부 날짜를 갖고 있어 선택으로 만들 이유가 없다. 날짜 없는 항목은 수집한 19곳과 함께 들어오며, 그때 "날짜 없는 장소를 어떻게 정렬하고 무엇으로 표기할지"라는 실제 요구사항을 갖고 9개 파일을 고치는 것이 맞다. 그 작업은 병합 계획에 속한다.
+
+이 계획의 어떤 태스크도 선택적 날짜를 필요로 하지 않는다. Task 9가 쓰는 `daysUntilEnd`는 시그니처가 `string | undefined`라 필수 필드를 받아도 그대로 동작한다.
 
 파일 맨 위에 임포트를 더한다.
 
