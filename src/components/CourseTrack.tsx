@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLanguage } from "../i18n/language";
 import {
   courseTotalMinutes,
   daysUntilEnd,
@@ -22,6 +23,7 @@ export function CourseTrack({
   onRemove,
   busy,
 }: CourseTrackProps) {
+  const { copy } = useLanguage();
   const [copied, setCopied] = useState(false);
   const total = courseTotalMinutes(
     spots.map((spot) => spot.kind),
@@ -39,21 +41,19 @@ export function CourseTrack({
 
   if (spots.length === 0) {
     return (
-      <aside className="course-track" aria-label="내 코스">
+      <aside className="course-track" aria-label={copy.course.trackLabel}>
         <div className="course-track__head">
-          <span className="meta-latin">My course</span>
+          <span className="meta-latin">{copy.course.trackTitle}</span>
         </div>
-        <p className="course-track__empty">
-          지도에서 장소를 눌러 코스를 짜보세요.
-        </p>
+        <p className="course-track__empty">{copy.course.empty}</p>
       </aside>
     );
   }
 
   return (
-    <aside className="course-track" aria-label="내 코스">
+    <aside className="course-track" aria-label={copy.course.trackLabel}>
       <div className="course-track__head">
-        <span className="meta-latin">My course</span>
+        <span className="meta-latin">{copy.course.trackTitle}</span>
         <span className="numeral course-track__total">
           {String(spots.length).padStart(2, "0")} · {total}′
         </span>
@@ -79,7 +79,9 @@ export function CourseTrack({
                     if (left === undefined || left < 0 || left > 7) return null;
                     return (
                       <span className="course-stop__ending">
-                        {left === 0 ? "오늘 종료" : `${left}일 뒤 종료`}
+                        {left === 0
+                          ? copy.course.endsToday
+                          : `${left}${copy.course.endsInDays}`}
                       </span>
                     );
                   })()}
@@ -88,14 +90,15 @@ export function CourseTrack({
                   type="button"
                   className="course-stop__remove"
                   onClick={() => onRemove(spot.id)}
-                  aria-label={`${spot.title} 코스에서 빼기`}
+                  aria-label={`${spot.title} ${copy.course.removeSuffix}`}
                 >
                   ×
                 </button>
               </div>
               {leg && (
                 <p className="meta-ko course-leg">
-                  {leg.estimated ? "약 " : ""}도보 {Math.round(leg.seconds / 60)}
+                  {leg.estimated ? copy.course.about : ""}
+                  {copy.course.walk} {Math.round(leg.seconds / 60)}
                   ′ · {Math.round(leg.meters)}m
                 </p>
               )}
@@ -111,14 +114,14 @@ export function CourseTrack({
           onClick={onOptimise}
           disabled={busy || spots.length < 3}
         >
-          순서 최적화
+          {copy.course.optimise}
         </button>
         <button
           type="button"
           className="course-btn is-solid"
           onClick={copyLink}
         >
-          {copied ? "복사됨" : "링크 복사"}
+          {copied ? copy.course.copied : copy.course.copyLink}
         </button>
       </div>
     </aside>

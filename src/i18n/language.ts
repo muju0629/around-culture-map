@@ -149,6 +149,21 @@ export const uiCopy = {
       title: "이 장면은 아직 없습니다.",
       home: "홈으로 돌아가기",
     },
+    course: {
+      indexHead: "지금 서울",
+      moodNavLabel: "무드",
+      trackLabel: "내 코스",
+      trackTitle: "MY COURSE",
+      empty: "지도에서 장소를 눌러 코스를 짜보세요.",
+      optimise: "순서 최적화",
+      copyLink: "링크 복사",
+      copied: "복사됨",
+      removeSuffix: "코스에서 빼기",
+      walk: "도보",
+      about: "약 ",
+      endsToday: "오늘 종료",
+      endsInDays: "일 뒤 종료",
+    },
   },
   en: {
     header: {
@@ -293,6 +308,21 @@ export const uiCopy = {
     notFound: {
       title: "This scene is not here yet.",
       home: "Return home",
+    },
+    course: {
+      indexHead: "Seoul right now",
+      moodNavLabel: "Moods",
+      trackLabel: "My course",
+      trackTitle: "MY COURSE",
+      empty: "Tap a place on the map to start a course.",
+      optimise: "Optimise order",
+      copyLink: "Copy link",
+      copied: "Copied",
+      removeSuffix: "remove from course",
+      walk: "Walk",
+      about: "about ",
+      endsToday: "Ends today",
+      endsInDays: " days left",
     },
   },
 } as const;

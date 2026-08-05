@@ -1,4 +1,5 @@
 import { MOODS, type MoodId } from "../data/moods";
+import { useLanguage } from "../i18n/language";
 import type { Spot } from "../types";
 
 interface MoodIndexProps {
@@ -8,6 +9,7 @@ interface MoodIndexProps {
 }
 
 export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
+  const { locale, copy } = useLanguage();
   const counts = new Map<MoodId, number>();
   spots.forEach((spot) => {
     spot.moods.forEach((mood) => {
@@ -16,8 +18,8 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
   });
 
   return (
-    <nav className="mood-index" aria-label="무드">
-      <p className="meta-ko mood-index__head">지금 서울</p>
+    <nav className="mood-index" aria-label={copy.course.moodNavLabel}>
+      <p className="meta-ko mood-index__head">{copy.course.indexHead}</p>
       <ul>
         {MOODS.map((mood) => {
           const count = counts.get(mood.id) ?? 0;
@@ -33,9 +35,15 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
                 disabled={isEmpty}
                 aria-pressed={mood.id === selected}
               >
-                <span className="mood-row__label">{mood.label}</span>
+                <span className="mood-row__label">
+                  {locale === "ko" ? mood.labelKo : mood.labelEn}
+                </span>
                 <span className="mood-row__lead" aria-hidden="true" />
-                <span className="mood-row__sub">{mood.subtitle}</span>
+                <span
+                  className={`mood-row__sub${locale === "ko" ? "" : " meta-latin"}`}
+                >
+                  {locale === "ko" ? mood.subtitleKo : mood.subtitleEn}
+                </span>
                 <span className="mood-row__count numeral">
                   {isEmpty ? "—" : String(count).padStart(2, "0")}
                 </span>
