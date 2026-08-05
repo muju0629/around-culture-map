@@ -16,6 +16,7 @@ AROUND는 서울의 문화 행사를 지도와 AI 큐레이터로 탐색하는 �
 - 무드를 축으로 하는 탐색
 - 지도 마커 체계 재설계
 - 코스 빌더 — 담기, 순서 바꾸기, 도보 시간, 순서 최적화, 링크 공유
+- 새 시각 언어를 사이트 전체 여섯 화면에 적용
 
 제외한다. 각각 별도 설계를 거친다.
 
@@ -112,7 +113,67 @@ MY COURSE                3곳 · 73분
 
 세 단은 데스크톱에서만이다. 태블릿 이하에서 목차는 오버레이로 접히고, 트랙은 기존 `.mobile-panel-handle` 하단 시트를 재사용한다. 새 반응형 체계를 만들지 않는다.
 
-## 5. 경로 계산
+## 5. 시각 언어
+
+Gesso "Obsidian Press" 시스템을 참조하되 색 체계는 받지 않는다. 받는 것은 타이포그래피, 여백, 모션, 디테일링이다. 사이트 전체 여섯 화면에 적용한다 — 한 앱에 두 미감이 섞이는 것이 가장 나쁜 결과다.
+
+### 5.1 참조 원본에서 받지 않은 것
+
+원본 토큰에는 서로 충돌하는 값이 있어 그대로 쓸 수 없다. 판단과 근거를 남긴다.
+
+| 원본 | 문제 | 결정 |
+| --- | --- | --- |
+| `--gesso-surface` = `--gesso-primary` = `#9d7700` | 카드 배경과 강조색이 같은 값. 같은 문서가 "Never paint large areas with primary"라고 명시 | 앰버 전량 폐기 |
+| 중립 램프가 두 벌 (CSS `#8f7229` / JSON `#1e262d`), JSON은 `neutral-950`이 `neutral-50`보다 밝아 단조성이 깨짐 | 어느 쪽도 신뢰할 수 없음 | 기존 AROUND 램프 유지 |
+| 컴포넌트 명세의 nav 링크 `#b1bfc5` on `#fffffe` | 1.89:1. WCAG 크게 미달 | 폐기 |
+| Do는 "high-contrast SERIF for display", Don't는 "Never set headlines in a geometric sans", 실제 디스플레이 서체는 기하학적 산세리프 Sora | 산문 규칙끼리 자기모순 | 토큰(Sora)을 따름 |
+| radius 토큰 2px / 레퍼런스 HTML 8px | 불일치 | 레퍼런스 HTML |
+| 캔버스 `#fffffe` | 같은 문서의 "always carry warm paper tint"와 어긋남. 지도가 화면 절반을 차지해 눈부심 | 기존 `#f1f0ec` 유지 |
+
+### 5.2 토큰
+
+```
+--paper   #f1f0ec   바탕
+--white   #faf9f5   융기면
+--ink     #11110f   본문 · 강조 면 (16.58:1)
+--muted   #5a5a5a   메타 (6.05:1)
+--faint   #9c9b96   비활성 (2.71:1, 의도한 값)
+--rule    rgba(17,17,15,.10)
+--ease    cubic-bezier(0.22, 1, 0.36, 1)
+--fast    180ms
+```
+
+색 강조는 없다. **검정이 곧 강조**이며 화면당 두 곳까지만 면으로 쓴다 — 선택된 목차 줄, 그리고 코스(마커 · 번호 · 경로선). §4.2의 흑백 마커 체계가 그대로 유효하다.
+
+`#e61919`은 곧 끝나는 행사 표시에만 남긴다.
+
+### 5.3 서체
+
+```css
+--font-display: "Sora", "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
+--font-body:    "Inter", "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
+```
+
+**Sora와 Inter에는 한글 글리프가 없다.** 브라우저가 글리프 단위로 대체하므로 라틴과 숫자는 Sora·Inter가, 한글은 Pretendard가 받는다. 이 순서가 곧 규칙이다.
+
+따라서 이 시스템의 인상은 **숫자와 라틴 레이블이 진다**. 목차의 개수, 코스 번호, 소요시간, `SEOUL` 같은 영문 메타가 Sora 700 · `font-variant-numeric: tabular-nums` · 자간 `-0.02em`으로 간다.
+
+### 5.4 메타 레이블
+
+한글에는 대문자가 없어 `text-transform: uppercase`가 아무 일도 하지 않고, 자간 `0.18em`은 한글에서 지나치게 벌어진다.
+
+- 라틴 메타 — 11px · `0.18em` · uppercase · weight 500
+- 한글 메타 — 11px · `0.14em` · uppercase 없음 · weight 500
+
+### 5.5 형태와 모션
+
+- 그림자 없음. 기존 `box-shadow` 10곳을 제거한다
+- radius는 0이 기본. CTA와 마커만 `9999px` 알약. 현재 흩어져 있는 7 · 12 · 14 · 18px을 정리한다
+- 면 구분은 1px 헤어라인. 카드를 상자로 두르지 않는다
+- 전환은 `180ms cubic-bezier(0.22, 1, 0.36, 1)`. 기존 `--ease-out-soft`를 대체한다
+- 지도 타일은 `grayscale(1) contrast(.82) brightness(1.1)`에 `mix-blend-mode: multiply`를 유지한다. 종이 온기가 지도까지 이어진다
+
+## 6. 경로 계산
 
 Mapbox Directions API로 도보 경로를 얻는다. 서울에서 walking · driving · cycling 모두 동작하며 한글 도로명이 온다. 대중교통은 Mapbox가 지원하지 않으므로 이번 범위는 **도보 전용**이다. 동네 단위 코스라는 전제와 맞는다.
 
@@ -123,9 +184,9 @@ Mapbox Directions API로 도보 경로를 얻는다. 서울에서 walking · dri
 
 순서 최적화는 Optimization API(`optimized-trips/v1`)를 쓴다. 버튼을 눌렀을 때만 호출하며, 응답의 `waypoint_index`대로 트랙을 재배열한다.
 
-## 6. 상태와 공유
+## 7. 상태와 공유
 
-### 6.1 useItinerary
+### 7.1 useItinerary
 
 이미 있는 훅이 순서 있는 `string[]`을 localStorage에 넣고 `useSyncExternalStore`로 구독한다. 저장 형태를 바꾸지 않으므로 기존 사용자 데이터가 살아 있다. 두 함수를 더한다.
 
@@ -134,7 +195,7 @@ reorder(from: number, to: number): void
 clear(): void
 ```
 
-### 6.2 링크 공유
+### 7.2 링크 공유
 
 ```
 /course?s=id1,id2,id3
@@ -142,7 +203,7 @@ clear(): void
 
 id를 순서대로 잇는다. 무드는 넣지 않는다 — 장소가 이미 정해져 있으므로 불필요하다. 직렬화는 `join(",")`, 복원은 `split(",")` 후 조회다. 존재하지 않는 id는 조용히 건너뛴다. 데이터가 바뀌어 항목이 사라져도 링크가 깨지지 않는다.
 
-## 7. 확인 방법
+## 8. 확인 방법
 
 순수 로직만 검증한다. 렌더링 테스트는 이번 범위가 아니다.
 
@@ -155,13 +216,13 @@ id를 순서대로 잇는다. 무드는 넣지 않는다 — 장소가 이미 �
 
 이 저장소에는 테스트 러너가 없다. Vite 프로젝트이므로 `vitest`를 devDependency로 하나 더한다. 설정 파일 없이 동작한다.
 
-## 8. 아직 막힌 것
+## 9. 아직 막힌 것
 
 1. **`enriched.json`이 저장소에 없다.** 수집한 19곳(신촌 7 · 약수 6 · 빵집 6)은 다른 세션의 산출물이라 읽을 수 없다. 병합의 선행 조건이다.
 2. **19곳의 설명문을 새로 써야 한다.** 원 출처의 문구는 쓸 수 없다.
 3. **출처 판단이 남아 있다.** 19곳은 큐레이션 미디어 게시물에서 왔다. 문구를 새로 쓰고 `sourceLabel`을 붙여도 장소 선택 자체가 그쪽의 편집 결과다. 발굴 단서로 쓰는 것과 그대로 싣는 것 사이의 판단이 필요하다. 이 결정은 데이터에만 영향을 주고 위 설계는 바뀌지 않는다.
 
-## 9. 데이터 현실
+## 10. 데이터 현실
 
 전체 43개 중 상설 장소는 4개다. 수집한 19곳을 더해도 무드 두 개(음반 · 헌책, 산책)는 비어 있다. 도보 코스는 1~2km 안에 3~5곳이 필요한데, 지금 그 밀도를 만족하는 곳은 신촌과 약수 · 버티고개뿐이다.
 
