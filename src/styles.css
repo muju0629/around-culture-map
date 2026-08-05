@@ -4186,3 +4186,90 @@ html[lang="en"] .detail-hero__content h1 {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
 }
+
+.mood-index {
+  border-right: 1px solid var(--rule);
+  padding: 26px 0 16px;
+}
+
+.mood-index__head {
+  padding: 0 22px 18px;
+}
+
+.mood-index ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mood-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 22px;
+  border: 0;
+  border-bottom: 1px solid var(--rule-soft);
+  border-radius: 0;
+  color: var(--black);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--fast) var(--ease-gesso);
+}
+
+.mood-index li:last-child .mood-row {
+  border-bottom: 0;
+}
+
+.mood-row__label {
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+
+.mood-row__lead {
+  flex: 1;
+  border-bottom: 1px dotted var(--rule);
+  transform: translateY(-3px);
+}
+
+.mood-row__sub {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.mood-row__count {
+  font-size: 15px;
+}
+
+.mood-row.is-selected {
+  color: var(--paper);
+  background: var(--black);
+  border-bottom-color: transparent;
+}
+
+.mood-row.is-selected .mood-row__sub {
+  color: rgba(241, 240, 236, 0.6);
+}
+
+.mood-row.is-selected .mood-row__lead {
+  border-bottom-color: rgba(241, 240, 236, 0.35);
+}
+
+.mood-row.is-empty {
+  color: var(--faint);
+  cursor: default;
+}
+
+.mood-row.is-empty .mood-row__sub {
+  color: var(--faint);
+}
+
+.mood-row:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: -2px;
+}
