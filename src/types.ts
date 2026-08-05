@@ -1,3 +1,5 @@
+import type { MoodId } from "./data/moods";
+
 export type EventCategory = "음악" | "전시" | "축제" | "문화공간";
 export type Locale = "ko" | "en";
 
@@ -42,6 +44,8 @@ export interface Spot {
   title: string;
   englishTitle: string;
   category: EventCategory;
+  kind: "place" | "event";
+  moods: MoodId[];
   region: string;
   district: string;
   venue: string;
