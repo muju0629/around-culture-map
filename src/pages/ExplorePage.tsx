@@ -115,7 +115,11 @@ export function ExplorePage() {
     const known = new Set(events.map((spot) => spot.id));
     const restored = parseCourse(shared, known);
     if (restored.length > 0) {
-      setItinerary(restored);
+      // 짜던 코스가 있을 때만 묻는다. 비어 있으면 잃을 것이 없다.
+      const hasCourse = itineraryRef.current.length > 0;
+      if (!hasCourse || window.confirm(copy.explore.sharedCourseConfirm)) {
+        setItinerary(restored);
+      }
     }
     const next = new URLSearchParams(searchParams);
     next.delete("s");

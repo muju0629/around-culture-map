@@ -56,6 +56,8 @@ export const uiCopy = {
       searchArea: "이 지역에서 다시 찾기",
       clearMapArea: "지도 영역 해제",
       noResults: "조건에 맞는 장소가 없습니다.",
+      sharedCourseConfirm:
+        "공유된 코스를 여시면 지금 짜고 있는 코스가 사라집니다. 계속할까요?",
     },
     detail: {
       back: "돌아가기",
@@ -199,6 +201,8 @@ export const uiCopy = {
       searchArea: "Search this map area",
       clearMapArea: "Clear map area",
       noResults: "No places match these conditions.",
+      sharedCourseConfirm:
+        "Opening a shared course will replace the one you are building. Continue?",
     },
     detail: {
       back: "Back",
