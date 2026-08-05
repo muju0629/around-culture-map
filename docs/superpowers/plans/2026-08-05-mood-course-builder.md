@@ -12,7 +12,7 @@
 
 - 바탕 `#f1f0ec` · 잉크 `#11110f` · 메타 `#5a5a5a` · 비활성 `#9c9b96` · 헤어라인 `rgba(17,17,15,.10)`
 - 색 강조 없음. 검정 면은 화면당 두 곳까지 — 선택된 목차 줄, 코스(마커 · 번호 · 경로선). `#e61919`은 종료 임박 표시 전용
-- 전환은 `180ms cubic-bezier(0.22, 1, 0.36, 1)`. 그림자 없음. radius는 0이 기본, CTA와 마커만 `9999px`
+- 전환은 `180ms cubic-bezier(0.22, 1, 0.36, 1)`. 그림자 없음. radius는 두 단계 — 면(선택된 목차 행 · 지도 컨테이너 · 카드류)은 `--radius-card: 16px`, 알약(버튼 · 마커 · 배지)은 `9999px`. 레일과 헤어라인은 직선. 둥근 행에는 행간 헤어라인을 두지 않는다
 - 폰트 스택 `"Sora", "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif` — Sora/Inter에 한글 글리프가 없어 글리프 단위로 Pretendard에 대체된다
 - 메타 레이블 — 라틴 11px `0.18em` uppercase weight 500 / 한글 11px `0.14em` uppercase 없음 weight 500
 - 지도 타일 필터 `grayscale(1) contrast(.82) brightness(1.1)` + `mix-blend-mode: multiply` 유지
@@ -744,7 +744,7 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
 
 .mood-index ul {
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
   list-style: none;
 }
 
@@ -753,19 +753,14 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
   align-items: baseline;
   gap: 10px;
   width: 100%;
-  padding: 13px 22px;
+  padding: 13px 12px;
   border: 0;
-  border-bottom: 1px solid var(--rule-soft);
-  border-radius: 0;
+  border-radius: var(--radius-card);
   color: var(--black);
   background: transparent;
   text-align: left;
   cursor: pointer;
   transition: background var(--fast) var(--ease-gesso);
-}
-
-.mood-index li:last-child .mood-row {
-  border-bottom: 0;
 }
 
 .mood-row__label {
@@ -795,7 +790,6 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
 .mood-row.is-selected {
   color: var(--paper);
   background: var(--black);
-  border-bottom-color: transparent;
 }
 
 .mood-row.is-selected .mood-row__sub {
@@ -1344,8 +1338,9 @@ export function CourseTrack({
 .course-stop__ending {
   display: inline-block;
   margin-top: 6px;
-  padding: 1px 5px;
+  padding: 2px 8px;
   border: 1px solid var(--signal);
+  border-radius: 9999px;
   color: var(--signal);
   font-size: 9px;
   font-weight: 700;
@@ -1548,6 +1543,17 @@ import {
   .explore-layout {
     display: grid;
     grid-template-columns: 290px minmax(0, 1fr) 270px;
+  }
+
+  /* 지도는 둥근 카드 — 종이 바탕 위에 얹힌 면 */
+  .explore-map-panel {
+    padding: 10px;
+    border-right: 0;
+  }
+
+  .explore-map-panel .abstract-map {
+    border-radius: var(--radius-card);
+    overflow: hidden;
   }
 }
 
