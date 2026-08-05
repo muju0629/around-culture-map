@@ -389,6 +389,15 @@ export function ExplorePage() {
     "--panel-drag-offset": `${dragOffset}px`,
   } as CSSProperties;
 
+  const selectSheetTab = (tab: "list" | "course") => {
+    setSheetTab(tab);
+    // 코스 탭으로 오면 시트를 펼친다. 핸들은 목록 패널 안에 있어
+    // 코스 탭에서는 보이지 않으므로, 접힌 채로 두면 펼 방법이 없다.
+    if (tab === "course" && panelSnap === "collapsed") {
+      setPanelSnap("half");
+    }
+  };
+
   return (
     <div className="page page--explore">
       <Header />
@@ -535,18 +544,22 @@ export function ExplorePage() {
               <button
                 type="button"
                 role="tab"
+                id="sheet-tab-list"
+                aria-controls="sheet-panel-list"
                 aria-selected={sheetTab === "list"}
                 className={sheetTab === "list" ? "is-active" : ""}
-                onClick={() => setSheetTab("list")}
+                onClick={() => selectSheetTab("list")}
               >
                 {copy.course.tabList}
               </button>
               <button
                 type="button"
                 role="tab"
+                id="sheet-tab-course"
+                aria-controls="sheet-panel-course"
                 aria-selected={sheetTab === "course"}
                 className={sheetTab === "course" ? "is-active" : ""}
-                onClick={() => setSheetTab("course")}
+                onClick={() => selectSheetTab("course")}
               >
                 {copy.course.tabCourse}
                 {itinerary.length > 0 && (
@@ -556,10 +569,12 @@ export function ExplorePage() {
             </div>
 
             <section
+              id="sheet-panel-list"
+              role="tabpanel"
+              aria-labelledby="sheet-tab-list"
               className={`explore-list-panel${
                 sheetTab === "course" ? " is-hidden-tab" : ""
               }`}
-              aria-label={copy.explore.listLabel}
             >
               <button
                 type="button"
@@ -619,7 +634,14 @@ export function ExplorePage() {
               </div>
             </section>
 
-            <div className={sheetTab === "list" ? "is-hidden-tab" : ""}>
+            <div
+              id="sheet-panel-course"
+              role="tabpanel"
+              aria-labelledby="sheet-tab-course"
+              className={`explore-sheet__track${
+                sheetTab === "list" ? " is-hidden-tab" : ""
+              }`}
+            >
               <CourseTrack
                 spots={courseSpots}
                 legs={route.legs}

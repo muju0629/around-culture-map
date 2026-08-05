@@ -3908,7 +3908,7 @@ html[lang="en"] .detail-hero__content h1 {
     display: none;
   }
 
-  .explore-sheet > div {
+  .explore-sheet__track {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
@@ -4296,6 +4296,10 @@ html[lang="en"] .detail-hero__content h1 {
   white-space: nowrap;
 }
 
+.mood-row__sub.meta-latin {
+  letter-spacing: 0.18em;
+}
+
 .mood-row__count {
   font-size: 15px;
 }
@@ -4490,7 +4494,7 @@ html[lang="en"] .detail-hero__content h1 {
      "내 코스" 탭이 활성인 채로 데스크톱 폭이 되었을 때 그 규칙이
      .explore-list-panel의 display:none보다 특정도가 높아 이겨버려
      목록 패널 내용이 그리드에 새어 들어간다. */
-  .explore-sheet > div {
+  .explore-sheet__track {
     display: contents;
   }
 }

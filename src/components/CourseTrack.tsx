@@ -23,7 +23,7 @@ export function CourseTrack({
   onRemove,
   busy,
 }: CourseTrackProps) {
-  const { copy } = useLanguage();
+  const { locale, copy } = useLanguage();
   const [copied, setCopied] = useState(false);
   const total = courseTotalMinutes(
     spots.map((spot) => spot.kind),
@@ -96,7 +96,11 @@ export function CourseTrack({
                 </button>
               </div>
               {leg && (
-                <p className="meta-ko course-leg">
+                <p
+                  className={`${
+                    locale === "ko" ? "meta-ko" : "meta-latin"
+                  } course-leg`}
+                >
                   {leg.estimated ? copy.course.about : ""}
                   {copy.course.walk} {Math.round(leg.seconds / 60)}
                   ′ · {Math.round(leg.meters)}m
