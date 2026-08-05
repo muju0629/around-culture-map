@@ -1558,6 +1558,22 @@ import {
 />
 ```
 
+**이러면 `.explore-layout`의 자식이 넷이 된다** — 목차 · 지도 · 목록 · 트랙. 그리드는 3열이므로 넷째가 넘친다.
+
+승인된 디자인은 **목차 · 지도 · 트랙** 3열이고 이벤트 목록 칼럼이 없다. 레이아웃 B를 고를 때의 문구도 "우측이 목록 대신 순서 있는 트랙"이었다. 탐색은 목록이 아니라 목차(무드별 개수)가 맡는다.
+
+따라서 데스크톱에서 목록 패널을 숨긴다. 지우지는 않는다 — 모바일 하단 시트가 그대로 쓰고, 필터·정렬·찜·카드가 전부 거기 붙어 있다.
+
+```css
+@media (min-width: 761px) {
+  .explore-list-panel {
+    display: none;
+  }
+}
+```
+
+`.explore-list-panel`은 `is-${panelSnap}` 클래스를 함께 받으므로 선택자는 클래스 하나로 충분하다.
+
 - [ ] **Step 3: 3단 그리드와 반응형을 더한다**
 
 `src/styles.css` 맨 아래에 더한다.
@@ -1612,6 +1628,16 @@ import {
   .course-track {
     border-left: 0;
     border-top: 1px solid var(--rule);
+  }
+}
+```
+
+데스크톱에서 목록 패널을 숨긴다 (위 §Step 2 참조 — 승인된 디자인은 3열이다).
+
+```css
+@media (min-width: 761px) {
+  .explore-list-panel {
+    display: none;
   }
 }
 ```
