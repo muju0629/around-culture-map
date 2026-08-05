@@ -5,6 +5,7 @@ import {
   CircleMarker,
   MapContainer,
   Marker,
+  Polyline,
   TileLayer,
   Tooltip,
   ZoomControl,
@@ -45,6 +46,7 @@ interface AbstractMapProps {
   userLocation?: UserLocation;
   radiusKm?: number;
   onViewportChange?: (bounds: MapBounds) => void;
+  routeLine?: Array<[number, number]>;
 }
 
 export interface MapBounds {
@@ -397,6 +399,7 @@ export function AbstractMap({
   userLocation,
   radiusKm,
   onViewportChange,
+  routeLine,
 }: AbstractMapProps) {
   const { locale, copy } = useLanguage();
   const [openClusterKey, setOpenClusterKey] = useState<string>();
@@ -420,6 +423,13 @@ export function AbstractMap({
         placeholder={<div className="map-loading">{copy.map.loading}</div>}
       >
         <TileLayer attribution={tileAttribution} url={tileUrl} />
+        {routeLine && routeLine.length > 1 && (
+          <Polyline
+            positions={routeLine}
+            pathOptions={{ color: "#11110f", weight: 1.75, opacity: 1 }}
+            interactive={false}
+          />
+        )}
         <ZoomControl position="bottomleft" />
         <MapViewport events={spots} selectedEvent={selectedEvent} />
         <MapInteractionEvents onViewportChange={onViewportChange} />
