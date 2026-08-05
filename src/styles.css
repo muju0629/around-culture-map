@@ -4412,7 +4412,7 @@ html[lang="en"] .detail-hero__content h1 {
   transform: scale(0.98);
 }
 
-@media (min-width: 761px) {
+@media (min-width: 1101px) {
   .explore-layout {
     display: grid;
     grid-template-columns: 290px minmax(0, 1fr) 270px;
@@ -4435,7 +4435,7 @@ html[lang="en"] .detail-hero__content h1 {
 }
 
 /* 760px는 기존 모바일 분기점이다 (styles.css:1984). 새 분기점을 만들지 않는다 */
-@media (max-width: 760px) {
+@media (max-width: 1100px) {
   .mood-index {
     border-right: 0;
     border-bottom: 1px solid var(--rule);

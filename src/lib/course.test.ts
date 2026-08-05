@@ -99,7 +99,7 @@ describe("종료 임박", () => {
     expect(daysUntilEnd("2026-08-08", today)).toBe(3);
   });
 
-  it("상설 장소는 undefined다", () => {
+  it("날짜가 없으면 undefined다", () => {
     expect(daysUntilEnd(undefined, today)).toBeUndefined();
   });
 

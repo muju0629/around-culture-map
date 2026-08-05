@@ -74,6 +74,7 @@ export function CourseTrack({
                     {spot.region} · {spot.category}
                   </span>
                   {(() => {
+                    if (spot.kind !== "event") return null;
                     const left = daysUntilEnd(spot.endDate, new Date());
                     if (left === undefined || left < 0 || left > 7) return null;
                     return (

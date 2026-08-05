@@ -133,12 +133,18 @@ export function ExplorePage() {
       setRoute({ legs: [], line: [] });
       return;
     }
+    const signature = itinerary.join(",");
     const points = courseSpots.map((spot) => ({
       latitude: spot.latitude,
       longitude: spot.longitude,
     }));
     const timer = window.setTimeout(() => {
-      fetchWalkingRoute(points).then(setRoute);
+      fetchWalkingRoute(points).then((next) => {
+        // 응답이 늦게 도착하는 사이 코스가 바뀌었다면 그 응답은 버린다
+        if (itineraryRef.current.join(",") === signature) {
+          setRoute(next);
+        }
+      });
     }, 300);
     return () => window.clearTimeout(timer);
   }, [itinerary.join(",")]);
@@ -159,6 +165,11 @@ export function ExplorePage() {
       setItinerary(order.map((i) => snapshot[i].id));
     }
     setOptimising(false);
+  };
+
+  const handleMarkerSelect = (spotId: string) => {
+    setSelectedId(spotId);
+    toggleItinerary(spotId);
   };
 
   const visibleEvents = useMemo(() => {
@@ -436,7 +447,7 @@ export function ExplorePage() {
               routeLine={route.line}
               selectedId={selectedId}
               hoveredId={hoveredId}
-              onSelect={toggleItinerary}
+              onSelect={handleMarkerSelect}
               onHover={setHoveredId}
               userLocation={userLocation}
               radiusKm={radiusKm}
