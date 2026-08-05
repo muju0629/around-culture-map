@@ -4411,3 +4411,59 @@ html[lang="en"] .detail-hero__content h1 {
 .course-btn:not(:disabled):active {
   transform: scale(0.98);
 }
+
+@media (min-width: 761px) {
+  .explore-layout {
+    display: grid;
+    grid-template-columns: 290px minmax(0, 1fr) 270px;
+  }
+
+  /* 지도는 둥근 카드 — 종이 바탕 위에 얹힌 면 */
+  .explore-map-panel {
+    padding: 10px;
+    border-right: 0;
+  }
+
+  .explore-map-panel .abstract-map {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .explore-list-panel {
+    display: none;
+  }
+}
+
+/* 760px는 기존 모바일 분기점이다 (styles.css:1984). 새 분기점을 만들지 않는다 */
+@media (max-width: 760px) {
+  .mood-index {
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 0 0;
+    overflow-x: auto;
+  }
+
+  .mood-index__head {
+    display: none;
+  }
+
+  .mood-index ul {
+    display: flex;
+  }
+
+  .mood-row {
+    border-bottom: 0;
+    border-right: 1px solid var(--rule-soft);
+    white-space: nowrap;
+  }
+
+  .mood-row__lead,
+  .mood-row__sub {
+    display: none;
+  }
+
+  .course-track {
+    border-left: 0;
+    border-top: 1px solid var(--rule);
+  }
+}

@@ -11,11 +11,14 @@ import {
   AbstractMap,
   type MapBounds,
 } from "../components/AbstractMap";
+import { CourseTrack } from "../components/CourseTrack";
 import { EventCard } from "../components/EventCard";
 import { FilterBar } from "../components/FilterBar";
 import { Header } from "../components/Header";
 import { CrosshairIcon } from "../components/Icons";
+import { MoodIndex } from "../components/MoodIndex";
 import {
+  events,
   filterEvents,
   filterOptions,
   getDistanceKm,
@@ -23,8 +26,11 @@ import {
   regions,
 } from "../data/events";
 import { getMarkerLabels } from "../data/mapMarkers";
+import type { MoodId } from "../data/moods";
 import { useFavorites } from "../hooks/useFavorites";
+import { useItinerary } from "../hooks/useItinerary";
 import { useLanguage } from "../i18n/language";
+import { fetchOptimalOrder, fetchWalkingRoute, type Route } from "../lib/directions";
 import type {
   Spot,
   ExploreFilter,
@@ -93,6 +99,41 @@ export function ExplorePage() {
   const dragStartY = useRef(0);
   const dragged = useRef(false);
   const { favorites, isFavorite, toggleFavorite } = useFavorites();
+  const [activeMood, setActiveMood] = useState<MoodId>("strange-by-day");
+  const [route, setRoute] = useState<Route>({ legs: [], line: [] });
+  const [optimising, setOptimising] = useState(false);
+  const { itinerary, toggleItinerary, setItinerary } = useItinerary();
+
+  const courseSpots = itinerary
+    .map((id) => events.find((spot) => spot.id === id))
+    .filter((spot): spot is Spot => Boolean(spot));
+
+  useEffect(() => {
+    if (courseSpots.length < 2) {
+      setRoute({ legs: [], line: [] });
+      return;
+    }
+    const points = courseSpots.map((spot) => ({
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+    }));
+    const timer = window.setTimeout(() => {
+      fetchWalkingRoute(points).then(setRoute);
+    }, 300);
+    return () => window.clearTimeout(timer);
+  }, [itinerary.join(",")]);
+
+  const handleOptimise = async () => {
+    setOptimising(true);
+    const order = await fetchOptimalOrder(
+      courseSpots.map((spot) => ({
+        latitude: spot.latitude,
+        longitude: spot.longitude,
+      })),
+    );
+    setItinerary(order.map((i) => courseSpots[i].id));
+    setOptimising(false);
+  };
 
   const visibleEvents = useMemo(() => {
     let matches = filterEvents(activeFilter, locale, activeRegion);
@@ -356,14 +397,20 @@ export function ExplorePage() {
         </div>
 
         <div className="explore-layout">
+          <MoodIndex
+            spots={events}
+            selected={activeMood}
+            onSelect={setActiveMood}
+          />
           <section className="explore-map-panel">
             <AbstractMap
               spots={visibleEvents}
-              activeMood="strange-by-day"
-              course={[]}
+              activeMood={activeMood}
+              course={itinerary}
+              routeLine={route.line}
               selectedId={selectedId}
               hoveredId={hoveredId}
-              onSelect={setSelectedId}
+              onSelect={toggleItinerary}
               onHover={setHoveredId}
               userLocation={userLocation}
               radiusKm={radiusKm}
@@ -495,6 +542,14 @@ export function ExplorePage() {
               )}
             </div>
           </section>
+
+          <CourseTrack
+            spots={courseSpots}
+            legs={route.legs}
+            onOptimise={handleOptimise}
+            onRemove={toggleItinerary}
+            busy={optimising}
+          />
         </div>
       </main>
     </div>
