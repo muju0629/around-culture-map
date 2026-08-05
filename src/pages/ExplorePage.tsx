@@ -103,6 +103,10 @@ export function ExplorePage() {
   const [route, setRoute] = useState<Route>({ legs: [], line: [] });
   const [optimising, setOptimising] = useState(false);
   const { itinerary, toggleItinerary, setItinerary } = useItinerary();
+  // 최신 코스를 읽기 위한 ref — handleOptimise가 await를 건너뛰고 나면
+  // 클로저에 잡힌 itinerary는 이미 낡았을 수 있다
+  const itineraryRef = useRef(itinerary);
+  itineraryRef.current = itinerary;
 
   const courseSpots = itinerary
     .map((id) => events.find((spot) => spot.id === id))
@@ -125,13 +129,19 @@ export function ExplorePage() {
 
   const handleOptimise = async () => {
     setOptimising(true);
+    const snapshot = courseSpots;
+    const signature = snapshot.map((spot) => spot.id).join(",");
     const order = await fetchOptimalOrder(
-      courseSpots.map((spot) => ({
+      snapshot.map((spot) => ({
         latitude: spot.latitude,
         longitude: spot.longitude,
       })),
     );
-    setItinerary(order.map((i) => courseSpots[i].id));
+    // 요청이 도는 동안 사용자가 코스를 바꿨다면 그 편집이 이긴다.
+    // 반환된 순서는 보낸 좌표 배열에 대한 순열이므로 다른 코스에는 의미가 없다.
+    if (itineraryRef.current.join(",") === signature) {
+      setItinerary(order.map((i) => snapshot[i].id));
+    }
     setOptimising(false);
   };
 
