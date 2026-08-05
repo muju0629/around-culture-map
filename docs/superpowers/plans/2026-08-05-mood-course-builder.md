@@ -955,6 +955,14 @@ const icon = divIcon({
   border: 0;
   color: var(--paper);
   background: var(--black);
+}
+
+/*
+  숫자는 자식 span에 있고, 기존 `.culture-marker span`이 8px을 직접 잡는다.
+  상속은 요소 자신에게 매칭되는 규칙이 없을 때만 적용되므로 부모에 적는 크기는
+  무효가 된다. 8px은 34px 마커에 `01+3` 같은 긴 라벨을 넣던 시절 값이다.
+*/
+.culture-marker.is-in-course span {
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 700;
