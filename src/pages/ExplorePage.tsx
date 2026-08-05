@@ -90,6 +90,7 @@ export function ExplorePage() {
   const [hoveredId, setHoveredId] = useState<string>();
   const [panelSnap, setPanelSnap] = useState<PanelSnap>("collapsed");
   const [dragOffset, setDragOffset] = useState(0);
+  const [sheetTab, setSheetTab] = useState<"list" | "course">("list");
   const [userLocation, setUserLocation] = useState<UserLocation>();
   const [locationStatus, setLocationStatus] = useState<
     "idle" | "loading" | "error"
@@ -529,76 +530,105 @@ export function ExplorePage() {
             </div>
           </section>
 
-          <section
-            className={`explore-list-panel is-${panelSnap}`}
-            aria-label={copy.explore.listLabel}
-            style={panelStyle}
-          >
-            <button
-              type="button"
-              className="mobile-panel-handle"
-              onPointerDown={handlePanelPointerDown}
-              onPointerMove={handlePanelPointerMove}
-              onPointerUp={handlePanelPointerUp}
-              onClick={cyclePanel}
-              aria-expanded={panelSnap !== "collapsed"}
-            >
-              <span />
-              {visibleEvents.length}
-              {copy.explore.places}
-            </button>
-            <div className="explore-list-panel__header">
-              <span>INDEX</span>
-              <div className="source-directory">
-                <a
-                  href="https://nol.yanolja.com/ticket/genre/exhibition"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  NOL EXHIBITION ↗
-                </a>
-                <a
-                  href="https://ticket.melon.com/concert/index.htm?genreType=GENRE_CON"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  MELON CONCERT ↗
-                </a>
-              </div>
+          <div className={`explore-sheet is-${panelSnap}`} style={panelStyle}>
+            <div className="explore-sheet__tabs" role="tablist">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={sheetTab === "list"}
+                className={sheetTab === "list" ? "is-active" : ""}
+                onClick={() => setSheetTab("list")}
+              >
+                {copy.course.tabList}
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={sheetTab === "course"}
+                className={sheetTab === "course" ? "is-active" : ""}
+                onClick={() => setSheetTab("course")}
+              >
+                {copy.course.tabCourse}
+                {itinerary.length > 0 && (
+                  <span className="numeral"> {String(itinerary.length).padStart(2, "0")}</span>
+                )}
+              </button>
             </div>
-            <div className="explore-list">
-              {visibleEvents.length > 0 ? (
-                visibleEvents.map((event) => (
-                  <EventCard
-                    key={event.id}
-                    event={event}
-                    layout="list"
-                    markerLabel={markerLabels.get(event.id)}
-                    distanceKm={
-                      userLocation
-                        ? getDistanceKm(userLocation, event)
-                        : undefined
-                    }
-                    isSelected={selectedId === event.id}
-                    onSelect={setSelectedId}
-                    onHover={setHoveredId}
-                    isFavorite={isFavorite(event.id)}
-                    onToggleFavorite={toggleFavorite}
-                  />
-                ))
-              ) : (
-                <div className="explore-empty">{copy.explore.noResults}</div>
-              )}
-            </div>
-          </section>
 
-          <CourseTrack
-            spots={courseSpots}
-            legs={route.legs}
-            onOptimise={handleOptimise}
-            onRemove={toggleItinerary}
-            busy={optimising}
-          />
+            <section
+              className={`explore-list-panel${
+                sheetTab === "course" ? " is-hidden-tab" : ""
+              }`}
+              aria-label={copy.explore.listLabel}
+            >
+              <button
+                type="button"
+                className="mobile-panel-handle"
+                onPointerDown={handlePanelPointerDown}
+                onPointerMove={handlePanelPointerMove}
+                onPointerUp={handlePanelPointerUp}
+                onClick={cyclePanel}
+                aria-expanded={panelSnap !== "collapsed"}
+              >
+                <span />
+                {visibleEvents.length}
+                {copy.explore.places}
+              </button>
+              <div className="explore-list-panel__header">
+                <span>INDEX</span>
+                <div className="source-directory">
+                  <a
+                    href="https://nol.yanolja.com/ticket/genre/exhibition"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    NOL EXHIBITION ↗
+                  </a>
+                  <a
+                    href="https://ticket.melon.com/concert/index.htm?genreType=GENRE_CON"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    MELON CONCERT ↗
+                  </a>
+                </div>
+              </div>
+              <div className="explore-list">
+                {visibleEvents.length > 0 ? (
+                  visibleEvents.map((event) => (
+                    <EventCard
+                      key={event.id}
+                      event={event}
+                      layout="list"
+                      markerLabel={markerLabels.get(event.id)}
+                      distanceKm={
+                        userLocation
+                          ? getDistanceKm(userLocation, event)
+                          : undefined
+                      }
+                      isSelected={selectedId === event.id}
+                      onSelect={setSelectedId}
+                      onHover={setHoveredId}
+                      isFavorite={isFavorite(event.id)}
+                      onToggleFavorite={toggleFavorite}
+                    />
+                  ))
+                ) : (
+                  <div className="explore-empty">{copy.explore.noResults}</div>
+                )}
+              </div>
+            </section>
+
+            <div className={sheetTab === "list" ? "is-hidden-tab" : ""}>
+              <CourseTrack
+                spots={courseSpots}
+                legs={route.legs}
+                onOptimise={handleOptimise}
+                onRemove={toggleItinerary}
+                busy={optimising}
+              />
+            </div>
+          </div>
         </div>
       </main>
     </div>

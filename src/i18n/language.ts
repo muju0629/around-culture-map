@@ -163,6 +163,8 @@ export const uiCopy = {
       about: "약 ",
       endsToday: "오늘 종료",
       endsInDays: "일 뒤 종료",
+      tabList: "목록",
+      tabCourse: "내 코스",
     },
   },
   en: {
@@ -323,6 +325,8 @@ export const uiCopy = {
       about: "about ",
       endsToday: "Ends today",
       endsInDays: " days left",
+      tabList: "List",
+      tabCourse: "My course",
     },
   },
 } as const;

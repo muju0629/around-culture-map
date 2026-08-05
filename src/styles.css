@@ -2315,21 +2315,6 @@ html[lang="en"] .detail-hero__content h1 {
     line-height: 1.3;
   }
 
-  .explore-list-panel {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 30;
-    height: min(62svh, 590px);
-    border-top: 1px solid var(--black);
-    transition: transform 240ms cubic-bezier(0.22, 0.8, 0.24, 1);
-  }
-
-  .explore-list-panel.is-collapsed {
-    transform: translateY(calc(100% - 76px));
-  }
-
   .mobile-panel-handle {
     display: flex;
     width: 100%;
@@ -3879,6 +3864,64 @@ html[lang="en"] .detail-hero__content h1 {
   .itinerary-list__flags {
     display: none;
   }
+
+  .explore-sheet {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    height: min(62svh, 590px);
+    border-top: 1px solid var(--black);
+    background: var(--paper);
+    transition: transform 240ms cubic-bezier(0.22, 0.8, 0.24, 1);
+  }
+
+  .explore-sheet__tabs {
+    display: flex;
+    flex: none;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .explore-sheet__tabs button {
+    flex: 1;
+    padding: 12px 8px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    background: transparent;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+  }
+
+  .explore-sheet__tabs button.is-active {
+    border-bottom-color: var(--black);
+    color: var(--black);
+  }
+
+  .explore-sheet .is-hidden-tab {
+    display: none;
+  }
+
+  .explore-sheet > div {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .explore-sheet .explore-list-panel {
+    position: static;
+    height: auto;
+    min-height: 0;
+    flex: 1;
+    border-top: 0;
+    transform: none;
+  }
 }
 
 @media (max-width: 760px) {
@@ -3992,23 +4035,23 @@ html[lang="en"] .detail-hero__content h1 {
     right: 12px;
   }
 
-  .explore-list-panel {
+  .explore-sheet {
     height: min(78svh, 680px);
     touch-action: none;
     transform: translateY(var(--panel-drag-offset));
   }
 
-  .explore-list-panel.is-collapsed {
+  .explore-sheet.is-collapsed {
     transform: translateY(
       calc(100% - 76px + var(--panel-drag-offset))
     );
   }
 
-  .explore-list-panel.is-half {
+  .explore-sheet.is-half {
     transform: translateY(calc(43% + var(--panel-drag-offset)));
   }
 
-  .explore-list-panel.is-expanded {
+  .explore-sheet.is-expanded {
     transform: translateY(var(--panel-drag-offset));
   }
 
@@ -4432,6 +4475,24 @@ html[lang="en"] .detail-hero__content h1 {
   .explore-list-panel {
     display: none;
   }
+
+  .explore-sheet {
+    display: contents;
+  }
+
+  .explore-sheet__tabs {
+    display: none;
+  }
+
+  /* 데스크톱에서는 탭이 없으므로 트랙 래퍼도 투명해야 그리드 3열이 된다.
+     .explore-list-panel은 위에서 이미 display:none이므로 여기서는
+     건드리지 않는다 — is-hidden-tab을 여기서도 contents로 만들면
+     "내 코스" 탭이 활성인 채로 데스크톱 폭이 되었을 때 그 규칙이
+     .explore-list-panel의 display:none보다 특정도가 높아 이겨버려
+     목록 패널 내용이 그리드에 새어 들어간다. */
+  .explore-sheet > div {
+    display: contents;
+  }
 }
 
 /* 760px는 기존 모바일 분기점이다 (styles.css:1984). 새 분기점을 만들지 않는다 */
@@ -4464,6 +4525,6 @@ html[lang="en"] .detail-hero__content h1 {
 
   .course-track {
     border-left: 0;
-    border-top: 1px solid var(--rule);
+    border-top: 0;
   }
 }
