@@ -4283,3 +4283,131 @@ html[lang="en"] .detail-hero__content h1 {
   outline: 2px solid var(--black);
   outline-offset: -2px;
 }
+
+.course-track {
+  border-left: 1px solid var(--rule);
+  padding: 26px 22px 18px;
+}
+
+.course-track__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.course-track__total {
+  font-size: 15px;
+  color: var(--black);
+}
+
+.course-track__empty {
+  margin: 18px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.course-track__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.course-stop {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  gap: 14px;
+  align-items: start;
+  padding-top: 18px;
+}
+
+.course-stop__num {
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.course-stop h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+
+.course-stop__sub {
+  display: block;
+  margin-top: 6px;
+}
+
+/* 화면에서 유일하게 색을 쓰는 곳 */
+.course-stop__ending {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border: 1px solid var(--signal);
+  border-radius: 9999px;
+  color: var(--signal);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.course-stop__remove {
+  border: 0;
+  padding: 0 2px;
+  color: var(--muted);
+  background: transparent;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--fast) var(--ease-gesso);
+}
+
+.course-stop__remove:hover {
+  color: var(--black);
+}
+
+.course-leg {
+  margin: 14px 0 0;
+  padding-left: 48px;
+  font-variant-numeric: tabular-nums;
+}
+
+.course-track__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--rule);
+}
+
+.course-btn {
+  flex: 1;
+  padding: 13px 10px;
+  border: 1px solid var(--rule);
+  border-radius: 9999px;
+  color: var(--black);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: pointer;
+  transition: transform var(--fast) var(--ease-gesso);
+}
+
+.course-btn.is-solid {
+  border-color: var(--black);
+  color: var(--paper);
+  background: var(--black);
+}
+
+.course-btn:disabled {
+  color: var(--faint);
+  cursor: default;
+}
+
+.course-btn:not(:disabled):active {
+  transform: scale(0.98);
+}
