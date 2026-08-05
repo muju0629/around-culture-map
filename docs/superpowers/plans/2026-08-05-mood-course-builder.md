@@ -882,11 +882,21 @@ import type { MoodId } from "../data/moods";
 
 `ClusterLayer` 안의 `divIcon` 생성 블록을 아래로 바꾼다. 기존 `markerLabel` · `markerSize` 계산을 대체한다.
 
+**클러스터를 원소 하나로 판정하면 안 된다.** 마커는 줌마다 46px 근접도로 여러 장소를 묶는다. 기존 코드가 `isSelected`와 `isHovered`를 `cluster.events.some(...)`로 판정하는 것과 같은 이유로, 무드와 코스도 구성원 전체를 봐야 한다. 세 곳이 뭉친 마커에서 두 번째만 코스에 담겨 있어도 그 마커는 코스 마커여야 한다.
+
+우선순위는 **코스 > 무드 안 > 무드 밖**이다. 번호는 구성원 중 가장 이른 방문 순서를 쓴다.
+
 ```tsx
-const spot = cluster.events[0];
-const courseIndex = course.indexOf(spot.id);
+const courseIndices = cluster.events
+  .map((spot) => course.indexOf(spot.id))
+  .filter((index) => index >= 0);
+const courseIndex = courseIndices.length
+  ? Math.min(...courseIndices)
+  : -1;
 const inCourse = courseIndex >= 0;
-const inMood = spot.moods.includes(activeMood);
+const inMood = cluster.events.some((spot) =>
+  spot.moods.includes(activeMood),
+);
 
 const state = inCourse
   ? "in-course"
@@ -900,7 +910,7 @@ const markerLabel = inCourse ? String(courseIndex + 1).padStart(2, "0") : "";
 const icon = divIcon({
   className: `culture-marker is-${state}${
     isSelected ? " is-selected" : ""
-  }`,
+  }${isHovered ? " is-hovered" : ""}`,
   html: `<span aria-hidden="true">${markerLabel}</span><span class="marker-a11y">${escapeHtml(
     markerA11yLabel,
   )}</span>`,
@@ -908,6 +918,10 @@ const icon = divIcon({
   iconSize: [markerSize, markerSize],
 });
 ```
+
+`isCluster` · `markerTitle` · `markerA11yLabel` 계산과 `<Marker>`의 `eventHandlers` · `<Tooltip>` 은 그대로 둔다. 클러스터를 누르면 구성원 목록이 열리는 동작(`onOpenCluster`)이 사라지면 여러 장소가 겹친 마커를 열 수 없다. `is-cluster` 클래스만 더는 쓰지 않는다 — 새 마커 체계는 형태가 아니라 상태로 구분한다.
+
+무드 밖 마커는 `pointer-events: none`이므로 클릭이 지도로 통과한다. 이는 의도된 동작이다.
 
 - [ ] **Step 3: 마커 스타일을 4상태로 다시 쓴다**
 
@@ -949,7 +963,9 @@ const icon = divIcon({
 }
 
 .culture-marker.is-available:hover,
-.culture-marker.is-in-course:hover {
+.culture-marker.is-in-course:hover,
+.culture-marker.is-available.is-hovered,
+.culture-marker.is-in-course.is-hovered {
   transform: scale(1.08);
 }
 
