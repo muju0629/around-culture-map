@@ -12,11 +12,12 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { Link } from "react-router-dom";
-import { getMarkerGroups, getMarkerLabels } from "../data/mapMarkers";
+import { getMarkerGroups } from "../data/mapMarkers";
 import { formatDateRange, getCategoryLabel } from "../data/events";
 import { useLanguage } from "../i18n/language";
 import { tileAttribution, tileUrl } from "../mapTiles";
 import type { Spot, UserLocation } from "../types";
+import type { MoodId } from "../data/moods";
 import { ArrowIcon } from "./Icons";
 
 function escapeHtml(value: string) {
@@ -34,11 +35,13 @@ function escapeHtml(value: string) {
 }
 
 interface AbstractMapProps {
-  events: Spot[];
+  spots: Spot[];
+  activeMood: MoodId;
+  course: string[];
   selectedId?: string;
   hoveredId?: string;
-  onSelect: (eventId: string) => void;
-  onHover?: (eventId?: string) => void;
+  onSelect: (spotId: string) => void;
+  onHover?: (spotId?: string) => void;
   userLocation?: UserLocation;
   radiusKm?: number;
   onViewportChange?: (bounds: MapBounds) => void;
@@ -202,7 +205,9 @@ interface RenderCluster {
 }
 
 interface ClusterLayerProps {
-  events: Spot[];
+  spots: Spot[];
+  activeMood: MoodId;
+  course: string[];
   selectedId?: string;
   hoveredId?: string;
   clusters: RenderCluster[];
@@ -213,7 +218,9 @@ interface ClusterLayerProps {
 }
 
 function ClusterLayer({
-  events,
+  spots,
+  activeMood,
+  course,
   selectedId,
   hoveredId,
   clusters,
@@ -224,8 +231,7 @@ function ClusterLayer({
 }: ClusterLayerProps) {
   const { locale, copy } = useLanguage();
   const map = useMap();
-  const baseGroups = useMemo(() => getMarkerGroups(events), [events]);
-  const labels = useMemo(() => getMarkerLabels(events), [events]);
+  const baseGroups = useMemo(() => getMarkerGroups(spots), [spots]);
 
   useEffect(() => {
     function recompute() {
@@ -294,20 +300,38 @@ function ClusterLayer({
         const isHovered = cluster.events.some(
           (event) => event.id === hoveredId,
         );
-        const indexLabel = String(cluster.index).padStart(2, "0");
-        const markerLabel = isCluster
-          ? `${indexLabel}+${cluster.events.length}`
-          : labels.get(cluster.events[0].id) ?? indexLabel;
         const markerTitle = cluster.events
           .map((event) => event.title)
           .join(" · ");
         const markerA11yLabel = `${markerTitle}${
           isSelected ? ` ${copy.event.selected}` : ""
         }`;
-        const markerSize = isSelected ? 46 : isCluster ? 44 : 34;
+
+        const courseIndices = cluster.events
+          .map((spot) => course.indexOf(spot.id))
+          .filter((index) => index >= 0);
+        const courseIndex = courseIndices.length
+          ? Math.min(...courseIndices)
+          : -1;
+        const inCourse = courseIndex >= 0;
+        const inMood = cluster.events.some((spot) =>
+          spot.moods.includes(activeMood),
+        );
+
+        const state = inCourse
+          ? "in-course"
+          : inMood
+            ? "available"
+            : "out-of-mood";
+
+        const markerSize = inCourse ? 32 : inMood ? 11 : 5;
+        const markerLabel = inCourse
+          ? String(courseIndex + 1).padStart(2, "0")
+          : "";
+
         const icon = divIcon({
-          className: `culture-marker${isSelected ? " is-selected" : ""}${
-            isCluster ? " is-cluster" : ""
+          className: `culture-marker is-${state}${
+            isSelected ? " is-selected" : ""
           }${isHovered ? " is-hovered" : ""}`,
           html: `<span aria-hidden="true">${markerLabel}</span><span class="marker-a11y">${escapeHtml(
             markerA11yLabel,
@@ -363,7 +387,9 @@ function ClusterLayer({
 }
 
 export function AbstractMap({
-  events,
+  spots,
+  activeMood,
+  course,
   selectedId,
   hoveredId,
   onSelect,
@@ -376,7 +402,7 @@ export function AbstractMap({
   const [openClusterKey, setOpenClusterKey] = useState<string>();
   const [clusters, setClusters] = useState<RenderCluster[]>([]);
   const selectedEvent =
-    events.find((event) => event.id === selectedId) ?? events[0];
+    spots.find((event) => event.id === selectedId) ?? spots[0];
   const openCluster = clusters.find(
     (cluster) => cluster.key === openClusterKey,
   );
@@ -395,7 +421,7 @@ export function AbstractMap({
       >
         <TileLayer attribution={tileAttribution} url={tileUrl} />
         <ZoomControl position="bottomleft" />
-        <MapViewport events={events} selectedEvent={selectedEvent} />
+        <MapViewport events={spots} selectedEvent={selectedEvent} />
         <MapInteractionEvents onViewportChange={onViewportChange} />
 
         {userLocation && (
@@ -431,7 +457,9 @@ export function AbstractMap({
         )}
 
         <ClusterLayer
-          events={events}
+          spots={spots}
+          activeMood={activeMood}
+          course={course}
           selectedId={selectedId}
           hoveredId={hoveredId}
           clusters={clusters}

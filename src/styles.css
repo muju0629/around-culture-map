@@ -980,17 +980,50 @@ html[lang="en"] .detail-hero__content h1 {
 .culture-marker {
   display: grid !important;
   place-items: center;
-  border: 1px solid var(--black);
-  border-radius: 50%;
-  color: var(--black);
-  background: var(--white);
-  box-shadow: 0 4px 14px rgba(17, 17, 15, 0.16);
+  border-radius: 9999px;
+  box-shadow: none;
   cursor: pointer;
   transition:
-    border-radius 160ms ease,
-    color 160ms ease,
-    background 160ms ease,
-    transform 160ms ease;
+    transform var(--fast) var(--ease-gesso),
+    background var(--fast) var(--ease-gesso);
+}
+
+.culture-marker.is-out-of-mood {
+  border: 0;
+  background: rgba(17, 17, 15, 0.26);
+  cursor: default;
+  pointer-events: none;
+}
+
+.culture-marker.is-available {
+  border: 1.5px solid var(--black);
+  background: var(--white);
+}
+
+.culture-marker.is-in-course {
+  border: 0;
+  color: var(--paper);
+  background: var(--black);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.culture-marker.is-available:hover,
+.culture-marker.is-in-course:hover,
+.culture-marker.is-available.is-hovered,
+.culture-marker.is-in-course.is-hovered {
+  transform: scale(1.08);
+}
+
+.culture-marker.is-selected::after {
+  position: absolute;
+  inset: -7px;
+  border: 1px solid var(--black);
+  border-radius: 9999px;
+  content: "";
 }
 
 .culture-marker span {
@@ -1007,26 +1040,6 @@ html[lang="en"] .detail-hero__content h1 {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
-}
-
-.culture-marker:hover,
-.culture-marker.is-selected {
-  color: var(--white);
-  background: var(--black);
-  transform: scale(1.08);
-}
-
-.culture-marker.is-cluster {
-  border-radius: 100px;
-}
-
-.culture-marker.is-selected::after {
-  position: absolute;
-  inset: -8px;
-  border: 1px solid var(--black);
-  border-radius: 50%;
-  content: "";
-  animation: marker-pulse 1.8s ease-out infinite;
 }
 
 .culture-map .leaflet-marker-icon:focus-visible {
@@ -3313,12 +3326,6 @@ html[lang="en"] .detail-hero__content h1 {
   border: 1px solid var(--black);
   background: var(--paper);
   font-size: 8px;
-}
-
-.culture-marker.is-hovered {
-  color: var(--white);
-  background: var(--black);
-  transform: scale(1.08);
 }
 
 .culture-map .culture-map-preview {

@@ -358,7 +358,9 @@ export function ExplorePage() {
         <div className="explore-layout">
           <section className="explore-map-panel">
             <AbstractMap
-              events={visibleEvents}
+              spots={visibleEvents}
+              activeMood="strange-by-day"
+              course={[]}
               selectedId={selectedId}
               hoveredId={hoveredId}
               onSelect={setSelectedId}
