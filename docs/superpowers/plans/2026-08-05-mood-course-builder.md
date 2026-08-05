@@ -314,7 +314,7 @@ describe("reorder", () => {
 });
 
 describe("직선거리 대체 계산", () => {
-  it("신촌 두 지점이 400~700m 사이다", () => {
+  it("신촌 두 지점이 300m 부근이다", () => {
     const m = haversineMeters(
       { latitude: 37.5573, longitude: 126.9366 },
       { latitude: 37.5559, longitude: 126.9395 },
