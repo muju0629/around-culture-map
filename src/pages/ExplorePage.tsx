@@ -218,6 +218,14 @@ export function ExplorePage() {
     sort,
     userLocation,
   ]);
+
+  // 코스에 담긴 곳은 필터와 무관하게 지도에 남는다.
+  // 사라지면 마커 번호가 끊겨 방문 순서를 읽을 수 없다.
+  const mapSpots = useMemo(() => {
+    const seen = new Set(visibleEvents.map((spot) => spot.id));
+    return [...visibleEvents, ...courseSpots.filter((spot) => !seen.has(spot.id))];
+  }, [visibleEvents, itinerary.join(",")]);
+
   const markerLabels = useMemo(
     () => getMarkerLabels(visibleEvents),
     [visibleEvents],
@@ -441,7 +449,7 @@ export function ExplorePage() {
           />
           <section className="explore-map-panel">
             <AbstractMap
-              spots={visibleEvents}
+              spots={mapSpots}
               activeMood={activeMood}
               course={itinerary}
               routeLine={route.line}
