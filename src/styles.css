@@ -28,6 +28,7 @@
   --rule-soft: rgba(17, 17, 15, 0.055);
   --ease-gesso: cubic-bezier(0.22, 1, 0.36, 1);
   --fast: 180ms;
+  --radius-card: 16px;
   --header-height: 76px;
 }
 
@@ -4198,7 +4199,7 @@ html[lang="en"] .detail-hero__content h1 {
 
 .mood-index ul {
   margin: 0;
-  padding: 0;
+  padding: 0 10px;
   list-style: none;
 }
 
@@ -4207,19 +4208,14 @@ html[lang="en"] .detail-hero__content h1 {
   align-items: baseline;
   gap: 10px;
   width: 100%;
-  padding: 13px 22px;
+  padding: 13px 12px;
   border: 0;
-  border-bottom: 1px solid var(--rule-soft);
-  border-radius: 0;
+  border-radius: var(--radius-card);
   color: var(--black);
   background: transparent;
   text-align: left;
   cursor: pointer;
   transition: background var(--fast) var(--ease-gesso);
-}
-
-.mood-index li:last-child .mood-row {
-  border-bottom: 0;
 }
 
 .mood-row__label {
@@ -4249,7 +4245,6 @@ html[lang="en"] .detail-hero__content h1 {
 .mood-row.is-selected {
   color: var(--paper);
   background: var(--black);
-  border-bottom-color: transparent;
 }
 
 .mood-row.is-selected .mood-row__sub {
