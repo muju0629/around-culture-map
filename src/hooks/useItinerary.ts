@@ -1,4 +1,5 @@
 import { useCallback, useSyncExternalStore } from "react";
+import { reorder } from "../lib/course";
 
 const STORAGE_KEY = "around:itinerary";
 const CHANGE_EVENT = "around:itinerary-change";
@@ -41,18 +42,33 @@ function writeItinerary(ids: string[]) {
 export function useItinerary() {
   const itinerary = useSyncExternalStore(subscribe, getSnapshot, () => []);
 
-  const toggleItinerary = useCallback((eventId: string) => {
+  const toggleItinerary = useCallback((spotId: string) => {
     const current = getSnapshot();
     writeItinerary(
-      current.includes(eventId)
-        ? current.filter((id) => id !== eventId)
-        : [...current, eventId],
+      current.includes(spotId)
+        ? current.filter((id) => id !== spotId)
+        : [...current, spotId],
     );
+  }, []);
+
+  const reorderItinerary = useCallback((from: number, to: number) => {
+    writeItinerary(reorder(getSnapshot(), from, to));
+  }, []);
+
+  const clearItinerary = useCallback(() => {
+    writeItinerary([]);
+  }, []);
+
+  const setItinerary = useCallback((ids: string[]) => {
+    writeItinerary(ids);
   }, []);
 
   return {
     itinerary,
-    isPlanned: (eventId: string) => itinerary.includes(eventId),
+    isPlanned: (spotId: string) => itinerary.includes(spotId),
     toggleItinerary,
+    reorderItinerary,
+    clearItinerary,
+    setItinerary,
   };
 }
