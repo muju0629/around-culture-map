@@ -1,5 +1,6 @@
 import { divIcon } from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { tileAttribution, tileUrl } from "../mapTiles";
 import type { CultureEvent } from "../types";
 
 const markerIcon = divIcon({
@@ -23,10 +24,7 @@ export function MiniMap({ event }: { event: CultureEvent }) {
         keyboard={false}
         attributionControl={false}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer attribution={tileAttribution} url={tileUrl} />
         <Marker
           position={[event.latitude, event.longitude]}
           icon={markerIcon}

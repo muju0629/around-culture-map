@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { getMarkerGroups, getMarkerLabels } from "../data/mapMarkers";
 import { formatDateRange, getCategoryLabel } from "../data/events";
 import { useLanguage } from "../i18n/language";
+import { tileAttribution, tileUrl } from "../mapTiles";
 import type { CultureEvent, UserLocation } from "../types";
 import { ArrowIcon } from "./Icons";
 
@@ -392,10 +393,7 @@ export function AbstractMap({
         zoomControl={false}
         placeholder={<div className="map-loading">{copy.map.loading}</div>}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+        <TileLayer attribution={tileAttribution} url={tileUrl} />
         <ZoomControl position="bottomleft" />
         <MapViewport events={events} selectedEvent={selectedEvent} />
         <MapInteractionEvents onViewportChange={onViewportChange} />
