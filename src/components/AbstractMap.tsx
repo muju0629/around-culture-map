@@ -59,33 +59,46 @@ export interface MapBounds {
 interface MapViewportProps {
   events: Spot[];
   selectedEvent?: Spot;
+  activeMood: MoodId;
 }
 
-function MapViewport({ events, selectedEvent }: MapViewportProps) {
+function MapViewport({ events, selectedEvent, activeMood }: MapViewportProps) {
   const map = useMap();
 
+  /*
+    무드가 탐색 축이므로 시야도 무드를 따라간다. 고른 무드의 장소에 맞춰
+    좁히지 않으면 「빵 하나에 두 정거장」을 눌러도 시야가 광역 그대로라
+    무드가 공간적으로 아무 일도 하지 않는 것처럼 보인다.
+    해당 무드가 비어 있으면 전체로 되돌린다.
+  */
+  const inMood = events.filter((event) => event.moods.includes(activeMood));
+  const framed = inMood.length > 0 ? inMood : events;
+  const frameKey = framed.map((event) => event.id).join(",");
+
   useEffect(() => {
-    if (events.length === 0) {
+    if (framed.length === 0) {
       return;
     }
 
-    if (events.length === 1) {
-      map.setView([events[0].latitude, events[0].longitude], 13, {
+    if (framed.length === 1) {
+      map.setView([framed[0].latitude, framed[0].longitude], 15, {
         animate: true,
       });
       return;
     }
 
     const bounds = latLngBounds(
-      events.map((event) => [event.latitude, event.longitude]),
+      framed.map((event) => [event.latitude, event.longitude]),
     );
     map.fitBounds(bounds, {
       animate: true,
-      maxZoom: 13,
+      maxZoom: 15,
       paddingTopLeft: [48, 84],
       paddingBottomRight: [48, 150],
     });
-  }, [events, map]);
+    // frameKey가 내용 기준 의존성이다. framed는 매 렌더 새 배열이라 쓸 수 없다.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [frameKey, map]);
 
   useEffect(() => {
     if (!selectedEvent) {
@@ -334,7 +347,9 @@ function ClusterLayer({
         const icon = divIcon({
           className: `culture-marker is-${state}${
             isSelected ? " is-selected" : ""
-          }${isHovered ? " is-hovered" : ""}`,
+          }${isHovered ? " is-hovered" : ""}${
+            isCluster && state !== "out-of-mood" ? " is-cluster" : ""
+          }`,
           html: `<span aria-hidden="true">${markerLabel}</span><span class="marker-a11y">${escapeHtml(
             markerA11yLabel,
           )}</span>`,
@@ -431,7 +446,11 @@ export function AbstractMap({
           />
         )}
         <ZoomControl position="bottomleft" />
-        <MapViewport events={spots} selectedEvent={selectedEvent} />
+        <MapViewport
+          events={spots}
+          selectedEvent={selectedEvent}
+          activeMood={activeMood}
+        />
         <MapInteractionEvents onViewportChange={onViewportChange} />
 
         {userLocation && (
@@ -481,8 +500,8 @@ export function AbstractMap({
       </MapContainer>
 
       <div className="map-caption">
-        <span>LIVE MAP / SEOUL METRO</span>
-        <span>OPENSTREETMAP</span>
+        <span>LIVE MAP / SEOUL</span>
+        <span>MAPBOX</span>
       </div>
 
       {openCluster && (

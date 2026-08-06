@@ -969,8 +969,12 @@ html[lang="en"] .detail-hero__content h1 {
   letter-spacing: 0.12em;
 }
 
+/*
+  light-v11은 이미 밝다. 여기에 brightness를 더 올리면 도로와 종이 바탕이
+  같은 값이 되어 지도가 빈 면으로 읽힌다. 대비는 올리고 밝기는 낮춘다.
+*/
 .culture-map .leaflet-tile-pane {
-  filter: grayscale(1) contrast(0.82) brightness(1.1);
+  filter: grayscale(1) contrast(1.15) brightness(0.92);
 }
 
 .culture-map .leaflet-tile {
@@ -1011,6 +1015,19 @@ html[lang="en"] .detail-hero__content h1 {
 .culture-marker.is-available.is-hovered,
 .culture-marker.is-in-course.is-hovered {
   transform: scale(1.08);
+}
+
+/*
+  클러스터는 한 번 더 눌러야 장소를 고를 수 있다. 단일 장소와 모양이 같으면
+  그 두 번째 탭이 예상 밖으로 읽히므로 바깥에 얇은 링을 하나 둘러 구분한다.
+*/
+.culture-marker.is-cluster::before {
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--black);
+  border-radius: 9999px;
+  opacity: 0.45;
+  content: "";
 }
 
 .culture-marker.is-selected::after {
@@ -4501,11 +4518,33 @@ html[lang="en"] .detail-hero__content h1 {
 
 /* 760px는 기존 모바일 분기점이다 (styles.css:1984). 새 분기점을 만들지 않는다 */
 @media (max-width: 1100px) {
+  /*
+    데스크톱의 2열 그리드가 그대로 남으면 두 번째 열의 minmax(360px, …)이
+    390px 화면에서 첫 열을 30px 미만으로 눌러 무드 레일이 사라진다.
+    세로로 쌓고 지도가 남은 높이를 갖게 한다.
+  */
+  .explore-layout {
+    display: flex;
+    flex-direction: column;
+    /*
+      .explore-toolbar가 이 컨테이너와 같은 y에서 시작하는 떠 있는 바다
+      (position: absolute, z-index: 20, styles.css:2266). 자리를 비워주지 않으면
+      첫 자식인 무드 레일이 그 아래 깔려 아예 보이지 않는다.
+    */
+    padding-top: 60px;
+  }
+
   .mood-index {
+    flex: none;
     border-right: 0;
     border-bottom: 1px solid var(--rule);
     padding: 16px 0 0;
     overflow-x: auto;
+  }
+
+  .explore-map-panel {
+    flex: 1;
+    min-height: 0;
   }
 
   .mood-index__head {
