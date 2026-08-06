@@ -90,11 +90,16 @@ function MapViewport({ events, selectedEvent, activeMood }: MapViewportProps) {
     const bounds = latLngBounds(
       framed.map((event) => [event.latitude, event.longitude]),
     );
+    /*
+      좁은 화면에서는 하단 시트가 지도를 덮는다. 150px만 비워두면 코스를 펼친
+      순간 그 코스의 마커가 시트 뒤로 숨는다. 시트가 반쯤 열린 높이만큼 비운다.
+    */
+    const isNarrow = map.getSize().x <= 1100;
     map.fitBounds(bounds, {
       animate: true,
       maxZoom: 15,
       paddingTopLeft: [48, 84],
-      paddingBottomRight: [48, 150],
+      paddingBottomRight: [48, isNarrow ? 300 : 150],
     });
     // frameKey가 내용 기준 의존성이다. framed는 매 렌더 새 배열이라 쓸 수 없다.
     // eslint-disable-next-line react-hooks/exhaustive-deps
