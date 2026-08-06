@@ -18,7 +18,10 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
   });
 
   return (
-    <nav className="mood-index" aria-label={copy.course.moodNavLabel}>
+    <nav
+      className={`mood-index${locale === "ko" ? "" : " is-latin"}`}
+      aria-label={copy.course.moodNavLabel}
+    >
       <p className="meta-ko mood-index__head">{copy.course.indexHead}</p>
       <ul>
         {MOODS.map((mood) => {

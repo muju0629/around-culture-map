@@ -81,7 +81,7 @@ export function CourseTrack({
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div>
-                  <h4>{spot.title}</h4>
+                  <h4>{locale === "ko" ? spot.title : spot.englishTitle}</h4>
                   <span className="meta-ko course-stop__sub">
                     {spot.region} · {spot.category}
                   </span>
@@ -102,7 +102,9 @@ export function CourseTrack({
                   type="button"
                   className="course-stop__remove"
                   onClick={() => onRemove(spot.id)}
-                  aria-label={`${spot.title} ${copy.course.removeSuffix}`}
+                  aria-label={`${
+                    locale === "ko" ? spot.title : spot.englishTitle
+                  } ${copy.course.removeSuffix}`}
                 >
                   ×
                 </button>

@@ -4318,7 +4318,23 @@ html[lang="en"] .detail-hero__content h1 {
 }
 
 .mood-row__count {
+  flex: none;
   font-size: 15px;
+}
+
+/*
+  영어 문구는 한국어보다 훨씬 길어 290px 레일에 문구·부제·숫자가 함께 들어가지
+  않는다. 부제를 접는다 — 「Streets where the sun sits low」처럼 영어 문구는
+  그 자체로 설명적이지만, 함축적인 한국어 문구에는 부제가 필요하다.
+  숫자는 이 목차의 쪽수 자리이므로 어떤 경우에도 밀려나선 안 된다.
+*/
+.mood-index.is-latin .mood-row__sub {
+  display: none;
+}
+
+.mood-index.is-latin .mood-row__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mood-row.is-selected {
