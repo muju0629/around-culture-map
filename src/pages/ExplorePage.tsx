@@ -393,7 +393,9 @@ export function ExplorePage() {
     setSheetTab(tab);
     // 코스 탭으로 오면 시트를 펼친다. 핸들은 목록 패널 안에 있어
     // 코스 탭에서는 보이지 않으므로, 접힌 채로 두면 펼 방법이 없다.
-    if (tab === "course" && panelSnap === "collapsed") {
+    // 다만 코스가 비었을 때는 펼치지 않는다 — 화면의 44%를 안내 문구 한 줄로
+    // 채우게 되고, 그 자리는 지도가 쓰는 편이 낫다.
+    if (tab === "course" && panelSnap === "collapsed" && itinerary.length > 0) {
       setPanelSnap("half");
     }
   };
