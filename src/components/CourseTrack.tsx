@@ -46,6 +46,18 @@ export function CourseTrack({
           <span className="meta-latin">{copy.course.trackTitle}</span>
         </div>
         <p className="course-track__empty">{copy.course.empty}</p>
+        {/*
+          비어 있을 때 안내 한 줄만 두면 데스크톱에서 270px 칼럼이 통째로
+          백지가 되어 렌더링이 실패한 것처럼 읽힌다. 번호 슬롯을 흐리게 세워
+          이 자리가 무엇을 담는 곳인지 형태로 보여준다.
+        */}
+        <ol className="course-track__ghosts" aria-hidden="true">
+          {[1, 2, 3].map((n) => (
+            <li key={n}>
+              <span className="numeral">{String(n).padStart(2, "0")}</span>
+            </li>
+          ))}
+        </ol>
       </aside>
     );
   }

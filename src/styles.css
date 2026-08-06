@@ -4372,6 +4372,31 @@ html[lang="en"] .detail-hero__content h1 {
   color: var(--muted);
 }
 
+.course-track__ghosts {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.course-track__ghosts li {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding-left: 2px;
+  border-top: 1px dashed var(--rule);
+  color: var(--faint);
+}
+
+.course-track__ghosts li:last-child {
+  border-bottom: 1px dashed var(--rule);
+}
+
+.course-track__ghosts .numeral {
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
 .course-track__list {
   margin: 0;
   padding: 0;
