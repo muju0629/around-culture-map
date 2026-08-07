@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { EventCard } from "../components/EventCard";
 import { Header } from "../components/Header";
 import { ArrowIcon } from "../components/Icons";
+import { IntroHero } from "../components/IntroHero";
 import { Poster } from "../components/Poster";
 import {
   getCurrentWeek,
@@ -94,6 +95,7 @@ export function HomePage() {
     <div className="page page--home">
       <Header />
       <main>
+        <IntroHero />
         <section className="home-hero" data-reveal>
           <div className="home-hero__copy">
             <p className="eyebrow">CURATED CULTURE MAP / SEOUL</p>

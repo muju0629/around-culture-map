@@ -37,6 +37,7 @@ export const uiCopy = {
       viewAll: "전체 일정 보기",
       random: "낯선 곳 하나",
       cta: ["취향을 따라", "조금 더 깊게"],
+      scrollHint: "아래로 스크롤",
     },
     explore: {
       title: "문화 지도",
@@ -199,6 +200,7 @@ export const uiCopy = {
       viewAll: "View the full index",
       random: "Find me something unfamiliar",
       cta: ["Follow your taste.", "Go a little deeper."],
+      scrollHint: "Scroll down",
     },
     explore: {
       title: "Culture map",

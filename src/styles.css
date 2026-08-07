@@ -371,6 +371,52 @@ html[lang="en"] .detail-hero__content h1 {
   cursor: pointer;
 }
 
+/* Intro hero — 폰트가 바뀌는 A, 터치에 반응하는 도트 */
+.intro-hero {
+  position: relative;
+  height: calc(100svh - var(--header-height));
+  overflow: hidden;
+  background: #0d0d0b;
+  /* touch-action을 막지 않는다 — 스와이프 스크롤이 진입 수단이다.
+     스크롤이 시작되면 pointercancel이 오고 글로우는 알아서 감쇠한다 */
+}
+
+.intro-hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.intro-hero__letter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--paper);
+  font-size: 40vh;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.intro-hero__hint {
+  position: absolute;
+  right: 0;
+  bottom: 26px;
+  left: 0;
+  margin: 0 auto;
+  padding: 12px;
+  border: 0;
+  background: none;
+  color: rgba(241, 240, 236, 0.55);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+}
+
 .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.16fr) minmax(360px, 0.84fr);
