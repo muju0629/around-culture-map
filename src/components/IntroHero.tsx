@@ -116,6 +116,8 @@ export function IntroHero() {
         strength: 1,
         active: true,
       };
+      // 마우스는 암시적 캡처가 없어 섹션 밖에서 놓으면 pointerup을 놓친다
+      section!.setPointerCapture(event.pointerId);
       wake();
     }
 
