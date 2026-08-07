@@ -417,6 +417,11 @@ html[lang="en"] .detail-hero__content h1 {
   cursor: pointer;
 }
 
+/* 전역 포커스 링은 거의 검정이라 어두운 히어로 배경에서 보이지 않는다 */
+.intro-hero__hint:focus-visible {
+  outline-color: var(--paper);
+}
+
 .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.16fr) minmax(360px, 0.84fr);

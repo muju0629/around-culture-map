@@ -28,7 +28,10 @@ export function IntroHero() {
   useEffect(() => {
     let cancelled = false;
     Promise.allSettled(
-      INTRO_FONTS.map((font) => document.fonts.load(`16px "${font.family}"`)),
+      // 서브셋이 U+41뿐이라 "A"로 조회해야 로드 판정이 된다
+      INTRO_FONTS.map((font) =>
+        document.fonts.load(`16px "${font.family}"`, "A"),
+      ),
     ).then((results) => {
       if (!cancelled) setPool(loadedFonts(INTRO_FONTS, results));
     });
@@ -54,10 +57,10 @@ export function IntroHero() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const dpr = window.devicePixelRatio || 1;
-
     function resize() {
       if (!canvas || !section) return;
+      // 창을 다른 배율 모니터로 옮기는 경우가 있어 매번 새로 읽는다
+      const dpr = window.devicePixelRatio || 1;
       canvas.width = section.clientWidth * dpr;
       canvas.height = section.clientHeight * dpr;
       draw();
@@ -65,6 +68,7 @@ export function IntroHero() {
 
     function draw() {
       if (!canvas || !ctx) return;
+      const dpr = window.devicePixelRatio || 1;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const gap = DOT_GAP * dpr;
       const { x, y, strength } = pointer.current;
@@ -116,8 +120,6 @@ export function IntroHero() {
         strength: 1,
         active: true,
       };
-      // 마우스는 암시적 캡처가 없어 섹션 밖에서 놓으면 pointerup을 놓친다
-      section!.setPointerCapture(event.pointerId);
       wake();
     }
 
@@ -138,15 +140,17 @@ export function IntroHero() {
     if (!reducedMotion) {
       section.addEventListener("pointerdown", handleDown);
       section.addEventListener("pointermove", handleMove);
-      section.addEventListener("pointerup", handleUp);
-      section.addEventListener("pointercancel", handleUp);
+      // 섹션 밖에서 놓아도 잡도록 release는 window에서 듣는다 —
+      // 캡처를 쓰면 click이 섹션으로 리타겟되어 힌트 버튼이 죽는다
+      window.addEventListener("pointerup", handleUp);
+      window.addEventListener("pointercancel", handleUp);
     }
     return () => {
       window.removeEventListener("resize", resize);
       section.removeEventListener("pointerdown", handleDown);
       section.removeEventListener("pointermove", handleMove);
-      section.removeEventListener("pointerup", handleUp);
-      section.removeEventListener("pointercancel", handleUp);
+      window.removeEventListener("pointerup", handleUp);
+      window.removeEventListener("pointercancel", handleUp);
       cancelAnimationFrame(rafId.current);
     };
     // reducedMotion은 마운트 시 고정값이라 의존성 불필요
