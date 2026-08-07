@@ -4,9 +4,9 @@ import { INTRO_FONTS, loadedFonts, type IntroFont } from "../lib/introFonts";
 
 const CYCLE_MS = 1000;
 const DOT_GAP = 28;
-const DOT_BASE = 0.06;
+const DOT_BASE = 0.14;
 const GLOW_RADIUS = 120;
-const GLOW_MAX = 0.5;
+const GLOW_MAX = 0.6;
 const DECAY_MS = 600;
 
 export function IntroHero() {
@@ -111,7 +111,8 @@ export function IntroHero() {
       rafId.current = requestAnimationFrame(tick);
     }
 
-    function handleDown(event: PointerEvent) {
+    // 호버·터치 공통 — 포인터가 섹션 위에 있으면 글로우가 따라온다
+    function handleMove(event: PointerEvent) {
       if (!event.isPrimary) return; // 멀티터치는 첫 포인터만
       const rect = section!.getBoundingClientRect();
       pointer.current = {
@@ -123,14 +124,14 @@ export function IntroHero() {
       wake();
     }
 
-    function handleMove(event: PointerEvent) {
-      if (!event.isPrimary || !pointer.current.active) return;
-      const rect = section!.getBoundingClientRect();
-      pointer.current.x = event.clientX - rect.left;
-      pointer.current.y = event.clientY - rect.top;
+    function handleUp(event: PointerEvent) {
+      if (!event.isPrimary) return;
+      // 마우스는 손을 떼도 아직 올려져 있다 — 끄는 건 pointerleave가 한다
+      if (event.pointerType === "mouse") return;
+      pointer.current.active = false;
     }
 
-    function handleUp(event: PointerEvent) {
+    function handleLeave(event: PointerEvent) {
       if (!event.isPrimary) return;
       pointer.current.active = false;
     }
@@ -138,8 +139,10 @@ export function IntroHero() {
     resize();
     window.addEventListener("resize", resize);
     if (!reducedMotion) {
-      section.addEventListener("pointerdown", handleDown);
+      // pointerdown도 move 핸들러로 — 터치는 down이 첫 좌표다
+      section.addEventListener("pointerdown", handleMove);
       section.addEventListener("pointermove", handleMove);
+      section.addEventListener("pointerleave", handleLeave);
       // 섹션 밖에서 놓아도 잡도록 release는 window에서 듣는다 —
       // 캡처를 쓰면 click이 섹션으로 리타겟되어 힌트 버튼이 죽는다
       window.addEventListener("pointerup", handleUp);
@@ -147,8 +150,9 @@ export function IntroHero() {
     }
     return () => {
       window.removeEventListener("resize", resize);
-      section.removeEventListener("pointerdown", handleDown);
+      section.removeEventListener("pointerdown", handleMove);
       section.removeEventListener("pointermove", handleMove);
+      section.removeEventListener("pointerleave", handleLeave);
       window.removeEventListener("pointerup", handleUp);
       window.removeEventListener("pointercancel", handleUp);
       cancelAnimationFrame(rafId.current);
