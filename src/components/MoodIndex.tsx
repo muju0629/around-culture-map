@@ -28,7 +28,7 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
           const count = counts.get(mood.id) ?? 0;
           const isEmpty = count === 0;
           return (
-            <li key={mood.id}>
+            <li key={selected === mood.id ? "on-" + mood.id : mood.id}>
               <button
                 type="button"
                 className={`mood-row${

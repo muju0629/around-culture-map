@@ -27,6 +27,7 @@ import {
 } from "../data/events";
 import { getMarkerLabels } from "../data/mapMarkers";
 import type { MoodId } from "../data/moods";
+import { useCountUp } from "../hooks/useCountUp";
 import { useFavorites } from "../hooks/useFavorites";
 import { useItinerary } from "../hooks/useItinerary";
 import { useLanguage } from "../i18n/language";
@@ -235,6 +236,8 @@ export function ExplorePage() {
     () => getMarkerLabels(visibleEvents),
     [visibleEvents],
   );
+
+  const animatedPlacesCount = useCountUp(visibleEvents.length);
 
   useEffect(() => {
     setActiveFilter(requestedFilter ?? "전체");
@@ -588,7 +591,7 @@ export function ExplorePage() {
                 aria-expanded={panelSnap !== "collapsed"}
               >
                 <span />
-                {visibleEvents.length}
+                {animatedPlacesCount}
                 {copy.explore.places}
               </button>
               <div className="explore-list-panel__header">

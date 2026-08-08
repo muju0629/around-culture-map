@@ -4401,6 +4401,18 @@ html[lang="en"] .detail-hero__content h1 {
   border-bottom-color: rgba(241, 240, 236, 0.35);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .mood-row.is-selected .mood-row__label {
+    animation: mood-snap 240ms var(--ease-out-soft);
+  }
+  @keyframes mood-snap {
+    from {
+      opacity: 0.35;
+      transform: translateY(2px);
+    }
+  }
+}
+
 .mood-row.is-empty {
   color: var(--faint);
   cursor: default;
