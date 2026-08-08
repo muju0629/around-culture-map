@@ -23,9 +23,10 @@
 
 - **색상환 도입 금지.** `--signal` 빨강이 화면의 유일한 색이라는 규칙 유지.
 - 무드별로 종이색(`--paper` #f1f0ec)의 온도만 미세 편차 (`--mood-paper`):
-  soundatnight #eff0f2(밤의 한기) · strangebyday #f0f1ef(중성) · crowdedday #f4efe8(온기) ·
-  wordlesshours #f2f0eb(기본 근처) · twostopsforbread #f5f1e6(크림) ·
-  dustythings #f2efe7(바랜 종이) · lowsunstreet #f5f0e9(낮은 해).
+  soundatnight #eaecf2(밤의 한기) · strangebyday #eef0ea(중성) · crowdedday #f6ece0(온기) ·
+  wordlesshours #f2efe6(기본 근처) · twostopsforbread #f7f0dd(크림) ·
+  dustythings #f1ecdd(바랜 종이) · lowsunstreet #f7eede(낮은 해).
+  1차 값은 실기에서 안 보여 2배 강화 (2026-08-08).
 - 적용 면: 탐색 화면의 크롬(무드 레일·시트·툴바 배경). Mapbox 타일은 건드리지 않는다
   (CSS filter 틴트는 탁해짐). 전환 400ms ease.
 

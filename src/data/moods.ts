@@ -24,7 +24,7 @@ export const MOODS: Mood[] = [
     labelEn: "A night to sink into sound",
     subtitleKo: "공연·리스닝바",
     subtitleEn: "Live · listening bars",
-    paper: "#eff0f2",
+    paper: "#eaecf2",
   },
   {
     id: "strange-by-day",
@@ -32,7 +32,7 @@ export const MOODS: Mood[] = [
     labelEn: "A day facing something strange",
     subtitleKo: "전시",
     subtitleEn: "Exhibitions",
-    paper: "#f0f1ef",
+    paper: "#eef0ea",
   },
   {
     id: "crowded-day",
@@ -40,7 +40,7 @@ export const MOODS: Mood[] = [
     labelEn: "A day for crowds",
     subtitleKo: "축제·마켓",
     subtitleEn: "Festivals · markets",
-    paper: "#f4efe8",
+    paper: "#f6ece0",
   },
   {
     id: "wordless-hours",
@@ -48,7 +48,7 @@ export const MOODS: Mood[] = [
     labelEn: "A long while without speaking",
     subtitleKo: "카페·바",
     subtitleEn: "Cafés · bars",
-    paper: "#f2f0eb",
+    paper: "#f2efe6",
   },
   {
     id: "two-stops-for-bread",
@@ -56,7 +56,7 @@ export const MOODS: Mood[] = [
     labelEn: "Two stops for one loaf",
     subtitleKo: "빵집",
     subtitleEn: "Bakeries",
-    paper: "#f5f1e6",
+    paper: "#f7f0dd",
   },
   {
     id: "dusty-things",
@@ -64,7 +64,7 @@ export const MOODS: Mood[] = [
     labelEn: "Among dusty things",
     subtitleKo: "음반·헌책",
     subtitleEn: "Records · used books",
-    paper: "#f2efe7",
+    paper: "#f1ecdd",
   },
   {
     id: "low-sun-street",
@@ -72,6 +72,6 @@ export const MOODS: Mood[] = [
     labelEn: "Streets where the sun sits low",
     subtitleKo: "산책",
     subtitleEn: "Walks",
-    paper: "#f5f0e9",
+    paper: "#f7eede",
   },
 ];
