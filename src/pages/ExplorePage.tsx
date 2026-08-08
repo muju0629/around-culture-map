@@ -408,7 +408,10 @@ export function ExplorePage() {
   return (
     <div className="page page--explore">
       <Header />
-      <main className="explore-main">
+      <main
+        className="explore-main"
+        style={{ "--mood-paper": activeMoodPaper } as CSSProperties}
+      >
         <div className="explore-toolbar">
           <div className="explore-toolbar__title">
             <span className="eyebrow">SEOUL / {todayLabel}</span>
@@ -462,10 +465,7 @@ export function ExplorePage() {
           </div>
         </div>
 
-        <div
-          className="explore-layout"
-          style={{ "--mood-paper": activeMoodPaper } as CSSProperties}
-        >
+        <div className="explore-layout">
           <MoodIndex
             spots={events}
             selected={activeMood}

@@ -920,6 +920,9 @@ html[lang="en"] .detail-hero__content h1 {
   padding: 14px 28px;
   gap: 24px;
   border-bottom: 1px solid var(--line);
+  /* 선택된 무드의 종이 색으로 서서히 물든다 */
+  background: var(--mood-paper, var(--paper));
+  transition: background 400ms ease;
 }
 
 .explore-toolbar__title h1 {
@@ -1460,6 +1463,7 @@ html[lang="en"] .detail-hero__content h1 {
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.45;
+  word-break: keep-all;
 }
 
 .detail-facts {
@@ -2433,7 +2437,8 @@ html[lang="en"] .detail-hero__content h1 {
     gap: 7px;
     border: 0;
     border-bottom: 1px solid var(--line);
-    background: var(--paper);
+    background: var(--mood-paper, var(--paper));
+    transition: background 400ms ease;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -4474,6 +4479,9 @@ html[lang="en"] .detail-hero__content h1 {
 .course-track {
   border-left: 1px solid var(--rule);
   padding: 26px 22px 18px;
+  /* 선택된 무드의 종이 색으로 서서히 물든다 */
+  background: var(--mood-paper, var(--paper));
+  transition: background 400ms ease;
 }
 
 .course-track__head {

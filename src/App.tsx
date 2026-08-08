@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Outlet, createBrowserRouter, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { ChatWidget } from "./components/ChatWidget";
 import { ArchivePage } from "./pages/ArchivePage";
@@ -18,20 +18,27 @@ function ScrollToTop() {
   return null;
 }
 
-export default function App() {
+function Layout() {
   return (
     <>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/course" element={<ExplorePage />} />
-        <Route path="/events/:id" element={<EventDetailPage />} />
-        <Route path="/archive" element={<ArchivePage />} />
-        <Route path="/saved" element={<SavedPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Outlet />
       <ChatWidget />
     </>
   );
 }
+
+export const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/explore", element: <ExplorePage /> },
+      { path: "/course", element: <ExplorePage /> },
+      { path: "/events/:id", element: <EventDetailPage /> },
+      { path: "/archive", element: <ArchivePage /> },
+      { path: "/saved", element: <SavedPage /> },
+      { path: "*", element: <NotFoundPage /> },
+    ],
+  },
+]);
