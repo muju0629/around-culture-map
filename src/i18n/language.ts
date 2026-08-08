@@ -98,6 +98,7 @@ export const uiCopy = {
       editorialImage: "AROUND 에디토리얼 이미지",
       poster: "포스터",
       free: "무료",
+      curatorNote: "큐레이터 노트",
     },
     saved: {
       eyebrow: "SAVED / VISIT PLAN",
@@ -261,6 +262,7 @@ export const uiCopy = {
       editorialImage: "AROUND editorial image",
       poster: "poster",
       free: "Free",
+      curatorNote: "Curator's note",
     },
     saved: {
       eyebrow: "SAVED / VISIT PLAN",

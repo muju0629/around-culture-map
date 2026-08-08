@@ -1439,6 +1439,20 @@ html[lang="en"] .detail-hero__content h1 {
   word-break: keep-all;
 }
 
+.detail-curator-note {
+  margin: 28px 0 0;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--black);
+}
+
+.detail-curator-note blockquote {
+  margin: 8px 0 0;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.45;
+}
+
 .detail-facts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

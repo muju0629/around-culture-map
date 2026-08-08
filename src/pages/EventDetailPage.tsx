@@ -219,6 +219,13 @@ export function EventDetailPage() {
             <h1>{event.title}</h1>
             <p className="detail-hero__intro">{event.description}</p>
 
+            {event.curatorNote && (
+              <figure className="detail-curator-note">
+                <span className="eyebrow">{copy.event.curatorNote}</span>
+                <blockquote>{event.curatorNote}</blockquote>
+              </figure>
+            )}
+
             <dl className="detail-facts">
               <div>
                 <dt>DATE</dt>
