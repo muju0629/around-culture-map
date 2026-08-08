@@ -10,6 +10,9 @@ export function NotFoundPage() {
     <div className="page page--not-found">
       <Header />
       <main className="not-found">
+        <span className="not-found__number" aria-hidden="true">
+          404
+        </span>
         <span className="eyebrow">404 / NOT FOUND</span>
         <h1>{copy.notFound.title}</h1>
         <Link className="text-link" to="/">
