@@ -5,7 +5,7 @@ import { EventCard } from "../components/EventCard";
 import { Header } from "../components/Header";
 import { ArrowIcon } from "../components/Icons";
 import { IntroHero } from "../components/IntroHero";
-import { Poster } from "../components/Poster";
+import { Poster, posterTransitionName } from "../components/Poster";
 import {
   getCurrentWeek,
   getEvents,
@@ -59,6 +59,10 @@ export function HomePage() {
   const featured = featuredPool
     .filter((event) => event.id !== heroEvent?.id)
     .slice(0, 3);
+  // heroEvent가 featuredPool에서 왔고 아직 시작 전이면(이번 주 안 예정)
+  // upcoming(startDate > today)에도 그대로 남을 수 있다 — 이때는 히어로 포스터에
+  // view-transition-name을 주지 않는다 (같은 이름이 두 곳에 뜨면 전환이 통째로 스킵된다).
+  const heroInUpcoming = upcoming.some((event) => event.id === heroEvent?.id);
   const shortcutFilters = ["전시", "음악", "문화공간"] as const;
 
   useEffect(() => {
@@ -128,8 +132,17 @@ export function HomePage() {
               to={`/events/${heroEvent.id}`}
               className="home-hero__poster"
               aria-label={`${heroEvent.title} ${copy.event.details}`}
+              viewTransition
             >
-              <Poster event={heroEvent} priority />
+              <Poster
+                event={heroEvent}
+                priority
+                style={
+                  heroInUpcoming
+                    ? undefined
+                    : { viewTransitionName: posterTransitionName(heroEvent.id) }
+                }
+              />
               <span className="home-hero__number">01</span>
             </Link>
           )}

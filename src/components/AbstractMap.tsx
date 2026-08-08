@@ -551,7 +551,7 @@ export function AbstractMap({
               locale,
             )}
           </small>
-          <Link to={`/events/${selectedEvent.id}`}>
+          <Link to={`/events/${selectedEvent.id}`} viewTransition>
             {copy.map.details} <ArrowIcon />
           </Link>
         </div>

@@ -155,7 +155,7 @@ export function SavedPage() {
                       </strong>
                       <span>{event.hours}</span>
                     </div>
-                    <Link to={`/events/${event.id}`}>
+                    <Link to={`/events/${event.id}`} viewTransition>
                       <span className="eyebrow">
                         {event.region} / {event.venue}
                       </span>
