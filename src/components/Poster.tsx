@@ -1,11 +1,18 @@
+import type { CSSProperties } from "react";
 import type { Spot } from "../types";
 import { useLanguage } from "../i18n/language";
+
+// view-transition-name은 CSS ident여야 한다 — id의 안전 문자만 남긴다
+export function posterTransitionName(id: string) {
+  return `poster-${id.replace(/[^a-zA-Z0-9-]/g, "")}`;
+}
 
 interface PosterProps {
   event: Spot;
   className?: string;
   showLabel?: boolean;
   priority?: boolean;
+  style?: CSSProperties;
 }
 
 export function Poster({
@@ -13,6 +20,7 @@ export function Poster({
   className = "",
   showLabel = true,
   priority = false,
+  style,
 }: PosterProps) {
   const { copy } = useLanguage();
 
@@ -20,7 +28,7 @@ export function Poster({
     const imageLabel = copy.event[event.posterImageType ?? "officialPoster"];
 
     return (
-      <div className={`poster poster--official ${className}`.trim()}>
+      <div className={`poster poster--official ${className}`.trim()} style={style}>
         <img
           className="poster__image"
           src={event.posterImage}
@@ -48,6 +56,7 @@ export function Poster({
       className={`poster poster--${event.poster} ${className}`.trim()}
       aria-label={`${event.title} ${copy.event.poster}`}
       role="img"
+      style={style}
     >
       <svg viewBox="0 0 600 760" preserveAspectRatio="none" aria-hidden="true">
         <rect width="600" height="760" className="poster__ground" />

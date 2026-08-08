@@ -8,7 +8,7 @@ import {
 import { useLanguage } from "../i18n/language";
 import type { Spot } from "../types";
 import { ArrowIcon, BookmarkIcon } from "./Icons";
-import { Poster } from "./Poster";
+import { Poster, posterTransitionName } from "./Poster";
 
 interface EventCardProps {
   event: Spot;
@@ -52,7 +52,11 @@ export function EventCard({
           aria-pressed={isSelected}
           aria-label={`${copy.event.selectOnMap}: ${event.title}`}
         >
-          <Poster event={event} showLabel={false} />
+          <Poster
+            event={event}
+            showLabel={false}
+            style={{ viewTransitionName: posterTransitionName(event.id) }}
+          />
           <span className="event-card__body">
             <span className="event-card__list-topline">
               {markerLabel && (
@@ -91,6 +95,7 @@ export function EventCard({
           <Link
             to={`/events/${event.id}`}
             aria-label={`${event.title} ${copy.event.details}`}
+            viewTransition
           >
             <ArrowIcon />
           </Link>
@@ -106,8 +111,11 @@ export function EventCard({
       onMouseEnter={() => onHover?.(event.id)}
       onMouseLeave={() => onHover?.()}
     >
-      <Link to={`/events/${event.id}`} className="event-card__visual">
-        <Poster event={event} />
+      <Link to={`/events/${event.id}`} className="event-card__visual" viewTransition>
+        <Poster
+          event={event}
+          style={{ viewTransitionName: posterTransitionName(event.id) }}
+        />
         <span className="event-card__status">
           {getEventStatus(event, locale)}
         </span>
@@ -137,7 +145,7 @@ export function EventCard({
           <BookmarkIcon filled={isFavorite} />
         </button>
       </div>
-      <Link to={`/events/${event.id}`} className="event-card__title">
+      <Link to={`/events/${event.id}`} className="event-card__title" viewTransition>
         <h3>{event.title}</h3>
         <ArrowIcon />
       </Link>

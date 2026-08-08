@@ -4663,3 +4663,18 @@ html[lang="en"] .detail-hero__content h1 {
     border-top: 0;
   }
 }
+
+/* View transitions — 카드 포스터가 상세 헤더로 이어진다 */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 180ms;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

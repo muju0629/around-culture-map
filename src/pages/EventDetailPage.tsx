@@ -7,7 +7,7 @@ import {
   BookmarkIcon,
   ShareIcon,
 } from "../components/Icons";
-import { Poster } from "../components/Poster";
+import { Poster, posterTransitionName } from "../components/Poster";
 import { MiniMap } from "../components/MiniMap";
 import {
   getEventEditorial,
@@ -204,7 +204,11 @@ export function EventDetailPage() {
 
         <section className="detail-hero" id="info">
           <div className="detail-hero__poster">
-            <Poster event={event} priority />
+            <Poster
+              event={event}
+              priority
+              style={{ viewTransitionName: posterTransitionName(event.id) }}
+            />
           </div>
           <div className="detail-hero__content">
             <p className="eyebrow">
