@@ -26,7 +26,7 @@ import {
   regions,
 } from "../data/events";
 import { getMarkerLabels } from "../data/mapMarkers";
-import type { MoodId } from "../data/moods";
+import { MOODS, type MoodId } from "../data/moods";
 import { useCountUp } from "../hooks/useCountUp";
 import { useFavorites } from "../hooks/useFavorites";
 import { useItinerary } from "../hooks/useItinerary";
@@ -103,6 +103,8 @@ export function ExplorePage() {
   const dragged = useRef(false);
   const { favorites, isFavorite, toggleFavorite } = useFavorites();
   const [activeMood, setActiveMood] = useState<MoodId>("strange-by-day");
+  // 활성 무드의 종이 색 — 탐색 크롬 배경을 이 값으로 물들인다
+  const activeMoodPaper = MOODS.find((mood) => mood.id === activeMood)?.paper;
   const [route, setRoute] = useState<Route>({ legs: [], line: [] });
   const [optimising, setOptimising] = useState(false);
   const { itinerary, toggleItinerary, setItinerary } = useItinerary();
@@ -460,7 +462,10 @@ export function ExplorePage() {
           </div>
         </div>
 
-        <div className="explore-layout">
+        <div
+          className="explore-layout"
+          style={{ "--mood-paper": activeMoodPaper } as CSSProperties}
+        >
           <MoodIndex
             spots={events}
             selected={activeMood}
