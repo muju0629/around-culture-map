@@ -28,7 +28,7 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
           const count = counts.get(mood.id) ?? 0;
           const isEmpty = count === 0;
           return (
-            <li key={selected === mood.id ? "on-" + mood.id : mood.id}>
+            <li key={mood.id}>
               <button
                 type="button"
                 className={`mood-row${
@@ -38,7 +38,10 @@ export function MoodIndex({ spots, selected, onSelect }: MoodIndexProps) {
                 disabled={isEmpty}
                 aria-pressed={mood.id === selected}
               >
-                <span className="mood-row__label">
+                <span
+                  key={selected === mood.id ? "on-" + mood.id : mood.id}
+                  className="mood-row__label"
+                >
                   {locale === "ko" ? mood.labelKo : mood.labelEn}
                 </span>
                 <span className="mood-row__lead" aria-hidden="true" />

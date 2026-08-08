@@ -9,6 +9,11 @@ export function countUpValue(from: number, to: number, t: number): number {
 export function useCountUp(target: number, durationMs = 400): number {
   const [display, setDisplay] = useState(target);
   const fromRef = useRef(target);
+  const displayRef = useRef(target);
+
+  useEffect(() => {
+    displayRef.current = display;
+  }, [display]);
 
   useEffect(() => {
     const reduced = window.matchMedia(
@@ -31,7 +36,7 @@ export function useCountUp(target: number, durationMs = 400): number {
     raf = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(raf);
-      fromRef.current = target;
+      fromRef.current = displayRef.current;
     };
   }, [target, durationMs]);
 
