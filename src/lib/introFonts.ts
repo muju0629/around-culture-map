@@ -10,6 +10,11 @@ export const INTRO_FONTS: IntroFont[] = [
   { family: "UnifrakturMaguntia", css: '"UnifrakturMaguntia", serif' },
   { family: "Space Mono", css: '"Space Mono", monospace' },
   { family: "Archivo Black", css: '"Archivo Black", sans-serif' },
+  { family: "Abril Fatface", css: '"Abril Fatface", serif' },
+  { family: "Monoton", css: '"Monoton", cursive' },
+  { family: "Silkscreen", css: '"Silkscreen", monospace' },
+  { family: "Caveat", css: '"Caveat", cursive' },
+  { family: "Bungee Shade", css: '"Bungee Shade", cursive' },
 ];
 
 /**
