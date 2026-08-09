@@ -8,6 +8,7 @@ const DOT_BASE = 0.14;
 const GLOW_RADIUS = 120;
 const GLOW_MAX = 0.6;
 const DECAY_MS = 600;
+const BULGE_PUSH = 10;
 
 export function IntroHero() {
   const { copy } = useLanguage();
@@ -75,14 +76,27 @@ export function IntroHero() {
       for (let cy = gap / 2; cy < canvas.height; cy += gap) {
         for (let cx = gap / 2; cx < canvas.width; cx += gap) {
           let alpha = DOT_BASE;
+          let radius = 1.1 * dpr;
+          let dotX = cx;
+          let dotY = cy;
           if (strength > 0) {
-            const dist = Math.hypot(cx - x * dpr, cy - y * dpr);
+            const dx = cx - x * dpr;
+            const dy = cy - y * dpr;
+            const dist = Math.hypot(dx, dy);
             const falloff = Math.max(0, 1 - dist / (GLOW_RADIUS * dpr));
-            alpha += (GLOW_MAX - DOT_BASE) * falloff * strength;
+            const swell = falloff * strength;
+            alpha += (GLOW_MAX - DOT_BASE) * swell;
+            // 볼록 렌즈 — 가까운 도트일수록 커지고 살짝 바깥으로 밀린다
+            radius += 1.4 * dpr * swell;
+            if (dist > 0) {
+              const push = (BULGE_PUSH * dpr * swell) / dist;
+              dotX += dx * push;
+              dotY += dy * push;
+            }
           }
           ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
           ctx.beginPath();
-          ctx.arc(cx, cy, 1.1 * dpr, 0, Math.PI * 2);
+          ctx.arc(dotX, dotY, radius, 0, Math.PI * 2);
           ctx.fill();
         }
       }
