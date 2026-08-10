@@ -56,6 +56,13 @@ export function ChatWidget() {
       : "default";
   const greetingContent = copy.chat.greeting;
   const [open, setOpen] = useState(false);
+
+  // 산책 중인 우로보로스를 만지면 여기로 열린다
+  useEffect(() => {
+    const openChat = () => setOpen(true);
+    window.addEventListener("around:chat-open", openChat);
+    return () => window.removeEventListener("around:chat-open", openChat);
+  }, []);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: greetingContent },
   ]);

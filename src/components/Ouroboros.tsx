@@ -1,26 +1,30 @@
 import { useEffect, useRef } from "react";
 
 /*
-  픽셀 우로보로스 마스코트 — 스네이크 게임 격자로 기어다니다
-  쉴 때 몸을 말아 꼬리를 문다. 스펙: docs/superpowers/specs/2026-08-10-ouroboros-mascot-design.md
+  동글동글 우로보로스 마스코트 = 챗 런처.
+  평소엔 ASK 버튼 자리(우하단)에 말려 잔다 — 투명해진 .chat-fab의 시각을 대신한다.
+  가끔 산책을 나가고, 산책 중 만지면 챗이 열린다("around:chat-open" 이벤트).
+  스펙: docs/superpowers/specs/2026-08-10-ouroboros-mascot-design.md (v2: 라운드·챗봇)
 */
-const CELL = 8; // 논리 셀 한 변 (px)
-const LENGTH = 14; // 세그먼트 수
-const STEP_MS = 90; // 한 셀 전진 간격
-const FAST_STEP_MS = 45; // 놀랐을 때
-const EDGE_BAND = 0.15; // 웨이포인트를 뽑는 가장자리 밴드 비율
-const WANDER_MS: [number, number] = [10000, 20000];
-const REST_MS: [number, number] = [8000, 12000];
-const AWAY_MS: [number, number] = [60000, 120000];
-const FIRST_MS: [number, number] = [3000, 9000];
-const TONGUE_MS = 700; // 혀 낼름 지속
+const SEGMENTS = 12;
+const SPACING = 7; // 세그먼트 간 몸 간격(px)
+const SPEED = 95; // px/s
+const TURN = 4.2; // 최대 회전(rad/s)
+const HEAD_R = 7.5;
+const TAIL_R = 3;
+const COIL_R = 14; // 말릴 때 반지름
+const FAB_OFFSET = 49; // 우하단 앵커 = chat-fab 중심 (right/bottom 20 + 29)
+const WALK_EVERY: [number, number] = [45000, 90000];
+const WALK_FOR: [number, number] = [8000, 14000];
+const TONGUE_MS = 800;
 const SIGNAL = "#e61919"; // 유일한 색 — 혀
 
-type Cell = { x: number; y: number };
-type Phase = "away" | "enter" | "wander" | "curl" | "rest" | "leave";
+type P = { x: number; y: number };
+type Phase = "rest" | "walk" | "return" | "coil";
 
 const rand = (lo: number, hi: number) => lo + Math.random() * (hi - lo);
 const pick = ([lo, hi]: [number, number]) => rand(lo, hi);
+const dist = (a: P, b: P) => Math.hypot(a.x - b.x, a.y - b.y);
 
 export function Ouroboros() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -35,11 +39,9 @@ export function Ouroboros() {
       "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    // 다크 홈이면 종이색 몸, 아니면 잉크색 몸 — 등장 시점에 판별
-    const bodyColor = () =>
-      document.querySelector(".page--home") ? "#f1f0ec" : "#11110f";
-    const eyeColor = () =>
-      document.querySelector(".page--home") ? "#0d0d0b" : "#f1f0ec";
+    const dark = () => Boolean(document.querySelector(".page--home"));
+    const bodyColor = () => (dark() ? "#f1f0ec" : "#11110f");
+    const backColor = () => (dark() ? "#0d0d0b" : "#f1f0ec");
 
     function resize() {
       if (!canvas) return;
@@ -49,222 +51,271 @@ export function Ouroboros() {
     resize();
     window.addEventListener("resize", resize);
 
-    const cols = () => Math.floor(canvas!.width / CELL);
-    const rows = () => Math.floor(canvas!.height / CELL);
+    const anchor = (): P => ({
+      x: canvas!.width - FAB_OFFSET,
+      y: canvas!.height - FAB_OFFSET,
+    });
 
-    // 우로보로스 링 — 5×4 직사각 둘레는 정확히 14셀, 전부 직교 인접이라
-    // 몸길이와 딱 맞아 머리가 꼬리를 문다 (삼각함수 원은 격자에서 겹치고 대각이 생김)
-    function circleCells(cx: number, cy: number): Cell[] {
-      const w = 5;
-      const h = 4;
-      const x0 = Math.max(1, Math.min(cols() - w - 1, cx - 2));
-      const y0 = Math.max(1, Math.min(rows() - h - 1, cy - 2));
-      const cells: Cell[] = [];
-      for (let x = x0; x < x0 + w; x += 1) cells.push({ x, y: y0 });
-      for (let y = y0 + 1; y < y0 + h; y += 1) cells.push({ x: x0 + w - 1, y });
-      for (let x = x0 + w - 2; x >= x0; x -= 1) cells.push({ x, y: y0 + h - 1 });
-      for (let y = y0 + h - 2; y >= y0 + 1; y -= 1) cells.push({ x: x0, y });
-      return cells; // 시계 방향 14셀
-    }
-
-    if (reduced) {
-      // 정적 폴백 — 우하단에 말려서 잠들어 있다 (rAF 0회)
-      const ring = circleCells(cols() - 9, rows() - 8);
-      ctx.fillStyle = eyeColor();
-      for (const c of ring) ctx.fillRect(c.x * CELL - 1, c.y * CELL - 1, CELL + 1, CELL + 1);
-      ctx.fillStyle = bodyColor();
-      for (const c of ring) ctx.fillRect(c.x * CELL, c.y * CELL, CELL - 1, CELL - 1);
-      return () => window.removeEventListener("resize", resize);
-    }
-
-    let snake: Cell[] = []; // [0] = 머리
-    let phase: Phase = "away";
+    // 몸은 머리 궤적을 그대로 따라온다 — 말리면 자동으로 감기고, 풀면 자동으로 풀린다
+    let head: P = anchor();
+    let angle = Math.PI;
+    let trail: P[] = [];
+    let phase: Phase = "rest";
     let phaseUntil = 0;
-    let waypoint: Cell = { x: 0, y: 0 };
-    let stepMs = STEP_MS;
-    let lastStep = 0;
+    let waypoint: P = anchor();
+    let coilAngle = 0;
+    let coiled = 0; // 감은 각도 누적
     let tongueUntil = 0;
-    let curlTarget: Cell[] = [];
     let rafId = 0;
     let running = false;
+    let last = 0;
+    let walkTimer = 0;
 
-    // 가장자리 밴드에서 웨이포인트 뽑기
-    function edgeWaypoint(): Cell {
-      const c = cols();
-      const r = rows();
-      const bandX = Math.max(3, Math.floor(c * EDGE_BAND));
-      const bandY = Math.max(3, Math.floor(r * EDGE_BAND));
+    // 머리 궤적을 등간격으로 샘플링해 세그먼트 위치를 얻는다
+    function segmentPositions(): P[] {
+      const points: P[] = [head];
+      let need = SPACING;
+      let prev = head;
+      for (const p of trail) {
+        let d = dist(prev, p);
+        while (d >= need && points.length < SEGMENTS) {
+          const t = need / d;
+          const q = {
+            x: prev.x + (p.x - prev.x) * t,
+            y: prev.y + (p.y - prev.y) * t,
+          };
+          points.push(q);
+          prev = q;
+          d = dist(prev, p);
+          need = SPACING;
+        }
+        if (points.length >= SEGMENTS) break;
+        need -= d;
+        prev = p;
+      }
+      while (points.length < SEGMENTS) points.push(prev);
+      return points;
+    }
+
+    function steerToward(target: P, dt: number) {
+      const desired = Math.atan2(target.y - head.y, target.x - head.x);
+      let diff = desired - angle;
+      while (diff > Math.PI) diff -= Math.PI * 2;
+      while (diff < -Math.PI) diff += Math.PI * 2;
+      const max = TURN * dt;
+      angle += Math.max(-max, Math.min(max, diff));
+      head = {
+        x: head.x + Math.cos(angle) * SPEED * dt,
+        y: head.y + Math.sin(angle) * SPEED * dt,
+      };
+      trail.unshift({ ...head });
+      if (trail.length > 240) trail.length = 240;
+    }
+
+    function edgeWaypoint(): P {
+      const w = canvas!.width;
+      const h = canvas!.height;
+      const band = 0.16;
       const side = Math.floor(rand(0, 4));
-      if (side === 0) return { x: Math.floor(rand(1, c - 1)), y: Math.floor(rand(1, bandY)) };
-      if (side === 1) return { x: Math.floor(rand(1, c - 1)), y: Math.floor(rand(r - bandY, r - 1)) };
-      if (side === 2) return { x: Math.floor(rand(1, bandX)), y: Math.floor(rand(1, r - 1)) };
-      return { x: Math.floor(rand(c - bandX, c - 1)), y: Math.floor(rand(1, r - 1)) };
+      if (side === 0) return { x: rand(30, w - 30), y: rand(24, h * band) };
+      if (side === 1)
+        return { x: rand(30, w - 30), y: rand(h * (1 - band), h - 24) };
+      if (side === 2) return { x: rand(24, w * band), y: rand(30, h - 30) };
+      return { x: rand(w * (1 - band), w - 24), y: rand(30, h - 30) };
     }
 
-    function enter(now: number) {
-      // 화면 밖 왼쪽/오른쪽에서 들어온다
-      const fromLeft = Math.random() < 0.5;
-      const y = Math.floor(rand(2, rows() - 2));
-      const x = fromLeft ? -LENGTH : cols() + LENGTH;
-      snake = Array.from({ length: LENGTH }, (_, i) => ({
-        x: x + (fromLeft ? -i : i),
-        y,
-      }));
-      waypoint = edgeWaypoint();
-      phase = "wander";
-      phaseUntil = now + pick(WANDER_MS);
-      stepMs = STEP_MS;
-    }
-
-    // 머리를 웨이포인트 쪽으로 한 셀 (축 하나씩 — 스네이크 게임 감각)
-    function stepToward(target: Cell) {
-      const head = snake[0];
-      const dx = target.x - head.x;
-      const dy = target.y - head.y;
-      const next = { ...head };
-      if (Math.abs(dx) >= Math.abs(dy) && dx !== 0) next.x += Math.sign(dx);
-      else if (dy !== 0) next.y += Math.sign(dy);
-      else if (dx !== 0) next.x += Math.sign(dx);
-      snake.unshift(next);
-      snake.pop();
-    }
-
-    function step(now: number) {
-      if (phase === "wander") {
-        const head = snake[0];
-        if (head.x === waypoint.x && head.y === waypoint.y) {
-          waypoint = edgeWaypoint();
+    function step(now: number, dt: number) {
+      if (phase === "walk") {
+        if (dist(head, waypoint) < 20) waypoint = edgeWaypoint();
+        steerToward(waypoint, dt);
+        if (now > phaseUntil) phase = "return";
+      } else if (phase === "return") {
+        steerToward(anchor(), dt);
+        if (dist(head, anchor()) < COIL_R + 12) {
+          phase = "coil";
+          coiled = 0;
+          coilAngle = Math.atan2(head.y - anchor().y, head.x - anchor().x);
         }
-        stepToward(waypoint);
-        stepMs = now < tongueUntil ? FAST_STEP_MS : STEP_MS;
-        if (now > phaseUntil) {
-          // 지금 자리 근처에 말리기
-          curlTarget = circleCells(head.x, head.y);
-          phase = "curl";
-        }
-      } else if (phase === "curl") {
-        // 머리가 원 경로를 차례로 밟으면 몸이 원이 된다
-        const idx = curlTarget.findIndex(
-          (c) => c.x === snake[0].x && c.y === snake[0].y,
+      } else if (phase === "coil") {
+        // 앵커 둘레를 돌면 궤적이 따라 감긴다
+        coilAngle += TURN * 0.75 * dt;
+        coiled += TURN * 0.75 * dt;
+        const a = anchor();
+        steerToward(
+          {
+            x: a.x + Math.cos(coilAngle) * COIL_R,
+            y: a.y + Math.sin(coilAngle) * COIL_R,
+          },
+          dt,
         );
-        const target =
-          idx === -1 ? curlTarget[0] : curlTarget[(idx + 1) % LENGTH];
-        stepToward(target);
-        // 꼬리가 원 위에 다 올라오면 휴식
-        const onCircle = snake.every((s) =>
-          curlTarget.some((c) => c.x === s.x && c.y === s.y),
-        );
-        if (onCircle) {
+        // 한 바퀴 반 감았으면 잠들기
+        if (coiled > Math.PI * 3) {
           phase = "rest";
-          phaseUntil = now + pick(REST_MS);
-        }
-      } else if (phase === "rest") {
-        if (now > phaseUntil) {
-          phase = "leave";
-          const exitLeft = snake[0].x < cols() / 2;
-          waypoint = { x: exitLeft ? -LENGTH - 2 : cols() + LENGTH + 2, y: snake[0].y };
-        }
-      } else if (phase === "leave") {
-        stepToward(waypoint);
-        const offscreen = snake.every((s) => s.x < -1 || s.x > cols() + 1);
-        if (offscreen) {
-          phase = "away";
-          phaseUntil = now + pick(AWAY_MS);
-          stop(); // 화면 밖 — rAF 정지, setTimeout으로 재등장
-          window.setTimeout(start, phaseUntil - now);
+          scheduleWalk();
         }
       }
+      // rest는 움직이지 않는다
     }
 
-    function draw(now: number) {
+    function scheduleWalk() {
+      window.clearTimeout(walkTimer);
+      walkTimer = window.setTimeout(() => {
+        if (phase === "rest") {
+          phase = "walk";
+          phaseUntil = performance.now() + pick(WALK_FOR);
+          waypoint = edgeWaypoint();
+          wake();
+        }
+      }, pick(WALK_EVERY));
+    }
+
+    function drawSnake(now: number) {
       if (!canvas || !ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (phase === "away") return;
-      // 스티커 아웃라인 — 어떤 배경(사진·다크) 위에서도 읽히게 반대색 1px
-      ctx.fillStyle = eyeColor();
-      for (const s of snake) {
-        ctx.fillRect(s.x * CELL - 1, s.y * CELL - 1, CELL + 1, CELL + 1);
+      const pts = segmentPositions();
+      // 스티커 아웃라인 — 사진·다크 어디서든 읽힌다. 꼬리부터 그려 머리가 위로.
+      for (let pass = 0; pass < 2; pass += 1) {
+        ctx.fillStyle = pass === 0 ? backColor() : bodyColor();
+        for (let i = SEGMENTS - 1; i >= 0; i -= 1) {
+          const t = i / (SEGMENTS - 1);
+          const r = HEAD_R + (TAIL_R - HEAD_R) * t + (pass === 0 ? 1.5 : 0);
+          ctx.beginPath();
+          ctx.arc(pts[i].x, pts[i].y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
       }
-      ctx.fillStyle = bodyColor();
-      for (const s of snake) {
-        ctx.fillRect(s.x * CELL, s.y * CELL, CELL - 1, CELL - 1);
+      // 눈 — 진행 방향 기준 양옆, 흰자 + 동공
+      const side = { x: -Math.sin(angle), y: Math.cos(angle) };
+      const fwd = { x: Math.cos(angle) * 2.5, y: Math.sin(angle) * 2.5 };
+      for (const s of [-1, 1]) {
+        ctx.fillStyle = backColor();
+        ctx.beginPath();
+        ctx.arc(
+          pts[0].x + fwd.x + side.x * 3.2 * s,
+          pts[0].y + fwd.y + side.y * 3.2 * s,
+          2.4,
+          0,
+          Math.PI * 2,
+        );
+        ctx.fill();
+        ctx.fillStyle = bodyColor();
+        ctx.beginPath();
+        ctx.arc(
+          pts[0].x + fwd.x * 1.3 + side.x * 3.2 * s,
+          pts[0].y + fwd.y * 1.3 + side.y * 3.2 * s,
+          1.1,
+          0,
+          Math.PI * 2,
+        );
+        ctx.fill();
       }
-      // 머리 눈 1픽셀
-      const head = snake[0];
-      ctx.fillStyle = eyeColor();
-      ctx.fillRect(head.x * CELL + 2, head.y * CELL + 2, 2, 2);
-      // 혀 — 놀랐을 때 + 배회 중 가끔, 진행 방향으로 2픽셀
+      // 혀 — 만졌을 때 + 산책 중 가끔, 빨강 두 갈래
       const flick =
         now < tongueUntil ||
-        (phase === "wander" && Math.floor(now / 1400) % 4 === 0);
-      if (flick && snake.length > 1) {
-        const dx = Math.sign(head.x - snake[1].x);
-        const dy = Math.sign(head.y - snake[1].y);
-        ctx.fillStyle = SIGNAL;
-        ctx.fillRect(
-          (head.x + dx) * CELL + (dx === 0 ? 3 : dx > 0 ? -3 : CELL - 4),
-          (head.y + dy) * CELL + (dy === 0 ? 3 : dy > 0 ? -3 : CELL - 4),
-          2,
-          3,
-        );
+        (phase === "walk" && Math.floor(now / 1600) % 5 === 0);
+      if (flick) {
+        ctx.strokeStyle = SIGNAL;
+        ctx.lineWidth = 1.6;
+        ctx.lineCap = "round";
+        for (const s of [-1, 1]) {
+          ctx.beginPath();
+          ctx.moveTo(
+            pts[0].x + Math.cos(angle) * HEAD_R,
+            pts[0].y + Math.sin(angle) * HEAD_R,
+          );
+          ctx.lineTo(
+            pts[0].x + Math.cos(angle) * (HEAD_R + 5) + side.x * 2 * s,
+            pts[0].y + Math.sin(angle) * (HEAD_R + 5) + side.y * 2 * s,
+          );
+          ctx.stroke();
+        }
       }
     }
 
     function tick(now: number) {
-      if (now - lastStep >= stepMs) {
-        lastStep = now;
-        step(now);
+      const dt = Math.min(0.05, last ? (now - last) / 1000 : 0.016);
+      last = now;
+      step(now, dt);
+      drawSnake(now);
+      if (phase === "rest" && now > tongueUntil) {
+        running = false; // 잠들면 rAF 정지 — scheduleWalk가 깨운다
+        last = 0;
+        return;
       }
-      draw(now);
-      if (running) rafId = requestAnimationFrame(tick);
-    }
-
-    function start() {
-      if (running || document.hidden) return;
-      running = true;
-      enter(performance.now());
       rafId = requestAnimationFrame(tick);
     }
 
-    function stop() {
-      running = false;
+    function wake() {
+      if (running) return;
+      running = true;
       cancelAnimationFrame(rafId);
-      ctx?.clearRect(0, 0, canvas!.width, canvas!.height);
+      rafId = requestAnimationFrame(tick);
     }
 
-    // 만지면 반응 — 캔버스는 클릭을 안 가로채고 window에서 수동 히트테스트
-    function handleDown(event: PointerEvent) {
-      if (phase === "away") return;
-      const hit = snake.some(
-        (s) =>
-          Math.abs(event.clientX - (s.x * CELL + CELL / 2)) < CELL * 1.5 &&
-          Math.abs(event.clientY - (s.y * CELL + CELL / 2)) < CELL * 1.5,
-      );
-      if (!hit) return;
-      const now = performance.now();
-      tongueUntil = now + TONGUE_MS;
-      if (phase === "rest" || phase === "curl") {
-        // 깨어나 다시 기어간다
-        phase = "wander";
-        phaseUntil = now + pick(WANDER_MS) / 2;
-        waypoint = edgeWaypoint();
+    // 초기 자세: 앵커에 이미 말려 있다 — 궤적을 원으로 미리 깔아둔다
+    function coilPose() {
+      const a = anchor();
+      trail = [];
+      let ang = 0;
+      for (let i = 0; i < 120; i += 1) {
+        ang -= 0.16;
+        trail.push({
+          x: a.x + Math.cos(ang) * COIL_R,
+          y: a.y + Math.sin(ang) * COIL_R,
+        });
       }
+      head = trail.shift()!;
+      angle = Math.atan2(head.y - trail[0].y, head.x - trail[0].x);
     }
 
+    coilPose();
+    drawSnake(0);
+
+    if (reduced) {
+      // 모션 없음 — 말린 자세 고정. 챗 열기는 투명 fab 버튼이 담당.
+      return () => window.removeEventListener("resize", resize);
+    }
+
+    scheduleWalk();
+
+    // 산책 중 만지면 챗 열림 — 쉬는 자세 클릭은 그 자리의 투명 fab 버튼이 받는다
+    function hit(x: number, y: number) {
+      return segmentPositions().some((p) => Math.hypot(x - p.x, y - p.y) < 16);
+    }
+    function handleDown(event: PointerEvent) {
+      if (phase === "rest" || !hit(event.clientX, event.clientY)) return;
+      tongueUntil = performance.now() + TONGUE_MS;
+      phase = "return"; // 놀라서 집으로
+      window.dispatchEvent(new CustomEvent("around:chat-open"));
+      wake();
+    }
+    // 호버 어포던스 — 산책 중 뱀 위에서 포인터 커서
+    function handleMove(event: PointerEvent) {
+      if (phase === "rest") return;
+      document.documentElement.style.cursor = hit(event.clientX, event.clientY)
+        ? "pointer"
+        : "";
+    }
     function handleVisibility() {
-      if (document.hidden) stop();
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+        running = false;
+        last = 0;
+      } else if (phase !== "rest") wake();
     }
 
     window.addEventListener("pointerdown", handleDown);
+    window.addEventListener("pointermove", handleMove);
     document.addEventListener("visibilitychange", handleVisibility);
-    const firstTimer = window.setTimeout(start, pick(FIRST_MS));
 
     return () => {
-      stop();
-      window.clearTimeout(firstTimer);
+      cancelAnimationFrame(rafId);
+      window.clearTimeout(walkTimer);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointerdown", handleDown);
+      window.removeEventListener("pointermove", handleMove);
       document.removeEventListener("visibilitychange", handleVisibility);
+      document.documentElement.style.cursor = "";
     };
   }, []);
 
