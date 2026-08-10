@@ -13,7 +13,7 @@
   --white: #faf9f5;
   --warm-gray: #d8d7d2;
   --mid-gray: #aaa9a4;
-  --cool-gray: #858783;
+  --cool-gray: #6b6d69; /* 4.5:1 대비 확보 (hallmark 게이트 40) — 구 #858783는 3.18:1 */
   --line: rgba(17, 17, 15, 0.22);
   --ease-out-soft: cubic-bezier(0.32, 0.72, 0, 1);
   --signal: #e61919;
