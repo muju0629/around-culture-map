@@ -399,7 +399,8 @@ html[lang="en"] .detail-hero__content h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--paper);
+  /* 리터럴 고정 — 홈 다크 반전(--paper)이 뒤집어도 A는 종이색 */
+  color: #f1f0ec;
   font-size: 40vh;
   line-height: 1;
   pointer-events: none;
@@ -424,7 +425,7 @@ html[lang="en"] .detail-hero__content h1 {
 
 /* 전역 포커스 링은 거의 검정이라 어두운 히어로 배경에서 보이지 않는다 */
 .intro-hero__hint:focus-visible {
-  outline-color: var(--paper);
+  outline-color: #f1f0ec; /* 홈 다크 반전과 무관하게 고정 */
 }
 
 .home-hero {
@@ -4741,4 +4742,35 @@ html[lang="en"] .detail-hero__content h1 {
   ::view-transition-new(*) {
     animation: none !important;
   }
+}
+
+/*
+  홈 다크 — 인트로(#0d0d0b)에서 뚝 끊기지 않게 홈 전체를 같은 어둠으로.
+  색은 항상 잉크↔종이 쌍으로 쓰이므로 변수만 반전한다. 포스터는 반전하지
+  않는다 — 검은 탁자 위의 종이 인쇄물로 남는 게 정체성이다.
+  다른 페이지(탐색·상세·아카이브)는 종이색 그대로.
+*/
+.page--home {
+  --paper: #0d0d0b;
+  --black: #f1f0ec;
+  --ink: #e6e4de;
+  --white: #11110f;
+  --mid-gray: #706f6a;
+  --cool-gray: #8a8c88;
+  --muted: #b4b3ae;
+  --faint: #7d7c77;
+  --line: rgba(241, 240, 236, 0.24);
+  --rule: rgba(241, 240, 236, 0.12);
+  --rule-soft: rgba(241, 240, 236, 0.07);
+  color: var(--black);
+  background: var(--paper);
+}
+
+.page--home .site-header {
+  border-bottom-color: var(--rule);
+  background: rgba(13, 13, 11, 0.9);
+}
+
+.page--home .home-hero__footer p {
+  color: var(--muted);
 }
