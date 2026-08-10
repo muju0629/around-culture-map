@@ -5,10 +5,11 @@ import { INTRO_FONTS, loadedFonts, type IntroFont } from "../lib/introFonts";
 const CYCLE_MS = 1000;
 const DOT_GAP = 28;
 const DOT_BASE = 0.14;
-const GLOW_RADIUS = 120;
-const GLOW_MAX = 0.6;
-const DECAY_MS = 600;
-const BULGE_PUSH = 10;
+const GLOW_RADIUS = 150;
+const GLOW_MAX = 0.45;
+const ATTACK_MS = 350;
+const DECAY_MS = 900;
+const BULGE_PUSH = 6;
 
 export function IntroHero() {
   const { copy } = useLanguage();
@@ -83,11 +84,13 @@ export function IntroHero() {
             const dx = cx - x * dpr;
             const dy = cy - y * dpr;
             const dist = Math.hypot(dx, dy);
-            const falloff = Math.max(0, 1 - dist / (GLOW_RADIUS * dpr));
+            const linear = Math.max(0, 1 - dist / (GLOW_RADIUS * dpr));
+            // smoothstep — 가장자리 경계가 지지 않게 완만한 곡선으로
+            const falloff = linear * linear * (3 - 2 * linear);
             const swell = falloff * strength;
             alpha += (GLOW_MAX - DOT_BASE) * swell;
             // 볼록 렌즈 — 가까운 도트일수록 커지고 살짝 바깥으로 밀린다
-            radius += 1.4 * dpr * swell;
+            radius += 0.8 * dpr * swell;
             if (dist > 0) {
               const push = (BULGE_PUSH * dpr * swell) / dist;
               dotX += dx * push;
@@ -106,7 +109,13 @@ export function IntroHero() {
     function tick(now: number) {
       const dt = last ? now - last : 16;
       last = now;
-      if (!pointer.current.active) {
+      if (pointer.current.active) {
+        // 켜질 때도 즉시가 아니라 서서히 차오른다
+        pointer.current.strength = Math.min(
+          1,
+          pointer.current.strength + dt / ATTACK_MS,
+        );
+      } else {
         pointer.current.strength = Math.max(
           0,
           pointer.current.strength - dt / DECAY_MS,
@@ -129,12 +138,10 @@ export function IntroHero() {
     function handleMove(event: PointerEvent) {
       if (!event.isPrimary) return; // 멀티터치는 첫 포인터만
       const rect = section!.getBoundingClientRect();
-      pointer.current = {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top,
-        strength: 1,
-        active: true,
-      };
+      // strength는 건드리지 않는다 — tick이 ATTACK_MS에 걸쳐 차오르게 한다
+      pointer.current.x = event.clientX - rect.left;
+      pointer.current.y = event.clientY - rect.top;
+      pointer.current.active = true;
       wake();
     }
 
