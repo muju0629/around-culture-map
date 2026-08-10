@@ -1,5 +1,8 @@
-import { Outlet, createBrowserRouter, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import {
+  Outlet,
+  ScrollRestoration,
+  createBrowserRouter,
+} from "react-router-dom";
 import { ChatWidget } from "./components/ChatWidget";
 import { ArchivePage } from "./pages/ArchivePage";
 import { EventDetailPage } from "./pages/EventDetailPage";
@@ -8,20 +11,11 @@ import { HomePage } from "./pages/HomePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { SavedPage } from "./pages/SavedPage";
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-}
-
 function Layout() {
   return (
     <>
-      <ScrollToTop />
+      {/* 새 이동은 최상단, 뒤로가기는 스크롤 복원 — 라우터 내장 동작 */}
+      <ScrollRestoration />
       <Outlet />
       <ChatWidget />
     </>
