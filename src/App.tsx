@@ -4,6 +4,7 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import { ChatWidget } from "./components/ChatWidget";
+import { Ouroboros } from "./components/Ouroboros";
 import { ArchivePage } from "./pages/ArchivePage";
 import { EventDetailPage } from "./pages/EventDetailPage";
 import { ExplorePage } from "./pages/ExplorePage";
@@ -17,6 +18,7 @@ function Layout() {
       {/* 새 이동은 최상단, 뒤로가기는 스크롤 복원 — 라우터 내장 동작 */}
       <ScrollRestoration />
       <Outlet />
+      <Ouroboros />
       <ChatWidget />
     </>
   );
