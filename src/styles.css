@@ -909,12 +909,15 @@ html[lang="en"] .detail-hero__content h1 {
 }
 
 .explore-main {
+  display: flex;
   height: 100vh;
   padding-top: var(--header-height);
+  flex-direction: column;
 }
 
 .explore-toolbar {
   display: grid;
+  flex: none;
   grid-template-columns: 200px minmax(0, 1fr);
   align-items: center;
   min-height: 88px;
@@ -928,6 +931,7 @@ html[lang="en"] .detail-hero__content h1 {
 
 .explore-toolbar__title h1 {
   margin: 4px 0 0;
+  word-break: keep-all; /* 「지도」가 「지/도」로 갈라지지 않게 */
   font-size: 36px;
   font-weight: 500;
   letter-spacing: -0.04em;
@@ -940,8 +944,10 @@ html[lang="en"] .detail-hero__content h1 {
 .explore-toolbar__heading-line {
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap; /* AREA 칩이 좁으면 타이틀 아래로 — 타이틀을 꺾지 않는다 */
   gap: 10px;
 }
+
 
 .active-area {
   padding: 4px 7px;
@@ -995,7 +1001,10 @@ html[lang="en"] .detail-hero__content h1 {
 .explore-layout {
   display: grid;
   grid-template-columns: minmax(0, 3fr) minmax(400px, 2fr);
-  height: calc(100vh - var(--header-height) - 88px);
+  /* 툴바 높이를 하드코딩하면 타이틀이 두 줄이 되는 순간 뷰포트를 넘친다 —
+     flex 자식으로 남은 높이를 받는다 */
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .explore-map-panel {
@@ -3366,9 +3375,7 @@ html[lang="en"] .detail-hero__content h1 {
   background: var(--black);
 }
 
-.explore-layout {
-  height: calc(100vh - var(--header-height) - 84px);
-}
+/* 높이는 위 base 규칙의 flex가 정한다 — 84px 하드코딩 제거 (styles.css:995 참조) */
 
 .explore-map-actions {
   position: absolute;
